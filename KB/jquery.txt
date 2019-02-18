@@ -1,0 +1,34 @@
+
+//https://www.w3schools.com/jquery/jquery_selectors.asp
+// $(document).ready(function() {
+//$(function(){ //shorter version of the above
+// selectors
+// $("p") // all <P> elements
+// $("#test") // #id selector
+// $(".test")  //.class selector
+// $("*") all $(this) current $("p.intro") p element intro class $("p:first") first p $("[href]")etc
+// https://www.w3schools.com/jquery/jquery_events.asp
+// $("p").click(function(){  handle event to all <p>s
+//  $(this).hide();toggle(); hide current hide(), show()  $(selector).hide(speed,callback); $(selector).show(speed,callback);  speed: "slow", "fast", or milliseconds
+// fadeIn(), fadeOut(), fadeToggle(), fadeTo()
+// slideDown(), slideUp(), slideToggle() // panel, etc slides open/close, etc.
+// animate() custom animations $(selector).animate({params},speed,callback);  $("div").animate({left: '250px'});
+// stop()  animations
+// $("p").hide("slow", function(){  callbacks after effects are 100% completed
+// $("#p1").css("color", "red").slideUp(2000).slideDown(2000);   chaining
+// $("p").on("click", function(){ 
+// DOM content:  getters and setters: text(), html(), val(), attr()
+// append(), prepend(), after(), before()  $("body").append(txt1, txt2, txt3);      
+// remove(), empty()  // removes elements (NOT isEmpty())
+// addClass() , removeClass(), css(), toggleClass() $("p").css("background-color");
+// https://www.w3schools.com/jquery/jquery_dimensions.asp
+// Traversing: parent() immediate parent
+// parents() // all ancestors 
+// parentsUntil() //specified number of parents
+// children()  $("div").children("p.first");
+// find()    $("div").find("*");   $("div").find("span");
+// siblings()  next() nextAll() nextUntil() prev() prevAll()prevUntil()
+// first(), last(), eq(), filter() and not()
+// AJAX
+// var jq = $.noConflict();
+// jq(document).ready(function(){

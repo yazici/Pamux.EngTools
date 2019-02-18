@@ -1,0 +1,9 @@
+;= File listing enhancements
+ls=dir /x $*
+l=dir /x $*
+ll=dir /w $*
+la=dir /x /a $*
+aliases=doskey /macros
+realias=%ENGTOOLS_ROOT%\prepare_environment.cmd
+-=popd
+..=pushd ..

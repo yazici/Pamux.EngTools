@@ -102,3 +102,39 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+
+# Visual Studio 2015 cache/options directory
+.vs/
+
+project.lock.json
+
+/3rdParty
+/OtherEngTools
+/Data/Clipboard.txt
+/Temp
+/Data/UnityAssetStore/*
+
+/src/Pamux.GameDev.Tools/TestAssets/scaled
+/BrowserExtensions/AzurePortal/*
+/BrowserExtensions/DigitalSigning/*
+/BrowserExtensions/SecureInput/*
+/BrowserExtensions/beastify/*
+/BrowserExtensions/media/*
+/BrowserExtensions/quick_print/*
+/BrowserExtensions/text_swap/*
+
+/Content/Harvest/Colorful World/Assets/Colorful_World/Prefabs/Summer/Rocks_Set_1
+/Content/Harvest

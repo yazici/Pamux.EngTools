@@ -58,6 +58,7 @@ class Environment:
         normalizedValue = Environment.getSegmentedEnvironmentVariableNormalizedValue(variable)
         os.environ[variable] = normalizedValue
     
+    
 Environment.normalizeSegmentedEnvironmentVariable("PATH")
 
 if __name__ == "__main__":

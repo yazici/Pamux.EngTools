@@ -10,6 +10,7 @@ using System.Diagnostics;
 using Pamux.GameDev.Lib.Extensions;
 using SharpCompress.Archives;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Pamux.GameDev.Lib.Models
 {
@@ -134,7 +135,7 @@ namespace Pamux.GameDev.Lib.Models
             }
         }
 
-        public void Initialize()
+        public async Task InitializeAsync()
         {
             if (HaveFreshMetadataFile())
             {
@@ -142,7 +143,7 @@ namespace Pamux.GameDev.Lib.Models
             }
             else
             {
-                ExtractMetaData(FullPath, Assets);
+                await ExtractMetaDataAsync(FullPath, Assets);
                 SaveMetaData();
             }
 
@@ -150,7 +151,7 @@ namespace Pamux.GameDev.Lib.Models
             InitializePackageContent();
             GenerateKeywords();
         }
-        
+
         public void SaveMetaData()
         {
             var dir = this.PamuxMetaDataPath.Substring(0, this.PamuxMetaDataPath.LastIndexOf('\\'));
@@ -395,7 +396,7 @@ namespace Pamux.GameDev.Lib.Models
         }
 
 
-        public static void ExtractMetaData(string unityPackageFullPath, IList<string> assets)
+        public static async Task ExtractMetaDataAsync(string unityPackageFullPath, IList<string> assets)
         {
             var archive = ArchiveFactory.Open(unityPackageFullPath);
             if (archive == null)
@@ -405,12 +406,14 @@ namespace Pamux.GameDev.Lib.Models
 
             foreach (var volume in archive.Entries)
             {
-                ProcessArchiveVolume(volume, assets);
+                await ProcessArchiveVolumeAsync(volume, assets);
             }
         }
 
 
-        private static void ProcessArchiveVolume(IArchiveEntry volume, IList<string> assets)
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+        private static async Task ProcessArchiveVolumeAsync(IArchiveEntry volume, IList<string> assets)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             Func<IArchiveEntry, string> getFirstLine = (entry) =>
             {
@@ -456,7 +459,6 @@ namespace Pamux.GameDev.Lib.Models
                             assets.Add(asset.path);
                         }
                     }
-
                 }
             }
             finally

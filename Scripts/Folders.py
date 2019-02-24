@@ -16,12 +16,18 @@ from win32com.shell import shell, shellcon
 #print (sys.executable)
 #print (os.path.dirname(sys.executable))
 
-
 class Folders:    
     BLENDER_VERSION = "2.80"
     
     SRC_ROOT = "c:/src"
     ASSETS_ROOT = "c:/assets"
+    APPS_ROOT = "c:/apps"
+    
+    SCRIPTS_ROOT = os.path.dirname(os.path.abspath( __file__ ))
+    PAMWX_ROOT = os.path.join(SCRIPTS_ROOT, "pamwx")
+    
+    ENGTOOLS_ROOT = os.path.dirname(SCRIPTS_ROOT)
+    ENGTOOLS_GENDATA = os.path.join(ENGTOOLS_ROOT, "GenData")
     
     BUILD_ARTIFACTS = set()
     BUILD_ARTIFACTS.add("bin")
@@ -30,14 +36,25 @@ class Folders:
 
     PATH_ALIASES = {}
     
+    
+    
     @staticmethod
     def getStartupDirectory():
         # 'C:\\Users\\<USERNAME>\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup'
         return shell.SHGetFolderPath(0, shellcon.CSIDL_STARTUP, None, 0) 
+        
     @staticmethod
     def getCommonStartupDirectory():
         # 'C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Startup'
         return shell.SHGetFolderPath(0, shellcon.CSIDL_COMMON_STARTUP, None, 0)
+        
+    @staticmethod
+    def getProgramFilesDirectory():
+        return shell.SHGetFolderPath(0, shellcon.CSIDL_PROGRAM_FILES, None, 0)
+    
+    @staticmethod
+    def getProgramFilesx86Directory():
+        return shell.SHGetFolderPath(0, shellcon.CSIDL_PROGRAM_FILESX86, None, 0)
     
     @staticmethod
     def getRoamingFolders():
@@ -81,3 +98,12 @@ class Folders:
                 yield os.path.join(root, name)
             for name in dirs:
                 yield os.path.join(root, name)
+    
+    @staticmethod
+    def ensureDirectoryExists(directory):
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+
+    @staticmethod   
+    def prepareFileSystem():
+        Folders.ensureDirectoryExists(Folders.ENGTOOLS_GENDATA)

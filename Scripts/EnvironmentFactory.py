@@ -3,7 +3,9 @@ import os
 import shutil
 import win32api
 from win32com.shell import shell, shellcon
+
 from Folders import Folders
+from Apps import Apps
 from Debug import Debug
 from Environment import Environment
 
@@ -18,6 +20,7 @@ class EnvironmentFactory:
         else:
             shutil.copyfile(self.originalFilePath, self.filePath)    
             self.file = open(self.filePath, "a")
+            self.file.write("\n\n")
         return self
         
     def __exit__(self, exc_type, exc_val, exc_tb):        
@@ -35,13 +38,23 @@ class EnvironmentFactory:
     def generateAliases():
         with EnvironmentFactory("aliases.txt", "gen_aliases.txt") as generator:
             generator.addFolderAlias("badd", Folders.getBlenderAddOnsFolder())
-    
+
     @staticmethod    
     def generateScript():        
         with EnvironmentFactory(None, "gen_env.cmd") as generator:
             generator.addSetVariable("PATH", Environment.getSegmentedEnvironmentVariableNormalizedValue("PATH"))
             
+            generator.addSetVariable("PAMUX_PYTHON36_64_EXE", "%ProgramFiles(x86)%\Microsoft Visual Studio\Shared\Python36_64\python.exe")
+            generator.addSetVariable("PAMUX_NOTEPADPLUSPLUS_EXE", Apps.NOTEPADPLUSPLUS_EXE)
+            generator.addSetVariable("PAMUX_ENGTOOLS_GENDATA", Folders.ENGTOOLS_GENDATA)
+            generator.addSetVariable("PAMUX_ENGTOOLS_ROOT", Folders.ENGTOOLS_ROOT)
+            generator.addSetVariable("PAMUX_SCRIPTS_ROOT", Folders.SCRIPTS_ROOT)
+            generator.addSetVariable("PAMUX_PAMWX_ROOT", Folders.PAMWX_ROOT)
+            
+            
     @staticmethod    
     def generate():
         EnvironmentFactory.generateAliases()
         EnvironmentFactory.generateScript()
+        
+        Folders.prepareFileSystem()

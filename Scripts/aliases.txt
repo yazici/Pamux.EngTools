@@ -3,7 +3,12 @@ ls=dir /x $*
 l=dir /x $*
 ll=dir /w $*
 la=dir /x /a $*
-aliases=doskey /macros
-realias=%ENGTOOLS_ROOT%\prepare_environment.cmd
 -=popd
 ..=pushd ..
+
+aliases=doskey /macros
+realias=%PAMUX_SCRIPTS_ROOT%\prepare_environment.cmd
+
+env=call %PAMUX_SCRIPTS_ROOT%\alias_helpers.cmd :showEnvironment
+
+hello= call %PAMUX_SCRIPTS_ROOT%\alias_helpers.cmd :runPamwxHelloWorld

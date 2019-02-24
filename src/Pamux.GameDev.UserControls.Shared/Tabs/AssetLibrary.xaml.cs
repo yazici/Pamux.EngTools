@@ -5,6 +5,7 @@ using Pamux.GameDev.Lib.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -60,13 +61,13 @@ namespace Pamux.GameDev.UserControls.Tabs
         //    }
         //}
 
-        private void EnumerateUnityPackageFiles()
+        private async Task EnumerateUnityPackageFilesAsync()
         {
             AllAssets.Clear();
             EnumerateUnityPackageFiles(Settings.Unity3DAssetsFolderPath, new List<string>());
             foreach (var asset in AllAssets)
             {
-                asset.Initialize();
+                await asset.InitializeAsync();
             }
         }
 

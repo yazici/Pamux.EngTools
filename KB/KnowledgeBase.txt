@@ -11,7 +11,7 @@ Raspberry PI : pi/raspberry
 
 
 Procedural Animal Walk Cycles 
-http://funkboxing.com/wordpress/?p=866
+http://funkboxing.com/wordpress/?p=866  
 	
 
 https://unity3d.com/learn/tutorials/topics/best-practices/guide-assetbundles-and-resources

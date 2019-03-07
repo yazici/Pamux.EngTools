@@ -47,6 +47,7 @@ class EnvironmentFactory:
             generator.addSetVariable("PAMUX_PYTHON36_64_EXE", "%ProgramFiles(x86)%\Microsoft Visual Studio\Shared\Python36_64\python.exe")
             generator.addSetVariable("PAMUX_NOTEPADPLUSPLUS_EXE", Apps.NOTEPADPLUSPLUS_EXE)
             generator.addSetVariable("PAMUX_ENGTOOLS_GENDATA", Folders.ENGTOOLS_GENDATA)
+            generator.addSetVariable("PAMUX_ENGTOOLS_DATA", Folders.ENGTOOLS_DATA)
             generator.addSetVariable("PAMUX_ENGTOOLS_ROOT", Folders.ENGTOOLS_ROOT)
             generator.addSetVariable("PAMUX_SCRIPTS_ROOT", Folders.SCRIPTS_ROOT)
             generator.addSetVariable("PAMUX_PAMWX_ROOT", Folders.PAMWX_ROOT)

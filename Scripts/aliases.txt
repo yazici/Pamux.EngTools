@@ -11,4 +11,13 @@ realias=%PAMUX_SCRIPTS_ROOT%\prepare_environment.cmd
 
 env=call %PAMUX_SCRIPTS_ROOT%\alias_helpers.cmd :showEnvironment
 
-hello= call %PAMUX_SCRIPTS_ROOT%\alias_helpers.cmd :runPamwxHelloWorld
+hello=call %PAMUX_SCRIPTS_ROOT%\alias_helpers.cmd :runPamwxHelloWorld
+
+pipi=call %PAMUX_SCRIPTS_ROOT%\alias_helpers.cmd :pipInstall $*
+
+pyv=call %PAMUX_SCRIPTS_ROOT%\alias_helpers.cmd :pythonVersion
+
+
+crawler=call %PAMUX_SCRIPTS_ROOT%\alias_helpers.cmd :runCrawler
+
+mst = call %PAMUX_SCRIPTS_ROOT%\alias_helpers.cmd :makeSeamlessTexture $* 

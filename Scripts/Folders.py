@@ -16,18 +16,22 @@ from win32com.shell import shell, shellcon
 #print (sys.executable)
 #print (os.path.dirname(sys.executable))
 
-class Folders:    
+class Folders: 
     BLENDER_VERSION = "2.80"
     
     SRC_ROOT = "c:/src"
     ASSETS_ROOT = "c:/assets"
     APPS_ROOT = "c:/apps"
     
+    BLENDER_APP_ROOT=os.path.join(APPS_ROOT, "blender-2.80-18e5540a48b6-win64")
+    BLENDER_PYTHON_EXE=os.path.join(BLENDER_APP_ROOT, "2.80/python/bin")
+    
     SCRIPTS_ROOT = os.path.dirname(os.path.abspath( __file__ ))
     PAMWX_ROOT = os.path.join(SCRIPTS_ROOT, "pamwx")
     
     ENGTOOLS_ROOT = os.path.dirname(SCRIPTS_ROOT)
     ENGTOOLS_GENDATA = os.path.join(ENGTOOLS_ROOT, "GenData")
+    ENGTOOLS_DATA = os.path.join(ENGTOOLS_ROOT, "Data")
     
     BUILD_ARTIFACTS = set()
     BUILD_ARTIFACTS.add("bin")

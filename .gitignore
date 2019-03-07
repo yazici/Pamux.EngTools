@@ -126,6 +126,12 @@ project.lock.json
 /Data/Clipboard.txt
 /Temp
 /Data/UnityAssetStore/*
+/Data/BlendSwap/*
+/Data/TurboSquid/*
+/Data/Free3d/*
+/Data/*.tsv
+/Data/errors.txt
+/GenData/*
 
 /src/Pamux.GameDev.Tools/TestAssets/scaled
 /BrowserExtensions/AzurePortal/*

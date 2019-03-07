@@ -1,1 +1,0 @@
-%windir%\system32\cmd.exe /k "%~dp0\prepare_environment.cmd"

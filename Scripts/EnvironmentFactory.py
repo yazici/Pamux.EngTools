@@ -51,7 +51,8 @@ class EnvironmentFactory:
             generator.addSetVariable("PAMUX_ENGTOOLS_ROOT", Folders.ENGTOOLS_ROOT)
             generator.addSetVariable("PAMUX_SCRIPTS_ROOT", Folders.SCRIPTS_ROOT)
             generator.addSetVariable("PAMUX_PAMWX_ROOT", Folders.PAMWX_ROOT)
-            
+            generator.addSetVariable("PAMUX_BLENDER_280_EXE", Apps.BLENDER_280_EXE)
+
             
     @staticmethod    
     def generate():

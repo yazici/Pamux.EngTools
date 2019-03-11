@@ -21,3 +21,10 @@ pyv=call %PAMUX_SCRIPTS_ROOT%\alias_helpers.cmd :pythonVersion
 crawler=call %PAMUX_SCRIPTS_ROOT%\alias_helpers.cmd :runCrawler
 
 mst = call %PAMUX_SCRIPTS_ROOT%\alias_helpers.cmd :makeSeamlessTexture $* 
+
+
+consan =call %PAMUX_SCRIPTS_ROOT%\alias_helpers.cmd :convertAndSanitize $*
+
+
+bl = %PAMUX_BLENDER_280_EXE%  $*
+blb = %PAMUX_BLENDER_280_EXE% -b $*

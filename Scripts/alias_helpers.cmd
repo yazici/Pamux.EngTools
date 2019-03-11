@@ -51,3 +51,11 @@ GOTO :eof
     "%PAMUX_PYTHON_EXE%" -c "from ImageProcessing import ImageProcessing; ImageProcessing.MakeSeamlessTexture('%1')"
 
     GOTO :eof
+    
+    
+    
+:convertAndSanitize
+    @echo off
+    "%PAMUX_PYTHON_EXE%" -c "from AssetUtils import AssetUtils; AssetUtils.ConvertAndSanitizeAll('%1')"
+
+    GOTO :eof

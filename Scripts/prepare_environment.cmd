@@ -19,6 +19,7 @@ REM %PAMUX_PYTHON_EXE% get-pip.py
 REM pipi pywin32
 REM pipi patool
 REM pipi pillow
+REM pipi keyboard
 doskey /MACROFILE=aliases.txt
 
 "%PAMUX_PYTHON_EXE%" -c "from EnvironmentFactory import EnvironmentFactory; EnvironmentFactory.generate()"

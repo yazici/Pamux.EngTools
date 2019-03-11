@@ -15,9 +15,9 @@ class Apps:
     GIT_EXE = os.path.join(Folders.getProgramFilesDirectory(), "git",  "cmd", "git.exe")
     UNITY_EXE = os.path.join(Folders.getProgramFilesDirectory(), "Unity",  "Editor", "Unity.exe")
     BLENDER_EXE = os.path.join(Folders.getProgramFilesDirectory(), "Blender Foundation",  "Blender", "Blender.exe")
-
     
-  
+    BLENDER_280_EXE=os.path.join(Folders.BLENDER_APP_ROOT, "blender.exe")
+
 	# NuGet_EXE = "nuget.exe"
 	# Putty_EXE = "putty.exe"
 	# Pscp_EXE = "pscp.exe"

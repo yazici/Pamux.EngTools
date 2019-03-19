@@ -23,7 +23,7 @@ class Folders:
     ASSETS_ROOT = "c:/assets"
     APPS_ROOT = "c:/apps"
     
-    BLENDER_APP_ROOT=os.path.join(APPS_ROOT, "blender-2.80-18e5540a48b6-win64")
+    BLENDER_APP_ROOT=os.path.join(APPS_ROOT, "blender-2.80")
     BLENDER_PYTHON_EXE=os.path.join(BLENDER_APP_ROOT, "2.80/python/bin")
     
     SCRIPTS_ROOT = os.path.dirname(os.path.abspath( __file__ ))
@@ -95,6 +95,16 @@ class Folders:
             for name in dirs:
                 yield os.path.join(root, name)
                 
+    @staticmethod
+    def getImmediateSubFolders(rootDir):
+        return [name for name in os.listdir(rootDir)
+            if os.path.isdir(os.path.join(rootDir, name))]  
+
+    @staticmethod
+    def getImmediateFiles(rootDir):
+        return [name for name in os.listdir(rootDir)
+            if os.path.isfile(os.path.join(rootDir, name))]  
+            
     @staticmethod
     def getAllFoldersAndFiles(rootDir):
         for root, dirs, files in os.walk(rootDir, topdown=False):

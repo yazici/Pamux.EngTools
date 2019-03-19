@@ -24,7 +24,9 @@ mst = call %PAMUX_SCRIPTS_ROOT%\alias_helpers.cmd :makeSeamlessTexture $*
 
 
 consan =call %PAMUX_SCRIPTS_ROOT%\alias_helpers.cmd :convertAndSanitize $*
+symhuman =call %PAMUX_SCRIPTS_ROOT%\alias_helpers.cmd :symmetrizeHuman $*
 
+cppwiz =call %PAMUX_SCRIPTS_ROOT%\alias_helpers.cmd :createCMakeBasedCppProject $*
 
 bl = %PAMUX_BLENDER_280_EXE%  $*
-blb = %PAMUX_BLENDER_280_EXE% -b $*
+blb = %PAMUX_BLENDER_280_EXE% -b --python $*

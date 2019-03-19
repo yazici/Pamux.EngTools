@@ -8,7 +8,7 @@ import subprocess
 from Folders import Folders
 from Debug import Debug
 from Blender import Blender
-
+import blendfile
 from shutil import copyfile
 #print(os.pathsep)
 #print(os.sep)

@@ -59,3 +59,21 @@ GOTO :eof
     "%PAMUX_PYTHON_EXE%" -c "from AssetUtils import AssetUtils; AssetUtils.ConvertAndSanitizeAll('%1')"
 
     GOTO :eof
+    
+    
+    
+    
+:symmetrizeHuman
+    @echo off
+    "%PAMUX_PYTHON_EXE%" -c "from MakeHuman import MakeHuman; MakeHuman.SymmetrizeHuman('%1')"
+
+    GOTO :eof
+    
+    
+    
+    
+:createCMakeBasedCppProject
+    @echo off
+    "%PAMUX_PYTHON_EXE%" -c "from Wizards import CMakeBasedCppWizard; wizard = CMakeBasedCppWizard('%1'); wizard.Run()"
+
+    GOTO :eof

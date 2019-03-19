@@ -3,7 +3,7 @@ import os
 import shutil
 import bpy
 import space_view3d_panel_measure as pm
-
+import blendfile
 class BlendSanitizer:
     
     def SetMetricUnits(self):

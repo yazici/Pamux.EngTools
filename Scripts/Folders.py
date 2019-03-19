@@ -19,9 +19,9 @@ from win32com.shell import shell, shellcon
 class Folders: 
     BLENDER_VERSION = "2.80"
     
-    SRC_ROOT = "c:/src"
-    ASSETS_ROOT = "c:/assets"
-    APPS_ROOT = "c:/apps"
+    SRC_ROOT = os.environ["PAMUX_SRC_ROOT"]
+    ASSETS_ROOT = os.environ["PAMUX_ASSETS_ROOT"]
+    APPS_ROOT = os.environ["PAMUX_APPS_ROOT"]
     
     BLENDER_APP_ROOT=os.path.join(APPS_ROOT, "blender-2.80")
     BLENDER_PYTHON_EXE=os.path.join(BLENDER_APP_ROOT, "2.80/python/bin")

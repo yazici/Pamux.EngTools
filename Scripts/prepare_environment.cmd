@@ -31,8 +31,8 @@ set PAMUX_PYTHON_SCRIPTS_ROOT=%PAMUX_BLENDER_PYTHON_ROOT%\scripts
 set PAMUX_PYTHON_EXE=%PAMUX_PYTHON_BIN_ROOT%\python.exe
 set PAMUX_PIP_EXE=%PAMUX_PYTHON_SCRIPTS_ROOT%\pip.exe
 
-%PAMUX_PYTHON_EXE% get-pip.py
-%PAMUX_PIP_EXE% install -r %PAMUX_SCRIPTS_ROOT%/requirements.txt
+REM %PAMUX_PYTHON_EXE% get-pip.py
+REM %PAMUX_PIP_EXE% install -r %PAMUX_SCRIPTS_ROOT%/requirements.txt
 
 
 doskey /MACROFILE=aliases.txt

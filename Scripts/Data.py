@@ -11,8 +11,8 @@ from Debug import Debug
 #print(os.sep)
 
 class Data:
-    THIRDPARTY_CATALOG = os.path.join(Folders.ENGTOOLS_DATA, "3rdParty.json")    
-    CMAKE_BASED_CPP_PROJECT_WIZARD = os.path.join(Folders.ENGTOOLS_DATA, "CMakeBasedCppProject.pwiz")
+    THIRDPARTY_CATALOG = os.path.join(Folders.ENGTOOLS_WIZARD_DATA, "3rdParty.json")    
+    CMAKE_BASED_CPP_PROJECT_WIZARD = os.path.join(Folders.ENGTOOLS_WIZARD_DATA, "CMakeBasedCppProject.pwiz")
 
     @staticmethod
     def main():

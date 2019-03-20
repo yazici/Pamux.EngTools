@@ -32,7 +32,7 @@ class Folders:
     ENGTOOLS_ROOT = os.path.dirname(SCRIPTS_ROOT)
     ENGTOOLS_GENDATA = os.path.join(ENGTOOLS_ROOT, "GenData")
     ENGTOOLS_DATA = os.path.join(ENGTOOLS_ROOT, "Data")
-    
+    ENGTOOLS_WIZARD_DATA = os.path.join(ENGTOOLS_DATA, "Wizards")
     BUILD_ARTIFACTS = set()
     BUILD_ARTIFACTS.add("bin")
     BUILD_ARTIFACTS.add("obj")

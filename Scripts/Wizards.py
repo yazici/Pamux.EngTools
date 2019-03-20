@@ -110,8 +110,9 @@ class WizardBase:
         #print(self.projectRoot)
         pass       
                 
-                
+# %PAMUX_ENGTOOLS_ROOT%\Data\Wizards\CMakeBasedCppProject                
 # cppwiz C:\src\Pamux\Pamux.CppWizTest
+# cppwiz C:\mysrc\Pamux.CppWizTest
 class CMakeBasedCppWizard(WizardBase):        
     def __init__(self, projectRoot):
         WizardBase.__init__(self, Data.CMAKE_BASED_CPP_PROJECT_WIZARD, projectRoot)

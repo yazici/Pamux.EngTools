@@ -8,7 +8,7 @@
             "name": "Python Debugger: pamux_eng_tools",
             "type": "debugpy",
             "request": "launch",
-            "program": "C:/src/Pamux.EngTools/PAM/pamux_eng_tools.py",
+            "program": "C:/src/Pamux.EngTools/src/pet/pamux_eng_tools.py",
             "console": "integratedTerminal"
         }
     ]

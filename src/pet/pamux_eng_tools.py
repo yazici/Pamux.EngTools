@@ -5,7 +5,6 @@
 # https://pypi.org/project/pyqt6-tools/   pip install pyqt6-tools
 
 import sys
-import os
 
 from PyQt6.QtWidgets import QApplication
 

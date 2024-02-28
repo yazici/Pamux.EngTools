@@ -1,5 +1,6 @@
-from model.asset_query import AssetQuery
 from pathlib import Path
+
+from model.asset_query import AssetQuery
 
 class GDOMetaFile:
     def __init__(self, filePath : str):
@@ -15,7 +16,7 @@ class GDOMetaFile:
 
         if not Path(self.__filePath).is_file():
             return
-        
+
         with open(self.__filePath,"r") as file:
             for aLine in file.readlines():
                 self.__assets.append(aLine.strip()) 

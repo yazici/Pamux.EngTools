@@ -1,12 +1,6 @@
-import os
-from PyQt6 import QtWidgets
-from PyQt6.QtWidgets import QMainWindow, QTableWidgetItem, QDockWidget, QTabWidget, QGridLayout, QPushButton, QFileDialog, QLabel
-from PyQt6.QtGui import QPixmap
-from PyQt6.QtCore import Qt
-from PyQt6 import uic
+from PyQt6.QtWidgets import QMainWindow, QTableWidgetItem
 
 from model.pamux_asset_library import PamuxAssetLibrary
-from utils.paths import Paths
 from utils.ui_helper import UI
 
 # app = QApplication.instance()
@@ -21,11 +15,8 @@ class MainWindow(QMainWindow):
         UI.load(self)
 
         self.tabWidget.setCurrentIndex(self.tabWidget.indexOf(self.tabAssetLibrary))
-
         self.editQuery.textChanged.connect(self.onQueryTextChanged)
-
         self.tableAssetContainers.setColumnWidth(0, 100)
-
         self.refreshAssetContainersTable()
 
     def onQueryTextChanged(self, queryText = None):
@@ -45,25 +36,3 @@ class MainWindow(QMainWindow):
             self.tableAssetContainers.setItem(row, 1, QTableWidgetItem(assetContainer.company))
             self.tableAssetContainers.setItem(row, 2, QTableWidgetItem(assetContainer.category))
             row = row + 1
-    
-    # def loadImages(self):
-    #     folderPath = QFileDialog.getExistingDirectory(self, "Select Folder")
-    #     if folderPath:
-    #         # Clear existing widgets/images from the layout
-    #         for i in reversed(range(1, self.layout.count())): 
-    #             widget = self.layout.itemAt(i).widget()
-    #             if widget is not None:
-    #                 widget.deleteLater()
-
-    #         row, col = 1, 0
-    #         for filename in os.listdir(folderPath):
-    #             if filename.lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.bmp')):
-    #                 imagePath = os.path.join(folderPath, filename)
-    #                 pixmap = QPixmap(imagePath)
-    #                 label = QLabel(self)
-    #                 label.setPixmap(pixmap.scaled(100, 100, Qt.AspectRatioMode.KeepAspectRatio))
-    #                 self.layout.addWidget(label, row, col)
-    #                 col += 1
-    #                 if col % 4 == 0:  # Adjust based on your grid needs
-    #                     row += 1
-    #                     col = 0

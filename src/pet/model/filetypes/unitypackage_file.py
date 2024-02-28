@@ -2,8 +2,8 @@ import os
 from pathlib import Path
 
 from model.asset_query import AssetQuery
-from utils.paths import Paths
 from model.filetypes.gdometa_file import GDOMetaFile
+from utils.paths import Paths
 
 class UnityPackageFile:
     def __init__(self, filePath : str):
@@ -11,11 +11,7 @@ class UnityPackageFile:
         self.__name = Path(self.__filePath).stem
         self.__gdoMetaFilePath = Paths.getGDOMetaPathFromUnityPackagePath(self.__filePath)
         self.__gdoMetaFile = GDOMetaFile(self.__gdoMetaFilePath)
-        
-    # @property
-    # def gdoMetaFilePath(self):
-    #     return self.__gdoMetaFilePath
-    
+
     @property
     def gdoMetaFile(self):
         return self.__gdoMetaFile

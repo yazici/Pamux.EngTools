@@ -2,9 +2,9 @@ import os
 
 import glob
 
-from utils.paths import Paths
 from model.asset_query import AssetQuery
 from model.unity_asset_container import UnityAssetContainer
+from utils.paths import Paths
 
 class PamuxAssetLibrary:
     def __init__(self):

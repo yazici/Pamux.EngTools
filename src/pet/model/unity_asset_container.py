@@ -1,8 +1,5 @@
 from model.asset_query import AssetQuery
-
 from model.filetypes.unitypackage_file import UnityPackageFile
-from model.filetypes.gdometa_file import GDOMetaFile
-
 from utils.string_utils import StringUtils
 
 # *.unitypackage files are Unity Asset Containers

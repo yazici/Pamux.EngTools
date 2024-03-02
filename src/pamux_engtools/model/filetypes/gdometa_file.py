@@ -1,7 +1,5 @@
 from pathlib import Path
 
-from model.asset_query import AssetQuery
-
 class GDOMetaFile:
     def __init__(self, filePath : str):
         self.__filePath = filePath

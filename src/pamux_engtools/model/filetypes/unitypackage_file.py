@@ -1,15 +1,15 @@
 import os
 from pathlib import Path
 
-from model.asset_query import AssetQuery
-from model.filetypes.gdometa_file import GDOMetaFile
-from utils.paths import Paths
+from pamux_engtools.model.filetypes.gdometa_file import GDOMetaFile
+from pamux_engtools.utils.paths import Paths
 
 class UnityPackageFile:
-    def __init__(self, filePath : str):
+    def __init__(self, config, filePath : str):
+        self.__config = config
         self.__filePath = filePath
         self.__name = Path(self.__filePath).stem
-        self.__gdoMetaFilePath = Paths.getGDOMetaPathFromUnityPackagePath(self.__filePath)
+        self.__gdoMetaFilePath = config.getMetadataPathFromDownloadedPackagePath(self.__filePath)
         self.__gdoMetaFile = GDOMetaFile(self.__gdoMetaFilePath)
 
     @property

@@ -2,15 +2,14 @@ import os
 
 import glob
 
-from model.asset_query import AssetQuery
-from model.unity_asset_container import UnityAssetContainer
-from utils.paths import Paths
+from pamux_engtools.model.asset_query import AssetQuery
+from pamux_engtools.model.unity_asset_container import UnityAssetContainer
 
 class PamuxAssetLibrary:
-    def __init__(self):
+    def __init__(self, config):
+        self.__config = config
         self.__assetContainers = []
         self.loadDatabase()
-
 
         # for gdoMetaPath in glob.glob(os.path.join(Paths.UnityAssetStoreMetadata, "**", "**", f"*.{Paths.MetadataExtension}")):
         #     self.__assetContainers.append(UnityPackagedAssets(None, gdoMetaPath))
@@ -28,13 +27,13 @@ class PamuxAssetLibrary:
 
     def loadDatabase(self):
         assetContainers = []
-        self.enumerateDownloadedUnityAssetStoreFolders(Paths.UnityAssetStore, [], assetContainers)
+        self.enumerateAssetStoreDownloadFolders(self.__config.unityAssetDownloadRoot, [], assetContainers)
     
         self.__assetContainers = assetContainers
         for asset in self.__assetContainers:
             asset.initialize()
 
-    def enumerateDownloadedUnityAssetStoreFolders(self, directory: str, dirNames: list, assetContainers: list):
+    def enumerateAssetStoreDownloadFolders(self, directory: str, dirNames: list, assetContainers: list):
         if len(dirNames) < 2:
             for subDirectory in os.listdir(directory):
                 fullName = os.path.join(directory, subDirectory)
@@ -42,14 +41,14 @@ class PamuxAssetLibrary:
                     continue
 
                 dirNames.append(subDirectory)
-                self.enumerateDownloadedUnityAssetStoreFolders(fullName, dirNames, assetContainers)
+                self.enumerateAssetStoreDownloadFolders(fullName, dirNames, assetContainers)
 
         else:
             for unityPackageFileFullPath in glob.glob(os.path.join(directory, "*.unitypackage")):
                 if not os.path.isfile(unityPackageFileFullPath):
                     continue
 
-                assetContainer = UnityAssetContainer(unityPackageFileFullPath, dirNames[0], dirNames[1])
+                assetContainer = UnityAssetContainer(self.__config, unityPackageFileFullPath, dirNames[0], dirNames[1])
                 assetContainers.append(assetContainer)
 
         if len(dirNames) > 0:

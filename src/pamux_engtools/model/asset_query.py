@@ -1,4 +1,4 @@
-from utils.string_utils import StringUtils
+from pamux_engtools.utils.string_utils import StringUtils
 
 class AssetQuery:
     def __init__(self, queryText: str):

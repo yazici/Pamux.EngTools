@@ -68,7 +68,7 @@
          <bool>false</bool>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>6</number>
         </property>
         <widget class="QWidget" name="tabHome">
          <attribute name="title">
@@ -142,6 +142,39 @@
           <item>
            <layout class="QVBoxLayout" name="verticalLayout_3">
             <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_2a">
+              <property name="spacing">
+               <number>10</number>
+              </property>
+              <property name="leftMargin">
+               <number>10</number>
+              </property>
+              <property name="topMargin">
+               <number>10</number>
+              </property>
+              <property name="rightMargin">
+               <number>10</number>
+              </property>
+              <property name="bottomMargin">
+               <number>10</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="labelUnityAssetDownloadRoot">
+                <property name="text">
+                 <string>Unity Asset Download Root</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="editUnityAssetDownloadRoot">
+                <property name="text">
+                 <string>D:\AppData\Roaming\Unity\Asset Store-5.x</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
              <layout class="QHBoxLayout" name="horizontalLayout_2">
               <property name="spacing">
                <number>10</number>
@@ -159,20 +192,33 @@
                <number>10</number>
               </property>
               <item>
-               <widget class="QLabel" name="labelUnityAssetStoreDataPath">
+               <widget class="QLabel" name="labelUnityAssetMetadataRoot">
                 <property name="text">
-                 <string>Unity Asset Store Data Path</string>
+                 <string>Unity Asset Metadata Root</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QLineEdit" name="editUnityAssetStoreDataPath">
+               <widget class="QLineEdit" name="editUnityAssetMetadataRoot">
                 <property name="text">
                  <string>C:\src\Pamux.EngTools\Data\UnityAssetStore</string>
                 </property>
                </widget>
               </item>
              </layout>
+            </item>
+            <item>
+             <spacer name="verticalSpacer">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
             </item>
            </layout>
           </item>

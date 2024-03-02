@@ -54,7 +54,7 @@ class AssetMetadata:
         pass
 
     def dump(self):
-        print("  " * self.__depth, self.__name)
+        # print("  " * self.__depth, self.__name)
         for child in self.__children:
             child.dump()
 

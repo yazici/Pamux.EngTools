@@ -24,6 +24,10 @@ class Paths:
 
     EngTools = os.path.join(Src, "Pamux.EngTools")
     EngData = os.path.join(EngTools, "Data")
+    EngConfig = os.path.join(EngTools, "Config")
+    EngToolsUIConfig = os.path.join(EngConfig, "petui.config.json")
+    EngToolsPrefixesConfig = os.path.join(EngConfig, "petui.prefixes.txt")
+
 
     EngTemp = os.path.join(EngTools, "Temp")
     EngContent = os.path.join(EngTools, "Content")
@@ -34,31 +38,20 @@ class Paths:
 
     LocalHtmlPath = os.path.join(EngData, "local.html")
 
-    VoiceSaveDirectory = os.path.join(EngTools, "Voice")
+    VoiceSaveDirectory = os.path.join(EngData, "Voice")
 
     GzipCli = os.path.join(Apps, "gzip-1.3.12-1-bin", "bin", "gzip.exe")
     SevenZipCli = os.path.join(ProgramFiles, "7-Zip", "7z.exe")
 
     UnityApp = os.path.join(ProgramFiles, "Unity")
 
-    UnityAssetStore = os.path.join(RoamingAppData, "Unity", "Asset Store-5.x")
+    UnityAssetDownloadDefault = os.path.join(RoamingAppData, "Unity", "Asset Store-5.x")
 
-    UnityAssetStoreMetadata = os.path.join(EngData, "UnityAssetStore")
+    UnityAssetMetadataDefault = os.path.join(EngData, "UnityAssetStore")
 
-    AssetsTSV = os.path.join(UnityAssetStoreMetadata, "Assets.tsv")
-    AssetTypesTSV = os.path.join(UnityAssetStoreMetadata, "AssetTypes.tsv")
-    AssetKeywordsTSV = os.path.join(UnityAssetStoreMetadata, "AssetKeywords.tsv")
-    AssetFilesTSV = os.path.join(UnityAssetStoreMetadata, "AssetFiles.tsv")
 
     SketchupSearchUrl = "https://3dwarehouse.sketchup.com/search.html?backendClass=entity&q="
-
-
-    UnityAssetStorePathIndex = len(UnityAssetStore)+1
 
     @staticmethod
     def getUiPath(name: str):
         return os.path.join(Paths.UiDir, f"{name}.ui")
-
-    @staticmethod
-    def getGDOMetaPathFromUnityPackagePath(unityPackagePath):
-        return os.path.join(Paths.UnityAssetStoreMetadata, unityPackagePath[Paths.UnityAssetStorePathIndex:].replace(".unitypackage", ".gdometa"))

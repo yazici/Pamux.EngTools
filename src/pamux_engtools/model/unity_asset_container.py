@@ -1,14 +1,14 @@
-from model.asset_query import AssetQuery
-from model.filetypes.unitypackage_file import UnityPackageFile
-from utils.string_utils import StringUtils
+from pamux_engtools.model.asset_query import AssetQuery
+from pamux_engtools.model.filetypes.unitypackage_file import UnityPackageFile
+from pamux_engtools.utils.string_utils import StringUtils
+from pamux_engtools.utils.paths import Paths
 
 # *.unitypackage files are Unity Asset Containers
+
 class UnityAssetContainer:
-    Prefixes = ["Complete Projects", "Editor Extensions", "3D Models", "Unity Essentials", "Unity Tech Demos", "Sample Projects", 
-                    "Packs", "Tutorials", "Terrain", "Environments", "Vegetation", "Systems"]
-    
-    def __init__(self, unityPackageFileFullPath : str, company: str, assetSubFolder: str):
-        self.__unityPackageFile = UnityPackageFile(unityPackageFileFullPath)
+    def __init__(self, config, unityPackageFileFullPath : str, company: str, assetSubFolder: str):
+        self.__config = config
+        self.__unityPackageFile = UnityPackageFile(self.__config, unityPackageFileFullPath)
         self.__company = company
         self.__categoryPath = self.get_category_path(assetSubFolder)
         self.__individualAssets = []
@@ -28,14 +28,20 @@ class UnityAssetContainer:
     
     def get_category_path(self, assetSubFolder):
         result = []
-
-        for prefix in UnityAssetContainer.Prefixes:
-            if assetSubFolder.startswith(prefix):
-                result.append(prefix.strip())
-                assetSubFolder = assetSubFolder[len(prefix):].strip()
+        original = assetSubFolder
+        while True: 
+            previousLen = len(result)
+            for prefix in self.__config.prefixes:
+                if assetSubFolder.startswith(prefix):
+                    result.append(prefix.strip())
+                    #print(assetSubFolder + " ===> " + assetSubFolder[len(prefix):].strip())
+                    assetSubFolder = assetSubFolder[len(prefix):].strip()                    
+                    break
+            if len(result) == previousLen:
+                break
 
         if len(assetSubFolder) != 0:
-            print(assetSubFolder)
+            print(original + " => " + assetSubFolder)
             result.append(assetSubFolder)
 
         return result

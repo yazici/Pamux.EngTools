@@ -1,6 +1,10 @@
-from unreal_materials.nodes.ports_base import PortsBase
-from unreal_materials.nodes.node_base import NodeBase, DefaultInputPorts, DefaultOutputPorts 
+from unreal_materials.nodes.utils.node_base import PortsBase, DefaultInputPorts, DefaultOutputPorts, NodeBase
 
 class MaterialFunctionCallBase(NodeBase):
-    def __init__(self, name: str, inputPorts: PortsBase = DefaultInputPorts(), outputPorts: PortsBase = DefaultOutputPorts()):
+    def __init__(
+        self,
+        name: str,
+        inputPorts: PortsBase = DefaultInputPorts(),
+        outputPorts: PortsBase = DefaultOutputPorts()):
+
         super().__init__("MaterialExpressionMaterialFunctionCall", name = name, inputPorts = inputPorts, outputPorts = outputPorts)

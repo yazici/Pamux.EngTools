@@ -1,4 +1,5 @@
-from unreal_materials.nodes.material_functions.commons.material_function_call import MaterialFunctionCallBase, PortsBase
+from unreal_materials.nodes.utils.node_base import PortsBase
+from unreal_materials.nodes.material_functions.commons.material_function_call import MaterialFunctionCallBase
 
 class MF_FoliageMask(MaterialFunctionCallBase):
     class InputPorts(PortsBase):

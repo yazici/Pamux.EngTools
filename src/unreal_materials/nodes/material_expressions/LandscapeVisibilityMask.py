@@ -1,4 +1,4 @@
-from unreal_materials.nodes.node_base import MaterialExpressionBase
+from unreal_materials.nodes.utils.node_base import MaterialExpressionBase
 
 # https://docs.unrealengine.com/5.0/en-US/PythonAPI/class/MaterialExpressionLandscapeLayerWeight.html
 
@@ -9,4 +9,4 @@ from unreal_materials.nodes.node_base import MaterialExpressionBase
 
 class LandscapeVisibilityMask(MaterialExpressionBase):    
     def __init__(self):
-        super().__init__("MaterialExpressionLandscapeVisibilityMask")
+        super().__init__("MaterialExpressionLandscapeVisibilityMask", "LandscapeVisibilityMask")

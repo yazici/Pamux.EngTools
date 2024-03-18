@@ -1,4 +1,4 @@
-from src.unreal_materials.nodes.output import MasterMaterialOutput
+from unreal_materials.nodes.output import MasterMaterialOutput
 
 class M_Landscape_Master(MasterMaterialOutput):
     def __init__(self):

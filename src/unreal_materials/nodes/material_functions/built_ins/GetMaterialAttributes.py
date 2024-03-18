@@ -1,5 +1,4 @@
-from unreal_materials.nodes.node_base import NodeBase, DefaultInputPorts
-from unreal_materials.nodes.ports_base import PortsBase
+from unreal_materials.nodes.utils.node_base import PortsBase, NodeBase, DefaultInputPorts
 
 class GetMaterialAttributes(NodeBase):
     class OutputPorts(PortsBase):
@@ -12,5 +11,9 @@ class GetMaterialAttributes(NodeBase):
 
             self.attributeTypes = attributeTypes
 
-    def __init__(self, details: Details = Details()):
-        super().__init__("GetMaterialAttributes", details = details, inputPorts = DefaultInputPorts(), outputPorts = GetMaterialAttributes.OutputPorts())
+    def __init__(self):
+        super().__init__(
+            "GetMaterialAttributes",
+            details = GetMaterialAttributes.Details(),
+            inputPorts = DefaultInputPorts(),
+            outputPorts = GetMaterialAttributes.OutputPorts())

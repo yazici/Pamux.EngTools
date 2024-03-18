@@ -1,4 +1,5 @@
-from unreal_materials.nodes.material_functions.commons.material_function_call import PortsBase, MaterialFunctionCallBase
+from unreal_materials.nodes.utils.node_base import PortsBase
+from unreal_materials.nodes.material_functions.commons.material_function_call import MaterialFunctionCallBase
 
 class UnaryFunctionCall(MaterialFunctionCallBase):
     class InputPorts(PortsBase):
@@ -7,7 +8,6 @@ class UnaryFunctionCall(MaterialFunctionCallBase):
 
     def __init__(self, name: str, inputPorts: PortsBase = InputPorts()):
         super().__init__(name = name, inputPorts = inputPorts)
-
 
 class Saturate(UnaryFunctionCall):
     def __init__(self):

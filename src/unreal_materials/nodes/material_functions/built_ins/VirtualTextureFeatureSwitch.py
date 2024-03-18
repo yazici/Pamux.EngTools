@@ -1,5 +1,4 @@
-from unreal_materials.nodes.ports_base import PortsBase
-from unreal_materials.nodes.node_base import NodeBase
+from unreal_materials.nodes.utils.node_base import PortsBase, NodeBase
 
 class VirtualTextureFeatureSwitch(NodeBase):
     class InputPorts(PortsBase):

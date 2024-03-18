@@ -1,5 +1,4 @@
-from unreal_materials.nodes.ports_base import PortsBase
-from unreal_materials.nodes.node_base import NodeBase
+from unreal_materials.nodes.utils.node_base import PortsBase, NodeBase
 
 # https://docs.unrealengine.com/5.0/en-US/PythonAPI/class/MaterialExpressionLandscapeLayerWeight.html
 class MasterMaterialOutput(NodeBase):
@@ -92,6 +91,5 @@ class MasterMaterialOutput(NodeBase):
             self.previewing = self.Previewing()
             self.importSettings = self.ImportSettings()
 
-            
-    def __init__(self, type, details: Details):
-        super().__init__(type = type, details = details)
+    def __init__(self, type):
+        super().__init__(type = type, details = MasterMaterialOutput.Details(), inputPorts = MasterMaterialOutput.InputPorts())

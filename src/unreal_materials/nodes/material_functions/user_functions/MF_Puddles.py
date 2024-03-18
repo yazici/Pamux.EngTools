@@ -1,4 +1,5 @@
-from unreal_materials.nodes.material_functions.commons.material_function_call import MaterialFunctionCallBase, PortsBase, NodeBase
+from unreal_materials.nodes.utils.node_base import PortsBase
+from unreal_materials.nodes.material_functions.commons.material_function_call import MaterialFunctionCallBase
 
 class MF_Puddles(MaterialFunctionCallBase):
     class InputPorts(PortsBase):
@@ -10,4 +11,4 @@ class MF_Puddles(MaterialFunctionCallBase):
             super().__init__([ "Result", "PuddleMask" ])
 
     def __init__(self):
-        super().__init__("MF_Puddles", NodeBase.DetailsBase(), MF_Puddles.InputPorts(), MF_Puddles.OutputPorts())
+        super().__init__(type = "MF_Puddles", inputPorts = MF_Puddles.InputPorts(), outputPorts = MF_Puddles.OutputPorts())

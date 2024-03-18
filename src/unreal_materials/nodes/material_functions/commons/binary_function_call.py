@@ -20,3 +20,7 @@ class Multiply(BinaryFunctionCall):
 class Subtract(BinaryFunctionCall):
     def __init__(self):
         super().__init__("Subtract")
+
+class AppendVector(BinaryFunctionCall):
+    def __init__(self):
+        super().__init__("AppendVector")

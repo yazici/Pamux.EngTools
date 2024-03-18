@@ -29,8 +29,8 @@ class NodeBase:
 
             details: DetailsBase = DetailsBase(),
 
-            inPorts: DefaultInputPorts = DefaultInputPorts(),
-            outPorts: DefaultOutputPorts = DefaultOutputPorts()):
+            inputPorts: DefaultInputPorts = DefaultInputPorts(),
+            outputPorts: DefaultOutputPorts = DefaultOutputPorts()):
 
         if name is None:
             name = type
@@ -42,8 +42,8 @@ class NodeBase:
 
         self.details = details
 
-        self.inPorts = inPorts
-        self.outPorts = outPorts
+        self.inputPorts = inputPorts
+        self.outputPorts = outputPorts
 
 
 class ParameterBase(NodeBase):
@@ -55,10 +55,10 @@ class ParameterBase(NodeBase):
 
             details: NodeBase.DetailsBase = NodeBase.DetailsBase(),
 
-            inPorts: DefaultInputPorts = DefaultInputPorts(),
-            outPorts: DefaultOutputPorts = DefaultOutputPorts()):
+            inputPorts: DefaultInputPorts = DefaultInputPorts(),
+            outputPorts: DefaultOutputPorts = DefaultOutputPorts()):
 
-        super().__init__(type, name, details, inPorts, outPorts)
+        super().__init__(type, name, details, inputPorts, outputPorts)
 
 
 class GroupedParameterBase(ParameterBase):
@@ -79,9 +79,9 @@ class GroupedParameterBase(ParameterBase):
 
             details: DetailsBase = DetailsBase(),
 
-            inPorts: DefaultInputPorts = DefaultInputPorts(),
-            outPorts: DefaultOutputPorts = DefaultOutputPorts()):
-        super().__init__(type, name, details, inPorts, outPorts)
+            inputPorts: DefaultInputPorts = DefaultInputPorts(),
+            outputPorts: DefaultOutputPorts = DefaultOutputPorts()):
+        super().__init__(type, name, details, inputPorts, outputPorts)
 
 
 class MaterialExpressionBase(NodeBase):
@@ -93,10 +93,10 @@ class MaterialExpressionBase(NodeBase):
 
             details: NodeBase.DetailsBase = NodeBase.DetailsBase(),
 
-            inPorts: DefaultInputPorts = DefaultInputPorts(),
-            outPorts: DefaultOutputPorts = DefaultOutputPorts()):
+            inputPorts: DefaultInputPorts = DefaultInputPorts(),
+            outputPorts: DefaultOutputPorts = DefaultOutputPorts()):
 
-        super().__init__(type, name, details, inPorts, outPorts)
+        super().__init__(type, name, details, inputPorts, outputPorts)
 
 
 #endregion

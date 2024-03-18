@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="Pamux Survival Game" company="Pamux Studios" webLink="http://" view-date="2024-03-16" view-index="0" gantt-divider-location="351" resource-divider-location="300" version="3.3.3300" locale="en_US">
+    <description/>
+    <view zooming-state="default:2" id="gantt-chart">
+        <field id="tpd3" name="Name" width="252" order="0"/>
+        <field id="tpd4" name="Begin date" width="23" order="1"/>
+        <field id="tpd5" name="End date" width="75" order="2"/>
+        <field id="tpd15" name="Notes" width="20" order="3"/>
+        <option id="filter.completedTasks" value="false"/>
+        <option id="filter.dueTodayTasks" value="false"/>
+        <option id="filter.overdueTasks" value="false"/>
+        <option id="filter.inProgressTodayTasks" value="false"/>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Name" width="199" order="0"/>
+        <field id="1" name="Default role" width="82" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="0" mon="0" tue="0" wed="0" thu="0" fri="0" sat="0"/>
+            <only-show-weekends value="false"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="16" uid="0840bda65b9e464aa4468cac0b7b19fd" name="Create Game Audio" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true">
+            <task id="0" uid="f64c9dc0e5ee465ab7f3fde4f5def8ed" name="SFX Design" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true"/>
+            <task id="1" uid="15e5997b2bb74b56a92da4bb20b97fa7" name="Chosing Music" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true"/>
+        </task>
+        <task id="2" uid="94571e08db3847d18e7ef4a92d81ccfb" name="Create Characters" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true">
+            <task id="6" uid="e300e91c086b4e49a21baad9184f0308" name="Implement Player Animations" meeting="false" start="2024-03-16" duration="1" complete="0" thirdDate="2024-03-16" thirdDate-constraint="0" expand="false">
+                <task id="7" uid="4845fa74a67d4f8eb97c83445a97d990" name="Animate player using an AXE" meeting="false" start="2024-03-16" duration="1" complete="0" thirdDate="2024-03-16" thirdDate-constraint="0" expand="true"/>
+                <task id="8" uid="dd6f7b905c9b48d391f727082f1d9302" name="Animate player using a PICKAXE" color="#8cb6ce" meeting="false" start="2024-03-16" duration="1" complete="0" thirdDate="2024-03-16" thirdDate-constraint="0" expand="true"/>
+                <task id="9" uid="ad5d8867e6ca41b9b950ae630c3a408e" name="Animate player using a KNIFE" color="#8cb6ce" meeting="false" start="2024-03-16" duration="1" complete="0" thirdDate="2024-03-16" thirdDate-constraint="0" expand="true"/>
+                <task id="10" uid="7c0c9c5fee174815ac463c8ef99c086d" name="Animate Player using Bow and Arrow" color="#8cb6ce" meeting="false" start="2024-03-16" duration="1" complete="0" thirdDate="2024-03-16" thirdDate-constraint="0" expand="true"/>
+                <task id="11" uid="dc2126f74fb9442d91ba03beb3816294" name="Animate Player using a PISTOL" color="#8cb6ce" meeting="false" start="2024-03-16" duration="1" complete="0" thirdDate="2024-03-16" thirdDate-constraint="0" expand="true"/>
+                <task id="12" uid="1a5a1d5e5eda4a05b49a226e1b8eb4f6" name="Animate Player using a RIFLE" color="#8cb6ce" meeting="false" start="2024-03-16" duration="1" complete="0" thirdDate="2024-03-16" thirdDate-constraint="0" expand="true"/>
+                <task id="13" uid="caafddd5320a457b90e6fafa0b2ffa69" name="Animate Player using a FLASHLIGHT" color="#8cb6ce" meeting="false" start="2024-03-16" duration="1" complete="0" thirdDate="2024-03-16" thirdDate-constraint="0" expand="true"/>
+                <task id="14" uid="3bcda3951ccc4c898ff6c4999e92f257" name="Animate Player using a TORCH" color="#8cb6ce" meeting="false" start="2024-03-16" duration="1" complete="0" thirdDate="2024-03-16" thirdDate-constraint="0" expand="true"/>
+                <task id="15" uid="a0c5b5f78e964c8a8b23dfb42aba000b" name="Animate Player using a LANTERN" color="#8cb6ce" meeting="false" start="2024-03-16" duration="1" complete="0" thirdDate="2024-03-16" thirdDate-constraint="0" expand="true"/>
+            </task>
+            <task id="5" uid="ff22c5f32bfd40f19b7e997b50ea66e9" name="Implement Character Locomotion" meeting="false" start="2024-03-16" duration="1" complete="0" thirdDate="2024-03-16" thirdDate-constraint="0" expand="false">
+                <task id="18" uid="20efffdc14114379aa7d5351c5dccb42" name="Animate Characters Walking" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true"/>
+                <task id="19" uid="c173db4da79c4edbaae6ca0ee75fb682" name="Animate Characters Running" color="#8cb6ce" meeting="false" start="2024-03-16" duration="1" complete="0" thirdDate="2024-03-16" thirdDate-constraint="0" expand="true"/>
+                <task id="20" uid="250033a3ea3840bdb7347ddb6d3d0368" name="Animate Characters Swimming" color="#8cb6ce" meeting="false" start="2024-03-16" duration="1" complete="0" thirdDate="2024-03-16" thirdDate-constraint="0" expand="true"/>
+                <task id="21" uid="92076198d71e4aa6af2c4c21691c8a2f" name="Animate Characters Climbing" color="#8cb6ce" meeting="false" start="2024-03-16" duration="1" complete="0" thirdDate="2024-03-16" thirdDate-constraint="0" expand="true"/>
+                <task id="22" uid="d78a77a0b6fe44fcbddf6d8130492578" name="Animate Characters Jumping" color="#8cb6ce" meeting="false" start="2024-03-16" duration="1" complete="0" thirdDate="2024-03-16" thirdDate-constraint="0" expand="true"/>
+            </task>
+        </task>
+        <task id="3" uid="9c314d3c544842dc86d842a00953f962" name="Create Environment" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true">
+            <task id="71" uid="0b4f680b98844877990203ac94af80b2" name="Man Made" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true">
+                <task id="74" uid="8a9a0090122349968a26dcda267f2c42" name="Add Roads" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true"/>
+                <task id="72" uid="c513ebff273246988a1171c508f54be4" name="Add buildings" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true">
+                    <task id="75" uid="5c709e7cdb0547e3a79f95938193c010" name="Design buildings" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true">
+                        <task id="77" uid="6ac15382b0b34139a98c2e54df2b95d4" name="Design interior" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true"/>
+                        <task id="78" uid="3f1a6d516a91426cb2531f962da16cd7" name="Design exterior" color="#8cb6ce" meeting="false" start="2024-03-16" duration="1" complete="0" thirdDate="2024-03-16" thirdDate-constraint="0" expand="true"/>
+                        <task id="76" uid="2b06d57acf3948f982e5cb4ec93e9b1d" name="Design building interactions" meeting="false" start="2024-03-16" duration="1" complete="0" expand="false">
+                            <task id="80" uid="4da18a462301401ab80bc6ee7bbc290a" name="Doors, windows, open, lock, unlock, close, etc" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true"/>
+                            <task id="81" uid="a6a19941d27e4885bdea5322e1fa0338" name="Destruction" color="#8cb6ce" meeting="false" start="2024-03-16" duration="1" complete="0" thirdDate="2024-03-16" thirdDate-constraint="0" expand="true"/>
+                            <task id="82" uid="f53c68b6ec6743299d37099800e98e57" name="Vegetation" color="#8cb6ce" meeting="false" start="2024-03-16" duration="1" complete="0" thirdDate="2024-03-16" thirdDate-constraint="0" expand="true"/>
+                        </task>
+                        <task id="79" uid="743d3b5aed41485da74e71c2dfe5f89f" name="Design furniture interactions" color="#8cb6ce" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true">
+                            <task id="86" uid="58e7125990cd4ca2b4c61c8e03aed7af" name="Build/craft" meeting="false" start="2024-03-16" duration="1" complete="0" thirdDate="2024-03-16" thirdDate-constraint="0" expand="true"/>
+                            <task id="85" uid="2e51ad7ddfe641d69826a47bb0d7d919" name="Destruction" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true"/>
+                            <task id="83" uid="f3eaf9fbc41042cab6fa2ba2713c8233" name="Doors, drawers, chests, open, close, etc." meeting="false" start="2024-03-16" duration="1" complete="0" thirdDate="2024-03-16" thirdDate-constraint="0" expand="true"/>
+                            <task id="84" uid="d0cdf37f28ff43468d8a0228e1c68683" name="Chairs, couches, etc. sit stand, push pull" color="#8cb6ce" meeting="false" start="2024-03-16" duration="1" complete="0" thirdDate="2024-03-16" thirdDate-constraint="0" expand="true"/>
+                        </task>
+                    </task>
+                </task>
+            </task>
+            <task id="70" uid="4e76c3dbafec49a0856ac88ef2930348" name="Nature" meeting="false" start="2024-03-16" duration="1" complete="0" thirdDate="2024-03-16" thirdDate-constraint="0" expand="false">
+                <task id="73" uid="151c684648b242e0b366d4b8a57531ab" name="Add Biomes" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true"/>
+                <task id="65" uid="fb6af31893934194afe2f59e543d032e" name="Add Sky" meeting="false" start="2024-03-16" duration="1" complete="0" expand="false">
+                    <task id="66" uid="e40aa153dc0141958cffba014f1a47a5" name="Day night cycle" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true"/>
+                    <task id="67" uid="d006367928e64c5ea0b5ad6351d57d10" name="Starry night" color="#8cb6ce" meeting="false" start="2024-03-16" duration="1" complete="0" thirdDate="2024-03-16" thirdDate-constraint="0" expand="true"/>
+                    <task id="68" uid="1dbc3d5bf4474b3b8115b6bf7ab90e02" name="Volumetric Clouds" color="#8cb6ce" meeting="false" start="2024-03-16" duration="1" complete="0" thirdDate="2024-03-16" thirdDate-constraint="0" expand="true"/>
+                    <task id="69" uid="cc93a1ba87b84780b5e519ec03d94c0c" name="Volumetric Fog" color="#8cb6ce" meeting="false" start="2024-03-16" duration="1" complete="0" thirdDate="2024-03-16" thirdDate-constraint="0" expand="true"/>
+                </task>
+                <task id="63" uid="7cfe005cdf08420bbe2cff2e8ee41e52" name="Add weather systems" meeting="false" start="2024-03-16" duration="1" complete="0" thirdDate="2024-03-16" thirdDate-constraint="0" expand="false">
+                    <task id="64" uid="3600797d654a450387d2d39e871cd655" name="Thunder, lightning, rain, snow, etc." meeting="false" start="2024-03-16" duration="1" complete="0" expand="true"/>
+                </task>
+                <task id="61" uid="42f76cebd2ba4c32bc91e2113b72af68" name="Add seasonal effects" meeting="false" start="2024-03-16" duration="1" complete="0" expand="false">
+                    <task id="62" uid="5f552e3c7b204495b8322772b85d1800" name="Accumulated snow, moss, etc." meeting="false" start="2024-03-16" duration="1" complete="0" thirdDate="2024-03-16" thirdDate-constraint="0" expand="true"/>
+                </task>
+                <task id="60" uid="6ce74534d0024a49943a30ea3e721d69" name="Add water" meeting="false" start="2024-03-16" duration="1" complete="0" expand="false">
+                    <task id="56" uid="5274f05f6493427981f0db227394c832" name="Add lakes" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true"/>
+                    <task id="57" uid="47ee40d015b84d189319e4e7b7c3d6c2" name="Add flowing rivers" color="#8cb6ce" meeting="false" start="2024-03-16" duration="1" complete="0" thirdDate="2024-03-16" thirdDate-constraint="0" expand="true"/>
+                    <task id="58" uid="a177e292f1a54cedbcaf469a73c59f07" name="Add the ocean" color="#8cb6ce" meeting="false" start="2024-03-16" duration="1" complete="0" thirdDate="2024-03-16" thirdDate-constraint="0" expand="true"/>
+                    <task id="59" uid="3022b68cc410407fa655f377cdfe859f" name="Add waterfalls" color="#8cb6ce" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true"/>
+                </task>
+                <task id="51" uid="8a4e948aa2af441fb77330bebd03fb7f" name="Add interactable objects" meeting="false" start="2024-03-16" duration="1" complete="0" expand="false">
+                    <task id="49" uid="638d4a3142d149cd9c5795172bdc65d7" name="Texture the Landscape" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true"/>
+                    <task id="54" uid="5af4dcd1f7124823b900d0bbbee15506" name="Trees, mineable rocks, mineable metals, bushes, pickable flowers, pickable fruits, etc." meeting="false" start="2024-03-16" duration="1" complete="0" thirdDate="2024-03-16" thirdDate-constraint="0" expand="true"/>
+                </task>
+                <task id="53" uid="fba36100d7a1466bb90e898638371b13" name="Add non-interactable objects" color="#8cb6ce" meeting="false" start="2024-03-16" duration="1" complete="0" thirdDate="2024-03-16" thirdDate-constraint="0" expand="false">
+                    <task id="55" uid="5edf2adcf2cb476084898a872cf67767" name="Grass, flowers, clover, background rocks, etc." meeting="false" start="2024-03-16" duration="1" complete="0" thirdDate="2024-03-16" thirdDate-constraint="0" expand="true"/>
+                </task>
+                <task id="17" uid="d9c6995ac30d4d419f9a40a4e5af9d29" name="Create Landscape Heightmap" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true"/>
+            </task>
+        </task>
+        <task id="4" uid="77d296424dcf4d82b7d0b173d326c90e" name="Learn Unreal" meeting="false" start="2024-03-16" duration="1" complete="0" thirdDate="2024-03-16" thirdDate-constraint="0" expand="true">
+            <notes><![CDATA[https://trello.com/b/W6x6u3px/game-design-trello-board]]></notes>
+            <task id="25" uid="e286375d072c45328466c7ac084c2b52" name="Learning Methods" meeting="false" start="2024-03-16" duration="1" complete="0" expand="false">
+                <task id="23" uid="63dc9cf70ab24b77a91c4d9b0b8d2e5e" name="Follow Tutorials" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true"/>
+                <task id="24" uid="47cd9c852ccd4eb694557877d9765421" name="Look at Sample Projects" color="#8cb6ce" meeting="false" start="2024-03-16" duration="1" complete="0" thirdDate="2024-03-16" thirdDate-constraint="0" expand="true"/>
+            </task>
+            <task id="26" uid="6bbb48b2e914471ea4179b262adb32b8" name="Subjects to Study" meeting="false" start="2024-03-16" duration="1" complete="0" expand="false">
+                <task id="48" uid="f35c23347db643ce8d12445c34d793b1" name="Level Design" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true"/>
+                <task id="47" uid="9bf52034996c4ca0968a4cf22b9fd725" name="Behavior Trees" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true"/>
+                <task id="46" uid="8b2c35c6b1aa4e689a28d2627c5da675" name="MetaSound" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true"/>
+                <task id="45" uid="516f87b6f6fe4a518776d54944d29dd7" name="MetaHuman" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true"/>
+                <task id="44" uid="b6dca1cfc4814942a5c48f4520031d80" name="Cinematography" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true"/>
+                <task id="43" uid="9aeaea06312b46b79ea43352355c24e6" name="Optimization" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true"/>
+                <task id="42" uid="8f538b1ef4a04494ab8d55e9a4e13d8e" name="Debugging and Profiling" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true"/>
+                <task id="41" uid="7f7dd808ae684a7fadd5fc35b0fc8cff" name="Lumen" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true"/>
+                <task id="40" uid="dc01357772aa423f903f5199434d63a4" name="Nanite" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true"/>
+                <task id="39" uid="e5c61d437cb7408f99654817f790ec8e" name="Interaction System" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true"/>
+                <task id="38" uid="9b49d5d7174c46edba7dc1898b4cd241" name="Inventory System" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true"/>
+                <task id="37" uid="9093fcf85f064552a94819c3445b2ce9" name="Post Processing" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true"/>
+                <task id="36" uid="b9ab6f744bca47c48b413b51e50b8f57" name="Lighting" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true"/>
+                <task id="35" uid="28c6267e9e85424f921cb64f7e89e63e" name="Tooling" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true"/>
+                <task id="34" uid="1c430f11d8654c638d20096f24cc264a" name="Materials" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true"/>
+                <task id="33" uid="a0fabf035884495a923ff20c2b70fb74" name="Blueprints / C++" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true"/>
+                <task id="32" uid="9b109ec7c47a425a84b3e8ccd8f75bb1" name="Game Save / Load" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true"/>
+                <task id="30" uid="88cc0a0b605c40428ea4d739581bbcb1" name="Landscapes" meeting="false" start="2024-03-16" duration="1" complete="0" expand="false">
+                    <task id="31" uid="961efecd103a493b8b09bdda4502f1d6" name="Procedural Obejct Creation" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true"/>
+                    <task id="28" uid="13945180149b49ee9c431d31e868f26b" name="Biomes" meeting="false" start="2024-03-16" duration="1" complete="0" thirdDate="2024-03-16" thirdDate-constraint="0" expand="true"/>
+                    <task id="29" uid="3e2da3d1e18c4394a5f0105e1a342f9f" name="Overhangs and Caves" meeting="false" start="2024-03-16" duration="1" complete="0" thirdDate="2024-03-16" thirdDate-constraint="0" expand="true"/>
+                </task>
+                <task id="27" uid="6706935d9d6a44acbb26a90cd1ae6867" name="Multiplayer" meeting="false" start="2024-03-16" duration="1" complete="0" expand="true"/>
+            </task>
+        </task>
+    </tasks>
+    <resources>
+        <resource id="0" name="Baris" function="Default:0" contacts="" phone=""/>
+    </resources>
+    <allocations>
+        <allocation task-id="7" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="7" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="8" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="8" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="9" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="9" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="0" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="0" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="2" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="2" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="6" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="6" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="10" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="10" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="11" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="11" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="13" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="13" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="12" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="12" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="14" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="14" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="15" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="15" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="17" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="17" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="3" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="3" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="4" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="4" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="1" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="1" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="16" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="16" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="5" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="5" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="19" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="19" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="20" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="20" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="21" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="21" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="22" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="22" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="18" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="18" resource-id="0" function="Default:0" responsible="false" load="100.0"/>
+    </allocations>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+</project>

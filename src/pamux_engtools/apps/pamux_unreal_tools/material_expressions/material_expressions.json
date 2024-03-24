@@ -1,0 +1,1763 @@
+{
+    "notes": [
+        "https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-engine-material-expressions-reference"
+    ],
+    
+    "types": [
+        {
+            "type": "MaterialExpression",
+            "properties": [
+                {
+                    "type": "string",
+                    "name": "Desc"
+                }
+            ]
+        },
+        {
+            
+            "type": "UnaryOperationNoDefault",
+            "input": [{
+                "type": "float",
+                "name": "Input"
+            }],
+            "output": [{
+                "type": "float",
+                "name": ""
+            }]
+        },
+        {
+            
+            "type": "BinaryOperation",
+            "properties": [{
+                "type": "float",
+                "name": "ConstA",
+                "defaultValue": "1.0"
+                
+            },
+            {
+                "type": "float",
+                "name": "ConstB",
+                "defaultValue": "1.0"
+            }],
+            "input": [{
+                "type": "float",
+                "name": "A"
+            },{
+                "type": "float",
+                "name": "B"
+            }],
+            "output": [{
+                "type": "float",
+                "name": ""
+            }]
+        },
+        {
+            "type": "ParameterNode",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [
+                {
+                    "type": "string",
+                    "name": "ParameterName"
+                },
+                {
+                    "type": "Generic",
+                    "name": "DefaultValue"
+                }
+            ],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionAORIndex",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionAbs",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [ {
+                "type": "float",
+                "name": "Input"
+            }],
+            "output": []
+        },
+        {
+            "notes": [
+                "https://dev.epicgames.com/documentation/en-us/unreal-engine/coordinates-material-expressions-in-unreal-engine?application_version=5.0",
+                "ActorPositionWS outputs Vector3 (RGB) data representing the location of the object with this material on it in world-space.",
+                "Origin is either Absolute World Postion or Camera Relative World Postion"
+            ],
+            "type": "MaterialExpressionActorPositionWS",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [
+                {
+                    "name": "Origin",
+                    "type": "enum(AbsoluteWorldPostion, CameraRelativeWorldPostion)"
+                }
+            ],
+            "input": [],
+            "output": [{
+                "type": "Vector3",
+                "name": ""
+            }]
+        },
+        {
+            "type": "MaterialExpressionAdd",
+            "mixins": [ "MaterialExpression", "BinaryOperation" ]
+        },
+        {
+            "type": "MaterialExpressionAntialiasedTextureMask",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionAppendVector",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionArccosine",
+            "mixins": [ "MaterialExpression", "UnaryOperationNoDefault" ]
+        },
+        {
+            "type": "MaterialExpressionArccosineFast",
+            "mixins": [ "MaterialExpression", "UnaryOperationNoDefault" ]
+        },
+        {
+            "type": "MaterialExpressionArcsine",
+            "mixins": [ "MaterialExpression", "UnaryOperationNoDefault" ]
+        },
+        {
+            "type": "MaterialExpressionArcsineFast",
+            "mixins": [ "MaterialExpression", "UnaryOperationNoDefault" ]
+        },
+        {
+            "type": "MaterialExpressionArctangent",
+            "mixins": [ "MaterialExpression", "UnaryOperationNoDefault" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionArctangent2",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionArctangent2Fast",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionArctangentFast",
+            "mixins": [ "MaterialExpression", "UnaryOperationNoDefault" ]
+        },
+        {
+            "type": "MaterialExpressionAtmosphericFogColor",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionAtmosphericLightColor",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionAtmosphericLightVector",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionBentNormalCustomOutput",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionBlackBody",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionBlendMaterialAttributes",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionBreakMaterialAttributes",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionBumpOffset",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionCameraPositionWS",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionCameraVectorWS",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionCeil",
+            "mixins": [ "MaterialExpression", "UnaryOperationNoDefault" ]
+        },
+        {
+            "type": "MaterialExpressionChannelMaskParameter",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionClamp",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionClearCoatNormalCustomOutput",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionCloudSampleAttribute",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionCollectionParameter",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionComment",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionComponentMask",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionConstant",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionConstant2Vector",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionConstant3Vector",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionConstant4Vector",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionConstantBiasScale",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionCosine",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionCrossProduct",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionCurveAtlasRowParameter",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionCustom",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionCustomOutput",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionDDX",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionDDY",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionDecalDerivative",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionDecalLifetimeOpacity",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionDecalMipmapLevel",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionDeltaTime",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionDepthFade",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionDepthOfFieldFunction",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionDeriveNormalZ",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionDesaturation",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionDistance",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionDistanceCullFade",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionDistanceFieldGradient",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionDistanceFieldsRenderingSwitch",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionDistanceToNearestSurface",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionDivide",
+            "mixins": [ "MaterialExpression", "BinaryOperation" ],
+        },
+        {
+            "type": "MaterialExpressionDotProduct",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionDynamicParameter",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionEyeAdaptation",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionFeatureLevelSwitch",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionFloor",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionFmod",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionFontSample",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionFontSampleParameter",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionFrac",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionFresnel",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionFunctionInput",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionFunctionOutput",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionGBufferNormal",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionGIReplace",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionGetMaterialAttributes",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionHairAttributes",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionHairColor",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionIf",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionInsideDistanceField",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionInsideMask",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionInverseLinearInterpolate",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionLandscapeGrassOutput",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionLandscapeLayerBlend",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionLandscapeLayerCoords",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionLandscapeLayerSample",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionLandscapeLayerSwitch",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionLandscapeLayerWeight",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionLandscapePhysicalMaterialOutput",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionLandscapeVisibilityMask",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionLightVector",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionLightmapUVs",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionLightmassReplace",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionLinearInterpolate",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionLocalForces",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionLogarithm10",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionLogarithm2",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionMakeMaterialAttributes",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionMapARPassthroughCameraUV",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionMaterialAttributeLayers",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionMaterialFunctionCall",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [
+                {
+                    "name": "material_function",
+                    "type": "MaterialFunction"
+                }
+            ],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionMaterialLayerOutput",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionMaterialProxyReplace",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionMax",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionMin",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionMultiply",
+            "mixins": [ "MaterialExpression", "BinaryOperation" ],
+        },
+        {
+            "type": "MaterialExpressionNamedRerouteBase",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionNamedRerouteDeclaration",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionNamedRerouteUsage",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionNoise",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionNormalize",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionObjectBounds",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionObjectOrientation",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionObjectPositionWS",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionObjectRadius",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionOneMinus",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionOutdoorsWindMap",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionPanner",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionParameter",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionParticleColor",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionParticleDirection",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionParticleMacroUV",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionParticleMotionBlurFade",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionParticlePositionWS",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionParticleRadius",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionParticleRandom",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionParticleRelativeTime",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionParticleSize",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionParticleSpeed",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionParticleSubUV",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionParticleSubUVProperties",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionPerInstanceCustomData",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionPerInstanceFadeAmount",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionPerInstanceRandom",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionPixelDepth",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionPixelNormalWS",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionPower",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionPreSkinnedLocalBounds",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionPreSkinnedNormal",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionPreSkinnedPosition",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionPrecomputedAOMask",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionPreviousFrameSwitch",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionProbeValueAtCamera",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionQualitySwitch",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionRayTracingQualitySwitch",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionReflectionCapturePassSwitch",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionReflectionVectorWS",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionReroute",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionRerouteBase",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionRotateAboutAxis",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionRotator",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionRound",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionRuntimeVirtualTextureOutput",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionRuntimeVirtualTextureReplace",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionRuntimeVirtualTextureSample",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionRuntimeVirtualTextureSampleParameter",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionSamplePhysicsIntegerField",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionSamplePhysicsScalarField",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionSamplePhysicsVectorField",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionSaturate",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionScalarArray",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionScalarArrayElement",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionScalarArrayParameter",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionScalarParameter",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionSceneColor",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionSceneDepth",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionSceneDepthWithoutWater",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionSceneTexelSize",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionSceneTexture",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionScreenPosition",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionSetMaterialAttributes",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionShaderStageSwitch",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionShadingModel",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionShadingPathSwitch",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionShadowReplace",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionSign",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionSine",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionSingleLayerWaterMaterialOutput",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionSkinningVertexOffsets",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionSkyAtmosphereAerialPerspective",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionSkyAtmosphereDistantLightScatteredLuminance",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionSkyAtmosphereInscatteringLightLuminance",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionSkyAtmosphereLightDirection",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionSkyAtmosphereLightDiskLuminance",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionSkyAtmosphereLightIlluminance",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionSkyAtmosphereLuminance",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionSkyAtmosphereViewLuminance",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionSmoothStep",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionSobol",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionSpeedTree",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionSphereMask",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionSphericalParticleOpacity",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionSquareRoot",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionStaticBool",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionStaticBoolParameter",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionStaticComponentMaskParameter",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionStaticSwitch",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionStaticSwitchParameter",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionStep",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionSubtract",
+            "mixins": [ "MaterialExpression", "BinaryOperation" ],
+        },
+        {
+            "type": "MaterialExpressionTangent",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionTangentOutput",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionTemporalSobol",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionTerrainLayerCoords",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionTerrainLayerSwitch",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionTerrainLayerWeight",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionTextureArray",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionTextureArrayElement",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionTextureArrayParameter",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionTextureArraySample",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionTextureBase",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionTextureCoordinate",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionTextureObject",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionTextureObjectParameter",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionTextureProperty",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionTextureSample",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionTextureSampleParameter",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionTextureSampleParameter2D",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionTextureSampleParameter2DArray",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionTextureSampleParameterCube",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionTextureSampleParameterSubUV",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionTextureSampleParameterVolume",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionThinTranslucentMaterialOutput",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionTime",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionTransform",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionTransformPosition",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionTruncate",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionTwoSidedSign",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionVectorArray",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionVectorArrayElement",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionVectorArrayParameter",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionVectorNoise",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionVectorParameter",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionVertexColor",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionVertexInterpolator",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionVertexNormalWS",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionVertexTangentWS",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionViewProperty",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionViewSize",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionVirtualTextureFeatureSwitch",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionVolumetricAdvancedMaterialInput",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionVolumetricAdvancedMaterialOutput",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionVolumetricWindMap",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionWeatherAnimation",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "MaterialExpressionWorldPosition",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+        {
+            "type": "WMaterialExpressionDecalSize",
+            "mixins": [ "MaterialExpression" ],
+            "properties": [],
+            "input": [],
+            "output": []
+        },
+    ]
+}

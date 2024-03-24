@@ -13,4 +13,9 @@ function global:petui()
     & ${global:EngTools_python_exe} ${global:EngTools_AppsRoot}\pamux_engtools_ui.py $args
 }
 
+function global:cland()
+{
+    & ${global:EngTools_python_exe} ${global:EngTools_AppsRoot}\pamux_clipboard_landscape.py $args
+}
+
 SetAliases

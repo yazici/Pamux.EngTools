@@ -1,0 +1,4031 @@
+{ "items": [
+        {
+            "class_path": "/Script/Engine.MaterialExpression",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionAbs",
+            "inputs": [
+                {
+                    "name": "Input",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionActorPositionWS",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionAdd",
+            "inputs": [
+                {
+                    "name": "A",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "B",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "ConstA",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "ConstB",
+                    "type": "FloatProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionAntialiasedTextureMask",
+            "base_class_path": "/Script/Engine.MaterialExpressionTextureSampleParameter2D",
+            "inputs": [
+                {
+                    "name": "ExpressionGUID",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Coordinates",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "Threshold",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "Channel",
+                    "type": "ByteProperty"
+                }, 
+                {
+                    "name": "ParameterName",
+                    "type": "NameProperty"
+                }, 
+                {
+                    "name": "Group",
+                    "type": "NameProperty"
+                }, 
+                {
+                    "name": "Texture",
+                    "type": "ObjectProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionAppendVector",
+            "inputs": [
+                {
+                    "name": "A",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "B",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionArccosine",
+            "inputs": [
+                {
+                    "name": "Input",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionArccosineFast",
+            "inputs": [
+                {
+                    "name": "Input",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionArcsine",
+            "inputs": [
+                {
+                    "name": "Input",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionArcsineFast",
+            "inputs": [
+                {
+                    "name": "Input",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionArctangent",
+            "inputs": [
+                {
+                    "name": "Input",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionArctangent2",
+            "inputs": [
+                {
+                    "name": "Y",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "X",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionArctangent2Fast",
+            "inputs": [
+                {
+                    "name": "Y",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "X",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionArctangentFast",
+            "inputs": [
+                {
+                    "name": "Input",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionAtmosphericFogColor",
+            "inputs": [
+                {
+                    "name": "WorldPosition",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionAtmosphericLightColor",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionAtmosphericLightVector",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionBentNormalCustomOutput",
+            "inputs": [
+                {
+                    "name": "Input",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionBlackBody",
+            "inputs": [
+                {
+                    "name": "Temp",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionBlendMaterialAttributes",
+            "inputs": [
+                {
+                    "name": "A",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "B",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Alpha",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "PixelAttributeBlendType",
+                    "type": "ByteProperty"
+                }, 
+                {
+                    "name": "VertexAttributeBlendType",
+                    "type": "ByteProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionBreakMaterialAttributes",
+            "inputs": [
+                {
+                    "name": "MaterialAttributes",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionBumpOffset",
+            "inputs": [
+                {
+                    "name": "Coordinate",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Height",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "HeightRatioInput",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "HeightRatio",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "ReferencePlane",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "ConstCoordinate",
+                    "type": "UInt32Property"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionCameraPositionWS",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionCameraVectorWS",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionCeil",
+            "inputs": [
+                {
+                    "name": "Input",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionChannelMaskParameter",
+            "inputs": [
+                {
+                    "name": "DefaultValue",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "ExpressionGUID",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "MaskChannel",
+                    "type": "ByteProperty"
+                }, 
+                {
+                    "name": "bUseCustomPrimitiveData",
+                    "type": "BoolProperty"
+                }, 
+                {
+                    "name": "PrimitiveDataIndex",
+                    "type": "ByteProperty"
+                }, 
+                {
+                    "name": "ParameterName",
+                    "type": "NameProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionClamp",
+            "inputs": [
+                {
+                    "name": "Input",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Min",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Max",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "ClampMode",
+                    "type": "ByteProperty"
+                }, 
+                {
+                    "name": "MinDefault",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "MaxDefault",
+                    "type": "FloatProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionClearCoatNormalCustomOutput",
+            "inputs": [
+                {
+                    "name": "Input",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionCloudSampleAttribute",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionCollectionParameter",
+            "inputs": [
+                {
+                    "name": "ParameterId",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "Collection",
+                    "type": "ObjectProperty"
+                }, 
+                {
+                    "name": "ParameterName",
+                    "type": "NameProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionComment",
+            "inputs": [
+                {
+                    "name": "CommentColor",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "SizeX",
+                    "type": "IntProperty"
+                }, 
+                {
+                    "name": "SizeY",
+                    "type": "IntProperty"
+                }, 
+                {
+                    "name": "Text",
+                    "type": "StrProperty"
+                }, 
+                {
+                    "name": "FontSize",
+                    "type": "IntProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionComponentMask",
+            "inputs": [
+                {
+                    "name": "Input",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "R",
+                    "type": "BoolProperty"
+                }, 
+                {
+                    "name": "G",
+                    "type": "BoolProperty"
+                }, 
+                {
+                    "name": "B",
+                    "type": "BoolProperty"
+                }, 
+                {
+                    "name": "A",
+                    "type": "BoolProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionConstant",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "R",
+                    "type": "FloatProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionConstant2Vector",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "R",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "G",
+                    "type": "FloatProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionConstant3Vector",
+            "inputs": [
+                {
+                    "name": "Constant",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionConstant4Vector",
+            "inputs": [
+                {
+                    "name": "Constant",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionConstantBiasScale",
+            "inputs": [
+                {
+                    "name": "Input",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "Bias",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "Scale",
+                    "type": "FloatProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionCosine",
+            "inputs": [
+                {
+                    "name": "Input",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "Period",
+                    "type": "FloatProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionCrossProduct",
+            "inputs": [
+                {
+                    "name": "A",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "B",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionCurveAtlasRowParameter",
+            "inputs": [
+                {
+                    "name": "InputTime",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "ExpressionGUID",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "Curve",
+                    "type": "ObjectProperty"
+                }, 
+                {
+                    "name": "Atlas",
+                    "type": "ObjectProperty"
+                }, 
+                {
+                    "name": "DefaultValue",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "bUseCustomPrimitiveData",
+                    "type": "BoolProperty"
+                }, 
+                {
+                    "name": "PrimitiveDataIndex",
+                    "type": "ByteProperty"
+                }, 
+                {
+                    "name": "ParameterName",
+                    "type": "NameProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionCustom",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "Code",
+                    "type": "StrProperty"
+                }, 
+                {
+                    "name": "OutputType",
+                    "type": "ByteProperty"
+                }, 
+                {
+                    "name": "Description",
+                    "type": "StrProperty"
+                }, 
+                {
+                    "name": "Inputs",
+                    "type": "ArrayProperty"
+                }, 
+                {
+                    "name": "AdditionalOutputs",
+                    "type": "ArrayProperty"
+                }, 
+                {
+                    "name": "AdditionalDefines",
+                    "type": "ArrayProperty"
+                }, 
+                {
+                    "name": "IncludeFilePaths",
+                    "type": "ArrayProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionCustomOutput",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionDDX",
+            "inputs": [
+                {
+                    "name": "Value",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionDDY",
+            "inputs": [
+                {
+                    "name": "Value",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionDecalDerivative",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionDecalLifetimeOpacity",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionDecalMipmapLevel",
+            "inputs": [
+                {
+                    "name": "TextureSize",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "ConstWidth",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "ConstHeight",
+                    "type": "FloatProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionDeltaTime",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionDepthFade",
+            "inputs": [
+                {
+                    "name": "InOpacity",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "FadeDistance",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "OpacityDefault",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "FadeDistanceDefault",
+                    "type": "FloatProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionDepthOfFieldFunction",
+            "inputs": [
+                {
+                    "name": "Depth",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "FunctionValue",
+                    "type": "ByteProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionDeriveNormalZ",
+            "inputs": [
+                {
+                    "name": "InXY",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionDesaturation",
+            "inputs": [
+                {
+                    "name": "Input",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Fraction",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "LuminanceFactors",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionDistance",
+            "inputs": [
+                {
+                    "name": "A",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "B",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionDistanceCullFade",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionDistanceFieldGradient",
+            "inputs": [
+                {
+                    "name": "Position",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionDistanceFieldsRenderingSwitch",
+            "inputs": [
+                {
+                    "name": "No",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Yes",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionDistanceToNearestSurface",
+            "inputs": [
+                {
+                    "name": "Position",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionDivide",
+            "inputs": [
+                {
+                    "name": "A",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "B",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "ConstA",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "ConstB",
+                    "type": "FloatProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionDotProduct",
+            "inputs": [
+                {
+                    "name": "A",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "B",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionDynamicParameter",
+            "inputs": [
+                {
+                    "name": "DefaultValue",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "ParamNames",
+                    "type": "ArrayProperty"
+                }, 
+                {
+                    "name": "ParameterIndex",
+                    "type": "UInt32Property"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionEyeAdaptation",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionFeatureLevelSwitch",
+            "inputs": [
+                {
+                    "name": "Default",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionFloor",
+            "inputs": [
+                {
+                    "name": "Input",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionFmod",
+            "inputs": [
+                {
+                    "name": "A",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "B",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionFontSample",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "Font",
+                    "type": "ObjectProperty"
+                }, 
+                {
+                    "name": "FontTexturePage",
+                    "type": "IntProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionFontSampleParameter",
+            "inputs": [
+                {
+                    "name": "ExpressionGUID",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "ParameterName",
+                    "type": "NameProperty"
+                }, 
+                {
+                    "name": "Group",
+                    "type": "NameProperty"
+                }, 
+                {
+                    "name": "Font",
+                    "type": "ObjectProperty"
+                }, 
+                {
+                    "name": "FontTexturePage",
+                    "type": "IntProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionFrac",
+            "inputs": [
+                {
+                    "name": "Input",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionFresnel",
+            "inputs": [
+                {
+                    "name": "ExponentIn",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "BaseReflectFractionIn",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Normal",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "Exponent",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "BaseReflectFraction",
+                    "type": "FloatProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionFunctionInput",
+            "inputs": [
+                {
+                    "name": "Preview",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "ID",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "PreviewValue",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "InputName",
+                    "type": "NameProperty"
+                }, 
+                {
+                    "name": "Description",
+                    "type": "StrProperty"
+                }, 
+                {
+                    "name": "InputType",
+                    "type": "ByteProperty"
+                }, 
+                {
+                    "name": "bUsePreviewValueAsDefault",
+                    "type": "BoolProperty"
+                }, 
+                {
+                    "name": "SortPriority",
+                    "type": "IntProperty"
+                }, 
+                {
+                    "name": "bCompilingFunctionPreview",
+                    "type": "BoolProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionFunctionOutput",
+            "inputs": [
+                {
+                    "name": "A",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "ID",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "OutputName",
+                    "type": "NameProperty"
+                }, 
+                {
+                    "name": "Description",
+                    "type": "StrProperty"
+                }, 
+                {
+                    "name": "SortPriority",
+                    "type": "IntProperty"
+                }, 
+                {
+                    "name": "bLastPreviewed",
+                    "type": "BoolProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionGetMaterialAttributes",
+            "inputs": [
+                {
+                    "name": "MaterialAttributes",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "AttributeGetTypes",
+                    "type": "ArrayProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionGIReplace",
+            "inputs": [
+                {
+                    "name": "Default",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "StaticIndirect",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "DynamicIndirect",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionHairAttributes",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "bUseTangentSpace",
+                    "type": "BoolProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionHairColor",
+            "inputs": [
+                {
+                    "name": "Melanin",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Redness",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "DyeColor",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionIf",
+            "inputs": [
+                {
+                    "name": "A",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "B",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "AGreaterThanB",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "AEqualsB",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "ALessThanB",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "EqualsThreshold",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "ConstB",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "ConstAEqualsB",
+                    "type": "FloatProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionInverseLinearInterpolate",
+            "inputs": [
+                {
+                    "name": "A",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "B",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Value",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "ConstA",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "ConstB",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "ConstValue",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "bClampResult",
+                    "type": "BoolProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionLightmapUVs",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionLightmassReplace",
+            "inputs": [
+                {
+                    "name": "Realtime",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Lightmass",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionLightVector",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionLinearInterpolate",
+            "inputs": [
+                {
+                    "name": "A",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "B",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Alpha",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "ConstA",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "ConstB",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "ConstAlpha",
+                    "type": "FloatProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionLogarithm10",
+            "inputs": [
+                {
+                    "name": "X",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionLogarithm2",
+            "inputs": [
+                {
+                    "name": "X",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionMakeMaterialAttributes",
+            "inputs": [
+                {
+                    "name": "BaseColor",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Metallic",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Specular",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Roughness",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Anisotropy",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "EmissiveColor",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Opacity",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "OpacityMask",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Normal",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Tangent",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "WorldPositionOffset",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "WorldDisplacement",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "TessellationMultiplier",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "SubsurfaceColor",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "ClearCoat",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "ClearCoatRoughness",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "AmbientOcclusion",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Refraction",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "CustomizedUVs",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "PixelDepthOffset",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "ShadingModel",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionMapARPassthroughCameraUV",
+            "inputs": [
+                {
+                    "name": "Coordinates",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionMaterialAttributeLayers",
+            "inputs": [
+                {
+                    "name": "ExpressionGUID",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Input",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "DefaultLayers",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "ParameterName",
+                    "type": "NameProperty"
+                }, 
+                {
+                    "name": "LayerCallers",
+                    "type": "ArrayProperty"
+                }, 
+                {
+                    "name": "NumActiveLayerCallers",
+                    "type": "IntProperty"
+                }, 
+                {
+                    "name": "BlendCallers",
+                    "type": "ArrayProperty"
+                }, 
+                {
+                    "name": "NumActiveBlendCallers",
+                    "type": "IntProperty"
+                }, 
+                {
+                    "name": "bIsLayerGraphBuilt",
+                    "type": "BoolProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionMaterialFunctionCall",
+            "inputs": [
+                {
+                    "name": "FunctionParameterInfo",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "MaterialFunction",
+                    "type": "ObjectProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionMaterialLayerOutput",
+            "inputs": [
+                {
+                    "name": "A",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "ID",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "OutputName",
+                    "type": "NameProperty"
+                }, 
+                {
+                    "name": "Description",
+                    "type": "StrProperty"
+                }, 
+                {
+                    "name": "SortPriority",
+                    "type": "IntProperty"
+                }, 
+                {
+                    "name": "bLastPreviewed",
+                    "type": "BoolProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionMaterialProxyReplace",
+            "inputs": [
+                {
+                    "name": "Realtime",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "MaterialProxy",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionMax",
+            "inputs": [
+                {
+                    "name": "A",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "B",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "ConstA",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "ConstB",
+                    "type": "FloatProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionMin",
+            "inputs": [
+                {
+                    "name": "A",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "B",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "ConstA",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "ConstB",
+                    "type": "FloatProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionMultiply",
+            "inputs": [
+                {
+                    "name": "A",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "B",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "ConstA",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "ConstB",
+                    "type": "FloatProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionNamedRerouteBase",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionNamedRerouteDeclaration",
+            "inputs": [
+                {
+                    "name": "Input",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "VariableGuid",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "Name",
+                    "type": "NameProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionNamedRerouteUsage",
+            "inputs": [
+                {
+                    "name": "DeclarationGuid",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "Declaration",
+                    "type": "ObjectProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionNoise",
+            "inputs": [
+                {
+                    "name": "Position",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "FilterWidth",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "Scale",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "Quality",
+                    "type": "IntProperty"
+                }, 
+                {
+                    "name": "NoiseFunction",
+                    "type": "ByteProperty"
+                }, 
+                {
+                    "name": "bTurbulence",
+                    "type": "BoolProperty"
+                }, 
+                {
+                    "name": "Levels",
+                    "type": "IntProperty"
+                }, 
+                {
+                    "name": "OutputMin",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "OutputMax",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "LevelScale",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "bTiling",
+                    "type": "BoolProperty"
+                }, 
+                {
+                    "name": "RepeatSize",
+                    "type": "UInt32Property"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionNormalize",
+            "inputs": [
+                {
+                    "name": "VectorInput",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionObjectBounds",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionObjectOrientation",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionObjectPositionWS",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionObjectRadius",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionOneMinus",
+            "inputs": [
+                {
+                    "name": "Input",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionPanner",
+            "inputs": [
+                {
+                    "name": "Coordinate",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Time",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Speed",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "SpeedX",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "SpeedY",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "ConstCoordinate",
+                    "type": "UInt32Property"
+                }, 
+                {
+                    "name": "bFractionalPart",
+                    "type": "BoolProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionParameter",
+            "inputs": [
+                {
+                    "name": "ExpressionGUID",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "ParameterName",
+                    "type": "NameProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionParticleColor",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionParticleDirection",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionParticleMacroUV",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionParticleMotionBlurFade",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionParticlePositionWS",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionParticleRadius",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionParticleRandom",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionParticleRelativeTime",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionParticleSize",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionParticleSpeed",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionParticleSubUV",
+            "inputs": [
+                {
+                    "name": "Coordinates",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "bBlend",
+                    "type": "BoolProperty"
+                }, 
+                {
+                    "name": "Texture",
+                    "type": "ObjectProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionParticleSubUVProperties",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionPerInstanceCustomData",
+            "inputs": [
+                {
+                    "name": "DefaultValue",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "ConstDefaultValue",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "DataIndex",
+                    "type": "UInt32Property"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionPerInstanceFadeAmount",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionPerInstanceRandom",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionPixelDepth",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionPixelNormalWS",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionPower",
+            "inputs": [
+                {
+                    "name": "Base",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Exponent",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "ConstExponent",
+                    "type": "FloatProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionPrecomputedAOMask",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionPreSkinnedLocalBounds",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionPreSkinnedNormal",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionPreSkinnedPosition",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionPreviousFrameSwitch",
+            "inputs": [
+                {
+                    "name": "CurrentFrame",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "PreviousFrame",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionQualitySwitch",
+            "inputs": [
+                {
+                    "name": "Default",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Inputs",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionRayTracingQualitySwitch",
+            "inputs": [
+                {
+                    "name": "Normal",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "RayTraced",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionReflectionCapturePassSwitch",
+            "inputs": [
+                {
+                    "name": "Default",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Reflection",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionReflectionVectorWS",
+            "inputs": [
+                {
+                    "name": "CustomWorldNormal",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "bNormalizeCustomWorldNormal",
+                    "type": "BoolProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionReroute",
+            "inputs": [
+                {
+                    "name": "Input",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionRerouteBase",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionRotateAboutAxis",
+            "inputs": [
+                {
+                    "name": "NormalizedRotationAxis",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "RotationAngle",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "PivotPoint",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Position",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "Period",
+                    "type": "FloatProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionRotator",
+            "inputs": [
+                {
+                    "name": "Coordinate",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Time",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "CenterX",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "CenterY",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "Speed",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "ConstCoordinate",
+                    "type": "UInt32Property"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionRound",
+            "inputs": [
+                {
+                    "name": "Input",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionRuntimeVirtualTextureOutput",
+            "inputs": [
+                {
+                    "name": "BaseColor",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Specular",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Roughness",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Normal",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "WorldHeight",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Opacity",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Mask",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionRuntimeVirtualTextureReplace",
+            "inputs": [
+                {
+                    "name": "Default",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "VirtualTextureOutput",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionRuntimeVirtualTextureSample",
+            "inputs": [
+                {
+                    "name": "Coordinates",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "WorldPosition",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "MipValue",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "VirtualTexture",
+                    "type": "ObjectProperty"
+                }, 
+                {
+                    "name": "MaterialType",
+                    "type": "EnumProperty"
+                }, 
+                {
+                    "name": "bSinglePhysicalSpace",
+                    "type": "BoolProperty"
+                }, 
+                {
+                    "name": "bAdaptive",
+                    "type": "BoolProperty"
+                }, 
+                {
+                    "name": "MipValueMode",
+                    "type": "ByteProperty"
+                }, 
+                {
+                    "name": "TextureAddressMode",
+                    "type": "ByteProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionRuntimeVirtualTextureSampleParameter",
+            "inputs": [
+                {
+                    "name": "ExpressionGUID",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Coordinates",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "WorldPosition",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "MipValue",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "ParameterName",
+                    "type": "NameProperty"
+                }, 
+                {
+                    "name": "Group",
+                    "type": "NameProperty"
+                }, 
+                {
+                    "name": "VirtualTexture",
+                    "type": "ObjectProperty"
+                }, 
+                {
+                    "name": "MaterialType",
+                    "type": "EnumProperty"
+                }, 
+                {
+                    "name": "bSinglePhysicalSpace",
+                    "type": "BoolProperty"
+                }, 
+                {
+                    "name": "bAdaptive",
+                    "type": "BoolProperty"
+                }, 
+                {
+                    "name": "MipValueMode",
+                    "type": "ByteProperty"
+                }, 
+                {
+                    "name": "TextureAddressMode",
+                    "type": "ByteProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionSamplePhysicsIntegerField",
+            "inputs": [
+                {
+                    "name": "WorldPosition",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "FieldTarget",
+                    "type": "ByteProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionSamplePhysicsScalarField",
+            "inputs": [
+                {
+                    "name": "WorldPosition",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "FieldTarget",
+                    "type": "ByteProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionSamplePhysicsVectorField",
+            "inputs": [
+                {
+                    "name": "WorldPosition",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "FieldTarget",
+                    "type": "ByteProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionSaturate",
+            "inputs": [
+                {
+                    "name": "Input",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionScalarParameter",
+            "inputs": [
+                {
+                    "name": "ExpressionGUID",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "DefaultValue",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "bUseCustomPrimitiveData",
+                    "type": "BoolProperty"
+                }, 
+                {
+                    "name": "PrimitiveDataIndex",
+                    "type": "ByteProperty"
+                }, 
+                {
+                    "name": "ParameterName",
+                    "type": "NameProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionSceneColor",
+            "inputs": [
+                {
+                    "name": "Input",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "OffsetFraction",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "ConstInput",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "InputMode",
+                    "type": "ByteProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionSceneDepth",
+            "inputs": [
+                {
+                    "name": "Input",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Coordinates",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "ConstInput",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "InputMode",
+                    "type": "ByteProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionSceneDepthWithoutWater",
+            "inputs": [
+                {
+                    "name": "Input",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "ConstInput",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "InputMode",
+                    "type": "ByteProperty"
+                }, 
+                {
+                    "name": "FallbackDepth",
+                    "type": "FloatProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionSceneTexelSize",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionSceneTexture",
+            "inputs": [
+                {
+                    "name": "Coordinates",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "SceneTextureId",
+                    "type": "ByteProperty"
+                }, 
+                {
+                    "name": "bFiltered",
+                    "type": "BoolProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionScreenPosition",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionSetMaterialAttributes",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "Inputs",
+                    "type": "ArrayProperty"
+                }, 
+                {
+                    "name": "AttributeSetTypes",
+                    "type": "ArrayProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionShaderStageSwitch",
+            "inputs": [
+                {
+                    "name": "PixelShader",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "VertexShader",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionShadingModel",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "ShadingModel",
+                    "type": "ByteProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionShadingPathSwitch",
+            "inputs": [
+                {
+                    "name": "Default",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Inputs",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionShadowReplace",
+            "inputs": [
+                {
+                    "name": "Default",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Shadow",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionSign",
+            "inputs": [
+                {
+                    "name": "Input",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionSine",
+            "inputs": [
+                {
+                    "name": "Input",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "Period",
+                    "type": "FloatProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionSingleLayerWaterMaterialOutput",
+            "inputs": [
+                {
+                    "name": "ScatteringCoefficients",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "AbsorptionCoefficients",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "PhaseG",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "ColorScaleBehindWater",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionSkinningVertexOffsets",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionSkyAtmosphereAerialPerspective",
+            "inputs": [
+                {
+                    "name": "WorldPosition",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionSkyAtmosphereDistantLightScatteredLuminance",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionSkyAtmosphereLightDirection",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "LightIndex",
+                    "type": "IntProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionSkyAtmosphereLightDiskLuminance",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "LightIndex",
+                    "type": "IntProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionSkyAtmosphereLightIlluminance",
+            "inputs": [
+                {
+                    "name": "WorldPosition",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "LightIndex",
+                    "type": "IntProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionSkyAtmosphereViewLuminance",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionSmoothStep",
+            "inputs": [
+                {
+                    "name": "Min",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Max",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Value",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "ConstMin",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "ConstMax",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "ConstValue",
+                    "type": "FloatProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionSobol",
+            "inputs": [
+                {
+                    "name": "Cell",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Index",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Seed",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "ConstSeed",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "ConstIndex",
+                    "type": "UInt32Property"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionSpeedTree",
+            "inputs": [
+                {
+                    "name": "GeometryInput",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "WindInput",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "LODInput",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "ExtraBendWS",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "GeometryType",
+                    "type": "ByteProperty"
+                }, 
+                {
+                    "name": "WindType",
+                    "type": "ByteProperty"
+                }, 
+                {
+                    "name": "LODType",
+                    "type": "ByteProperty"
+                }, 
+                {
+                    "name": "BillboardThreshold",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "bAccurateWindVelocities",
+                    "type": "BoolProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionSphereMask",
+            "inputs": [
+                {
+                    "name": "A",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "B",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Radius",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Hardness",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "AttenuationRadius",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "HardnessPercent",
+                    "type": "FloatProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionSphericalParticleOpacity",
+            "inputs": [
+                {
+                    "name": "Density",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "ConstantDensity",
+                    "type": "FloatProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionSquareRoot",
+            "inputs": [
+                {
+                    "name": "Input",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionStaticBool",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "Value",
+                    "type": "BoolProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionStaticBoolParameter",
+            "inputs": [
+                {
+                    "name": "ExpressionGUID",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "DefaultValue",
+                    "type": "BoolProperty"
+                }, 
+                {
+                    "name": "ParameterName",
+                    "type": "NameProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionStaticComponentMaskParameter",
+            "inputs": [
+                {
+                    "name": "ExpressionGUID",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "DefaultR",
+                    "type": "BoolProperty"
+                }, 
+                {
+                    "name": "DefaultG",
+                    "type": "BoolProperty"
+                }, 
+                {
+                    "name": "DefaultB",
+                    "type": "BoolProperty"
+                }, 
+                {
+                    "name": "DefaultA",
+                    "type": "BoolProperty"
+                }, 
+                {
+                    "name": "ParameterName",
+                    "type": "NameProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionStaticSwitch",
+            "inputs": [
+                {
+                    "name": "A",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "B",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Value",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "DefaultValue",
+                    "type": "BoolProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionStaticSwitchParameter",
+            "inputs": [
+                {
+                    "name": "ExpressionGUID",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "DefaultValue",
+                    "type": "BoolProperty"
+                }, 
+                {
+                    "name": "ParameterName",
+                    "type": "NameProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionStep",
+            "inputs": [
+                {
+                    "name": "Y",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "X",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "ConstY",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "ConstX",
+                    "type": "FloatProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionSubtract",
+            "inputs": [
+                {
+                    "name": "A",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "B",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "ConstA",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "ConstB",
+                    "type": "FloatProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionTangent",
+            "inputs": [
+                {
+                    "name": "Input",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "Period",
+                    "type": "FloatProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionTangentOutput",
+            "inputs": [
+                {
+                    "name": "Input",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionTemporalSobol",
+            "inputs": [
+                {
+                    "name": "Index",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Seed",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "ConstSeed",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "ConstIndex",
+                    "type": "UInt32Property"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionTextureBase",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "Texture",
+                    "type": "ObjectProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionTextureCoordinate",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "CoordinateIndex",
+                    "type": "IntProperty"
+                }, 
+                {
+                    "name": "UTiling",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "VTiling",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "UnMirrorU",
+                    "type": "BoolProperty"
+                }, 
+                {
+                    "name": "UnMirrorV",
+                    "type": "BoolProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionTextureObject",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "Texture",
+                    "type": "ObjectProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionTextureObjectParameter",
+            "inputs": [
+                {
+                    "name": "ExpressionGUID",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Coordinates",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "ParameterName",
+                    "type": "NameProperty"
+                }, 
+                {
+                    "name": "Group",
+                    "type": "NameProperty"
+                }, 
+                {
+                    "name": "Texture",
+                    "type": "ObjectProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionTextureProperty",
+            "inputs": [
+                {
+                    "name": "TextureObject",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "Property",
+                    "type": "ByteProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionTextureSample",
+            "inputs": [
+                {
+                    "name": "Coordinates",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "Texture",
+                    "type": "ObjectProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionTextureSampleParameter",
+            "inputs": [
+                {
+                    "name": "ExpressionGUID",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Coordinates",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "ParameterName",
+                    "type": "NameProperty"
+                }, 
+                {
+                    "name": "Group",
+                    "type": "NameProperty"
+                }, 
+                {
+                    "name": "Texture",
+                    "type": "ObjectProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionTextureSampleParameter2D",
+            "inputs": [
+                {
+                    "name": "ExpressionGUID",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Coordinates",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "ParameterName",
+                    "type": "NameProperty"
+                }, 
+                {
+                    "name": "Group",
+                    "type": "NameProperty"
+                }, 
+                {
+                    "name": "Texture",
+                    "type": "ObjectProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionTextureSampleParameter2DArray",
+            "inputs": [
+                {
+                    "name": "ExpressionGUID",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Coordinates",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "ParameterName",
+                    "type": "NameProperty"
+                }, 
+                {
+                    "name": "Group",
+                    "type": "NameProperty"
+                }, 
+                {
+                    "name": "Texture",
+                    "type": "ObjectProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionTextureSampleParameterCube",
+            "inputs": [
+                {
+                    "name": "ExpressionGUID",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Coordinates",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "ParameterName",
+                    "type": "NameProperty"
+                }, 
+                {
+                    "name": "Group",
+                    "type": "NameProperty"
+                }, 
+                {
+                    "name": "Texture",
+                    "type": "ObjectProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionTextureSampleParameterSubUV",
+            "inputs": [
+                {
+                    "name": "ExpressionGUID",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Coordinates",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "bBlend",
+                    "type": "BoolProperty"
+                }, 
+                {
+                    "name": "ParameterName",
+                    "type": "NameProperty"
+                }, 
+                {
+                    "name": "Group",
+                    "type": "NameProperty"
+                }, 
+                {
+                    "name": "Texture",
+                    "type": "ObjectProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionTextureSampleParameterVolume",
+            "inputs": [
+                {
+                    "name": "ExpressionGUID",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Coordinates",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "ParameterName",
+                    "type": "NameProperty"
+                }, 
+                {
+                    "name": "Group",
+                    "type": "NameProperty"
+                }, 
+                {
+                    "name": "Texture",
+                    "type": "ObjectProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionThinTranslucentMaterialOutput",
+            "inputs": [
+                {
+                    "name": "TransmittanceColor",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionTime",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "bIgnorePause",
+                    "type": "BoolProperty"
+                }, 
+                {
+                    "name": "bOverride_Period",
+                    "type": "BoolProperty"
+                }, 
+                {
+                    "name": "Period",
+                    "type": "FloatProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionTransform",
+            "inputs": [
+                {
+                    "name": "Input",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "TransformSourceType",
+                    "type": "ByteProperty"
+                }, 
+                {
+                    "name": "TransformType",
+                    "type": "ByteProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionTransformPosition",
+            "inputs": [
+                {
+                    "name": "Input",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "TransformSourceType",
+                    "type": "ByteProperty"
+                }, 
+                {
+                    "name": "TransformType",
+                    "type": "ByteProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionTruncate",
+            "inputs": [
+                {
+                    "name": "Input",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionTwoSidedSign",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionVectorNoise",
+            "inputs": [
+                {
+                    "name": "Position",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "NoiseFunction",
+                    "type": "ByteProperty"
+                }, 
+                {
+                    "name": "Quality",
+                    "type": "IntProperty"
+                }, 
+                {
+                    "name": "bTiling",
+                    "type": "BoolProperty"
+                }, 
+                {
+                    "name": "TileSize",
+                    "type": "UInt32Property"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionVectorParameter",
+            "inputs": [
+                {
+                    "name": "DefaultValue",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "ExpressionGUID",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "bUseCustomPrimitiveData",
+                    "type": "BoolProperty"
+                }, 
+                {
+                    "name": "PrimitiveDataIndex",
+                    "type": "ByteProperty"
+                }, 
+                {
+                    "name": "ParameterName",
+                    "type": "NameProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionVertexColor",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionVertexInterpolator",
+            "inputs": [
+                {
+                    "name": "Input",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionVertexNormalWS",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionVertexTangentWS",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionViewProperty",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "Property",
+                    "type": "ByteProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionViewSize",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionVirtualTextureFeatureSwitch",
+            "inputs": [
+                {
+                    "name": "No",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "Yes",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionVolumetricAdvancedMaterialInput",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionVolumetricAdvancedMaterialOutput",
+            "inputs": [
+                {
+                    "name": "PhaseG",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "PhaseG2",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "PhaseBlend",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "MultiScatteringContribution",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "MultiScatteringOcclusion",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "MultiScatteringEccentricity",
+                    "type": "StructProperty"
+                }, 
+                {
+                    "name": "ConservativeDensity",
+                    "type": "StructProperty"
+                }
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "ConstPhaseG",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "ConstPhaseG2",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "ConstPhaseBlend",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "PerSamplePhaseEvaluation",
+                    "type": "BoolProperty"
+                }, 
+                {
+                    "name": "MultiScatteringApproximationOctaveCount",
+                    "type": "UInt32Property"
+                }, 
+                {
+                    "name": "ConstMultiScatteringContribution",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "ConstMultiScatteringOcclusion",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "ConstMultiScatteringEccentricity",
+                    "type": "FloatProperty"
+                }, 
+                {
+                    "name": "bGroundContribution",
+                    "type": "BoolProperty"
+                }, 
+                {
+                    "name": "bGrayScaleMaterial",
+                    "type": "BoolProperty"
+                }, 
+                {
+                    "name": "bRayMarchVolumeShadow",
+                    "type": "BoolProperty"
+                }
+            ]
+        },
+        {
+            "class_path": "/Script/Engine.MaterialExpressionWorldPosition",
+            "inputs": [
+            ],
+            "outputs": [
+            ],
+            "params": [
+                {
+                    "name": "WorldPositionShaderOffset",
+                    "type": "ByteProperty"
+                }
+            ]
+        }
+    ]
+}

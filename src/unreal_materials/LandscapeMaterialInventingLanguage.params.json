@@ -1,0 +1,13 @@
+{
+    "params" : [
+        {
+            "MaterialExpressionLandscapeLayerWeight": {
+                "ParameterName": "Wetness",
+                "PreviewWeight": 0.0
+            },
+            "MaterialExpression": {
+                "Desc": ""
+            }
+        }
+    ]
+}

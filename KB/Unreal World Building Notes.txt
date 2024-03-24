@@ -1,0 +1,73 @@
+https://youtu.be/qSU0uDr2wt4?si=hc-C1hS7NZ3c82rJ
+
+First steps in creating a world.
+
+1. Decide the type of environment
+2. Collect references.
+3. Identify key characteristics.
+
+
+
+. Cohesive scene need a plan
+. People should want to jump in and explore and enjoy being in the world, discover interesting stuff, etc.
+. Should have foundation of reality (realistic topology, climate, erosion, etc.)
+. Should feel familiar
+. Should remind people a place they have been before (nostalgia?)
+. cohesive theme
+. desert/rain forest/icy cave/mountain/ancient ruins
+. Google images, pinterest, youtube, etc. references/inspiration for materials, colors, foliage, precipitation
+
+
+Identify using references:
+
+* Landscape shapes (rolling hills, jagged rocks, dry dunes, etc.)
+* Ground materials (moss, snow, grass, pebbles, sand, etc.)
+* Main foliage types
+* Color themese
+* Weather (clouds, fog, rain, snow, hail, lightning, wind)
+* Water systems (OCEANS, lakes, rivers, swamps, ponds)
+* Fauna (birds, small mammals, ambient sounds)
+
+
+This tutorial:
+
+1. Decide the type of environment
+    A1. Forest with a stream
+2. Collect references.
+    A2. Google: "mossy forest", save to reference image folders.
+3. Identify key characteristics.
+    A3. https://www.youtube.com/watch?v=qSU0uDr2wt4&list=PL78XDi0TS4lHwqv_PmXAdedT2SH1qeRqK&ab_channel=BenCloward
+    . Moss on the rocks
+    . Cascading Water
+    . Key Assets: 
+        water, 
+        rocks,
+        trees,
+        fallen logs,
+        streams with huge rocks covered with moss,
+        tree barks covered with moss,
+        pebbly stones in the ground,
+        moss on the ground,
+        ferns,
+        material to represent ground under water 
+        muddy looking, wet stony ground,
+        mud,
+        dirt with rocks,
+        moss,
+        udergrowth vegetation
+        bushes/sticks
+
+
+Use mannequin in the environment for scale reference
+
+
+
+Reference Materials Software
+
+https://www.pureref.com/
+
+Landscape Technical Guide
+
+https://docs.unrealengine.com/5.0/en-US/landscape-technical-guide-in-unreal-engine/
+
+Split channels in Substance Designer

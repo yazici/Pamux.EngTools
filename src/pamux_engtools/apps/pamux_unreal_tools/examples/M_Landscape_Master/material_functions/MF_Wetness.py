@@ -35,22 +35,16 @@ class MF_Wetness:
                 self.multiply.a.comesFrom(self.saturate.output)
                 self.multiply.b.comesFrom(self.wetnessDarken.output)
 
-                self.setMaterialAttributes = SetMaterialAttributes(material_function)
-                setMaterialAttributesArray = unreal.Array(unreal.Guid)
-                setMaterialAttributesArray.append(MaterialAttributeGuids.BaseColor)
-                setMaterialAttributesArray.append(MaterialAttributeGuids.Roughness)
-                #self.setMaterialAttributes.attribute_set_types.set(setMaterialAttributesArray)
+                self.makeMaterialAttributes = MakeMaterialAttributes(material_function)
+                self.makeMaterialAttributes.baseColor.comesFrom(self.multiply.output)
+                self.makeMaterialAttributes.roughness.comesFrom(self.wetnessRoughness.output)
 
-                self.setMaterialAttributes.materialAttributes.comesFrom(materialAttributes)
-                self.setMaterialAttributes.baseColor.comesFrom(self.multiply.output)
-                self.setMaterialAttributes.roughness.comesFrom(self.wetnessRoughness.output)
-
-                return self.setMaterialAttributes.output
+                return self.makeMaterialAttributes.output
 
         class HeightBlendBasedOnInputWetnessValueBlock:
             def build(self, material_function, prewettedMaterialAttributes: OutSocket, materialAttributes: OutSocket):
-                self.getMaterialAttributes = GetMaterialAttributes(material_function)
-                self.getMaterialAttributes.input.comesFrom(materialAttributes)
+                self.breakMaterialAttributes = BreakMaterialAttributes(material_function)
+                self.breakMaterialAttributes.input.comesFrom(materialAttributes)
 
                 self.constWetness = Constant(material_function)
                 self.constWetness.r.set(1.0)
@@ -68,7 +62,7 @@ class MF_Wetness:
                 self.constSubtract = Constant(material_function)
 
                 self.subtract = Subtract(material_function)
-                self.subtract.a.comesFrom(self.getMaterialAttributes.opacity)
+                self.subtract.a.comesFrom(self.breakMaterialAttributes.opacity)
                 self.subtract.b.comesFrom(self.constSubtract.output)
 
                 self.add = Add(material_function)
@@ -80,7 +74,7 @@ class MF_Wetness:
 
                 self.blendMaterialAttributes = BlendMaterialAttributes(material_function)
                 self.blendMaterialAttributes.a.comesFrom(prewettedMaterialAttributes)
-                self.blendMaterialAttributes.b.comesFrom(self.getMaterialAttributes.materialAttributes)
+                self.blendMaterialAttributes.b.comesFrom(materialAttributes)
                 self.blendMaterialAttributes.alpha.comesFrom(self.saturate.output)
 
                 return self.blendMaterialAttributes.output
@@ -105,23 +99,18 @@ class MF_Wetness:
             self.inMaterial.input_type.set(unreal.FunctionInputType.FUNCTION_INPUT_MATERIAL_ATTRIBUTES)
             self.inMaterial.preview.comesFrom(self.makeMaterialAttributes.output)
 
-            self.getMaterialAttributes = GetMaterialAttributes(self.current_container)
-            
-            getMaterialAttributesArray = unreal.Array(unreal.Guid)
-            getMaterialAttributesArray.append(MaterialAttributeGuids.BaseColor)
-            # self.getMaterialAttributes.attribute_get_types.set(getMaterialAttributesArray)
 
-            
-            self.getMaterialAttributes.input.comesFrom(self.inMaterial.output)
+            self.breakMaterialAttributes = BreakMaterialAttributes(self.current_container)
+            self.breakMaterialAttributes.input.comesFrom(self.inMaterial.output)
 
             self.wetness = MF_Wetness.Builder.WetnessBlock().build(
                 self.current_container,
-                self.getMaterialAttributes.materialAttributes,
-                self.getMaterialAttributes.baseColor)
+                self.inMaterial.output,
+                self.breakMaterialAttributes.baseColor)
             
             self.heightBlendBasedOnInputWetnessValue = MF_Wetness.Builder.HeightBlendBasedOnInputWetnessValueBlock().build(
                 self.current_container,
-                self.getMaterialAttributes.materialAttributes,
+                self.inMaterial.output,
                 self.wetness)
 
             self.result = self.makeFunctionOutput("Result", 0)

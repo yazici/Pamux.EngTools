@@ -8,7 +8,7 @@ from pamux_unreal_tools.material import Material
 from pamux_unreal_tools.examples.M_Landscape_Master.params import *
 from pamux_unreal_tools.examples.M_Landscape_Master.globals import *
 from pamux_unreal_tools.generated.material_expression_wrappers import *
-
+from pamux_unreal_tools.material import MaterialAttributeGuids
 # from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MF_TextureCellBombing_Landscape import *
 
 class MF_LandscapeBaseMaterial:
@@ -121,7 +121,35 @@ class MF_LandscapeBaseMaterial:
             call_BreakOutFloat4Components = self.callMaterialFunction(breakOutFloat4Components)
             call_BreakOutFloat4Components.float4 = commonParams.UVParams
 
+            componentMask = ComponentMask(self.current_container)
+            componentMask.g.set(False)
+
+            self.makeMaterialAttributes = MakeMaterialAttributes(self.current_container)
+            qualitySwitch = QualitySwitch(self.current_container)
+            self.makeMaterialAttributes.baseColor.comesFrom(qualitySwitch.output)
+
+            multiply = Multiply(self.current_container)
+            self.makeMaterialAttributes.roughness.comesFrom(multiply.output)
+
+            multiplyAdd = Multiply(self.current_container) # TODO
+            self.makeMaterialAttributes.normal.comesFrom(multiplyAdd.output)
+
+            add = Add(self.current_container)
+            self.makeMaterialAttributes.opacity.comesFrom(add.output)
+            
+            self.breakMaterialAttributes = BreakMaterialAttributes(self.current_container)            
+            self.breakMaterialAttributes.input.comesFrom(self.makeMaterialAttributes.output)
+
+
             result, height = self.makeLayerFunctionOutputs()
+
+            MEL.connect_material_expressions(
+                self.breakMaterialAttributes.asset,
+                self.breakMaterialAttributes.input.name,
+                result.asset,
+                f"")
+
+            MEL.connect_material_expressions(componentMask.asset, "", height.asset, f"")
 
             # uvParamsRG = AppendVector(material_function, call_BreakOutFloat4Components.r, call_BreakOutFloat4Components.g)
             # uvParamsBA = AppendVector(material_function, call_BreakOutFloat4Components.b, call_BreakOutFloat4Components.a)
@@ -150,8 +178,8 @@ class MF_LandscapeBaseMaterial:
             # opacity = self.opacityPath(material_function, heightTexture, commonParams)
             # normal = self.normalPath(material_function, qualitySwitched, commonParams, rotatedUVs)
 
-            # sma = SetMaterialAttributes(material_function, baseColor, roughness, normal, opacity)
-            # gma = GetMaterialAttributes(material_function, sma)
+            # sma = MakeMaterialAttributes(material_function, baseColor, roughness, normal, opacity)
+            # gma = BreakMaterialAttributes(material_function, sma)
 
             # gmaOpacityR = Mask(material_function, gma.Opacity, "R")
 

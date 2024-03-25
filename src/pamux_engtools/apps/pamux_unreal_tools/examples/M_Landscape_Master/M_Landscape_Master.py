@@ -31,12 +31,12 @@ class M_Landscape_Master:
             super().__init__(Params, material_name, package_name)
 
         # def __buildMainPath(self, MF_BlendTwoMaterialsViaHighOpacityMap_Output):
-        #     setMaterialAttributes = SetMaterialAttributes(self.material)
-        #     setMaterialAttributes.input.comesFrom(self.params.LandscapeRVT)
+        #     makeMaterialAttributes = MakeMaterialAttributes(self.material)
+        #     makeMaterialAttributes.input.comesFrom(self.params.LandscapeRVT)
 
         #     virtualTextureFeatureSwitch = VirtualTextureFeatureSwitch(self.material)
         #     virtualTextureFeatureSwitch.in1.comesFrom(MF_BlendTwoMaterialsViaHighOpacityMap_Output)
-        #     virtualTextureFeatureSwitch.in2.comesFrom(setMaterialAttributes)
+        #     virtualTextureFeatureSwitch.in2.comesFrom(makeMaterialAttributes)
 
         #     call_MF_GlancingAngleSpecCorrection = self.callMaterialFunction(self.MF_GlancingAngleSpecCorrection)
         #     call_MF_GlancingAngleSpecCorrection.in1.comesFrom(virtualTextureFeatureSwitch.output)
@@ -45,9 +45,9 @@ class M_Landscape_Master:
         #     qualitySwitch.in1.comesFrom(call_MF_GlancingAngleSpecCorrection.output)
         #     qualitySwitch.in2.comesFrom(virtualTextureFeatureSwitch.output)
 
-        #     setMaterialAttributes = SetMaterialAttributes(self.material)
-        #     setMaterialAttributes.in1.comesFrom(qualitySwitch.output)
-        #     setMaterialAttributes.in2.comesFrom(self.params.LandscapeVisibilityMask)
+        #     makeMaterialAttributes = MakeMaterialAttributes(self.material)
+        #     makeMaterialAttributes.in1.comesFrom(qualitySwitch.output)
+        #     makeMaterialAttributes.in2.comesFrom(self.params.LandscapeVisibilityMask)
 
         # def __rvtSpecular(self, baseColor):
         #     sCurve = MaterialFunction.load("SCurve", "/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment", True)
@@ -76,16 +76,16 @@ class M_Landscape_Master:
         #      return
         
         # def __buildRVTOutputPath(self, MF_BlendTwoMaterialsViaHighOpacityMap_Output):
-        #     getMaterialAttributes = GetMaterialAttributes(self.material)
-        #     getMaterialAttributes.in1.comesFrom(MF_BlendTwoMaterialsViaHighOpacityMap_Output)
+        #     breakMaterialAttributes = BreakMaterialAttributes(self.material)
+        #     breakMaterialAttributes.input.comesFrom(MF_BlendTwoMaterialsViaHighOpacityMap_Output)
 
-        #     rvtSpecular = self.__rvtSpecular(getMaterialAttributes.baseColor)
+        #     rvtSpecular = self.__rvtSpecular(breakMaterialAttributes.baseColor)
 
         #     return self.__rvtOutput(
-        #          getMaterialAttributes.baseColor, 
+        #          breakMaterialAttributes.baseColor, 
         #          rvtSpecular,
-        #          getMaterialAttributes.roughness, 
-        #          getMaterialAttributes.normal, 
+        #          breakMaterialAttributes.roughness, 
+        #          breakMaterialAttributes.normal, 
         #          WorldPosition(self.material).z) # AbsoluteWorldPosition?
 
         # def __buildLandscapeGrassOutputAndMaskingPath(self, MF_BlendTwoMaterialsViaHighOpacityMap_Output):

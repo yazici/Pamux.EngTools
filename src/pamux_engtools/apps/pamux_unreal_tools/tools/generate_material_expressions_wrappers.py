@@ -173,8 +173,45 @@ def setup_input_sockets(pamux_wrapper_class_name):
         result.append(Value('PixelDepthOffset', 'StructProperty'))
         result.append(Value('ShadingModel', 'StructProperty'))
 
+    elif pamux_wrapper_class_name == "MakeMaterialAttributes":
+        result.append(Value('BaseColor', 'StructProperty'))
+        result.append(Value('Metallic', 'StructProperty'))
+        result.append(Value('Specular', 'StructProperty'))
+        result.append(Value('Roughness', 'StructProperty'))
+        result.append(Value('Anisotropy', 'StructProperty'))
+        result.append(Value('EmissiveColor', 'StructProperty'))
+        result.append(Value('Opacity', 'StructProperty'))
+        result.append(Value('OpacityMask', 'StructProperty'))
+        result.append(Value('Normal', 'StructProperty'))
+        result.append(Value('Tangent', 'StructProperty'))
+        result.append(Value('WorldPositionOffset', 'StructProperty'))
+        # result.append(Value('WorldDisplacement', 'StructProperty'))
+        #result.append(Value('TessellationMultiplier', 'StructProperty'))
+        result.append(Value('SubsurfaceColor', 'StructProperty'))
+        result.append(Value('ClearCoat', 'StructProperty'))
+        result.append(Value('ClearCoatRoughness', 'StructProperty'))
+        result.append(Value('AmbientOcclusion', 'StructProperty'))
+        result.append(Value('Refraction', 'StructProperty'))
+        result.append(Value('CustomizedUV_0', 'StructProperty'))
+        result.append(Value('CustomizedUV_1', 'StructProperty'))
+        result.append(Value('CustomizedUV_2', 'StructProperty'))
+        result.append(Value('CustomizedUV_3', 'StructProperty'))
+        result.append(Value('CustomizedUV_4', 'StructProperty'))
+        result.append(Value('CustomizedUV_5', 'StructProperty'))
+        result.append(Value('CustomizedUV_6', 'StructProperty'))
+        result.append(Value('CustomizedUV_7', 'StructProperty'))
+        result.append(Value('PixelDepthOffset', 'StructProperty'))
+        result.append(Value('ShadingModel', 'StructProperty'))
+        result.append(Value('Displacement', 'StructProperty'))
+    elif pamux_wrapper_class_name == "BreakMaterialAttributes":
+        result.append(Value('', 'StructProperty'))
+
     elif pamux_wrapper_class_name == "GetMaterialAttributes":
         result.append(Value('', 'StructProperty'))
+
+    elif pamux_wrapper_class_name == "Desaturation":
+        result.append(Value('', 'StructProperty'))
+        result.append(Value('Fraction', 'StructProperty'))
     
     elif pamux_wrapper_class_name in material_expressions_dump_data:
          result = material_expressions_dump_data[pamux_wrapper_class_name].inputs
@@ -223,8 +260,40 @@ def setup_output_sockets(pamux_wrapper_class_name):
         result.append(Value('PixelDepthOffset', 'StructProperty'))
         result.append(Value('ShadingModel', 'StructProperty'))
 
+    elif pamux_wrapper_class_name == "BreakMaterialAttributes":
+        result.append(Value('BaseColor', 'StructProperty'))
+        result.append(Value('Metallic', 'StructProperty'))
+        result.append(Value('Specular', 'StructProperty'))
+        result.append(Value('Roughness', 'StructProperty'))
+        result.append(Value('Anisotropy', 'StructProperty'))
+        result.append(Value('EmissiveColor', 'StructProperty'))
+        result.append(Value('Opacity', 'StructProperty'))
+        result.append(Value('OpacityMask', 'StructProperty'))
+        result.append(Value('Normal', 'StructProperty'))
+        result.append(Value('Tangent', 'StructProperty'))
+        result.append(Value('WorldPositionOffset', 'StructProperty'))
+        # result.append(Value('WorldDisplacement', 'StructProperty'))
+        #result.append(Value('TessellationMultiplier', 'StructProperty'))
+        result.append(Value('SubsurfaceColor', 'StructProperty'))
+        result.append(Value('ClearCoat', 'StructProperty'))
+        result.append(Value('ClearCoatRoughness', 'StructProperty'))
+        result.append(Value('AmbientOcclusion', 'StructProperty'))
+        result.append(Value('Refraction', 'StructProperty'))
+        result.append(Value('CustomizedUV0', 'StructProperty'))
+        result.append(Value('CustomizedUV1', 'StructProperty'))
+        result.append(Value('CustomizedUV2', 'StructProperty'))
+        result.append(Value('CustomizedUV3', 'StructProperty'))
+        result.append(Value('CustomizedUV4', 'StructProperty'))
+        result.append(Value('CustomizedUV5', 'StructProperty'))
+        result.append(Value('CustomizedUV6', 'StructProperty'))
+        result.append(Value('CustomizedUV7', 'StructProperty'))
+        result.append(Value('PixelDepthOffset', 'StructProperty'))
+        result.append(Value('ShadingModel', 'StructProperty'))
+        result.append(Value('Displacement', 'StructProperty'))
 
-    
+    elif pamux_wrapper_class_name == "MakeMaterialAttributes":
+        result.append(Value('', 'StructProperty'))
+
     elif pamux_wrapper_class_name in material_expressions_dump_data:
         result = material_expressions_dump_data[pamux_wrapper_class_name].outputs
 

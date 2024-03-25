@@ -363,10 +363,36 @@ class BreakMaterialAttributes(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
-        self.materialAttributes = InSocket(self, 'MaterialAttributes', 'StructProperty')
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
-        self.output = OutSocket(self, '', 'StructProperty')
+        self.baseColor = OutSocket(self, 'BaseColor', 'StructProperty')
+        self.metallic = OutSocket(self, 'Metallic', 'StructProperty')
+        self.specular = OutSocket(self, 'Specular', 'StructProperty')
+        self.roughness = OutSocket(self, 'Roughness', 'StructProperty')
+        self.anisotropy = OutSocket(self, 'Anisotropy', 'StructProperty')
+        self.emissiveColor = OutSocket(self, 'EmissiveColor', 'StructProperty')
+        self.opacity = OutSocket(self, 'Opacity', 'StructProperty')
+        self.opacityMask = OutSocket(self, 'OpacityMask', 'StructProperty')
+        self.normal = OutSocket(self, 'Normal', 'StructProperty')
+        self.tangent = OutSocket(self, 'Tangent', 'StructProperty')
+        self.worldPositionOffset = OutSocket(self, 'WorldPositionOffset', 'StructProperty')
+        self.subsurfaceColor = OutSocket(self, 'SubsurfaceColor', 'StructProperty')
+        self.clearCoat = OutSocket(self, 'ClearCoat', 'StructProperty')
+        self.clearCoatRoughness = OutSocket(self, 'ClearCoatRoughness', 'StructProperty')
+        self.ambientOcclusion = OutSocket(self, 'AmbientOcclusion', 'StructProperty')
+        self.refraction = OutSocket(self, 'Refraction', 'StructProperty')
+        self.customizedUV0 = OutSocket(self, 'CustomizedUV0', 'StructProperty')
+        self.customizedUV1 = OutSocket(self, 'CustomizedUV1', 'StructProperty')
+        self.customizedUV2 = OutSocket(self, 'CustomizedUV2', 'StructProperty')
+        self.customizedUV3 = OutSocket(self, 'CustomizedUV3', 'StructProperty')
+        self.customizedUV4 = OutSocket(self, 'CustomizedUV4', 'StructProperty')
+        self.customizedUV5 = OutSocket(self, 'CustomizedUV5', 'StructProperty')
+        self.customizedUV6 = OutSocket(self, 'CustomizedUV6', 'StructProperty')
+        self.customizedUV7 = OutSocket(self, 'CustomizedUV7', 'StructProperty')
+        self.pixelDepthOffset = OutSocket(self, 'PixelDepthOffset', 'StructProperty')
+        self.shadingModel = OutSocket(self, 'ShadingModel', 'StructProperty')
+        self.displacement = OutSocket(self, 'Displacement', 'StructProperty')
 
 
 class BumpOffset(MaterialExpression):
@@ -954,9 +980,8 @@ class Desaturation(MaterialExpression):
         self.luminance_factors = Property(self, 'luminance_factors', 'LinearColor')
 
         # Input Sockets
-        self.input = InSocket(self, 'Input', 'StructProperty')
+        self.input = InSocket(self, '', 'StructProperty')
         self.fraction = InSocket(self, 'Fraction', 'StructProperty')
-        self.luminanceFactors = InSocket(self, 'LuminanceFactors', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1944,16 +1969,22 @@ class MakeMaterialAttributes(MaterialExpression):
         self.normal = InSocket(self, 'Normal', 'StructProperty')
         self.tangent = InSocket(self, 'Tangent', 'StructProperty')
         self.worldPositionOffset = InSocket(self, 'WorldPositionOffset', 'StructProperty')
-        self.worldDisplacement = InSocket(self, 'WorldDisplacement', 'StructProperty')
-        self.tessellationMultiplier = InSocket(self, 'TessellationMultiplier', 'StructProperty')
         self.subsurfaceColor = InSocket(self, 'SubsurfaceColor', 'StructProperty')
         self.clearCoat = InSocket(self, 'ClearCoat', 'StructProperty')
         self.clearCoatRoughness = InSocket(self, 'ClearCoatRoughness', 'StructProperty')
         self.ambientOcclusion = InSocket(self, 'AmbientOcclusion', 'StructProperty')
         self.refraction = InSocket(self, 'Refraction', 'StructProperty')
-        self.customizedUVs = InSocket(self, 'CustomizedUVs', 'StructProperty')
+        self.customizedUV_0 = InSocket(self, 'CustomizedUV_0', 'StructProperty')
+        self.customizedUV_1 = InSocket(self, 'CustomizedUV_1', 'StructProperty')
+        self.customizedUV_2 = InSocket(self, 'CustomizedUV_2', 'StructProperty')
+        self.customizedUV_3 = InSocket(self, 'CustomizedUV_3', 'StructProperty')
+        self.customizedUV_4 = InSocket(self, 'CustomizedUV_4', 'StructProperty')
+        self.customizedUV_5 = InSocket(self, 'CustomizedUV_5', 'StructProperty')
+        self.customizedUV_6 = InSocket(self, 'CustomizedUV_6', 'StructProperty')
+        self.customizedUV_7 = InSocket(self, 'CustomizedUV_7', 'StructProperty')
         self.pixelDepthOffset = InSocket(self, 'PixelDepthOffset', 'StructProperty')
         self.shadingModel = InSocket(self, 'ShadingModel', 'StructProperty')
+        self.displacement = InSocket(self, 'Displacement', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')

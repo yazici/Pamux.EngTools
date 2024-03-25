@@ -31,7 +31,7 @@ class MLF_ForestGround:
 # def MLF_ForestGround():
 #         result, height = MaterialFunctions.landscapeBaseMaterial(Params.ForestGround, Params.ForestGround.Opacity)
 
-#         materialAttributes = Nodes.getMaterialAttributes(result)
+#         materialAttributes = Nodes.breakMaterialAttributes(result)
 
 #         fuzzyShading = Nodes.fuzzyShading(
 #             materialAttributes.baseColor,
@@ -45,7 +45,7 @@ class MLF_ForestGround:
 
 #         lerped = Nodes.lerp(materialAttributes.baseColor, fuzzyShading, rouhgnessB)
 
-#         return Nodes.setMaterialAttributes(
+#         return Nodes.makeMaterialAttributes(
 #             lerped,
 #             materialAttributes.normal,
 #             materialAttributes.specular,

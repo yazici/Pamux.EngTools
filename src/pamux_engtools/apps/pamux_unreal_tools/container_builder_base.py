@@ -1,9 +1,9 @@
+from pamux_unreal_tools.generated.material_expression_wrappers import *
 
 from pamux_unreal_tools.material import Material
-from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.material_function import MaterialFunction
 
-from pamux_unreal_tools.examples.M_Landscape_Master.globals import *
+from pamux_unreal_tools.utils.build_stack import BuildStack
 
 LandscapeMaterialFunctionPackage = "/Game/Materials/Pamux/Landscape/Functions"
 
@@ -21,15 +21,15 @@ class ContainerBuilderBase:
     def get(self):
         result = self.loadOrCreate()
 
-        Globals.BuildStack.push(result)
+        BuildStack.push(result)
         self.build()
         result.save()
-        Globals.BuildStack.pop()
+        BuildStack.pop()
         return result
 
     @property
     def current_container(self):
-        return Globals.BuildStack.top()
+        return BuildStack.top()
 
     def callMaterialFunction(self, materialFunctionToCall: MaterialFunction):
         result = MaterialFunctionCall(self.current_container)

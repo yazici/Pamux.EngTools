@@ -2,7 +2,6 @@
 from pamux_unreal_tools.material_function import MaterialFunction
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.container_builder_base import ContainerBuilderBase
-from pamux_unreal_tools.examples.M_Landscape_Master.globals import *
 
 LandscapeMaterialFunctionPackage = "/Game/Materials/Pamux/Landscape/Functions"
 
@@ -22,11 +21,8 @@ class MaterialFunctionBuilderBase(ContainerBuilderBase):
     def makeFunctionOutput_Result(self):
         return self.makeFunctionOutput("Result", 0)
     
-    def makeFunctionOutput_Height(self):        
+    def makeFunctionOutput_Height(self):
         return self.makeFunctionOutput("Height", 1)
-    
-    
-    
 
 LandscapeMaterialLayerFunctionPackage = f"{LandscapeMaterialFunctionPackage}/Layers"
 

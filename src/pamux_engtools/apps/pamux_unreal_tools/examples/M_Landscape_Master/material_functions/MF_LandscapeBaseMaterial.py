@@ -1,11 +1,10 @@
 from pamux_unreal_tools.material import Material
 from pamux_unreal_tools.material_function import MaterialFunction
-from pamux_unreal_tools.material_function_builder_base import MaterialFunctionBuilderBase
+from pamux_unreal_tools.material_function_builder_base import MaterialLayerFunctionBuilderBase
 from pamux_unreal_tools.material_expressions.material_expression_wrappers import *
 
 from pamux_unreal_tools.material import Material
 
-from pamux_unreal_tools.material_script_helpers import *
 from pamux_unreal_tools.examples.M_Landscape_Master.params import *
 from pamux_unreal_tools.examples.M_Landscape_Master.globals import *
 from pamux_unreal_tools.material_expressions.material_expression_wrappers import *
@@ -16,20 +15,19 @@ from pamux_unreal_tools.material_expressions.material_expression_wrappers import
 # from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MF_TextureCellBombing_Landscape import *
 
 # from pamux_unreal_tools.material_expression_container import *
-# from pamux_unreal_tools.material_script_helpers import *
 
 class MF_LandscapeBaseMaterial:
-    class Builder(MaterialFunctionBuilderBase):
+    class Builder(MaterialLayerFunctionBuilderBase):
         def __init__(self):
             super().__init__("MF_LandscapeBaseMaterial")
 
-        # def baseColorPath(self, material_function: MaterialFunction, qualitySwitched, commonParams, rotatedUVs, heightTexture):
+        # def baseColorPath(self, qualitySwitched, commonParams, rotatedUVs, heightTexture):
         #         switched = self.doStuffWithTexture(material_function, commonParams.Albedo, False, qualitySwitched, commonParams, rotatedUVs)        
 
         #         switchedAndMultipliedColorOverlay = Multiply(material_function, switched, commonParams.ColorOverlay)
 
         #         blend_Overlay = MaterialFunction.load("Blend_Overlay", "/Engine/Functions/Engine_MaterialFunctions03/Blends", True)
-        #         call_Blend_Overlay = callMaterialFunction(material_function, blend_Overlay)
+        #         call_Blend_Overlay = self.callMaterialFunction(blend_Overlay)
         #         call_Blend_Overlay.base = switched
         #         call_Blend_Overlay.blend = commonParams.ColorOverlay
         #         # blendOverlay = Blend_Overlay(material_function, switched, commonParams.ColorOverlay)
@@ -40,12 +38,12 @@ class MF_LandscapeBaseMaterial:
         #         lerpedColorOverlay = LinearInterpolate(material_function, switched, qualitySwitched2, commonParams.ColorOverlay.Intensity)
 
         #         cheapContrast_RGB = MaterialFunction.load("CheapContrast_RGB", "/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment", True)
-        #         call_CheapContrast_RGB = callMaterialFunction(material_function, cheapContrast_RGB)
+        #         call_CheapContrast_RGB = self.callMaterialFunction(cheapContrast_RGB)
         #         call_CheapContrast_RGB.In = lerpedColorOverlay
         #         call_CheapContrast_RGB.Contrast = commonParams.Contrast
 
         #         heightLerp = MaterialFunction.load("HeightLerp", "/Engine/Functions/Engine_MaterialFunctions02/Texturing", True)
-        #         call_HeightLerp = callMaterialFunction(material_function, heightLerp)
+        #         call_HeightLerp = self.callMaterialFunction(heightLerp)
         #         call_HeightLerp.A = lerpedColorOverlay
         #         call_HeightLerp.B = call_CheapContrast_RGB.Result
         #         call_HeightLerp.TransitionPhase = commonParams.Contrast.Variation
@@ -53,12 +51,12 @@ class MF_LandscapeBaseMaterial:
 
         #         return QualitySwitch(heightLerp, lerpedColorOverlay)
 
-        # def roughnessPath(self, material_function: MaterialFunction, qualitySwitched, commonParams, rotatedUVs):
+        # def roughnessPath(self, qualitySwitched, commonParams, rotatedUVs):
         #     switched = self.doStuffWithTexture(material_function, commonParams.Roughness, False, qualitySwitched, commonParams, rotatedUVs)        
 
         #     return Multiply(material_function, switched, commonParams.Roughness.Intensity)
 
-        # def normalPath(self, material_function: MaterialFunction, qualitySwitched, commonParams, rotatedUVs):
+        # def normalPath(self, qualitySwitched, commonParams, rotatedUVs):
         #     multiplyAdd = MaterialFunction.load("MultiplyAdd", "/Engine/Functions/Engine_MaterialFunctions02/Math", True)
 
         #     switched = self.doStuffWithTexture(material_function, commonParams.Normal, True, qualitySwitched, commonParams, rotatedUVs)
@@ -67,16 +65,16 @@ class MF_LandscapeBaseMaterial:
         #     constZero = 0
         #     computedIntensity = AppendVector(material_function, computedIntensity, constZero)
 
-        #     call_multiplyAdd = callMaterialFunction(material_function, multiplyAdd)
+        #     call_multiplyAdd = self.callMaterialFunction(multiplyAdd)
         #     call_multiplyAdd.a.comesFrom(switched)
         #     call_multiplyAdd.b.comesFrom(computedIntensity)
 
         #     return call_multiplyAdd.Result
         
-        # def heightTexture(self, material_function: MaterialFunction, qualitySwitched, commonParams, rotatedUVs):
+        # def heightTexture(self, qualitySwitched, commonParams, rotatedUVs):
         #     return self.doStuffWithTexture(material_function, commonParams.Displacement, False, qualitySwitched, commonParams, rotatedUVs)
             
-        # def doStuffWithTexture(self, material_function: MaterialFunction, texture, isNormalMap, qualitySwitched, commonParams, rotatedUVs):
+        # def doStuffWithTexture(self, texture, isNormalMap, qualitySwitched, commonParams, rotatedUVs):
         #     MF_TextureCellBombing_Landscape = MF_TextureCellBombing_Landscape.Builder().get()
         #     call_textureCellBombing_Landscape = MaterialFunctionCall(material_function, MF_TextureCellBombing_Landscape)
 
@@ -96,7 +94,7 @@ class MF_LandscapeBaseMaterial:
 
 
 
-        # def opacityPath(self, material_function: MaterialFunction, heightTexture, commonParams):
+        # def opacityPath(self, heightTexture, commonParams):
         #     # # commonParams.D.Intensity = 1
             
         #     # isNormalMap = True
@@ -121,20 +119,14 @@ class MF_LandscapeBaseMaterial:
 
         #     return MultiplyAdd(material_function, heightTexture, computedIntensity)
 
-        def build(self, material_function: MaterialFunction):
+        def build(self):
             commonParams = LandscapeBaseMaterialParams()
 
             breakOutFloat4Components = MaterialFunction.load("BreakOutFloat4Components", "/Engine/Functions/Engine_MaterialFunctions02/Utility", True)
-            call_BreakOutFloat4Components = callMaterialFunction(material_function, breakOutFloat4Components)
+            call_BreakOutFloat4Components = self.callMaterialFunction(breakOutFloat4Components)
             call_BreakOutFloat4Components.float4 = commonParams.UVParams
 
-            result = FunctionOutput(material_function)
-            result.output_name.set("Result")
-            result.sort_priority.set(0)
-
-            height = FunctionOutput(material_function)
-            height.output_name.set("Height")
-            height.sort_priority.set(1)
+            result, height = self.makeLayerFunctionOutputs()
 
             # uvParamsRG = AppendVector(material_function, call_BreakOutFloat4Components.r, call_BreakOutFloat4Components.g)
             # uvParamsBA = AppendVector(material_function, call_BreakOutFloat4Components.b, call_BreakOutFloat4Components.a)
@@ -146,7 +138,7 @@ class MF_LandscapeBaseMaterial:
             # multiply.b = uvParamsRG
 
             # customRotator = MaterialFunction.load("CustomRotator", "/Engine/Functions/Engine_MaterialFunctions02/Texturing", True)
-            # call_CustomRotator = callMaterialFunction(material_function, customRotator)
+            # call_CustomRotator = self.callMaterialFunction(customRotator)
 
             # call_CustomRotator.
             # uvParamsBA, 

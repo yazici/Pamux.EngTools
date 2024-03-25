@@ -193,7 +193,7 @@ class Globals:
 material = Unreal.create_material_asset("tesds")
 # material = Unreal.create_material_function_asset("test", "test_dirt")
 
-landscapeLayerBlendNode = Unreal.create_material_expression_LandscapeLayerBlend(material, Globals.Layers)
+landscapeLayerBlendNode = Unreal.create_material_expression_LandscapeLayerBlend(material, Globals.layer_names)
 
 
 class MaterialFunctions:
@@ -403,7 +403,7 @@ class Blocks:
 
 
 def M_Landscape_Master():
-    blendedLandscapeLayers = MaterialFunctions.blendLandscapeLayers(Globals.Layers)
+    blendedLandscapeLayers = MaterialFunctions.blendLandscapeLayers(Globals.layer_names)
 
     blendedLandscapeLayersWithWetness = MaterialFunctions.applyWetness(blendedLandscapeLayers, Params.wetness)
     blendedLandscapeLayersWithWetnessAndPuddles = MaterialFunctions.applyPuddles(blendedLandscapeLayersWithWetness)
@@ -438,7 +438,7 @@ def M_Landscape_Master_RVTOutput(materialsBlendedViaHighOpacityMap):
     return Blocks.rvtOutput(materialsBlendedViaHighOpacityMapMaterialAttributes.baseColor, rvtSpecularResult, materialsBlendedViaHighOpacityMapMaterialAttributes.roughness, materialsBlendedViaHighOpacityMapMaterialAttributes.normal, Globals.AbsoluteWorldPosition.z)
 
 def M_Landscape_Master_LandscapeGrassOutputAndMasking():
-    landscapeGrassOutput = Blocks.landscapeGrassOutputAndMasking(Params.foliageMask, Globals.LayersForGrass)
+    landscapeGrassOutput = Blocks.landscapeGrassOutputAndMasking(Params.foliageMask, Globals.grass_layer_names)
 
 def MLF_Dirt():
     return MaterialFunctions.landscapeBaseMaterial(Params.Dirt)

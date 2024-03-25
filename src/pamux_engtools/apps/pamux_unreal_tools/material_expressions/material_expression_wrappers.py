@@ -27,6 +27,7 @@ class AbsorptionMediumMaterialOutput(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -41,6 +42,7 @@ class ActorPositionWS(MaterialExpression):
         self.origin_type = Property(self, 'origin_type', 'PositionOrigin')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -100,6 +102,7 @@ class Append3Vector(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -113,6 +116,7 @@ class Append4Vector(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -269,6 +273,7 @@ class AtmosphericLightColor(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -282,6 +287,7 @@ class AtmosphericLightVector(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -311,6 +317,7 @@ class BinaryOp(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -389,6 +396,7 @@ class Burn(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -402,6 +410,7 @@ class CameraPositionWS(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -415,6 +424,7 @@ class CameraVectorWS(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -498,6 +508,7 @@ class CloudSampleAttribute(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -566,6 +577,7 @@ class Composite(MaterialExpression):
         self.subgraph_name = Property(self, 'subgraph_name', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -580,6 +592,7 @@ class Constant(MaterialExpression):
         self.r = Property(self, 'r', 'float')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -595,6 +608,7 @@ class Constant2Vector(MaterialExpression):
         self.r = Property(self, 'r', 'float')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -655,6 +669,7 @@ class ConstantDouble(MaterialExpression):
         self.value = Property(self, 'value', 'double')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -730,6 +745,7 @@ class Custom(MaterialExpression):
         self.output_type = Property(self, 'output_type', 'CustomMaterialOutputType')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -743,6 +759,7 @@ class CustomOutput(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -757,6 +774,7 @@ class DBufferTexture(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -799,6 +817,7 @@ class DataDrivenShaderPlatformInfoSwitch(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -812,6 +831,7 @@ class DecalColor(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -825,6 +845,7 @@ class DecalDerivative(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -838,6 +859,7 @@ class DecalLifetimeOpacity(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -867,6 +889,7 @@ class DeltaTime(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -943,6 +966,7 @@ class Difference(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -956,6 +980,7 @@ class DisjointOver(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -984,6 +1009,7 @@ class DistanceCullFade(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1001,6 +1027,7 @@ class DistanceFieldApproxAO(MaterialExpression):
         self.step_scale_default = Property(self, 'step_scale_default', 'float')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1074,6 +1101,7 @@ class Dodge(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1106,6 +1134,7 @@ class DoubleVectorParameter(MaterialExpression):
         self.sort_priority = Property(self, 'sort_priority', 'int32')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1136,6 +1165,7 @@ class ExecBegin(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1149,6 +1179,7 @@ class ExecEnd(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1162,6 +1193,7 @@ class Exponential(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1175,6 +1207,7 @@ class Exponential2(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1188,6 +1221,7 @@ class EyeAdaptation(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1201,6 +1235,7 @@ class EyeAdaptationInverse(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1259,6 +1294,7 @@ class FontSample(MaterialExpression):
         self.font_texture_page = Property(self, 'font_texture_page', 'int32')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1291,6 +1327,7 @@ class ForLoop(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1318,6 +1355,7 @@ class Fractal3D(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1356,7 +1394,7 @@ class FunctionInput(MaterialExpression):
 
         # Input Sockets
         self.preview = InSocket(self, 'Preview', 'StructProperty')
-        self.iD = InSocket(self, 'ID', 'StructProperty')
+        self.ID = InSocket(self, 'ID', 'StructProperty')
         self.previewValue = InSocket(self, 'PreviewValue', 'StructProperty')
 
         # Output Sockets
@@ -1375,7 +1413,7 @@ class FunctionOutput(MaterialExpression):
 
         # Input Sockets
         self.a = InSocket(self, 'A', 'StructProperty')
-        self.iD = InSocket(self, 'ID', 'StructProperty')
+        self.ID = InSocket(self, 'ID', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1405,6 +1443,7 @@ class GenericConstant(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1419,6 +1458,7 @@ class GetLocal(MaterialExpression):
         self.local_name = Property(self, 'local_name', 'Name')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1433,10 +1473,31 @@ class GetMaterialAttributes(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
-        self.materialAttributes = InSocket(self, 'MaterialAttributes', 'StructProperty')
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
-        self.output = OutSocket(self, '', 'StructProperty')
+        self.materialAttributes = OutSocket(self, 'MaterialAttributes', 'StructProperty')
+        self.baseColor = OutSocket(self, 'BaseColor', 'StructProperty')
+        self.metallic = OutSocket(self, 'Metallic', 'StructProperty')
+        self.specular = OutSocket(self, 'Specular', 'StructProperty')
+        self.roughness = OutSocket(self, 'Roughness', 'StructProperty')
+        self.anisotropy = OutSocket(self, 'Anisotropy', 'StructProperty')
+        self.emissiveColor = OutSocket(self, 'EmissiveColor', 'StructProperty')
+        self.opacity = OutSocket(self, 'Opacity', 'StructProperty')
+        self.opacityMask = OutSocket(self, 'OpacityMask', 'StructProperty')
+        self.normal = OutSocket(self, 'Normal', 'StructProperty')
+        self.tangent = OutSocket(self, 'Tangent', 'StructProperty')
+        self.worldPositionOffset = OutSocket(self, 'WorldPositionOffset', 'StructProperty')
+        self.worldDisplacement = OutSocket(self, 'WorldDisplacement', 'StructProperty')
+        self.tessellationMultiplier = OutSocket(self, 'TessellationMultiplier', 'StructProperty')
+        self.subsurfaceColor = OutSocket(self, 'SubsurfaceColor', 'StructProperty')
+        self.clearCoat = OutSocket(self, 'ClearCoat', 'StructProperty')
+        self.clearCoatRoughness = OutSocket(self, 'ClearCoatRoughness', 'StructProperty')
+        self.ambientOcclusion = OutSocket(self, 'AmbientOcclusion', 'StructProperty')
+        self.refraction = OutSocket(self, 'Refraction', 'StructProperty')
+        self.customizedUVs = OutSocket(self, 'CustomizedUVs', 'StructProperty')
+        self.pixelDepthOffset = OutSocket(self, 'PixelDepthOffset', 'StructProperty')
+        self.shadingModel = OutSocket(self, 'ShadingModel', 'StructProperty')
 
 
 class HairAttributes(MaterialExpression):
@@ -1448,6 +1509,7 @@ class HairAttributes(MaterialExpression):
         self.use_tangent_space = Property(self, 'use_tangent_space', 'bool')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1479,6 +1541,7 @@ class HeightfieldMinMaxTexture(MaterialExpression):
         self.sampler_type = Property(self, 'sampler_type', 'MaterialSamplerType')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1492,6 +1555,7 @@ class HsvToRgb(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1525,6 +1589,7 @@ class IfThenElse(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1538,6 +1603,7 @@ class In(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1571,6 +1637,7 @@ class IsOrthographic(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1585,6 +1652,7 @@ class LandscapeGrassOutput(MaterialExpression):
         self.grass_types = Property(self, 'grass_types', 'Array[GrassInput]')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1599,6 +1667,7 @@ class LandscapeLayerBlend(MaterialExpression):
         self.layers = Property(self, 'layers', 'Array[LayerBlendInput]')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1618,6 +1687,7 @@ class LandscapeLayerCoords(MaterialExpression):
         self.mapping_type = Property(self, 'mapping_type', 'TerrainCoordMappingType')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1633,6 +1703,7 @@ class LandscapeLayerSample(MaterialExpression):
         self.preview_weight = Property(self, 'preview_weight', 'float')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1648,6 +1719,7 @@ class LandscapeLayerSwitch(MaterialExpression):
         self.preview_used = Property(self, 'preview_used', 'bool')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1664,6 +1736,7 @@ class LandscapeLayerWeight(MaterialExpression):
         self.preview_weight = Property(self, 'preview_weight', 'float')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1678,6 +1751,7 @@ class LandscapePhysicalMaterialOutput(MaterialExpression):
         self.inputs = Property(self, 'inputs', 'Array[PhysicalMaterialInput]')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1691,6 +1765,7 @@ class LandscapeVisibilityMask(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1704,6 +1779,7 @@ class Length(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1719,6 +1795,7 @@ class Less(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1732,6 +1809,7 @@ class LightVector(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1745,6 +1823,7 @@ class LightmapUVs(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1792,6 +1871,7 @@ class Logarithm(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1833,6 +1913,7 @@ class Luminance(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1894,6 +1975,7 @@ class Mask(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1943,7 +2025,7 @@ class MaterialLayerOutput(MaterialExpression):
 
         # Input Sockets
         self.a = InSocket(self, 'A', 'StructProperty')
-        self.iD = InSocket(self, 'ID', 'StructProperty')
+        self.ID = InSocket(self, 'ID', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1972,6 +2054,7 @@ class MaterialXAppend3Vector(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1985,6 +2068,7 @@ class MaterialXAppend4Vector(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1999,6 +2083,7 @@ class MaterialXBurn(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2013,6 +2098,7 @@ class MaterialXDifference(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2027,6 +2113,7 @@ class MaterialXDisjointOver(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2041,6 +2128,7 @@ class MaterialXDodge(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2054,6 +2142,7 @@ class MaterialXExponential(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2076,6 +2165,7 @@ class MaterialXFractal3D(MaterialExpression):
         self.turbulence = Property(self, 'turbulence', 'bool')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2089,6 +2179,7 @@ class MaterialXHsvToRgb(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2103,6 +2194,7 @@ class MaterialXIn(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2116,6 +2208,7 @@ class MaterialXLength(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2129,6 +2222,7 @@ class MaterialXLogarithm(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2144,6 +2238,7 @@ class MaterialXLuminance(MaterialExpression):
         self.luminance_mode = Property(self, 'luminance_mode', 'MaterialXLuminanceMode')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2158,6 +2253,7 @@ class MaterialXMask(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2172,6 +2268,7 @@ class MaterialXMatte(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2186,6 +2283,7 @@ class MaterialXMinus(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2200,6 +2298,7 @@ class MaterialXOut(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2214,6 +2313,7 @@ class MaterialXOver(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2228,6 +2328,7 @@ class MaterialXOverlay(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2243,6 +2344,7 @@ class MaterialXPlace2D(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2257,6 +2359,7 @@ class MaterialXPlus(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2270,6 +2373,7 @@ class MaterialXPremult(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2284,6 +2388,7 @@ class MaterialXRamp4(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2298,6 +2403,7 @@ class MaterialXRampLeftRight(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2312,6 +2418,7 @@ class MaterialXRampTopBottom(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2329,6 +2436,7 @@ class MaterialXRemap(MaterialExpression):
         self.target_low_default = Property(self, 'target_low_default', 'float')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2342,6 +2450,7 @@ class MaterialXRgbToHsv(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2356,6 +2465,7 @@ class MaterialXRotate2D(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2370,6 +2480,7 @@ class MaterialXScreen(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2385,6 +2496,7 @@ class MaterialXSplitLeftRight(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2400,6 +2512,7 @@ class MaterialXSplitTopBottom(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2414,6 +2527,7 @@ class MaterialXSwizzle(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2443,6 +2557,7 @@ class MaterialXTextureSampleParameterBlur(MaterialExpression):
         self.texture = Property(self, 'texture', 'Texture')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2456,6 +2571,7 @@ class MaterialXUnpremult(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2469,6 +2585,7 @@ class Matte(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2516,6 +2633,7 @@ class Minus(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2546,6 +2664,7 @@ class NamedRerouteBase(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2590,6 +2709,7 @@ class NaniteReplace(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2642,6 +2762,7 @@ class ObjectBounds(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2655,6 +2776,7 @@ class ObjectLocalBounds(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2668,6 +2790,7 @@ class ObjectOrientation(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2682,6 +2805,7 @@ class ObjectPositionWS(MaterialExpression):
         self.origin_type = Property(self, 'origin_type', 'PositionOrigin')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2695,6 +2819,7 @@ class ObjectRadius(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2722,6 +2847,7 @@ class Out(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2735,6 +2861,7 @@ class Over(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2748,6 +2875,7 @@ class Overlay(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2798,6 +2926,7 @@ class ParticleColor(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2811,6 +2940,7 @@ class ParticleDirection(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2824,6 +2954,7 @@ class ParticleMacroUV(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2837,6 +2968,7 @@ class ParticleMotionBlurFade(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2851,6 +2983,7 @@ class ParticlePositionWS(MaterialExpression):
         self.origin_type = Property(self, 'origin_type', 'PositionOrigin')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2864,6 +2997,7 @@ class ParticleRadius(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2877,6 +3011,7 @@ class ParticleRandom(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2890,6 +3025,7 @@ class ParticleRelativeTime(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2903,6 +3039,7 @@ class ParticleSize(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2916,6 +3053,7 @@ class ParticleSpeed(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2929,6 +3067,7 @@ class ParticleSpriteRotation(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2965,6 +3104,7 @@ class ParticleSubUVProperties(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2979,6 +3119,7 @@ class PathTracingBufferTexture(MaterialExpression):
         self.path_tracing_buffer_texture_id = Property(self, 'path_tracing_buffer_texture_id', 'PathTracingBufferTextureId')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -2992,6 +3133,7 @@ class PathTracingQualitySwitch(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -3005,6 +3147,7 @@ class PathTracingRayTypeSwitch(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -3036,6 +3179,7 @@ class PerInstanceCustomData3Vector(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -3049,6 +3193,7 @@ class PerInstanceFadeAmount(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -3062,6 +3207,7 @@ class PerInstanceRandom(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -3076,6 +3222,7 @@ class PinBase(MaterialExpression):
         self.reroute_pins = Property(self, 'reroute_pins', 'Array[CompositeReroute]')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -3089,6 +3236,7 @@ class PixelDepth(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -3102,6 +3250,7 @@ class PixelNormalWS(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -3115,6 +3264,7 @@ class Place2D(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -3128,6 +3278,7 @@ class Plus(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -3157,6 +3308,7 @@ class PreSkinnedLocalBounds(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -3170,6 +3322,7 @@ class PreSkinnedNormal(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -3183,6 +3336,7 @@ class PreSkinnedPosition(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -3196,6 +3350,7 @@ class PrecomputedAOMask(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -3209,6 +3364,7 @@ class Premult(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -3252,6 +3408,7 @@ class Ramp4(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -3265,6 +3422,7 @@ class RampLeftRight(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -3278,6 +3436,7 @@ class RampTopBottom(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -3336,6 +3495,7 @@ class Remap(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -3363,6 +3523,7 @@ class RerouteBase(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -3376,6 +3537,7 @@ class RgbToHsv(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -3389,6 +3551,7 @@ class Rotate2D(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -3583,14 +3746,14 @@ class Saturate(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
-        self.input = InSocket(self, 'Input', 'StructProperty')
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
 
 
 class ScalarParameter(MaterialExpression):
-    def __init__(self, parent: MaterialExpressionContainer, node_pos_x = 0, node_pos_y = 0):
+    def __init__(self, parent: MaterialExpressionContainer, parameter_name = None, default_value = None, node_pos_x = 0, node_pos_y = 0):
         super().__init__(parent, unreal.MaterialExpressionScalarParameter, node_pos_x, node_pos_y)
 
         # Properties
@@ -3610,6 +3773,8 @@ class ScalarParameter(MaterialExpression):
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
 
+        if parameter_name is not None: self.parameter_name.set(parameter_name)
+        if default_value is not None: self.default_value.set(default_value)
 
 class SceneColor(MaterialExpression):
     def __init__(self, parent: MaterialExpressionContainer, node_pos_x = 0, node_pos_y = 0):
@@ -3673,6 +3838,7 @@ class SceneTexelSize(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -3702,6 +3868,7 @@ class Screen(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -3715,6 +3882,7 @@ class ScreenPosition(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -3729,6 +3897,7 @@ class SetLocal(MaterialExpression):
         self.local_name = Property(self, 'local_name', 'Name')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -3743,6 +3912,28 @@ class SetMaterialAttributes(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.materialAttributes = InSocket(self, 'MaterialAttributes', 'StructProperty')
+        self.baseColor = InSocket(self, 'BaseColor', 'StructProperty')
+        self.metallic = InSocket(self, 'Metallic', 'StructProperty')
+        self.specular = InSocket(self, 'Specular', 'StructProperty')
+        self.roughness = InSocket(self, 'Roughness', 'StructProperty')
+        self.anisotropy = InSocket(self, 'Anisotropy', 'StructProperty')
+        self.emissiveColor = InSocket(self, 'EmissiveColor', 'StructProperty')
+        self.opacity = InSocket(self, 'Opacity', 'StructProperty')
+        self.opacityMask = InSocket(self, 'OpacityMask', 'StructProperty')
+        self.normal = InSocket(self, 'Normal', 'StructProperty')
+        self.tangent = InSocket(self, 'Tangent', 'StructProperty')
+        self.worldPositionOffset = InSocket(self, 'WorldPositionOffset', 'StructProperty')
+        self.worldDisplacement = InSocket(self, 'WorldDisplacement', 'StructProperty')
+        self.tessellationMultiplier = InSocket(self, 'TessellationMultiplier', 'StructProperty')
+        self.subsurfaceColor = InSocket(self, 'SubsurfaceColor', 'StructProperty')
+        self.clearCoat = InSocket(self, 'ClearCoat', 'StructProperty')
+        self.clearCoatRoughness = InSocket(self, 'ClearCoatRoughness', 'StructProperty')
+        self.ambientOcclusion = InSocket(self, 'AmbientOcclusion', 'StructProperty')
+        self.refraction = InSocket(self, 'Refraction', 'StructProperty')
+        self.customizedUVs = InSocket(self, 'CustomizedUVs', 'StructProperty')
+        self.pixelDepthOffset = InSocket(self, 'PixelDepthOffset', 'StructProperty')
+        self.shadingModel = InSocket(self, 'ShadingModel', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -3772,6 +3963,7 @@ class ShadingModel(MaterialExpression):
         self.shading_model = Property(self, 'shading_model', 'MaterialShadingModel')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -3875,6 +4067,7 @@ class SkyAtmosphereDistantLightScatteredLuminance(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -3889,6 +4082,7 @@ class SkyAtmosphereLightDirection(MaterialExpression):
         self.light_index = Property(self, 'light_index', 'int32')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -3903,6 +4097,7 @@ class SkyAtmosphereLightDiskLuminance(MaterialExpression):
         self.light_index = Property(self, 'light_index', 'int32')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -3931,6 +4126,7 @@ class SkyAtmosphereViewLuminance(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -3944,6 +4140,7 @@ class SkyLightEnvMapSample(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -3996,6 +4193,7 @@ class SparseVolumeTextureBase(MaterialExpression):
         self.sparse_volume_texture = Property(self, 'sparse_volume_texture', 'SparseVolumeTexture')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4010,6 +4208,7 @@ class SparseVolumeTextureObject(MaterialExpression):
         self.sparse_volume_texture = Property(self, 'sparse_volume_texture', 'SparseVolumeTexture')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4028,6 +4227,7 @@ class SparseVolumeTextureObjectParameter(MaterialExpression):
         self.sparse_volume_texture = Property(self, 'sparse_volume_texture', 'SparseVolumeTexture')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4043,6 +4243,7 @@ class SparseVolumeTextureSample(MaterialExpression):
         self.sparse_volume_texture = Property(self, 'sparse_volume_texture', 'SparseVolumeTexture')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4061,6 +4262,7 @@ class SparseVolumeTextureSampleParameter(MaterialExpression):
         self.sparse_volume_texture = Property(self, 'sparse_volume_texture', 'SparseVolumeTexture')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4130,6 +4332,7 @@ class SplitLeftRight(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4143,6 +4346,7 @@ class SplitTopBottom(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4171,6 +4375,7 @@ class SpriteTextureSampler(MaterialExpression):
         self.texture = Property(self, 'texture', 'Texture')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4199,6 +4404,7 @@ class StaticBool(MaterialExpression):
         self.value = Property(self, 'value', 'bool')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4306,6 +4512,7 @@ class StrataAdd(MaterialExpression):
         self.use_parameter_blending = Property(self, 'use_parameter_blending', 'bool')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4319,6 +4526,7 @@ class StrataBSDF(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4332,6 +4540,7 @@ class StrataConvertToDecal(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4346,6 +4555,7 @@ class StrataEyeBSDF(MaterialExpression):
         self.subsurface_profile = Property(self, 'subsurface_profile', 'SubsurfaceProfile')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4359,6 +4569,7 @@ class StrataHairBSDF(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4372,6 +4583,7 @@ class StrataHazinessToSecondaryRoughness(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4386,6 +4598,7 @@ class StrataHorizontalMixing(MaterialExpression):
         self.use_parameter_blending = Property(self, 'use_parameter_blending', 'bool')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4400,6 +4613,7 @@ class StrataLegacyConversion(MaterialExpression):
         self.subsurface_profile = Property(self, 'subsurface_profile', 'SubsurfaceProfile')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4413,6 +4627,7 @@ class StrataLightFunction(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4426,6 +4641,7 @@ class StrataMetalnessToDiffuseAlbedoF0(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4439,6 +4655,7 @@ class StrataPostProcess(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4452,6 +4669,7 @@ class StrataSimpleClearCoatBSDF(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4465,6 +4683,7 @@ class StrataSingleLayerWaterBSDF(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4481,6 +4700,7 @@ class StrataSlabBSDF(MaterialExpression):
         self.use_sss_diffusion = Property(self, 'use_sss_diffusion', 'bool')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4494,6 +4714,7 @@ class StrataThinFilm(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4507,6 +4728,7 @@ class StrataTransmittanceToMFP(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4520,6 +4742,7 @@ class StrataUI(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4533,6 +4756,7 @@ class StrataUnlitBSDF(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4546,6 +4770,7 @@ class StrataUtilityBase(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4560,6 +4785,7 @@ class StrataVerticalLayering(MaterialExpression):
         self.use_parameter_blending = Property(self, 'use_parameter_blending', 'bool')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4573,6 +4799,7 @@ class StrataVolumetricFogCloudBSDF(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4586,6 +4813,7 @@ class StrataWeight(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4599,6 +4827,7 @@ class SubsurfaceMediumMaterialOutput(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4633,6 +4862,7 @@ class Switch(MaterialExpression):
         self.inputs = Property(self, 'inputs', 'Array[SwitchCustomInput]')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4693,6 +4923,7 @@ class TerrainLayerCoords(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4706,6 +4937,7 @@ class TerrainLayerSwitch(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4719,6 +4951,7 @@ class TerrainLayerWeight(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4735,6 +4968,7 @@ class TextureBase(MaterialExpression):
         self.texture = Property(self, 'texture', 'Texture')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4753,6 +4987,7 @@ class TextureCoordinate(MaterialExpression):
         self.v_tiling = Property(self, 'v_tiling', 'float')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4769,6 +5004,7 @@ class TextureObject(MaterialExpression):
         self.texture = Property(self, 'texture', 'Texture')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4837,7 +5073,12 @@ class TextureSample(MaterialExpression):
         self.applyViewMipBias = InSocket(self, 'ApplyViewMipBias', 'StructProperty')
 
         # Output Sockets
-        self.output = OutSocket(self, '', 'StructProperty')
+        self.RGB = OutSocket(self, 'RGB', 'StructProperty')
+        self.r = OutSocket(self, 'R', 'StructProperty')
+        self.g = OutSocket(self, 'G', 'StructProperty')
+        self.b = OutSocket(self, 'B', 'StructProperty')
+        self.a = OutSocket(self, 'A', 'StructProperty')
+        self.RGBA = OutSocket(self, 'RGBA', 'StructProperty')
 
 
 class TextureSampleParameter(MaterialExpression):
@@ -4929,6 +5170,7 @@ class TextureSampleParameterBlur(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -4981,6 +5223,7 @@ class TextureSampleParameterCubeArray(MaterialExpression):
         self.texture = Property(self, 'texture', 'Texture')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -5066,6 +5309,7 @@ class Time(MaterialExpression):
         self.period = Property(self, 'period', 'float')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -5125,6 +5369,7 @@ class TruncateLWC(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -5138,6 +5383,7 @@ class TwoSidedSign(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -5151,6 +5397,7 @@ class Unpremult(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -5204,6 +5451,7 @@ class VertexColor(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -5231,6 +5479,7 @@ class VertexNormalWS(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -5244,6 +5493,7 @@ class VertexTangentWS(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -5258,6 +5508,7 @@ class ViewProperty(MaterialExpression):
         self.property_ = Property(self, 'property_', 'MaterialExposedViewProperty')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -5271,6 +5522,7 @@ class ViewSize(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -5299,6 +5551,7 @@ class VolumetricAdvancedMaterialInput(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -5344,6 +5597,7 @@ class VolumetricCloudEmptySpaceSkippingInput(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -5357,6 +5611,7 @@ class VolumetricCloudEmptySpaceSkippingOutput(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -5370,6 +5625,7 @@ class WhileLoop(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -5384,6 +5640,7 @@ class WorldPosition(MaterialExpression):
         self.world_position_shader_offset = Property(self, 'world_position_shader_offset', 'WorldPositionIncludedOffsets')
 
         # Input Sockets
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')

@@ -3,12 +3,14 @@
 import unreal
 
 from multipledispatch import dispatch
+from collections import deque
 
 MEL = unreal.MaterialEditingLibrary
 ATH = unreal.AssetToolsHelpers
 AT = ATH.get_asset_tools()
 EAL = unreal.EditorAssetLibrary
 AUL = unreal.EditorUtilityLibrary
+
 
 # https://docs.unrealengine.com/5.3/en-US/PythonAPI/class/MaterialEditingLibrary.html
 class MaterialExpressionContainer:
@@ -17,6 +19,10 @@ class MaterialExpressionContainer:
         
     def createMaterialExpression(self, expression_class, node_pos_x = 0, node_pos_y = 0):
         raise "implement createMaterialExpression"
+
+
+
+
 
 class MaterialExpressionValue:
     def __init__(self, materialExpression, name, type):
@@ -30,6 +36,9 @@ class Property(MaterialExpressionValue):
 
     def set(self, val):
         self.materialExpression.asset.set_editor_property(self.name, val)
+
+    def get(self):
+        return self.materialExpression.asset.get_editor_property(self.name)
 
 class Socket(MaterialExpressionValue):
     def __init__(self, materialExpression, name, type, is_output = False):
@@ -54,3 +63,6 @@ class OutSocket(Socket):
     @dispatch(unreal.MaterialProperty)
     def connectTo(self, materialProperty: unreal.MaterialProperty) -> bool:
         return MEL.connect_material_property(self.materialExpression.asset, self.name, materialProperty)
+
+    def connectToFunctionOutput(self, function_output) -> bool:
+        return MEL.connect_material_expressions(self.materialExpression.asset, self.name, function_output.asset, function_output.output_name.get())

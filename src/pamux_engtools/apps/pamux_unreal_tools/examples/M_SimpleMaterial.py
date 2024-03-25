@@ -10,7 +10,6 @@ sys.path.append(str(Path(__file__).parent.parent.parent.resolve()))
 from pamux_unreal_tools.material import Material
 from pamux_unreal_tools.material_expressions.material_expression_wrappers import *
 from pamux_unreal_tools.material_expression_container import *
-from pamux_unreal_tools.material_script_helpers import *
 
 class MaterialBuilder:
     def __init__(self, material):

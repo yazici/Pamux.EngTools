@@ -25,7 +25,7 @@ class Value:
 
     def field_name(self, ctor):
         if self.name != "":
-            if self.name == "UVs":
+            if self.name == "UVs" or self.name == "ID" or self.name.startswith("RGB"):
                 return self.name
             return self.name[0:1].lower() + self.name[1:]
         if ctor == "InSocket":
@@ -127,29 +127,105 @@ def read_dump_data():
                 ud = UnrealDump(full_path)
                 material_expressions_dump_data[ud.pamux_name] = ud
 
+input_only_classes = []
+output_only_classes = []
+
 def setup_input_sockets(pamux_wrapper_class_name):
     result = Values()
+
+    if pamux_wrapper_class_name in output_only_classes:
+        return result
 
     if pamux_wrapper_class_name == "TextureSample":
         result.append(Value('UVs', 'StructProperty'))
         result.append(Value('Tex', 'StructProperty'))
         result.append(Value('ApplyViewMipBias', 'StructProperty'))
+
     elif pamux_wrapper_class_name == "AntialiasedTextureMask":
         result.append(Value('UVs', 'StructProperty'))
         result.append(Value('ApplyViewMipBias', 'StructProperty'))
 
-    if pamux_wrapper_class_name in material_expressions_dump_data:
-        if result.is_empty:
-            result = material_expressions_dump_data[pamux_wrapper_class_name].inputs
+    elif pamux_wrapper_class_name == "Saturate":
+        result.append(Value('', 'StructProperty'))
 
-    # if result.is_empty:
-    #     result.append(Value("", "StructProperty"))
-            
+    elif pamux_wrapper_class_name == "SetMaterialAttributes":
+        result.append(Value('MaterialAttributes', 'StructProperty'))
+
+        result.append(Value('BaseColor', 'StructProperty'))
+        result.append(Value('Metallic', 'StructProperty'))
+        result.append(Value('Specular', 'StructProperty'))
+        result.append(Value('Roughness', 'StructProperty'))
+        result.append(Value('Anisotropy', 'StructProperty'))
+        result.append(Value('EmissiveColor', 'StructProperty'))
+        result.append(Value('Opacity', 'StructProperty'))
+        result.append(Value('OpacityMask', 'StructProperty'))
+        result.append(Value('Normal', 'StructProperty'))
+        result.append(Value('Tangent', 'StructProperty'))
+        result.append(Value('WorldPositionOffset', 'StructProperty'))
+        result.append(Value('WorldDisplacement', 'StructProperty'))
+        result.append(Value('TessellationMultiplier', 'StructProperty'))
+        result.append(Value('SubsurfaceColor', 'StructProperty'))
+        result.append(Value('ClearCoat', 'StructProperty'))
+        result.append(Value('ClearCoatRoughness', 'StructProperty'))
+        result.append(Value('AmbientOcclusion', 'StructProperty'))
+        result.append(Value('Refraction', 'StructProperty'))
+        result.append(Value('CustomizedUVs', 'StructProperty'))
+        result.append(Value('PixelDepthOffset', 'StructProperty'))
+        result.append(Value('ShadingModel', 'StructProperty'))
+
+    elif pamux_wrapper_class_name == "GetMaterialAttributes":
+        result.append(Value('', 'StructProperty'))
+    
+    elif pamux_wrapper_class_name in material_expressions_dump_data:
+         result = material_expressions_dump_data[pamux_wrapper_class_name].inputs
+
+    if result.is_empty:
+        result.append(Value("", "StructProperty"))
+        
     return result
 
 def setup_output_sockets(pamux_wrapper_class_name):
     result = Values()
-    if pamux_wrapper_class_name in material_expressions_dump_data:
+
+    if pamux_wrapper_class_name in input_only_classes:
+        return result
+
+    if pamux_wrapper_class_name == "TextureSample":
+        result.append(Value('RGB', 'StructProperty'))
+        result.append(Value('R', 'StructProperty'))
+        result.append(Value('G', 'StructProperty'))
+        result.append(Value('B', 'StructProperty'))
+        result.append(Value('A', 'StructProperty'))
+        result.append(Value('RGBA', 'StructProperty'))
+
+    elif pamux_wrapper_class_name == "GetMaterialAttributes":
+        result.append(Value('MaterialAttributes', 'StructProperty'))
+
+        result.append(Value('BaseColor', 'StructProperty'))
+        result.append(Value('Metallic', 'StructProperty'))
+        result.append(Value('Specular', 'StructProperty'))
+        result.append(Value('Roughness', 'StructProperty'))
+        result.append(Value('Anisotropy', 'StructProperty'))
+        result.append(Value('EmissiveColor', 'StructProperty'))
+        result.append(Value('Opacity', 'StructProperty'))
+        result.append(Value('OpacityMask', 'StructProperty'))
+        result.append(Value('Normal', 'StructProperty'))
+        result.append(Value('Tangent', 'StructProperty'))
+        result.append(Value('WorldPositionOffset', 'StructProperty'))
+        result.append(Value('WorldDisplacement', 'StructProperty'))
+        result.append(Value('TessellationMultiplier', 'StructProperty'))
+        result.append(Value('SubsurfaceColor', 'StructProperty'))
+        result.append(Value('ClearCoat', 'StructProperty'))
+        result.append(Value('ClearCoatRoughness', 'StructProperty'))
+        result.append(Value('AmbientOcclusion', 'StructProperty'))
+        result.append(Value('Refraction', 'StructProperty'))
+        result.append(Value('CustomizedUVs', 'StructProperty'))
+        result.append(Value('PixelDepthOffset', 'StructProperty'))
+        result.append(Value('ShadingModel', 'StructProperty'))
+
+
+    
+    elif pamux_wrapper_class_name in material_expressions_dump_data:
         result = material_expressions_dump_data[pamux_wrapper_class_name].outputs
 
     if result.is_empty:
@@ -202,6 +278,33 @@ def setup_properties(doc):
         
     return result
 
+class CTORParams:
+    def __init__(self):
+        self.params = []
+
+    def append(self, name):
+        self.params.append(name)
+
+    def declare(self):
+        result = ""
+        for param in self.params:
+            result += f", {param} = None"
+        return result
+    
+    def assign(self):
+        result = ""
+        for param in self.params:
+            result += f"\n        if {param} is not None: self.{param}.set({param})"
+        return result
+
+def setup_ctor_params(pamux_wrapper_class_name):
+    result = CTORParams()
+
+    if pamux_wrapper_class_name == "ScalarParameter":
+        result.append("parameter_name")
+        result.append("default_value")
+    
+    return result
 def write_pamux_wrapper_class(py_file, c):
     pamux_wrapper_class_name = c.__name__[len("MaterialExpression"):]
 
@@ -210,11 +313,12 @@ def write_pamux_wrapper_class(py_file, c):
     inputs = setup_input_sockets(pamux_wrapper_class_name)
     outputs = setup_output_sockets(pamux_wrapper_class_name)
     properties = setup_properties(c.__doc__)
+    ctor_params = setup_ctor_params(pamux_wrapper_class_name)
 
     py_file.write("\n")
     py_file.write(f"class {pamux_wrapper_class_name}(MaterialExpression):")
     py_file.write("\n")
-    py_file.write("    def __init__(self, parent: MaterialExpressionContainer, node_pos_x = 0, node_pos_y = 0):")
+    py_file.write(f"    def __init__(self, parent: MaterialExpressionContainer{ctor_params.declare()}, node_pos_x = 0, node_pos_y = 0):")
     py_file.write("\n")
     py_file.write(f"        super().__init__(parent, unreal.{c.__name__}, node_pos_x, node_pos_y)")
     py_file.write("\n")
@@ -232,6 +336,7 @@ def write_pamux_wrapper_class(py_file, c):
     py_file.write(f"        # Output Sockets")
     py_file.write(outputs.to_py("OutSocket"))
     py_file.write("\n")
+    py_file.write(f"{ctor_params.assign()}")
 
 
 # See unreal.py

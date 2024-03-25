@@ -3,7 +3,7 @@
 import unreal
 
 from pamux_unreal_tools.material_expression import MaterialExpression
-from pamux_engtools.apps.pamux_unreal_tools.material_expression_container import *
+from pamux_unreal_tools.material_expression_container import *
 
 class Abs(MaterialExpression):
     def __init__(self, parent: MaterialExpressionContainer, node_pos_x = 0, node_pos_y = 0):

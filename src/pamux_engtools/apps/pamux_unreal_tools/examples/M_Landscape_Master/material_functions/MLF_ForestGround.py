@@ -1,11 +1,10 @@
 from pamux_unreal_tools.material_function import MaterialFunction
 from pamux_unreal_tools.material_function_builder_base import MaterialLayerFunctionBuilderBase
-from pamux_unreal_tools.material_expressions.parameters.scalar_parameter import ScalarParameter
 from pamux_unreal_tools.material import Material
 from pamux_unreal_tools.material_function import MaterialFunction
 
-from pamux_engtools.apps.pamux_unreal_tools.generated.material_expression_wrappers import *
-from pamux_engtools.apps.pamux_unreal_tools.material_expression_container import *
+from pamux_unreal_tools.generated.material_expression_wrappers import *
+from pamux_unreal_tools.material_expression_container import *
 
 # self.weight = LLWeightParameter(f"{name}")
 # self.foliageThreshold = ScalarParameter(f"{name}FoliageThreshold")

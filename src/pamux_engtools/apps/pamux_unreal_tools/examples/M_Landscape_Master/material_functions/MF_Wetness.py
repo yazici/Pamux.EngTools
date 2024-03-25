@@ -4,8 +4,8 @@ from pamux_unreal_tools.material import Material
 from pamux_unreal_tools.material import MaterialAttributeGuids
 from pamux_unreal_tools.material_function import MaterialFunction
 
-from pamux_engtools.apps.pamux_unreal_tools.generated.material_expression_wrappers import *
-from pamux_engtools.apps.pamux_unreal_tools.material_expression_container import *
+from pamux_unreal_tools.generated.material_expression_wrappers import *
+from pamux_unreal_tools.material_expression_container import *
 
 # material = util.load_asset('/Game/0_Root/Material/M_standard_shd_test.M_standard_shd_test')
 # print(material) # Material

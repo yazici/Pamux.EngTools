@@ -7,7 +7,7 @@ import types
 
 import json
 dump_folder = "C:/src/UNrealEngineClassDump/Class/Script"
-py_out_filepath = "C:/src/Pamux.EngTools/src/pamux_engtools/apps/pamux_unreal_tools/material_expressions/material_expression_wrappers.py"
+py_out_filepath = "C:/src/Pamux.EngTools/src/pamux_engtools/apps/pamux_unreal_tools/generated/material_expression_wrappers.py"
 
 class Value:
     def __init__(self, name, type, notes = ""):
@@ -410,7 +410,7 @@ def create_py_from_unreal_module():
         py_file.write("\n")
         py_file.write("from pamux_unreal_tools.material_expression import MaterialExpression")
         py_file.write("\n")
-        py_file.write("from pamux_unreal_tools.generated.material_expression_container import *")
+        py_file.write("from pamux_unreal_tools.material_expression_container import *")
 
         for class_name in dir(unreal):
             c = getattr(unreal, class_name)

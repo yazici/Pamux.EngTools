@@ -1,7 +1,7 @@
 
 from pamux_unreal_tools.material_function import MaterialFunction
 from pamux_unreal_tools.generated.material_expression_wrappers import *
-from pamux_unreal_tools.container_builder_base import ContainerBuilderBase
+from pamux_unreal_tools.base.container_builder_base import ContainerBuilderBase
 
 LandscapeMaterialFunctionPackage = "/Game/Materials/Pamux/Landscape/Functions"
 

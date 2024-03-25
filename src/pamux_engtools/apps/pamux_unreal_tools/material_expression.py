@@ -1,6 +1,6 @@
 import unreal
 from multipledispatch import dispatch
-from pamux_unreal_tools.material_expression_container import *
+from pamux_unreal_tools.base.material_expression_container import *
 
 # in cmd: "C:\Program Files\Epic Games\UE_5.3\Engine\Binaries\ThirdParty\Python3\Win64\python.exe" -m pip install multipledispatch
 

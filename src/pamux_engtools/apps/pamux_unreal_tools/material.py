@@ -24,7 +24,7 @@ class MaterialAttributeGuids:
     ClearCoatBottomNormal = GuidLibrary.parse_string_to_guid("AA3D5C0416294716BBDEC8696A27DD72")[0]
     CustomEyeTangent = GuidLibrary.parse_string_to_guid("8EAB2CB273634A248CD14F473F9C8E55")[0]
 
-from pamux_unreal_tools.material_expression_container import MaterialExpressionContainer
+from pamux_unreal_tools.base.material_expression_container import MaterialExpressionContainer
 # https://docs.unrealengine.com/5.3/en-US/PythonAPI/class/MaterialEditingLibrary.html
 class Material(MaterialExpressionContainer):
     def __init__(self, asset: unreal.Material):

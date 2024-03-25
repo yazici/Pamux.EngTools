@@ -1,4 +1,4 @@
-# py "C:/src/Pamux.EngTools/src/pamux_engtools/apps/pamux_blueprint_creator.py"
+# py "C:/src/Pamux.EngTools/src/pamux_engtools/apps/pamux_unreal_tools/tools/generate_material_expressions_wrappers.py"
 # https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-engine-material-expressions-reference
 import unreal
 import os
@@ -410,7 +410,7 @@ def create_py_from_unreal_module():
         py_file.write("\n")
         py_file.write("from pamux_unreal_tools.material_expression import MaterialExpression")
         py_file.write("\n")
-        py_file.write("from pamux_unreal_tools.material_expression_container import *")
+        py_file.write("from pamux_unreal_tools.base.material_expression_container import *")
 
         for class_name in dir(unreal):
             c = getattr(unreal, class_name)

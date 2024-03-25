@@ -7,7 +7,7 @@ ATH = unreal.AssetToolsHelpers
 AT = ATH.get_asset_tools()
 EAL = unreal.EditorAssetLibrary
 AUL = unreal.EditorUtilityLibrary
-from pamux_unreal_tools.material_expression_container import MaterialExpressionContainer
+from pamux_unreal_tools.base.material_expression_container import MaterialExpressionContainer
 # https://docs.unrealengine.com/5.3/en-US/PythonAPI/class/MaterialEditingLibrary.html
 class MaterialFunction(MaterialExpressionContainer):
     def __init__(self, asset: unreal.MaterialFunction):

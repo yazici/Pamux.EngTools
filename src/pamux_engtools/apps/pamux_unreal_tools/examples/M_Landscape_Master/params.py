@@ -1,4 +1,4 @@
-from pamux_unreal_tools.material_expressions.material_expression_wrappers import *
+from pamux_engtools.apps.pamux_unreal_tools.generated.material_expression_wrappers import *
 
 class LandscapeBaseMaterialParams:
 

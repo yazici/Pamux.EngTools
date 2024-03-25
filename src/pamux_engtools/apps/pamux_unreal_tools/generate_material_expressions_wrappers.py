@@ -1,5 +1,5 @@
 # py "C:/src/Pamux.EngTools/src/pamux_engtools/apps/pamux_blueprint_creator.py"
-
+# https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-engine-material-expressions-reference
 import unreal
 import os
 import inspect
@@ -296,11 +296,29 @@ class CTORParams:
         for param in self.params:
             result += f"\n        if {param} is not None: self.{param}.set({param})"
         return result
+    
+parameter_with_default_value_classes = [
+    "StaticBoolParameter",
+    "ScalarParameter",
+    "StaticSwitchParameter",
+    "VectorParameter",
+    "ChannelMaskParameter",
+    "CurveAtlasRowParameter",
+    "DoubleVectorParameter"]
+
+binary_op_classes = [
+    "Add",
+    "Multiply",
+    "Subtract",
+    "Divide",
+    "Max",
+    "Min"
+]
 
 def setup_ctor_params(pamux_wrapper_class_name):
     result = CTORParams()
 
-    if pamux_wrapper_class_name == "ScalarParameter":
+    if pamux_wrapper_class_name in parameter_with_default_value_classes:
         result.append("parameter_name")
         result.append("default_value")
     
@@ -392,7 +410,7 @@ def create_py_from_unreal_module():
         py_file.write("\n")
         py_file.write("from pamux_unreal_tools.material_expression import MaterialExpression")
         py_file.write("\n")
-        py_file.write("from pamux_unreal_tools.material_expression_container import *")
+        py_file.write("from pamux_unreal_tools.generated.material_expression_container import *")
 
         for class_name in dir(unreal):
             c = getattr(unreal, class_name)

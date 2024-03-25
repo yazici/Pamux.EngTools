@@ -4,8 +4,13 @@ from pamux_unreal_tools.material import Material
 from pamux_unreal_tools.material import MaterialAttributeGuids
 from pamux_unreal_tools.material_function import MaterialFunction
 
-from pamux_unreal_tools.material_expressions.material_expression_wrappers import *
-from pamux_unreal_tools.material_expression_container import *
+from pamux_engtools.apps.pamux_unreal_tools.generated.material_expression_wrappers import *
+from pamux_engtools.apps.pamux_unreal_tools.material_expression_container import *
+
+# material = util.load_asset('/Game/0_Root/Material/M_standard_shd_test.M_standard_shd_test')
+# print(material) # Material
+ 
+# node_set = unreal.MaterialEditingLibrary.get_material_selected_nodes(material)
 
 class MF_Wetness:
     class Builder(MaterialFunctionBuilderBase):
@@ -83,10 +88,10 @@ class MF_Wetness:
         def build(self):
             self.textureSampleSet = MaterialFunctionBuilderBase.TextureSampleSet(
                 self.current_container, 
-                "/Game/Materials/Landscape/Textures/GrassLayer/T_GrassyLayer_A", 
-                "/Game/Materials/Landscape/Textures/GrassLayer/T_GrassyLayer_R", 
-                "/Game/Materials/Landscape/Textures/GrassLayer/T_GrassyLayer_D", 
-                "/Game/Materials/Landscape/Textures/GrassLayer/T_GrassyLayer_N")
+                "/Game/Materials/Landscape/Textures/GrassyLayer/T_GrassyLayer_A", 
+                "/Game/Materials/Landscape/Textures/GrassyLayer/T_GrassyLayer_R", 
+                "/Game/Materials/Landscape/Textures/GrassyLayer/T_GrassyLayer_D", 
+                "/Game/Materials/Landscape/Textures/GrassyLayer/T_GrassyLayer_N")
 
 
             self.makeMaterialAttributes = MakeMaterialAttributes(self.current_container)
@@ -104,7 +109,7 @@ class MF_Wetness:
             
             getMaterialAttributesArray = unreal.Array(unreal.Guid)
             getMaterialAttributesArray.append(MaterialAttributeGuids.BaseColor)
-            self.getMaterialAttributes.attribute_get_types.set(getMaterialAttributesArray)
+            # self.getMaterialAttributes.attribute_get_types.set(getMaterialAttributesArray)
 
             
             self.getMaterialAttributes.input.comesFrom(self.inMaterial.output)

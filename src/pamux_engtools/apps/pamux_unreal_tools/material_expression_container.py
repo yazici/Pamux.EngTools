@@ -11,6 +11,7 @@ AT = ATH.get_asset_tools()
 EAL = unreal.EditorAssetLibrary
 AUL = unreal.EditorUtilityLibrary
 
+# Assertion failed: Outputs.Num() == AttributeGetTypes.Num() + 1 [File:D:\build\++UE5\Sync\Engine\Source\Runtime\Engine\Private\Materials\MaterialExpressions.cpp] [Line: 7213]
 
 # https://docs.unrealengine.com/5.3/en-US/PythonAPI/class/MaterialEditingLibrary.html
 class MaterialExpressionContainer:
@@ -19,9 +20,6 @@ class MaterialExpressionContainer:
         
     def createMaterialExpression(self, expression_class, node_pos_x = 0, node_pos_y = 0):
         raise "implement createMaterialExpression"
-
-
-
 
 
 class MaterialExpressionValue:

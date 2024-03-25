@@ -1,11 +1,10 @@
 import unreal
 from multipledispatch import dispatch
-from pamux_unreal_tools.material_expression_container import *
+from pamux_engtools.apps.pamux_unreal_tools.material_expression_container import *
 
 # in cmd: "C:\Program Files\Epic Games\UE_5.3\Engine\Binaries\ThirdParty\Python3\Win64\python.exe" -m pip install multipledispatch
 
 MEL = unreal.MaterialEditingLibrary
-from pamux_unreal_tools.material_expression_container import MaterialExpressionContainer
 
 class MaterialExpressionBase:
     def __init__(self, parent: MaterialExpressionContainer, expression_class, node_pos_x = 0, node_pos_y = 0):
@@ -26,6 +25,6 @@ class MaterialExpression(MaterialExpressionBase):
     def connectTo(self, outPortName: str, materialExpression: MaterialExpressionBase, inPortName: str) -> bool:
         return MEL.connect_material_expressions(self.asset, outPortName, materialExpression.asset, inPortName)
     
-    @dispatch(MaterialExpressionBase, str)
-    def connectTo(self, OutSocket) -> bool:
-        return MEL.connect_material_expressions(self.asset, "", materialExpression.asset, inPortName)
+    # @dispatch(MaterialExpressionBase, str)
+    # def connectTo(self, OutSocket) -> bool:
+    #     return MEL.connect_material_expressions(self.asset, "", materialExpression.asset, inPortName)

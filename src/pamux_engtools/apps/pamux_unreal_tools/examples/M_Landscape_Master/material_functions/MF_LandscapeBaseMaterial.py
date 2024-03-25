@@ -1,20 +1,18 @@
 from pamux_unreal_tools.material import Material
 from pamux_unreal_tools.material_function import MaterialFunction
 from pamux_unreal_tools.material_function_builder_base import MaterialLayerFunctionBuilderBase
-from pamux_unreal_tools.material_expressions.material_expression_wrappers import *
+from pamux_engtools.apps.pamux_unreal_tools.generated.material_expression_wrappers import *
 
 from pamux_unreal_tools.material import Material
 
 from pamux_unreal_tools.examples.M_Landscape_Master.params import *
 from pamux_unreal_tools.examples.M_Landscape_Master.globals import *
-from pamux_unreal_tools.material_expressions.material_expression_wrappers import *
+from pamux_engtools.apps.pamux_unreal_tools.generated.material_expression_wrappers import *
 
 
 # from pamux_unreal_tools.material_expressions.material_function_call import MaterialFunctionCall
 
 # from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MF_TextureCellBombing_Landscape import *
-
-# from pamux_unreal_tools.material_expression_container import *
 
 class MF_LandscapeBaseMaterial:
     class Builder(MaterialLayerFunctionBuilderBase):

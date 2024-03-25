@@ -10,10 +10,8 @@ from pamux_unreal_tools.material import Material
 
 from pamux_unreal_tools.examples.M_Landscape_Master.params import *
 from pamux_unreal_tools.examples.M_Landscape_Master.globals import *
-from pamux_unreal_tools.material_expressions.material_expression_wrappers import *
+from pamux_engtools.apps.pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.material_builder_base import MaterialBuilderBase
-
-# from pamux_unreal_tools.material_expression_container import *
 
 from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MF_LandscapeBaseMaterial import *
 from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MF_Wetness import *

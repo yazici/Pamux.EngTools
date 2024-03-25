@@ -3,7 +3,7 @@
 import unreal
 
 from pamux_unreal_tools.material_expression import MaterialExpression
-from pamux_unreal_tools.material_expression_container import *
+from pamux_engtools.apps.pamux_unreal_tools.material_expression_container import *
 
 class Abs(MaterialExpression):
     def __init__(self, parent: MaterialExpressionContainer, node_pos_x = 0, node_pos_y = 0):
@@ -445,7 +445,7 @@ class Ceil(MaterialExpression):
 
 
 class ChannelMaskParameter(MaterialExpression):
-    def __init__(self, parent: MaterialExpressionContainer, node_pos_x = 0, node_pos_y = 0):
+    def __init__(self, parent: MaterialExpressionContainer, parameter_name = None, default_value = None, node_pos_x = 0, node_pos_y = 0):
         super().__init__(parent, unreal.MaterialExpressionChannelMaskParameter, node_pos_x, node_pos_y)
 
         # Properties
@@ -466,6 +466,8 @@ class ChannelMaskParameter(MaterialExpression):
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
 
+        if parameter_name is not None: self.parameter_name.set(parameter_name)
+        if default_value is not None: self.default_value.set(default_value)
 
 class Clamp(MaterialExpression):
     def __init__(self, parent: MaterialExpressionContainer, node_pos_x = 0, node_pos_y = 0):
@@ -706,7 +708,7 @@ class CrossProduct(MaterialExpression):
 
 
 class CurveAtlasRowParameter(MaterialExpression):
-    def __init__(self, parent: MaterialExpressionContainer, node_pos_x = 0, node_pos_y = 0):
+    def __init__(self, parent: MaterialExpressionContainer, parameter_name = None, default_value = None, node_pos_x = 0, node_pos_y = 0):
         super().__init__(parent, unreal.MaterialExpressionCurveAtlasRowParameter, node_pos_x, node_pos_y)
 
         # Properties
@@ -729,6 +731,8 @@ class CurveAtlasRowParameter(MaterialExpression):
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
 
+        if parameter_name is not None: self.parameter_name.set(parameter_name)
+        if default_value is not None: self.default_value.set(default_value)
 
 class Custom(MaterialExpression):
     def __init__(self, parent: MaterialExpressionContainer, node_pos_x = 0, node_pos_y = 0):
@@ -1123,7 +1127,7 @@ class DotProduct(MaterialExpression):
 
 
 class DoubleVectorParameter(MaterialExpression):
-    def __init__(self, parent: MaterialExpressionContainer, node_pos_x = 0, node_pos_y = 0):
+    def __init__(self, parent: MaterialExpressionContainer, parameter_name = None, default_value = None, node_pos_x = 0, node_pos_y = 0):
         super().__init__(parent, unreal.MaterialExpressionDoubleVectorParameter, node_pos_x, node_pos_y)
 
         # Properties
@@ -1139,6 +1143,8 @@ class DoubleVectorParameter(MaterialExpression):
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
 
+        if parameter_name is not None: self.parameter_name.set(parameter_name)
+        if default_value is not None: self.default_value.set(default_value)
 
 class DynamicParameter(MaterialExpression):
     def __init__(self, parent: MaterialExpressionContainer, node_pos_x = 0, node_pos_y = 0):
@@ -4411,7 +4417,7 @@ class StaticBool(MaterialExpression):
 
 
 class StaticBoolParameter(MaterialExpression):
-    def __init__(self, parent: MaterialExpressionContainer, node_pos_x = 0, node_pos_y = 0):
+    def __init__(self, parent: MaterialExpressionContainer, parameter_name = None, default_value = None, node_pos_x = 0, node_pos_y = 0):
         super().__init__(parent, unreal.MaterialExpressionStaticBoolParameter, node_pos_x, node_pos_y)
 
         # Properties
@@ -4428,6 +4434,8 @@ class StaticBoolParameter(MaterialExpression):
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
 
+        if parameter_name is not None: self.parameter_name.set(parameter_name)
+        if default_value is not None: self.default_value.set(default_value)
 
 class StaticComponentMaskParameter(MaterialExpression):
     def __init__(self, parent: MaterialExpressionContainer, node_pos_x = 0, node_pos_y = 0):
@@ -4468,7 +4476,7 @@ class StaticSwitch(MaterialExpression):
 
 
 class StaticSwitchParameter(MaterialExpression):
-    def __init__(self, parent: MaterialExpressionContainer, node_pos_x = 0, node_pos_y = 0):
+    def __init__(self, parent: MaterialExpressionContainer, parameter_name = None, default_value = None, node_pos_x = 0, node_pos_y = 0):
         super().__init__(parent, unreal.MaterialExpressionStaticSwitchParameter, node_pos_x, node_pos_y)
 
         # Properties
@@ -4485,6 +4493,8 @@ class StaticSwitchParameter(MaterialExpression):
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
 
+        if parameter_name is not None: self.parameter_name.set(parameter_name)
+        if default_value is not None: self.default_value.set(default_value)
 
 class Step(MaterialExpression):
     def __init__(self, parent: MaterialExpressionContainer, node_pos_x = 0, node_pos_y = 0):
@@ -5422,7 +5432,7 @@ class VectorNoise(MaterialExpression):
 
 
 class VectorParameter(MaterialExpression):
-    def __init__(self, parent: MaterialExpressionContainer, node_pos_x = 0, node_pos_y = 0):
+    def __init__(self, parent: MaterialExpressionContainer, parameter_name = None, default_value = None, node_pos_x = 0, node_pos_y = 0):
         super().__init__(parent, unreal.MaterialExpressionVectorParameter, node_pos_x, node_pos_y)
 
         # Properties
@@ -5442,6 +5452,8 @@ class VectorParameter(MaterialExpression):
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
 
+        if parameter_name is not None: self.parameter_name.set(parameter_name)
+        if default_value is not None: self.default_value.set(default_value)
 
 class VertexColor(MaterialExpression):
     def __init__(self, parent: MaterialExpressionContainer, node_pos_x = 0, node_pos_y = 0):

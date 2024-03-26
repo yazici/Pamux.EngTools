@@ -1,14 +1,22 @@
-
 # py "C:/src/Pamux.EngTools/src/pamux_engtools/apps/pamux_unreal_tools/examples/M_Landscape_Master/M_Landscape_Master.py"
-
 from pathlib import Path
 import sys
 
 sys.path.append(str(Path(__file__).parent.parent.parent.parent.resolve()))
 
+from importlib import * 
+
+reloads = []
+for  k, v in sys.modules.items():
+    if k.startswith("pamux_unreal_tools"):
+        print(k)
+        reloads.append(v)
+
+for module in reloads:
+    reload(module)
+
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 
-from pamux_unreal_tools.material import Material
 from pamux_unreal_tools.base.material_builder_base import MaterialBuilderBase
 
 from pamux_unreal_tools.examples.M_Landscape_Master.params import *
@@ -22,7 +30,6 @@ from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MF_Glanci
 from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MF_TextureCellBombing_Landscape import *
 from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MLF_ForestGround import *
 from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MF_FoliageMask import *
-
 
 # https://github.com/SomeRanDev/Haxe-UnrealEngine5/blob/d17e0b1f9d8973ed0641484148c55d552ba69dff/Externs/generated_5_0_3/MaterialExpressionLinearInterpolate.hx#L4
 class M_Landscape_Master:
@@ -50,7 +57,7 @@ class M_Landscape_Master:
         #     makeMaterialAttributes.in2.comesFrom(self.params.LandscapeVisibilityMask)
 
         # def __rvtSpecular(self, baseColor):
-        #     sCurve = MaterialFunction.load("SCurve", "/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment", True)
+        #     sCurve = MaterialFunctionFactory().load("SCurve", "/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment", True)
         #     call_SCurve = self.callMaterialFunction(sCurve)
         #     call_SCurve.In.comesFrom(baseColor)
         #     call_SCurve.Power.comesFrom(Params.specularContrast)
@@ -176,9 +183,9 @@ class M_Landscape_Master:
 
 
 
-#sCurve = MaterialFunction.load("SCurve", "/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment", True)
+#sCurve = MaterialFunctionFactory().load("SCurve", "/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment", True)
 #call_SCurve = self.callMaterialFunction(sCurve)
 #call_SCurve.In.comesFrom(baseColor)
 #call_SCurve.Power.comesFrom(Params.specularContrast)
 
-material = M_Landscape_Master.Builder("M_Landscape_Master", "/Game/Materials/Pamux").build()
+material = M_Landscape_Master.Builder("M_Landscape_Master", "/Game/Materials/Pamux").get()

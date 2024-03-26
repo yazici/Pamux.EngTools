@@ -516,9 +516,9 @@ def write_pamux_wrapper_class(py_file, c):
     py_file.write("\n")
     py_file.write(f"class {pamux_wrapper_class_name}(MaterialExpression):")
     py_file.write("\n")
-    py_file.write(f"    def __init__(self{ctor_params.declare()}, node_pos_x = 0, node_pos_y = 0):")
+    py_file.write(f"    def __init__(self{ctor_params.declare()}, node_pos: NodePos = None):")
     py_file.write("\n")
-    py_file.write(f"        super().__init__(unreal.{c.__name__}, node_pos_x, node_pos_y)")
+    py_file.write(f"        super().__init__(unreal.{c.__name__}, node_pos)")
     py_file.write("\n")
     py_file.write("\n")
     py_file.write(f"        # Properties")
@@ -593,6 +593,8 @@ def create_py_from_unreal_module():
         py_file.write("from pamux_unreal_tools.material_expression import MaterialExpression")
         py_file.write("\n")
         py_file.write("from pamux_unreal_tools.base.material_expression_container import *")
+        py_file.write("\n")
+        py_file.write("from pamux_unreal_tools.utils.build_stack import NodePos")
         py_file.write("\n")
 
 

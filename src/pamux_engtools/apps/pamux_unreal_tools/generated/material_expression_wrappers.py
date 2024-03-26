@@ -4,11 +4,12 @@ import unreal
 
 from pamux_unreal_tools.material_expression import MaterialExpression
 from pamux_unreal_tools.base.material_expression_container import *
+from pamux_unreal_tools.utils.build_stack import NodePos
 
 
 class Abs(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionAbs, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionAbs, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -21,8 +22,8 @@ class Abs(MaterialExpression):
 
 
 class AbsorptionMediumMaterialOutput(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionAbsorptionMediumMaterialOutput, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionAbsorptionMediumMaterialOutput, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -35,8 +36,8 @@ class AbsorptionMediumMaterialOutput(MaterialExpression):
 
 
 class ActorPositionWS(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionActorPositionWS, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionActorPositionWS, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -50,8 +51,8 @@ class ActorPositionWS(MaterialExpression):
 
 
 class Add(MaterialExpression):
-    def __init__(self, a = None, b = None, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionAdd, node_pos_x, node_pos_y)
+    def __init__(self, a = None, b = None, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionAdd, node_pos)
 
         # Properties
         self.const_a = Property(self, 'const_a', 'float')
@@ -77,8 +78,8 @@ class Add(MaterialExpression):
               self.b.comesFrom(b)
 
 class AntialiasedTextureMask(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionAntialiasedTextureMask, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionAntialiasedTextureMask, node_pos)
 
         # Properties
         self.automatic_view_mip_bias = Property(self, 'automatic_view_mip_bias', 'bool')
@@ -106,8 +107,8 @@ class AntialiasedTextureMask(MaterialExpression):
 
 
 class Append3Vector(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionAppend3Vector, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionAppend3Vector, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -120,8 +121,8 @@ class Append3Vector(MaterialExpression):
 
 
 class Append4Vector(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionAppend4Vector, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionAppend4Vector, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -134,8 +135,8 @@ class Append4Vector(MaterialExpression):
 
 
 class AppendVector(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionAppendVector, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionAppendVector, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -149,8 +150,8 @@ class AppendVector(MaterialExpression):
 
 
 class Arccosine(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionArccosine, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionArccosine, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -163,8 +164,8 @@ class Arccosine(MaterialExpression):
 
 
 class ArccosineFast(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionArccosineFast, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionArccosineFast, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -177,8 +178,8 @@ class ArccosineFast(MaterialExpression):
 
 
 class Arcsine(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionArcsine, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionArcsine, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -191,8 +192,8 @@ class Arcsine(MaterialExpression):
 
 
 class ArcsineFast(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionArcsineFast, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionArcsineFast, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -205,8 +206,8 @@ class ArcsineFast(MaterialExpression):
 
 
 class Arctangent(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionArctangent, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionArctangent, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -219,8 +220,8 @@ class Arctangent(MaterialExpression):
 
 
 class Arctangent2(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionArctangent2, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionArctangent2, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -234,8 +235,8 @@ class Arctangent2(MaterialExpression):
 
 
 class Arctangent2Fast(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionArctangent2Fast, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionArctangent2Fast, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -249,8 +250,8 @@ class Arctangent2Fast(MaterialExpression):
 
 
 class ArctangentFast(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionArctangentFast, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionArctangentFast, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -263,8 +264,8 @@ class ArctangentFast(MaterialExpression):
 
 
 class AtmosphericFogColor(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionAtmosphericFogColor, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionAtmosphericFogColor, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -277,8 +278,8 @@ class AtmosphericFogColor(MaterialExpression):
 
 
 class AtmosphericLightColor(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionAtmosphericLightColor, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionAtmosphericLightColor, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -291,8 +292,8 @@ class AtmosphericLightColor(MaterialExpression):
 
 
 class AtmosphericLightVector(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionAtmosphericLightVector, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionAtmosphericLightVector, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -305,8 +306,8 @@ class AtmosphericLightVector(MaterialExpression):
 
 
 class BentNormalCustomOutput(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionBentNormalCustomOutput, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionBentNormalCustomOutput, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -319,8 +320,8 @@ class BentNormalCustomOutput(MaterialExpression):
 
 
 class BinaryOp(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionBinaryOp, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionBinaryOp, node_pos)
 
         # Properties
         self.const_a = Property(self, 'const_a', 'float')
@@ -335,8 +336,8 @@ class BinaryOp(MaterialExpression):
 
 
 class BlackBody(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionBlackBody, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionBlackBody, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -349,8 +350,8 @@ class BlackBody(MaterialExpression):
 
 
 class BlendMaterialAttributes(MaterialExpression):
-    def __init__(self, a = None, b = None, alpha = None, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionBlendMaterialAttributes, node_pos_x, node_pos_y)
+    def __init__(self, a = None, b = None, alpha = None, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionBlendMaterialAttributes, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -370,8 +371,8 @@ class BlendMaterialAttributes(MaterialExpression):
         if alpha is not None: self.alpha.comesFrom(alpha)
 
 class BreakMaterialAttributes(MaterialExpression):
-    def __init__(self, input = None, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionBreakMaterialAttributes, node_pos_x, node_pos_y)
+    def __init__(self, input = None, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionBreakMaterialAttributes, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -411,8 +412,8 @@ class BreakMaterialAttributes(MaterialExpression):
         if input is not None: self.input.comesFrom(input)
 
 class BumpOffset(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionBumpOffset, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionBumpOffset, node_pos)
 
         # Properties
         self.const_coordinate = Property(self, 'const_coordinate', 'uint32')
@@ -430,8 +431,8 @@ class BumpOffset(MaterialExpression):
 
 
 class Burn(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionBurn, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionBurn, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -444,8 +445,8 @@ class Burn(MaterialExpression):
 
 
 class CameraPositionWS(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionCameraPositionWS, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionCameraPositionWS, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -458,8 +459,8 @@ class CameraPositionWS(MaterialExpression):
 
 
 class CameraVectorWS(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionCameraVectorWS, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionCameraVectorWS, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -472,8 +473,8 @@ class CameraVectorWS(MaterialExpression):
 
 
 class Ceil(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionCeil, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionCeil, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -486,8 +487,8 @@ class Ceil(MaterialExpression):
 
 
 class ChannelMaskParameter(MaterialExpression):
-    def __init__(self, parameter_name = None, default_value = None, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionChannelMaskParameter, node_pos_x, node_pos_y)
+    def __init__(self, parameter_name = None, default_value = None, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionChannelMaskParameter, node_pos)
 
         # Properties
         self.channel_names = Property(self, 'channel_names', 'ParameterChannelNames')
@@ -511,8 +512,8 @@ class ChannelMaskParameter(MaterialExpression):
         if default_value is not None: self.default_value.set(default_value)
 
 class Clamp(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionClamp, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionClamp, node_pos)
 
         # Properties
         self.clamp_mode = Property(self, 'clamp_mode', 'ClampMode')
@@ -530,8 +531,8 @@ class Clamp(MaterialExpression):
 
 
 class ClearCoatNormalCustomOutput(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionClearCoatNormalCustomOutput, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionClearCoatNormalCustomOutput, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -544,8 +545,8 @@ class ClearCoatNormalCustomOutput(MaterialExpression):
 
 
 class CloudSampleAttribute(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionCloudSampleAttribute, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionCloudSampleAttribute, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -558,8 +559,8 @@ class CloudSampleAttribute(MaterialExpression):
 
 
 class CollectionParameter(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionCollectionParameter, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionCollectionParameter, node_pos)
 
         # Properties
         self.collection = Property(self, 'collection', 'MaterialParameterCollection')
@@ -574,8 +575,8 @@ class CollectionParameter(MaterialExpression):
 
 
 class Comment(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionComment, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionComment, node_pos)
 
         # Properties
         self.color_comment_bubble = Property(self, 'color_comment_bubble', 'bool')
@@ -594,8 +595,8 @@ class Comment(MaterialExpression):
 
 
 class ComponentMask(MaterialExpression):
-    def __init__(self, input = None, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionComponentMask, node_pos_x, node_pos_y)
+    def __init__(self, input = None, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionComponentMask, node_pos)
 
         # Properties
         self.a = Property(self, 'a', 'bool')
@@ -613,8 +614,8 @@ class ComponentMask(MaterialExpression):
         if input is not None: self.input.comesFrom(input)
 
 class Composite(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionComposite, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionComposite, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -628,8 +629,8 @@ class Composite(MaterialExpression):
 
 
 class Constant(MaterialExpression):
-    def __init__(self, r = None, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionConstant, node_pos_x, node_pos_y)
+    def __init__(self, r = None, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionConstant, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -644,8 +645,8 @@ class Constant(MaterialExpression):
         if r is not None: self.r.set(r)
 
 class Constant2Vector(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionConstant2Vector, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionConstant2Vector, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -660,8 +661,8 @@ class Constant2Vector(MaterialExpression):
 
 
 class Constant3Vector(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionConstant3Vector, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionConstant3Vector, node_pos)
 
         # Properties
         self.constant = Property(self, 'constant', 'LinearColor')
@@ -675,8 +676,8 @@ class Constant3Vector(MaterialExpression):
 
 
 class Constant4Vector(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionConstant4Vector, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionConstant4Vector, node_pos)
 
         # Properties
         self.constant = Property(self, 'constant', 'LinearColor')
@@ -690,8 +691,8 @@ class Constant4Vector(MaterialExpression):
 
 
 class ConstantBiasScale(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionConstantBiasScale, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionConstantBiasScale, node_pos)
 
         # Properties
         self.bias = Property(self, 'bias', 'float')
@@ -706,8 +707,8 @@ class ConstantBiasScale(MaterialExpression):
 
 
 class ConstantDouble(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionConstantDouble, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionConstantDouble, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -721,8 +722,8 @@ class ConstantDouble(MaterialExpression):
 
 
 class Cosine(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionCosine, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionCosine, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -736,8 +737,8 @@ class Cosine(MaterialExpression):
 
 
 class CrossProduct(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionCrossProduct, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionCrossProduct, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -751,8 +752,8 @@ class CrossProduct(MaterialExpression):
 
 
 class CurveAtlasRowParameter(MaterialExpression):
-    def __init__(self, parameter_name = None, default_value = None, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionCurveAtlasRowParameter, node_pos_x, node_pos_y)
+    def __init__(self, parameter_name = None, default_value = None, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionCurveAtlasRowParameter, node_pos)
 
         # Properties
         self.atlas = Property(self, 'atlas', 'CurveLinearColorAtlas')
@@ -778,8 +779,8 @@ class CurveAtlasRowParameter(MaterialExpression):
         if default_value is not None: self.default_value.set(default_value)
 
 class Custom(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionCustom, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionCustom, node_pos)
 
         # Properties
         self.additional_defines = Property(self, 'additional_defines', 'Array[CustomDefine]')
@@ -799,8 +800,8 @@ class Custom(MaterialExpression):
 
 
 class CustomOutput(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionCustomOutput, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionCustomOutput, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -813,8 +814,8 @@ class CustomOutput(MaterialExpression):
 
 
 class DBufferTexture(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionDBufferTexture, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionDBufferTexture, node_pos)
 
         # Properties
         self.d_buffer_texture_id = Property(self, 'd_buffer_texture_id', 'DBufferTextureId')
@@ -828,8 +829,8 @@ class DBufferTexture(MaterialExpression):
 
 
 class DDX(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionDDX, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionDDX, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -842,8 +843,8 @@ class DDX(MaterialExpression):
 
 
 class DDY(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionDDY, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionDDY, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -856,8 +857,8 @@ class DDY(MaterialExpression):
 
 
 class DataDrivenShaderPlatformInfoSwitch(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionDataDrivenShaderPlatformInfoSwitch, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionDataDrivenShaderPlatformInfoSwitch, node_pos)
 
         # Properties
         self.ddspi_property_names = Property(self, 'ddspi_property_names', 'Array[DataDrivenShaderPlatformInfoInput]')
@@ -871,8 +872,8 @@ class DataDrivenShaderPlatformInfoSwitch(MaterialExpression):
 
 
 class DecalColor(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionDecalColor, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionDecalColor, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -885,8 +886,8 @@ class DecalColor(MaterialExpression):
 
 
 class DecalDerivative(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionDecalDerivative, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionDecalDerivative, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -899,8 +900,8 @@ class DecalDerivative(MaterialExpression):
 
 
 class DecalLifetimeOpacity(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionDecalLifetimeOpacity, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionDecalLifetimeOpacity, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -913,8 +914,8 @@ class DecalLifetimeOpacity(MaterialExpression):
 
 
 class DecalMipmapLevel(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionDecalMipmapLevel, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionDecalMipmapLevel, node_pos)
 
         # Properties
         self.const_height = Property(self, 'const_height', 'float')
@@ -929,8 +930,8 @@ class DecalMipmapLevel(MaterialExpression):
 
 
 class DeltaTime(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionDeltaTime, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionDeltaTime, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -943,8 +944,8 @@ class DeltaTime(MaterialExpression):
 
 
 class DepthFade(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionDepthFade, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionDepthFade, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -960,8 +961,8 @@ class DepthFade(MaterialExpression):
 
 
 class DepthOfFieldFunction(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionDepthOfFieldFunction, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionDepthOfFieldFunction, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -975,8 +976,8 @@ class DepthOfFieldFunction(MaterialExpression):
 
 
 class DeriveNormalZ(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionDeriveNormalZ, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionDeriveNormalZ, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -989,8 +990,8 @@ class DeriveNormalZ(MaterialExpression):
 
 
 class Desaturation(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionDesaturation, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionDesaturation, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1005,8 +1006,8 @@ class Desaturation(MaterialExpression):
 
 
 class Difference(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionDifference, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionDifference, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1019,8 +1020,8 @@ class Difference(MaterialExpression):
 
 
 class DisjointOver(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionDisjointOver, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionDisjointOver, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1033,8 +1034,8 @@ class DisjointOver(MaterialExpression):
 
 
 class Distance(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionDistance, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionDistance, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1048,8 +1049,8 @@ class Distance(MaterialExpression):
 
 
 class DistanceCullFade(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionDistanceCullFade, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionDistanceCullFade, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1062,8 +1063,8 @@ class DistanceCullFade(MaterialExpression):
 
 
 class DistanceFieldApproxAO(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionDistanceFieldApproxAO, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionDistanceFieldApproxAO, node_pos)
 
         # Properties
         self.base_distance_default = Property(self, 'base_distance_default', 'float')
@@ -1080,8 +1081,8 @@ class DistanceFieldApproxAO(MaterialExpression):
 
 
 class DistanceFieldGradient(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionDistanceFieldGradient, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionDistanceFieldGradient, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1094,8 +1095,8 @@ class DistanceFieldGradient(MaterialExpression):
 
 
 class DistanceFieldsRenderingSwitch(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionDistanceFieldsRenderingSwitch, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionDistanceFieldsRenderingSwitch, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1109,8 +1110,8 @@ class DistanceFieldsRenderingSwitch(MaterialExpression):
 
 
 class DistanceToNearestSurface(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionDistanceToNearestSurface, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionDistanceToNearestSurface, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1123,8 +1124,8 @@ class DistanceToNearestSurface(MaterialExpression):
 
 
 class Divide(MaterialExpression):
-    def __init__(self, a = None, b = None, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionDivide, node_pos_x, node_pos_y)
+    def __init__(self, a = None, b = None, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionDivide, node_pos)
 
         # Properties
         self.const_a = Property(self, 'const_a', 'float')
@@ -1150,8 +1151,8 @@ class Divide(MaterialExpression):
               self.b.comesFrom(b)
 
 class Dodge(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionDodge, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionDodge, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1164,8 +1165,8 @@ class Dodge(MaterialExpression):
 
 
 class DotProduct(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionDotProduct, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionDotProduct, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1179,8 +1180,8 @@ class DotProduct(MaterialExpression):
 
 
 class DoubleVectorParameter(MaterialExpression):
-    def __init__(self, parameter_name = None, default_value = None, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionDoubleVectorParameter, node_pos_x, node_pos_y)
+    def __init__(self, parameter_name = None, default_value = None, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionDoubleVectorParameter, node_pos)
 
         # Properties
         self.default_value = Property(self, 'default_value', 'Vector4d')
@@ -1199,8 +1200,8 @@ class DoubleVectorParameter(MaterialExpression):
         if default_value is not None: self.default_value.set(default_value)
 
 class DynamicParameter(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionDynamicParameter, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionDynamicParameter, node_pos)
 
         # Properties
         self.default_value = Property(self, 'default_value', 'LinearColor')
@@ -1216,8 +1217,8 @@ class DynamicParameter(MaterialExpression):
 
 
 class ExecBegin(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionExecBegin, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionExecBegin, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1230,8 +1231,8 @@ class ExecBegin(MaterialExpression):
 
 
 class ExecEnd(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionExecEnd, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionExecEnd, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1244,8 +1245,8 @@ class ExecEnd(MaterialExpression):
 
 
 class Exponential(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionExponential, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionExponential, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1258,8 +1259,8 @@ class Exponential(MaterialExpression):
 
 
 class Exponential2(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionExponential2, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionExponential2, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1272,8 +1273,8 @@ class Exponential2(MaterialExpression):
 
 
 class EyeAdaptation(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionEyeAdaptation, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionEyeAdaptation, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1286,8 +1287,8 @@ class EyeAdaptation(MaterialExpression):
 
 
 class EyeAdaptationInverse(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionEyeAdaptationInverse, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionEyeAdaptationInverse, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1300,8 +1301,8 @@ class EyeAdaptationInverse(MaterialExpression):
 
 
 class FeatureLevelSwitch(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionFeatureLevelSwitch, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionFeatureLevelSwitch, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1314,8 +1315,8 @@ class FeatureLevelSwitch(MaterialExpression):
 
 
 class Floor(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionFloor, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionFloor, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1328,8 +1329,8 @@ class Floor(MaterialExpression):
 
 
 class Fmod(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionFmod, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionFmod, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1343,8 +1344,8 @@ class Fmod(MaterialExpression):
 
 
 class FontSample(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionFontSample, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionFontSample, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1359,8 +1360,8 @@ class FontSample(MaterialExpression):
 
 
 class FontSampleParameter(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionFontSampleParameter, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionFontSampleParameter, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1378,8 +1379,8 @@ class FontSampleParameter(MaterialExpression):
 
 
 class ForLoop(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionForLoop, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionForLoop, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1392,8 +1393,8 @@ class ForLoop(MaterialExpression):
 
 
 class Frac(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionFrac, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionFrac, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1406,8 +1407,8 @@ class Frac(MaterialExpression):
 
 
 class Fractal3D(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionFractal3D, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionFractal3D, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1420,8 +1421,8 @@ class Fractal3D(MaterialExpression):
 
 
 class Fresnel(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionFresnel, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionFresnel, node_pos)
 
         # Properties
         self.base_reflect_fraction = Property(self, 'base_reflect_fraction', 'float')
@@ -1438,8 +1439,8 @@ class Fresnel(MaterialExpression):
 
 
 class FunctionInput(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionFunctionInput, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionFunctionInput, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1472,8 +1473,8 @@ class FunctionInput(MaterialExpression):
 
 
 class FunctionOutput(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionFunctionOutput, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionFunctionOutput, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1490,8 +1491,8 @@ class FunctionOutput(MaterialExpression):
 
 
 class GIReplace(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionGIReplace, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionGIReplace, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1506,8 +1507,8 @@ class GIReplace(MaterialExpression):
 
 
 class GenericConstant(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionGenericConstant, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionGenericConstant, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1520,8 +1521,8 @@ class GenericConstant(MaterialExpression):
 
 
 class GetLocal(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionGetLocal, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionGetLocal, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1535,8 +1536,8 @@ class GetLocal(MaterialExpression):
 
 
 class GetMaterialAttributes(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionGetMaterialAttributes, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionGetMaterialAttributes, node_pos)
 
         # Properties
         self.attribute_get_types = Property(self, 'attribute_get_types', 'Array[Guid]')
@@ -1571,8 +1572,8 @@ class GetMaterialAttributes(MaterialExpression):
 
 
 class HairAttributes(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionHairAttributes, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionHairAttributes, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1586,8 +1587,8 @@ class HairAttributes(MaterialExpression):
 
 
 class HairColor(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionHairColor, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionHairColor, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1602,8 +1603,8 @@ class HairColor(MaterialExpression):
 
 
 class HeightfieldMinMaxTexture(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionHeightfieldMinMaxTexture, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionHeightfieldMinMaxTexture, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1618,8 +1619,8 @@ class HeightfieldMinMaxTexture(MaterialExpression):
 
 
 class HsvToRgb(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionHsvToRgb, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionHsvToRgb, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1632,8 +1633,8 @@ class HsvToRgb(MaterialExpression):
 
 
 class If(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionIf, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionIf, node_pos)
 
         # Properties
         self.const_b = Property(self, 'const_b', 'float')
@@ -1652,8 +1653,8 @@ class If(MaterialExpression):
 
 
 class IfThenElse(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionIfThenElse, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionIfThenElse, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1666,8 +1667,8 @@ class IfThenElse(MaterialExpression):
 
 
 class In(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionIn, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionIn, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1680,8 +1681,8 @@ class In(MaterialExpression):
 
 
 class InverseLinearInterpolate(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionInverseLinearInterpolate, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionInverseLinearInterpolate, node_pos)
 
         # Properties
         self.clamp_result = Property(self, 'clamp_result', 'bool')
@@ -1700,8 +1701,8 @@ class InverseLinearInterpolate(MaterialExpression):
 
 
 class IsOrthographic(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionIsOrthographic, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionIsOrthographic, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1714,8 +1715,8 @@ class IsOrthographic(MaterialExpression):
 
 
 class LandscapeGrassOutput(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionLandscapeGrassOutput, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionLandscapeGrassOutput, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1729,8 +1730,8 @@ class LandscapeGrassOutput(MaterialExpression):
 
 
 class LandscapeLayerBlend(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionLandscapeLayerBlend, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionLandscapeLayerBlend, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1744,8 +1745,8 @@ class LandscapeLayerBlend(MaterialExpression):
 
 
 class LandscapeLayerCoords(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionLandscapeLayerCoords, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionLandscapeLayerCoords, node_pos)
 
         # Properties
         self.custom_uv_type = Property(self, 'custom_uv_type', 'LandscapeCustomizedCoordType')
@@ -1764,8 +1765,8 @@ class LandscapeLayerCoords(MaterialExpression):
 
 
 class LandscapeLayerSample(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionLandscapeLayerSample, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionLandscapeLayerSample, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1780,8 +1781,8 @@ class LandscapeLayerSample(MaterialExpression):
 
 
 class LandscapeLayerSwitch(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionLandscapeLayerSwitch, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionLandscapeLayerSwitch, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1796,8 +1797,8 @@ class LandscapeLayerSwitch(MaterialExpression):
 
 
 class LandscapeLayerWeight(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionLandscapeLayerWeight, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionLandscapeLayerWeight, node_pos)
 
         # Properties
         self.const_base = Property(self, 'const_base', 'Vector')
@@ -1813,8 +1814,8 @@ class LandscapeLayerWeight(MaterialExpression):
 
 
 class LandscapePhysicalMaterialOutput(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionLandscapePhysicalMaterialOutput, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionLandscapePhysicalMaterialOutput, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1828,8 +1829,8 @@ class LandscapePhysicalMaterialOutput(MaterialExpression):
 
 
 class LandscapeVisibilityMask(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionLandscapeVisibilityMask, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionLandscapeVisibilityMask, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1842,8 +1843,8 @@ class LandscapeVisibilityMask(MaterialExpression):
 
 
 class Length(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionLength, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionLength, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1856,8 +1857,8 @@ class Length(MaterialExpression):
 
 
 class Less(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionLess, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionLess, node_pos)
 
         # Properties
         self.const_a = Property(self, 'const_a', 'float')
@@ -1872,8 +1873,8 @@ class Less(MaterialExpression):
 
 
 class LightVector(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionLightVector, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionLightVector, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1886,8 +1887,8 @@ class LightVector(MaterialExpression):
 
 
 class LightmapUVs(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionLightmapUVs, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionLightmapUVs, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1900,8 +1901,8 @@ class LightmapUVs(MaterialExpression):
 
 
 class LightmassReplace(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionLightmassReplace, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionLightmassReplace, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1915,8 +1916,8 @@ class LightmassReplace(MaterialExpression):
 
 
 class LinearInterpolate(MaterialExpression):
-    def __init__(self, a = None, b = None, alpha = None, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionLinearInterpolate, node_pos_x, node_pos_y)
+    def __init__(self, a = None, b = None, alpha = None, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionLinearInterpolate, node_pos)
 
         # Properties
         self.const_a = Property(self, 'const_a', 'float')
@@ -1937,8 +1938,8 @@ class LinearInterpolate(MaterialExpression):
         if alpha is not None: self.alpha.comesFrom(alpha)
 
 class Logarithm(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionLogarithm, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionLogarithm, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1951,8 +1952,8 @@ class Logarithm(MaterialExpression):
 
 
 class Logarithm10(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionLogarithm10, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionLogarithm10, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1965,8 +1966,8 @@ class Logarithm10(MaterialExpression):
 
 
 class Logarithm2(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionLogarithm2, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionLogarithm2, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1979,8 +1980,8 @@ class Logarithm2(MaterialExpression):
 
 
 class Luminance(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionLuminance, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionLuminance, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -1993,8 +1994,8 @@ class Luminance(MaterialExpression):
 
 
 class MakeMaterialAttributes(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMakeMaterialAttributes, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMakeMaterialAttributes, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -2065,8 +2066,8 @@ class MakeMaterialAttributes(MaterialExpression):
 
 
 class MapARPassthroughCameraUV(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMapARPassthroughCameraUV, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMapARPassthroughCameraUV, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -2079,8 +2080,8 @@ class MapARPassthroughCameraUV(MaterialExpression):
 
 
 class Mask(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMask, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMask, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -2093,8 +2094,8 @@ class Mask(MaterialExpression):
 
 
 class MaterialAttributeLayers(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMaterialAttributeLayers, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMaterialAttributeLayers, node_pos)
 
         # Properties
         self.default_layers = Property(self, 'default_layers', 'MaterialLayersFunctions')
@@ -2110,8 +2111,8 @@ class MaterialAttributeLayers(MaterialExpression):
 
 
 class MaterialFunctionCall(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMaterialFunctionCall, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMaterialFunctionCall, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -2125,8 +2126,8 @@ class MaterialFunctionCall(MaterialExpression):
 
 
 class MaterialLayerOutput(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMaterialLayerOutput, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMaterialLayerOutput, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -2143,8 +2144,8 @@ class MaterialLayerOutput(MaterialExpression):
 
 
 class MaterialProxyReplace(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMaterialProxyReplace, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMaterialProxyReplace, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -2158,8 +2159,8 @@ class MaterialProxyReplace(MaterialExpression):
 
 
 class MaterialXAppend3Vector(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMaterialXAppend3Vector, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMaterialXAppend3Vector, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -2172,8 +2173,8 @@ class MaterialXAppend3Vector(MaterialExpression):
 
 
 class MaterialXAppend4Vector(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMaterialXAppend4Vector, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMaterialXAppend4Vector, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -2186,8 +2187,8 @@ class MaterialXAppend4Vector(MaterialExpression):
 
 
 class MaterialXBurn(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMaterialXBurn, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMaterialXBurn, node_pos)
 
         # Properties
         self.const_alpha = Property(self, 'const_alpha', 'float')
@@ -2201,8 +2202,8 @@ class MaterialXBurn(MaterialExpression):
 
 
 class MaterialXDifference(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMaterialXDifference, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMaterialXDifference, node_pos)
 
         # Properties
         self.const_alpha = Property(self, 'const_alpha', 'float')
@@ -2216,8 +2217,8 @@ class MaterialXDifference(MaterialExpression):
 
 
 class MaterialXDisjointOver(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMaterialXDisjointOver, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMaterialXDisjointOver, node_pos)
 
         # Properties
         self.const_alpha = Property(self, 'const_alpha', 'float')
@@ -2231,8 +2232,8 @@ class MaterialXDisjointOver(MaterialExpression):
 
 
 class MaterialXDodge(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMaterialXDodge, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMaterialXDodge, node_pos)
 
         # Properties
         self.const_alpha = Property(self, 'const_alpha', 'float')
@@ -2246,8 +2247,8 @@ class MaterialXDodge(MaterialExpression):
 
 
 class MaterialXExponential(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMaterialXExponential, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMaterialXExponential, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -2260,8 +2261,8 @@ class MaterialXExponential(MaterialExpression):
 
 
 class MaterialXFractal3D(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMaterialXFractal3D, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMaterialXFractal3D, node_pos)
 
         # Properties
         self.const_amplitude = Property(self, 'const_amplitude', 'float')
@@ -2283,8 +2284,8 @@ class MaterialXFractal3D(MaterialExpression):
 
 
 class MaterialXHsvToRgb(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMaterialXHsvToRgb, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMaterialXHsvToRgb, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -2297,8 +2298,8 @@ class MaterialXHsvToRgb(MaterialExpression):
 
 
 class MaterialXIn(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMaterialXIn, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMaterialXIn, node_pos)
 
         # Properties
         self.const_alpha = Property(self, 'const_alpha', 'float')
@@ -2312,8 +2313,8 @@ class MaterialXIn(MaterialExpression):
 
 
 class MaterialXLength(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMaterialXLength, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMaterialXLength, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -2326,8 +2327,8 @@ class MaterialXLength(MaterialExpression):
 
 
 class MaterialXLogarithm(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMaterialXLogarithm, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMaterialXLogarithm, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -2340,8 +2341,8 @@ class MaterialXLogarithm(MaterialExpression):
 
 
 class MaterialXLuminance(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMaterialXLuminance, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMaterialXLuminance, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -2356,8 +2357,8 @@ class MaterialXLuminance(MaterialExpression):
 
 
 class MaterialXMask(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMaterialXMask, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMaterialXMask, node_pos)
 
         # Properties
         self.const_alpha = Property(self, 'const_alpha', 'float')
@@ -2371,8 +2372,8 @@ class MaterialXMask(MaterialExpression):
 
 
 class MaterialXMatte(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMaterialXMatte, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMaterialXMatte, node_pos)
 
         # Properties
         self.const_alpha = Property(self, 'const_alpha', 'float')
@@ -2386,8 +2387,8 @@ class MaterialXMatte(MaterialExpression):
 
 
 class MaterialXMinus(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMaterialXMinus, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMaterialXMinus, node_pos)
 
         # Properties
         self.const_alpha = Property(self, 'const_alpha', 'float')
@@ -2401,8 +2402,8 @@ class MaterialXMinus(MaterialExpression):
 
 
 class MaterialXOut(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMaterialXOut, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMaterialXOut, node_pos)
 
         # Properties
         self.const_alpha = Property(self, 'const_alpha', 'float')
@@ -2416,8 +2417,8 @@ class MaterialXOut(MaterialExpression):
 
 
 class MaterialXOver(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMaterialXOver, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMaterialXOver, node_pos)
 
         # Properties
         self.const_alpha = Property(self, 'const_alpha', 'float')
@@ -2431,8 +2432,8 @@ class MaterialXOver(MaterialExpression):
 
 
 class MaterialXOverlay(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMaterialXOverlay, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMaterialXOverlay, node_pos)
 
         # Properties
         self.const_alpha = Property(self, 'const_alpha', 'float')
@@ -2446,8 +2447,8 @@ class MaterialXOverlay(MaterialExpression):
 
 
 class MaterialXPlace2D(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMaterialXPlace2D, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMaterialXPlace2D, node_pos)
 
         # Properties
         self.const_coordinate = Property(self, 'const_coordinate', 'uint8')
@@ -2462,8 +2463,8 @@ class MaterialXPlace2D(MaterialExpression):
 
 
 class MaterialXPlus(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMaterialXPlus, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMaterialXPlus, node_pos)
 
         # Properties
         self.const_alpha = Property(self, 'const_alpha', 'float')
@@ -2477,8 +2478,8 @@ class MaterialXPlus(MaterialExpression):
 
 
 class MaterialXPremult(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMaterialXPremult, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMaterialXPremult, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -2491,8 +2492,8 @@ class MaterialXPremult(MaterialExpression):
 
 
 class MaterialXRamp4(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMaterialXRamp4, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMaterialXRamp4, node_pos)
 
         # Properties
         self.const_coordinate = Property(self, 'const_coordinate', 'uint8')
@@ -2506,8 +2507,8 @@ class MaterialXRamp4(MaterialExpression):
 
 
 class MaterialXRampLeftRight(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMaterialXRampLeftRight, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMaterialXRampLeftRight, node_pos)
 
         # Properties
         self.const_coordinate = Property(self, 'const_coordinate', 'uint8')
@@ -2521,8 +2522,8 @@ class MaterialXRampLeftRight(MaterialExpression):
 
 
 class MaterialXRampTopBottom(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMaterialXRampTopBottom, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMaterialXRampTopBottom, node_pos)
 
         # Properties
         self.const_coordinate = Property(self, 'const_coordinate', 'uint8')
@@ -2536,8 +2537,8 @@ class MaterialXRampTopBottom(MaterialExpression):
 
 
 class MaterialXRemap(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMaterialXRemap, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMaterialXRemap, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -2554,8 +2555,8 @@ class MaterialXRemap(MaterialExpression):
 
 
 class MaterialXRgbToHsv(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMaterialXRgbToHsv, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMaterialXRgbToHsv, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -2568,8 +2569,8 @@ class MaterialXRgbToHsv(MaterialExpression):
 
 
 class MaterialXRotate2D(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMaterialXRotate2D, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMaterialXRotate2D, node_pos)
 
         # Properties
         self.const_rotation_angle = Property(self, 'const_rotation_angle', 'float')
@@ -2583,8 +2584,8 @@ class MaterialXRotate2D(MaterialExpression):
 
 
 class MaterialXScreen(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMaterialXScreen, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMaterialXScreen, node_pos)
 
         # Properties
         self.const_alpha = Property(self, 'const_alpha', 'float')
@@ -2598,8 +2599,8 @@ class MaterialXScreen(MaterialExpression):
 
 
 class MaterialXSplitLeftRight(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMaterialXSplitLeftRight, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMaterialXSplitLeftRight, node_pos)
 
         # Properties
         self.const_center = Property(self, 'const_center', 'float')
@@ -2614,8 +2615,8 @@ class MaterialXSplitLeftRight(MaterialExpression):
 
 
 class MaterialXSplitTopBottom(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMaterialXSplitTopBottom, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMaterialXSplitTopBottom, node_pos)
 
         # Properties
         self.const_center = Property(self, 'const_center', 'float')
@@ -2630,8 +2631,8 @@ class MaterialXSplitTopBottom(MaterialExpression):
 
 
 class MaterialXSwizzle(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMaterialXSwizzle, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMaterialXSwizzle, node_pos)
 
         # Properties
         self.channels = Property(self, 'channels', 'str')
@@ -2645,8 +2646,8 @@ class MaterialXSwizzle(MaterialExpression):
 
 
 class MaterialXTextureSampleParameterBlur(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMaterialXTextureSampleParameterBlur, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMaterialXTextureSampleParameterBlur, node_pos)
 
         # Properties
         self.automatic_view_mip_bias = Property(self, 'automatic_view_mip_bias', 'bool')
@@ -2675,8 +2676,8 @@ class MaterialXTextureSampleParameterBlur(MaterialExpression):
 
 
 class MaterialXUnpremult(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMaterialXUnpremult, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMaterialXUnpremult, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -2689,8 +2690,8 @@ class MaterialXUnpremult(MaterialExpression):
 
 
 class Matte(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMatte, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMatte, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -2703,8 +2704,8 @@ class Matte(MaterialExpression):
 
 
 class Max(MaterialExpression):
-    def __init__(self, a = None, b = None, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMax, node_pos_x, node_pos_y)
+    def __init__(self, a = None, b = None, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMax, node_pos)
 
         # Properties
         self.const_a = Property(self, 'const_a', 'float')
@@ -2730,8 +2731,8 @@ class Max(MaterialExpression):
               self.b.comesFrom(b)
 
 class Min(MaterialExpression):
-    def __init__(self, a = None, b = None, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMin, node_pos_x, node_pos_y)
+    def __init__(self, a = None, b = None, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMin, node_pos)
 
         # Properties
         self.const_a = Property(self, 'const_a', 'float')
@@ -2757,8 +2758,8 @@ class Min(MaterialExpression):
               self.b.comesFrom(b)
 
 class Minus(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMinus, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMinus, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -2771,8 +2772,8 @@ class Minus(MaterialExpression):
 
 
 class Multiply(MaterialExpression):
-    def __init__(self, a = None, b = None, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionMultiply, node_pos_x, node_pos_y)
+    def __init__(self, a = None, b = None, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionMultiply, node_pos)
 
         # Properties
         self.const_a = Property(self, 'const_a', 'float')
@@ -2798,8 +2799,8 @@ class Multiply(MaterialExpression):
               self.b.comesFrom(b)
 
 class NamedRerouteBase(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionNamedRerouteBase, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionNamedRerouteBase, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -2812,8 +2813,8 @@ class NamedRerouteBase(MaterialExpression):
 
 
 class NamedRerouteDeclaration(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionNamedRerouteDeclaration, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionNamedRerouteDeclaration, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -2829,8 +2830,8 @@ class NamedRerouteDeclaration(MaterialExpression):
 
 
 class NamedRerouteUsage(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionNamedRerouteUsage, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionNamedRerouteUsage, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -2843,8 +2844,8 @@ class NamedRerouteUsage(MaterialExpression):
 
 
 class NaniteReplace(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionNaniteReplace, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionNaniteReplace, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -2857,8 +2858,8 @@ class NaniteReplace(MaterialExpression):
 
 
 class Noise(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionNoise, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionNoise, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -2882,8 +2883,8 @@ class Noise(MaterialExpression):
 
 
 class Normalize(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionNormalize, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionNormalize, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -2896,8 +2897,8 @@ class Normalize(MaterialExpression):
 
 
 class ObjectBounds(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionObjectBounds, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionObjectBounds, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -2910,8 +2911,8 @@ class ObjectBounds(MaterialExpression):
 
 
 class ObjectLocalBounds(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionObjectLocalBounds, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionObjectLocalBounds, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -2924,8 +2925,8 @@ class ObjectLocalBounds(MaterialExpression):
 
 
 class ObjectOrientation(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionObjectOrientation, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionObjectOrientation, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -2938,8 +2939,8 @@ class ObjectOrientation(MaterialExpression):
 
 
 class ObjectPositionWS(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionObjectPositionWS, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionObjectPositionWS, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -2953,8 +2954,8 @@ class ObjectPositionWS(MaterialExpression):
 
 
 class ObjectRadius(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionObjectRadius, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionObjectRadius, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -2967,8 +2968,8 @@ class ObjectRadius(MaterialExpression):
 
 
 class OneMinus(MaterialExpression):
-    def __init__(self, input = None, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionOneMinus, node_pos_x, node_pos_y)
+    def __init__(self, input = None, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionOneMinus, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -2982,8 +2983,8 @@ class OneMinus(MaterialExpression):
         if input is not None: self.input.comesFrom(input)
 
 class Out(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionOut, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionOut, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -2996,8 +2997,8 @@ class Out(MaterialExpression):
 
 
 class Over(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionOver, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionOver, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3010,8 +3011,8 @@ class Over(MaterialExpression):
 
 
 class Overlay(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionOverlay, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionOverlay, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3024,8 +3025,8 @@ class Overlay(MaterialExpression):
 
 
 class Panner(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionPanner, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionPanner, node_pos)
 
         # Properties
         self.const_coordinate = Property(self, 'const_coordinate', 'uint32')
@@ -3044,8 +3045,8 @@ class Panner(MaterialExpression):
 
 
 class Parameter(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionParameter, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionParameter, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3061,8 +3062,8 @@ class Parameter(MaterialExpression):
 
 
 class ParticleColor(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionParticleColor, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionParticleColor, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3075,8 +3076,8 @@ class ParticleColor(MaterialExpression):
 
 
 class ParticleDirection(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionParticleDirection, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionParticleDirection, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3089,8 +3090,8 @@ class ParticleDirection(MaterialExpression):
 
 
 class ParticleMacroUV(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionParticleMacroUV, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionParticleMacroUV, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3103,8 +3104,8 @@ class ParticleMacroUV(MaterialExpression):
 
 
 class ParticleMotionBlurFade(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionParticleMotionBlurFade, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionParticleMotionBlurFade, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3117,8 +3118,8 @@ class ParticleMotionBlurFade(MaterialExpression):
 
 
 class ParticlePositionWS(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionParticlePositionWS, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionParticlePositionWS, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3132,8 +3133,8 @@ class ParticlePositionWS(MaterialExpression):
 
 
 class ParticleRadius(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionParticleRadius, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionParticleRadius, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3146,8 +3147,8 @@ class ParticleRadius(MaterialExpression):
 
 
 class ParticleRandom(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionParticleRandom, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionParticleRandom, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3160,8 +3161,8 @@ class ParticleRandom(MaterialExpression):
 
 
 class ParticleRelativeTime(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionParticleRelativeTime, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionParticleRelativeTime, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3174,8 +3175,8 @@ class ParticleRelativeTime(MaterialExpression):
 
 
 class ParticleSize(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionParticleSize, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionParticleSize, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3188,8 +3189,8 @@ class ParticleSize(MaterialExpression):
 
 
 class ParticleSpeed(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionParticleSpeed, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionParticleSpeed, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3202,8 +3203,8 @@ class ParticleSpeed(MaterialExpression):
 
 
 class ParticleSpriteRotation(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionParticleSpriteRotation, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionParticleSpriteRotation, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3216,8 +3217,8 @@ class ParticleSpriteRotation(MaterialExpression):
 
 
 class ParticleSubUV(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionParticleSubUV, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionParticleSubUV, node_pos)
 
         # Properties
         self.automatic_view_mip_bias = Property(self, 'automatic_view_mip_bias', 'bool')
@@ -3239,8 +3240,8 @@ class ParticleSubUV(MaterialExpression):
 
 
 class ParticleSubUVProperties(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionParticleSubUVProperties, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionParticleSubUVProperties, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3253,8 +3254,8 @@ class ParticleSubUVProperties(MaterialExpression):
 
 
 class PathTracingBufferTexture(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionPathTracingBufferTexture, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionPathTracingBufferTexture, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3268,8 +3269,8 @@ class PathTracingBufferTexture(MaterialExpression):
 
 
 class PathTracingQualitySwitch(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionPathTracingQualitySwitch, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionPathTracingQualitySwitch, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3282,8 +3283,8 @@ class PathTracingQualitySwitch(MaterialExpression):
 
 
 class PathTracingRayTypeSwitch(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionPathTracingRayTypeSwitch, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionPathTracingRayTypeSwitch, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3296,8 +3297,8 @@ class PathTracingRayTypeSwitch(MaterialExpression):
 
 
 class PerInstanceCustomData(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionPerInstanceCustomData, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionPerInstanceCustomData, node_pos)
 
         # Properties
         self.const_default_value = Property(self, 'const_default_value', 'float')
@@ -3312,8 +3313,8 @@ class PerInstanceCustomData(MaterialExpression):
 
 
 class PerInstanceCustomData3Vector(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionPerInstanceCustomData3Vector, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionPerInstanceCustomData3Vector, node_pos)
 
         # Properties
         self.const_default_value = Property(self, 'const_default_value', 'LinearColor')
@@ -3328,8 +3329,8 @@ class PerInstanceCustomData3Vector(MaterialExpression):
 
 
 class PerInstanceFadeAmount(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionPerInstanceFadeAmount, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionPerInstanceFadeAmount, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3342,8 +3343,8 @@ class PerInstanceFadeAmount(MaterialExpression):
 
 
 class PerInstanceRandom(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionPerInstanceRandom, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionPerInstanceRandom, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3356,8 +3357,8 @@ class PerInstanceRandom(MaterialExpression):
 
 
 class PinBase(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionPinBase, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionPinBase, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3371,8 +3372,8 @@ class PinBase(MaterialExpression):
 
 
 class PixelDepth(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionPixelDepth, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionPixelDepth, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3385,8 +3386,8 @@ class PixelDepth(MaterialExpression):
 
 
 class PixelNormalWS(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionPixelNormalWS, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionPixelNormalWS, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3399,8 +3400,8 @@ class PixelNormalWS(MaterialExpression):
 
 
 class Place2D(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionPlace2D, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionPlace2D, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3413,8 +3414,8 @@ class Place2D(MaterialExpression):
 
 
 class Plus(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionPlus, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionPlus, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3427,8 +3428,8 @@ class Plus(MaterialExpression):
 
 
 class Power(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionPower, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionPower, node_pos)
 
         # Properties
         self.const_exponent = Property(self, 'const_exponent', 'float')
@@ -3443,8 +3444,8 @@ class Power(MaterialExpression):
 
 
 class PreSkinnedLocalBounds(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionPreSkinnedLocalBounds, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionPreSkinnedLocalBounds, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3457,8 +3458,8 @@ class PreSkinnedLocalBounds(MaterialExpression):
 
 
 class PreSkinnedNormal(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionPreSkinnedNormal, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionPreSkinnedNormal, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3471,8 +3472,8 @@ class PreSkinnedNormal(MaterialExpression):
 
 
 class PreSkinnedPosition(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionPreSkinnedPosition, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionPreSkinnedPosition, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3485,8 +3486,8 @@ class PreSkinnedPosition(MaterialExpression):
 
 
 class PrecomputedAOMask(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionPrecomputedAOMask, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionPrecomputedAOMask, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3499,8 +3500,8 @@ class PrecomputedAOMask(MaterialExpression):
 
 
 class Premult(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionPremult, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionPremult, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3513,8 +3514,8 @@ class Premult(MaterialExpression):
 
 
 class PreviousFrameSwitch(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionPreviousFrameSwitch, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionPreviousFrameSwitch, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3528,8 +3529,8 @@ class PreviousFrameSwitch(MaterialExpression):
 
 
 class QualitySwitch(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionQualitySwitch, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionQualitySwitch, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3543,8 +3544,8 @@ class QualitySwitch(MaterialExpression):
 
 
 class Ramp4(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionRamp4, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionRamp4, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3557,8 +3558,8 @@ class Ramp4(MaterialExpression):
 
 
 class RampLeftRight(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionRampLeftRight, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionRampLeftRight, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3571,8 +3572,8 @@ class RampLeftRight(MaterialExpression):
 
 
 class RampTopBottom(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionRampTopBottom, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionRampTopBottom, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3585,8 +3586,8 @@ class RampTopBottom(MaterialExpression):
 
 
 class RayTracingQualitySwitch(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionRayTracingQualitySwitch, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionRayTracingQualitySwitch, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3600,8 +3601,8 @@ class RayTracingQualitySwitch(MaterialExpression):
 
 
 class ReflectionCapturePassSwitch(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionReflectionCapturePassSwitch, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionReflectionCapturePassSwitch, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3615,8 +3616,8 @@ class ReflectionCapturePassSwitch(MaterialExpression):
 
 
 class ReflectionVectorWS(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionReflectionVectorWS, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionReflectionVectorWS, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3630,8 +3631,8 @@ class ReflectionVectorWS(MaterialExpression):
 
 
 class Remap(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionRemap, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionRemap, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3644,8 +3645,8 @@ class Remap(MaterialExpression):
 
 
 class Reroute(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionReroute, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionReroute, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3658,8 +3659,8 @@ class Reroute(MaterialExpression):
 
 
 class RerouteBase(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionRerouteBase, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionRerouteBase, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3672,8 +3673,8 @@ class RerouteBase(MaterialExpression):
 
 
 class RgbToHsv(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionRgbToHsv, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionRgbToHsv, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3686,8 +3687,8 @@ class RgbToHsv(MaterialExpression):
 
 
 class Rotate2D(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionRotate2D, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionRotate2D, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3700,8 +3701,8 @@ class Rotate2D(MaterialExpression):
 
 
 class RotateAboutAxis(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionRotateAboutAxis, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionRotateAboutAxis, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3718,8 +3719,8 @@ class RotateAboutAxis(MaterialExpression):
 
 
 class Rotator(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionRotator, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionRotator, node_pos)
 
         # Properties
         self.center_x = Property(self, 'center_x', 'float')
@@ -3737,8 +3738,8 @@ class Rotator(MaterialExpression):
 
 
 class Round(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionRound, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionRound, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3751,8 +3752,8 @@ class Round(MaterialExpression):
 
 
 class RuntimeVirtualTextureOutput(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionRuntimeVirtualTextureOutput, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionRuntimeVirtualTextureOutput, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3771,8 +3772,8 @@ class RuntimeVirtualTextureOutput(MaterialExpression):
 
 
 class RuntimeVirtualTextureReplace(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionRuntimeVirtualTextureReplace, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionRuntimeVirtualTextureReplace, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3786,8 +3787,8 @@ class RuntimeVirtualTextureReplace(MaterialExpression):
 
 
 class RuntimeVirtualTextureSample(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionRuntimeVirtualTextureSample, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionRuntimeVirtualTextureSample, node_pos)
 
         # Properties
         self.adaptive = Property(self, 'adaptive', 'bool')
@@ -3809,8 +3810,8 @@ class RuntimeVirtualTextureSample(MaterialExpression):
 
 
 class RuntimeVirtualTextureSampleParameter(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionRuntimeVirtualTextureSampleParameter, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionRuntimeVirtualTextureSampleParameter, node_pos)
 
         # Properties
         self.adaptive = Property(self, 'adaptive', 'bool')
@@ -3836,8 +3837,8 @@ class RuntimeVirtualTextureSampleParameter(MaterialExpression):
 
 
 class SamplePhysicsIntegerField(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionSamplePhysicsIntegerField, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionSamplePhysicsIntegerField, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3851,8 +3852,8 @@ class SamplePhysicsIntegerField(MaterialExpression):
 
 
 class SamplePhysicsScalarField(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionSamplePhysicsScalarField, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionSamplePhysicsScalarField, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3866,8 +3867,8 @@ class SamplePhysicsScalarField(MaterialExpression):
 
 
 class SamplePhysicsVectorField(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionSamplePhysicsVectorField, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionSamplePhysicsVectorField, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3881,8 +3882,8 @@ class SamplePhysicsVectorField(MaterialExpression):
 
 
 class Saturate(MaterialExpression):
-    def __init__(self, input = None, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionSaturate, node_pos_x, node_pos_y)
+    def __init__(self, input = None, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionSaturate, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3896,8 +3897,8 @@ class Saturate(MaterialExpression):
         if input is not None: self.input.comesFrom(input)
 
 class ScalarParameter(MaterialExpression):
-    def __init__(self, parameter_name = None, default_value = None, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionScalarParameter, node_pos_x, node_pos_y)
+    def __init__(self, parameter_name = None, default_value = None, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionScalarParameter, node_pos)
 
         # Properties
         self.default_value = Property(self, 'default_value', 'float')
@@ -3920,8 +3921,8 @@ class ScalarParameter(MaterialExpression):
         if default_value is not None: self.default_value.set(default_value)
 
 class SceneColor(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionSceneColor, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionSceneColor, node_pos)
 
         # Properties
         self.const_input = Property(self, 'const_input', 'Vector2D')
@@ -3938,8 +3939,8 @@ class SceneColor(MaterialExpression):
 
 
 class SceneDepth(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionSceneDepth, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionSceneDepth, node_pos)
 
         # Properties
         self.const_input = Property(self, 'const_input', 'Vector2D')
@@ -3956,8 +3957,8 @@ class SceneDepth(MaterialExpression):
 
 
 class SceneDepthWithoutWater(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionSceneDepthWithoutWater, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionSceneDepthWithoutWater, node_pos)
 
         # Properties
         self.const_input = Property(self, 'const_input', 'Vector2D')
@@ -3974,8 +3975,8 @@ class SceneDepthWithoutWater(MaterialExpression):
 
 
 class SceneTexelSize(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionSceneTexelSize, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionSceneTexelSize, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -3988,8 +3989,8 @@ class SceneTexelSize(MaterialExpression):
 
 
 class SceneTexture(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionSceneTexture, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionSceneTexture, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4004,8 +4005,8 @@ class SceneTexture(MaterialExpression):
 
 
 class Screen(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionScreen, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionScreen, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4018,8 +4019,8 @@ class Screen(MaterialExpression):
 
 
 class ScreenPosition(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionScreenPosition, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionScreenPosition, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4032,8 +4033,8 @@ class ScreenPosition(MaterialExpression):
 
 
 class SetLocal(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionSetLocal, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionSetLocal, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4047,8 +4048,8 @@ class SetLocal(MaterialExpression):
 
 
 class SetMaterialAttributes(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionSetMaterialAttributes, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionSetMaterialAttributes, node_pos)
 
         # Properties
         self.attribute_set_types = Property(self, 'attribute_set_types', 'Array[Guid]')
@@ -4083,8 +4084,8 @@ class SetMaterialAttributes(MaterialExpression):
 
 
 class ShaderStageSwitch(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionShaderStageSwitch, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionShaderStageSwitch, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4098,8 +4099,8 @@ class ShaderStageSwitch(MaterialExpression):
 
 
 class ShadingModel(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionShadingModel, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionShadingModel, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4113,8 +4114,8 @@ class ShadingModel(MaterialExpression):
 
 
 class ShadingPathSwitch(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionShadingPathSwitch, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionShadingPathSwitch, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4128,8 +4129,8 @@ class ShadingPathSwitch(MaterialExpression):
 
 
 class ShadowReplace(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionShadowReplace, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionShadowReplace, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4143,8 +4144,8 @@ class ShadowReplace(MaterialExpression):
 
 
 class Sign(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionSign, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionSign, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4157,8 +4158,8 @@ class Sign(MaterialExpression):
 
 
 class Sine(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionSine, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionSine, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4172,8 +4173,8 @@ class Sine(MaterialExpression):
 
 
 class SingleLayerWaterMaterialOutput(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionSingleLayerWaterMaterialOutput, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionSingleLayerWaterMaterialOutput, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4189,8 +4190,8 @@ class SingleLayerWaterMaterialOutput(MaterialExpression):
 
 
 class SkyAtmosphereAerialPerspective(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionSkyAtmosphereAerialPerspective, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionSkyAtmosphereAerialPerspective, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4203,8 +4204,8 @@ class SkyAtmosphereAerialPerspective(MaterialExpression):
 
 
 class SkyAtmosphereDistantLightScatteredLuminance(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionSkyAtmosphereDistantLightScatteredLuminance, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionSkyAtmosphereDistantLightScatteredLuminance, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4217,8 +4218,8 @@ class SkyAtmosphereDistantLightScatteredLuminance(MaterialExpression):
 
 
 class SkyAtmosphereLightDirection(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionSkyAtmosphereLightDirection, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionSkyAtmosphereLightDirection, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4232,8 +4233,8 @@ class SkyAtmosphereLightDirection(MaterialExpression):
 
 
 class SkyAtmosphereLightDiskLuminance(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionSkyAtmosphereLightDiskLuminance, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionSkyAtmosphereLightDiskLuminance, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4247,8 +4248,8 @@ class SkyAtmosphereLightDiskLuminance(MaterialExpression):
 
 
 class SkyAtmosphereLightIlluminance(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionSkyAtmosphereLightIlluminance, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionSkyAtmosphereLightIlluminance, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4262,8 +4263,8 @@ class SkyAtmosphereLightIlluminance(MaterialExpression):
 
 
 class SkyAtmosphereViewLuminance(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionSkyAtmosphereViewLuminance, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionSkyAtmosphereViewLuminance, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4276,8 +4277,8 @@ class SkyAtmosphereViewLuminance(MaterialExpression):
 
 
 class SkyLightEnvMapSample(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionSkyLightEnvMapSample, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionSkyLightEnvMapSample, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4290,8 +4291,8 @@ class SkyLightEnvMapSample(MaterialExpression):
 
 
 class SmoothStep(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionSmoothStep, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionSmoothStep, node_pos)
 
         # Properties
         self.const_max = Property(self, 'const_max', 'float')
@@ -4309,8 +4310,8 @@ class SmoothStep(MaterialExpression):
 
 
 class Sobol(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionSobol, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionSobol, node_pos)
 
         # Properties
         self.const_index = Property(self, 'const_index', 'uint32')
@@ -4328,8 +4329,8 @@ class Sobol(MaterialExpression):
 
 
 class SparseVolumeTextureBase(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionSparseVolumeTextureBase, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionSparseVolumeTextureBase, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4343,8 +4344,8 @@ class SparseVolumeTextureBase(MaterialExpression):
 
 
 class SparseVolumeTextureObject(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionSparseVolumeTextureObject, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionSparseVolumeTextureObject, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4358,8 +4359,8 @@ class SparseVolumeTextureObject(MaterialExpression):
 
 
 class SparseVolumeTextureObjectParameter(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionSparseVolumeTextureObjectParameter, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionSparseVolumeTextureObjectParameter, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4377,8 +4378,8 @@ class SparseVolumeTextureObjectParameter(MaterialExpression):
 
 
 class SparseVolumeTextureSample(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionSparseVolumeTextureSample, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionSparseVolumeTextureSample, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4393,8 +4394,8 @@ class SparseVolumeTextureSample(MaterialExpression):
 
 
 class SparseVolumeTextureSampleParameter(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionSparseVolumeTextureSampleParameter, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionSparseVolumeTextureSampleParameter, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4412,8 +4413,8 @@ class SparseVolumeTextureSampleParameter(MaterialExpression):
 
 
 class SpeedTree(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionSpeedTree, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionSpeedTree, node_pos)
 
         # Properties
         self.accurate_wind_velocities = Property(self, 'accurate_wind_velocities', 'bool')
@@ -4434,8 +4435,8 @@ class SpeedTree(MaterialExpression):
 
 
 class SphereMask(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionSphereMask, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionSphereMask, node_pos)
 
         # Properties
         self.attenuation_radius = Property(self, 'attenuation_radius', 'float')
@@ -4453,8 +4454,8 @@ class SphereMask(MaterialExpression):
 
 
 class SphericalParticleOpacity(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionSphericalParticleOpacity, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionSphericalParticleOpacity, node_pos)
 
         # Properties
         self.constant_density = Property(self, 'constant_density', 'float')
@@ -4468,8 +4469,8 @@ class SphericalParticleOpacity(MaterialExpression):
 
 
 class SplitLeftRight(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionSplitLeftRight, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionSplitLeftRight, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4482,8 +4483,8 @@ class SplitLeftRight(MaterialExpression):
 
 
 class SplitTopBottom(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionSplitTopBottom, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionSplitTopBottom, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4496,8 +4497,8 @@ class SplitTopBottom(MaterialExpression):
 
 
 class SpriteTextureSampler(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionSpriteTextureSampler, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionSpriteTextureSampler, node_pos)
 
         # Properties
         self.additional_slot_index = Property(self, 'additional_slot_index', 'int32')
@@ -4525,8 +4526,8 @@ class SpriteTextureSampler(MaterialExpression):
 
 
 class SquareRoot(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionSquareRoot, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionSquareRoot, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4539,8 +4540,8 @@ class SquareRoot(MaterialExpression):
 
 
 class StaticBool(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionStaticBool, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionStaticBool, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4554,8 +4555,8 @@ class StaticBool(MaterialExpression):
 
 
 class StaticBoolParameter(MaterialExpression):
-    def __init__(self, parameter_name = None, default_value = None, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionStaticBoolParameter, node_pos_x, node_pos_y)
+    def __init__(self, parameter_name = None, default_value = None, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionStaticBoolParameter, node_pos)
 
         # Properties
         self.default_value = Property(self, 'default_value', 'bool')
@@ -4575,8 +4576,8 @@ class StaticBoolParameter(MaterialExpression):
         if default_value is not None: self.default_value.set(default_value)
 
 class StaticComponentMaskParameter(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionStaticComponentMaskParameter, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionStaticComponentMaskParameter, node_pos)
 
         # Properties
         self.default_a = Property(self, 'default_a', 'bool')
@@ -4596,8 +4597,8 @@ class StaticComponentMaskParameter(MaterialExpression):
 
 
 class StaticSwitch(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionStaticSwitch, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionStaticSwitch, node_pos)
 
         # Properties
         self.default_value = Property(self, 'default_value', 'bool')
@@ -4613,8 +4614,8 @@ class StaticSwitch(MaterialExpression):
 
 
 class StaticSwitchParameter(MaterialExpression):
-    def __init__(self, parameter_name = None, default_value = None, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionStaticSwitchParameter, node_pos_x, node_pos_y)
+    def __init__(self, parameter_name = None, default_value = None, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionStaticSwitchParameter, node_pos)
 
         # Properties
         self.default_value = Property(self, 'default_value', 'bool')
@@ -4634,8 +4635,8 @@ class StaticSwitchParameter(MaterialExpression):
         if default_value is not None: self.default_value.set(default_value)
 
 class Step(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionStep, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionStep, node_pos)
 
         # Properties
         self.const_x = Property(self, 'const_x', 'float')
@@ -4651,8 +4652,8 @@ class Step(MaterialExpression):
 
 
 class StrataAdd(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionStrataAdd, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionStrataAdd, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4666,8 +4667,8 @@ class StrataAdd(MaterialExpression):
 
 
 class StrataBSDF(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionStrataBSDF, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionStrataBSDF, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4680,8 +4681,8 @@ class StrataBSDF(MaterialExpression):
 
 
 class StrataConvertToDecal(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionStrataConvertToDecal, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionStrataConvertToDecal, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4694,8 +4695,8 @@ class StrataConvertToDecal(MaterialExpression):
 
 
 class StrataEyeBSDF(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionStrataEyeBSDF, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionStrataEyeBSDF, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4709,8 +4710,8 @@ class StrataEyeBSDF(MaterialExpression):
 
 
 class StrataHairBSDF(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionStrataHairBSDF, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionStrataHairBSDF, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4723,8 +4724,8 @@ class StrataHairBSDF(MaterialExpression):
 
 
 class StrataHazinessToSecondaryRoughness(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionStrataHazinessToSecondaryRoughness, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionStrataHazinessToSecondaryRoughness, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4737,8 +4738,8 @@ class StrataHazinessToSecondaryRoughness(MaterialExpression):
 
 
 class StrataHorizontalMixing(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionStrataHorizontalMixing, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionStrataHorizontalMixing, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4752,8 +4753,8 @@ class StrataHorizontalMixing(MaterialExpression):
 
 
 class StrataLegacyConversion(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionStrataLegacyConversion, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionStrataLegacyConversion, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4767,8 +4768,8 @@ class StrataLegacyConversion(MaterialExpression):
 
 
 class StrataLightFunction(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionStrataLightFunction, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionStrataLightFunction, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4781,8 +4782,8 @@ class StrataLightFunction(MaterialExpression):
 
 
 class StrataMetalnessToDiffuseAlbedoF0(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionStrataMetalnessToDiffuseAlbedoF0, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionStrataMetalnessToDiffuseAlbedoF0, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4795,8 +4796,8 @@ class StrataMetalnessToDiffuseAlbedoF0(MaterialExpression):
 
 
 class StrataPostProcess(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionStrataPostProcess, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionStrataPostProcess, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4809,8 +4810,8 @@ class StrataPostProcess(MaterialExpression):
 
 
 class StrataSimpleClearCoatBSDF(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionStrataSimpleClearCoatBSDF, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionStrataSimpleClearCoatBSDF, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4823,8 +4824,8 @@ class StrataSimpleClearCoatBSDF(MaterialExpression):
 
 
 class StrataSingleLayerWaterBSDF(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionStrataSingleLayerWaterBSDF, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionStrataSingleLayerWaterBSDF, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4837,8 +4838,8 @@ class StrataSingleLayerWaterBSDF(MaterialExpression):
 
 
 class StrataSlabBSDF(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionStrataSlabBSDF, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionStrataSlabBSDF, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4854,8 +4855,8 @@ class StrataSlabBSDF(MaterialExpression):
 
 
 class StrataThinFilm(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionStrataThinFilm, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionStrataThinFilm, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4868,8 +4869,8 @@ class StrataThinFilm(MaterialExpression):
 
 
 class StrataTransmittanceToMFP(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionStrataTransmittanceToMFP, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionStrataTransmittanceToMFP, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4882,8 +4883,8 @@ class StrataTransmittanceToMFP(MaterialExpression):
 
 
 class StrataUI(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionStrataUI, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionStrataUI, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4896,8 +4897,8 @@ class StrataUI(MaterialExpression):
 
 
 class StrataUnlitBSDF(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionStrataUnlitBSDF, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionStrataUnlitBSDF, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4910,8 +4911,8 @@ class StrataUnlitBSDF(MaterialExpression):
 
 
 class StrataUtilityBase(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionStrataUtilityBase, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionStrataUtilityBase, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4924,8 +4925,8 @@ class StrataUtilityBase(MaterialExpression):
 
 
 class StrataVerticalLayering(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionStrataVerticalLayering, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionStrataVerticalLayering, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4939,8 +4940,8 @@ class StrataVerticalLayering(MaterialExpression):
 
 
 class StrataVolumetricFogCloudBSDF(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionStrataVolumetricFogCloudBSDF, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionStrataVolumetricFogCloudBSDF, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4953,8 +4954,8 @@ class StrataVolumetricFogCloudBSDF(MaterialExpression):
 
 
 class StrataWeight(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionStrataWeight, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionStrataWeight, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4967,8 +4968,8 @@ class StrataWeight(MaterialExpression):
 
 
 class SubsurfaceMediumMaterialOutput(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionSubsurfaceMediumMaterialOutput, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionSubsurfaceMediumMaterialOutput, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -4981,8 +4982,8 @@ class SubsurfaceMediumMaterialOutput(MaterialExpression):
 
 
 class Subtract(MaterialExpression):
-    def __init__(self, a = None, b = None, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionSubtract, node_pos_x, node_pos_y)
+    def __init__(self, a = None, b = None, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionSubtract, node_pos)
 
         # Properties
         self.const_a = Property(self, 'const_a', 'float')
@@ -5008,8 +5009,8 @@ class Subtract(MaterialExpression):
               self.b.comesFrom(b)
 
 class Switch(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionSwitch, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionSwitch, node_pos)
 
         # Properties
         self.const_default = Property(self, 'const_default', 'float')
@@ -5026,8 +5027,8 @@ class Switch(MaterialExpression):
 
 
 class Tangent(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionTangent, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionTangent, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -5041,8 +5042,8 @@ class Tangent(MaterialExpression):
 
 
 class TangentOutput(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionTangentOutput, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionTangentOutput, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -5055,8 +5056,8 @@ class TangentOutput(MaterialExpression):
 
 
 class TemporalSobol(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionTemporalSobol, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionTemporalSobol, node_pos)
 
         # Properties
         self.const_index = Property(self, 'const_index', 'uint32')
@@ -5073,8 +5074,8 @@ class TemporalSobol(MaterialExpression):
 
 
 class TerrainLayerCoords(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionTerrainLayerCoords, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionTerrainLayerCoords, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -5087,8 +5088,8 @@ class TerrainLayerCoords(MaterialExpression):
 
 
 class TerrainLayerSwitch(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionTerrainLayerSwitch, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionTerrainLayerSwitch, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -5101,8 +5102,8 @@ class TerrainLayerSwitch(MaterialExpression):
 
 
 class TerrainLayerWeight(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionTerrainLayerWeight, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionTerrainLayerWeight, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -5115,8 +5116,8 @@ class TerrainLayerWeight(MaterialExpression):
 
 
 class TextureBase(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionTextureBase, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionTextureBase, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -5132,8 +5133,8 @@ class TextureBase(MaterialExpression):
 
 
 class TextureCoordinate(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionTextureCoordinate, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionTextureCoordinate, node_pos)
 
         # Properties
         self.coordinate_index = Property(self, 'coordinate_index', 'int32')
@@ -5151,8 +5152,8 @@ class TextureCoordinate(MaterialExpression):
 
 
 class TextureObject(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionTextureObject, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionTextureObject, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -5168,8 +5169,8 @@ class TextureObject(MaterialExpression):
 
 
 class TextureObjectParameter(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionTextureObjectParameter, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionTextureObjectParameter, node_pos)
 
         # Properties
         self.automatic_view_mip_bias = Property(self, 'automatic_view_mip_bias', 'bool')
@@ -5195,8 +5196,8 @@ class TextureObjectParameter(MaterialExpression):
 
 
 class TextureProperty(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionTextureProperty, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionTextureProperty, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -5210,8 +5211,8 @@ class TextureProperty(MaterialExpression):
 
 
 class TextureSample(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionTextureSample, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionTextureSample, node_pos)
 
         # Properties
         self.automatic_view_mip_bias = Property(self, 'automatic_view_mip_bias', 'bool')
@@ -5239,8 +5240,8 @@ class TextureSample(MaterialExpression):
 
 
 class TextureSampleParameter(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionTextureSampleParameter, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionTextureSampleParameter, node_pos)
 
         # Properties
         self.automatic_view_mip_bias = Property(self, 'automatic_view_mip_bias', 'bool')
@@ -5266,8 +5267,8 @@ class TextureSampleParameter(MaterialExpression):
 
 
 class TextureSampleParameter2D(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionTextureSampleParameter2D, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionTextureSampleParameter2D, node_pos)
 
         # Properties
         self.automatic_view_mip_bias = Property(self, 'automatic_view_mip_bias', 'bool')
@@ -5293,8 +5294,8 @@ class TextureSampleParameter2D(MaterialExpression):
 
 
 class TextureSampleParameter2DArray(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionTextureSampleParameter2DArray, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionTextureSampleParameter2DArray, node_pos)
 
         # Properties
         self.automatic_view_mip_bias = Property(self, 'automatic_view_mip_bias', 'bool')
@@ -5320,8 +5321,8 @@ class TextureSampleParameter2DArray(MaterialExpression):
 
 
 class TextureSampleParameterBlur(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionTextureSampleParameterBlur, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionTextureSampleParameterBlur, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -5334,8 +5335,8 @@ class TextureSampleParameterBlur(MaterialExpression):
 
 
 class TextureSampleParameterCube(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionTextureSampleParameterCube, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionTextureSampleParameterCube, node_pos)
 
         # Properties
         self.automatic_view_mip_bias = Property(self, 'automatic_view_mip_bias', 'bool')
@@ -5361,8 +5362,8 @@ class TextureSampleParameterCube(MaterialExpression):
 
 
 class TextureSampleParameterCubeArray(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionTextureSampleParameterCubeArray, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionTextureSampleParameterCubeArray, node_pos)
 
         # Properties
         self.automatic_view_mip_bias = Property(self, 'automatic_view_mip_bias', 'bool')
@@ -5387,8 +5388,8 @@ class TextureSampleParameterCubeArray(MaterialExpression):
 
 
 class TextureSampleParameterSubUV(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionTextureSampleParameterSubUV, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionTextureSampleParameterSubUV, node_pos)
 
         # Properties
         self.automatic_view_mip_bias = Property(self, 'automatic_view_mip_bias', 'bool')
@@ -5415,8 +5416,8 @@ class TextureSampleParameterSubUV(MaterialExpression):
 
 
 class TextureSampleParameterVolume(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionTextureSampleParameterVolume, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionTextureSampleParameterVolume, node_pos)
 
         # Properties
         self.automatic_view_mip_bias = Property(self, 'automatic_view_mip_bias', 'bool')
@@ -5442,8 +5443,8 @@ class TextureSampleParameterVolume(MaterialExpression):
 
 
 class ThinTranslucentMaterialOutput(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionThinTranslucentMaterialOutput, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionThinTranslucentMaterialOutput, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -5456,8 +5457,8 @@ class ThinTranslucentMaterialOutput(MaterialExpression):
 
 
 class Time(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionTime, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionTime, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -5473,8 +5474,8 @@ class Time(MaterialExpression):
 
 
 class Transform(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionTransform, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionTransform, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -5489,8 +5490,8 @@ class Transform(MaterialExpression):
 
 
 class TransformPosition(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionTransformPosition, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionTransformPosition, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -5505,8 +5506,8 @@ class TransformPosition(MaterialExpression):
 
 
 class Truncate(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionTruncate, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionTruncate, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -5519,8 +5520,8 @@ class Truncate(MaterialExpression):
 
 
 class TruncateLWC(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionTruncateLWC, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionTruncateLWC, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -5533,8 +5534,8 @@ class TruncateLWC(MaterialExpression):
 
 
 class TwoSidedSign(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionTwoSidedSign, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionTwoSidedSign, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -5547,8 +5548,8 @@ class TwoSidedSign(MaterialExpression):
 
 
 class Unpremult(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionUnpremult, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionUnpremult, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -5561,8 +5562,8 @@ class Unpremult(MaterialExpression):
 
 
 class VectorNoise(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionVectorNoise, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionVectorNoise, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -5579,8 +5580,8 @@ class VectorNoise(MaterialExpression):
 
 
 class VectorParameter(MaterialExpression):
-    def __init__(self, parameter_name = None, default_value = None, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionVectorParameter, node_pos_x, node_pos_y)
+    def __init__(self, parameter_name = None, default_value = None, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionVectorParameter, node_pos)
 
         # Properties
         self.channel_names = Property(self, 'channel_names', 'ParameterChannelNames')
@@ -5607,8 +5608,8 @@ class VectorParameter(MaterialExpression):
         if default_value is not None: self.default_value.set(default_value)
 
 class VertexColor(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionVertexColor, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionVertexColor, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -5621,8 +5622,8 @@ class VertexColor(MaterialExpression):
 
 
 class VertexInterpolator(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionVertexInterpolator, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionVertexInterpolator, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -5635,8 +5636,8 @@ class VertexInterpolator(MaterialExpression):
 
 
 class VertexNormalWS(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionVertexNormalWS, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionVertexNormalWS, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -5649,8 +5650,8 @@ class VertexNormalWS(MaterialExpression):
 
 
 class VertexTangentWS(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionVertexTangentWS, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionVertexTangentWS, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -5663,8 +5664,8 @@ class VertexTangentWS(MaterialExpression):
 
 
 class ViewProperty(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionViewProperty, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionViewProperty, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -5678,8 +5679,8 @@ class ViewProperty(MaterialExpression):
 
 
 class ViewSize(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionViewSize, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionViewSize, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -5692,8 +5693,8 @@ class ViewSize(MaterialExpression):
 
 
 class VirtualTextureFeatureSwitch(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionVirtualTextureFeatureSwitch, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionVirtualTextureFeatureSwitch, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -5707,8 +5708,8 @@ class VirtualTextureFeatureSwitch(MaterialExpression):
 
 
 class VolumetricAdvancedMaterialInput(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionVolumetricAdvancedMaterialInput, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionVolumetricAdvancedMaterialInput, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -5721,8 +5722,8 @@ class VolumetricAdvancedMaterialInput(MaterialExpression):
 
 
 class VolumetricAdvancedMaterialOutput(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionVolumetricAdvancedMaterialOutput, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionVolumetricAdvancedMaterialOutput, node_pos)
 
         # Properties
         self.clamp_multi_scattering_contribution = Property(self, 'clamp_multi_scattering_contribution', 'bool')
@@ -5753,8 +5754,8 @@ class VolumetricAdvancedMaterialOutput(MaterialExpression):
 
 
 class VolumetricCloudEmptySpaceSkippingInput(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionVolumetricCloudEmptySpaceSkippingInput, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionVolumetricCloudEmptySpaceSkippingInput, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -5767,8 +5768,8 @@ class VolumetricCloudEmptySpaceSkippingInput(MaterialExpression):
 
 
 class VolumetricCloudEmptySpaceSkippingOutput(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionVolumetricCloudEmptySpaceSkippingOutput, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionVolumetricCloudEmptySpaceSkippingOutput, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -5781,8 +5782,8 @@ class VolumetricCloudEmptySpaceSkippingOutput(MaterialExpression):
 
 
 class WhileLoop(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionWhileLoop, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionWhileLoop, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')
@@ -5795,8 +5796,8 @@ class WhileLoop(MaterialExpression):
 
 
 class WorldPosition(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
-        super().__init__(unreal.MaterialExpressionWorldPosition, node_pos_x, node_pos_y)
+    def __init__(self, node_pos: NodePos = None):
+        super().__init__(unreal.MaterialExpressionWorldPosition, node_pos)
 
         # Properties
         self.desc = Property(self, 'desc', 'str')

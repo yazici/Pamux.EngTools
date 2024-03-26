@@ -1,6 +1,5 @@
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 
-from pamux_unreal_tools.material import Material
 from pamux_unreal_tools.material_function import MaterialFunction
 
 from pamux_unreal_tools.utils.build_stack import BuildStack
@@ -8,22 +7,35 @@ from pamux_unreal_tools.utils.build_stack import BuildStack
 LandscapeMaterialFunctionPackage = "/Game/Materials/Pamux/Landscape/Functions"
 
 class ContainerBuilderBase:
-    def __init__(self, container_name: str, package_name: str = LandscapeMaterialFunctionPackage):
+    def __init__(self, container_factory: MaterialExpressionContainerFactory, params_factory, container_name: str, package_name: str = LandscapeMaterialFunctionPackage):
+        self.container_factory = container_factory
+        self.params_factory = params_factory
         self.container_name = container_name
         self.package_name = package_name
+        
 
     def build(self):
         raise "Implement and build container blueprint here"
 
     def loadOrCreate(self):
-        raise "Implement and loadOrCreate container blueprint here"
+        result = self.container_factory.loadOrCreate(self.container_name, self.package_name, True)
+        BuildStack.push(result)
+
+        print(result)
+        print(BuildStack.top())
+
+        if self.params_factory is None:
+            self.params = None
+        else:
+            self.params = self.params_factory(result)
+        return result
 
     def get(self):
         result = self.loadOrCreate()
 
-        BuildStack.push(result)
         self.build()
         result.save()
+
         BuildStack.pop()
         return result
 

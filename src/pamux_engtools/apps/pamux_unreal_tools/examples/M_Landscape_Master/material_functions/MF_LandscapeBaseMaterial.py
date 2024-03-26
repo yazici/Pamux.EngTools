@@ -1,14 +1,13 @@
-from pamux_unreal_tools.material import Material
-from pamux_unreal_tools.material_function import MaterialFunction
+from importlib import * 
+
+from pamux_unreal_tools.material_function import MaterialFunctionFactory
 from pamux_unreal_tools.base.material_function_builder_base import MaterialLayerFunctionBuilderBase
 from pamux_unreal_tools.generated.material_expression_wrappers import *
-
-from pamux_unreal_tools.material import Material
-
 from pamux_unreal_tools.examples.M_Landscape_Master.params import *
 from pamux_unreal_tools.examples.M_Landscape_Master.globals import *
-from pamux_unreal_tools.generated.material_expression_wrappers import *
-from pamux_unreal_tools.material import MaterialAttributeGuids
+
+
+
 # from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MF_TextureCellBombing_Landscape import *
 
 class MF_LandscapeBaseMaterial:
@@ -21,7 +20,7 @@ class MF_LandscapeBaseMaterial:
 
         #         switchedAndMultipliedColorOverlay = Multiply(material_function, switched, commonParams.ColorOverlay)
 
-        #         blend_Overlay = MaterialFunction.load("Blend_Overlay", "/Engine/Functions/Engine_MaterialFunctions03/Blends", True)
+        #         blend_Overlay = MaterialFunctionFactory().load("Blend_Overlay", "/Engine/Functions/Engine_MaterialFunctions03/Blends", True)
         #         call_Blend_Overlay = self.callMaterialFunction(blend_Overlay)
         #         call_Blend_Overlay.base = switched
         #         call_Blend_Overlay.blend = commonParams.ColorOverlay
@@ -32,12 +31,12 @@ class MF_LandscapeBaseMaterial:
 
         #         lerpedColorOverlay = LinearInterpolate(material_function, switched, qualitySwitched2, commonParams.ColorOverlay.Intensity)
 
-        #         cheapContrast_RGB = MaterialFunction.load("CheapContrast_RGB", "/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment", True)
+        #         cheapContrast_RGB = MaterialFunctionFactory().load("CheapContrast_RGB", "/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment", True)
         #         call_CheapContrast_RGB = self.callMaterialFunction(cheapContrast_RGB)
         #         call_CheapContrast_RGB.In = lerpedColorOverlay
         #         call_CheapContrast_RGB.Contrast = commonParams.Contrast
 
-        #         heightLerp = MaterialFunction.load("HeightLerp", "/Engine/Functions/Engine_MaterialFunctions02/Texturing", True)
+        #         heightLerp = MaterialFunctionFactory().load("HeightLerp", "/Engine/Functions/Engine_MaterialFunctions02/Texturing", True)
         #         call_HeightLerp = self.callMaterialFunction(heightLerp)
         #         call_HeightLerp.A = lerpedColorOverlay
         #         call_HeightLerp.B = call_CheapContrast_RGB.Result
@@ -52,7 +51,7 @@ class MF_LandscapeBaseMaterial:
         #     return Multiply(material_function, switched, commonParams.Roughness.Intensity)
 
         # def normalPath(self, qualitySwitched, commonParams, rotatedUVs):
-        #     multiplyAdd = MaterialFunction.load("MultiplyAdd", "/Engine/Functions/Engine_MaterialFunctions02/Math", True)
+        #     multiplyAdd = MaterialFunctionFactory().load("MultiplyAdd", "/Engine/Functions/Engine_MaterialFunctions02/Math", True)
 
         #     switched = self.doStuffWithTexture(material_function, commonParams.Normal, True, qualitySwitched, commonParams, rotatedUVs)
 
@@ -117,9 +116,9 @@ class MF_LandscapeBaseMaterial:
         def build(self):
             commonParams = LandscapeBaseMaterialParams()
 
-            breakOutFloat4Components = MaterialFunction.load("BreakOutFloat4Components", "/Engine/Functions/Engine_MaterialFunctions02/Utility", True)
+            breakOutFloat4Components = MaterialFunctionFactory().load("BreakOutFloat4Components", "/Engine/Functions/Engine_MaterialFunctions02/Utility", True)
             call_BreakOutFloat4Components = self.callMaterialFunction(breakOutFloat4Components)
-            call_BreakOutFloat4Components.float4 = commonParams.UVParams
+            # call_BreakOutFloat4Components.float4.comesFrom(commonParams.UVParams)
 
             componentMask = ComponentMask()
             componentMask.g.set(False)
@@ -131,8 +130,14 @@ class MF_LandscapeBaseMaterial:
             multiply = Multiply()
             makeMaterialAttributes.roughness.comesFrom(multiply)
 
-            multiplyAdd = Multiply() # TODO
-            makeMaterialAttributes.normal.comesFrom(multiplyAdd)
+            multiplyAdd = MaterialFunctionFactory().load("MultiplyAdd", "/Engine/Functions/Engine_MaterialFunctions02/Math", True)
+
+            call_multiplyAdd = self.callMaterialFunction(multiplyAdd)
+            # call_multiplyAdd.a.comesFrom(switched)
+            # call_multiplyAdd.b.comesFrom(computedIntensity)
+
+
+            # makeMaterialAttributes.normal.comesFrom(multiplyAdd)
 
             add = Add()
             makeMaterialAttributes.opacity.comesFrom(add)
@@ -158,7 +163,7 @@ class MF_LandscapeBaseMaterial:
             # multiply.a = landscapeLayerCoords
             # multiply.b = uvParamsRG
 
-            # customRotator = MaterialFunction.load("CustomRotator", "/Engine/Functions/Engine_MaterialFunctions02/Texturing", True)
+            # customRotator = MaterialFunctionFactory().load("CustomRotator", "/Engine/Functions/Engine_MaterialFunctions02/Texturing", True)
             # call_CustomRotator = self.callMaterialFunction(customRotator)
 
             # call_CustomRotator.

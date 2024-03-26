@@ -1,6 +1,5 @@
 from pamux_unreal_tools.material_function import MaterialFunction
 from pamux_unreal_tools.base.material_function_builder_base import MaterialLayerFunctionBuilderBase
-from pamux_unreal_tools.material import Material
 from pamux_unreal_tools.material_function import MaterialFunction
 
 from pamux_unreal_tools.generated.material_expression_wrappers import *

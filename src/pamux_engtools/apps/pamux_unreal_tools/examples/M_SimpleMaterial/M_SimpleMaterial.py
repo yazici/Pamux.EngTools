@@ -7,7 +7,7 @@ import sys
 
 sys.path.append(str(Path(__file__).parent.parent.parent.resolve()))
  
-from pamux_unreal_tools.material import Material
+from pamux_unreal_tools.material import MaterialFactory
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.base.material_expression_container import *
 
@@ -37,7 +37,7 @@ class MaterialBuilder:
         textureSample = TextureSample(self.material)
         textureSample.UVs.comesFrom(textureCoord.output)
 
-material = Material.loadOrCreate("M_Test", "/Game/Materials/Pamux", True)
+material = MaterialFactory().loadOrCreate("M_Test", "/Game/Materials/Pamux", True)
 
 material_builder = MaterialBuilder(material)
 material_builder.build()

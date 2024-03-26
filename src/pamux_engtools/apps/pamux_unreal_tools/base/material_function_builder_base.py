@@ -1,5 +1,5 @@
 
-from pamux_unreal_tools.material_function import MaterialFunction
+from pamux_unreal_tools.material_function import MaterialFunction, MaterialFunctionFactory
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.base.container_builder_base import ContainerBuilderBase
 
@@ -7,10 +7,7 @@ LandscapeMaterialFunctionPackage = "/Game/Materials/Pamux/Landscape/Functions"
 
 class MaterialFunctionBuilderBase(ContainerBuilderBase):
     def __init__(self, container_name: str, package_name: str = LandscapeMaterialFunctionPackage):
-        super().__init__(container_name, package_name)
-
-    def loadOrCreate(self):
-        return MaterialFunction.loadOrCreate(self.container_name, self.package_name, True)
+        super().__init__(MaterialFunctionFactory(), None, container_name, package_name)
 
     def makeFunctionOutput(self, name, sort_priority):
         result = FunctionOutput()

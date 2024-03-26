@@ -52,9 +52,9 @@ class LandscapeLayerParams(LandscapeBaseMaterialParams):
 
 class Params:
     def __init__(self, material):
-        self.Wetness = ScalarParameter(material)
-        self.LandscapeRVT = ScalarParameter(material)
-        self.LandscapeVisibilityMask = ScalarParameter(material)
+        self.Wetness = ScalarParameter()
+        self.LandscapeRVT = ScalarParameter()
+        self.LandscapeVisibilityMask = ScalarParameter()
 
         self.Dirt = LandscapeLayerParams("Dirt")
         self.Grass = LandscapeLayerParams("Grass")

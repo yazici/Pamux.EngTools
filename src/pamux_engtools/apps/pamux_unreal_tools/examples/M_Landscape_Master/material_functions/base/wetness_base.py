@@ -1,14 +1,22 @@
-from pamux_unreal_tools.material_function import MaterialFunction
 
 from pamux_unreal_tools.base.material_function_builder_base import MaterialFunctionBuilderBase
-from pamux_unreal_tools.material import Material
-from pamux_unreal_tools.material_function import MaterialFunction
 
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.base.material_expression_container import *
 
 LandscapeMaterialFunctionPackage = "/Game/Materials/Pamux/Landscape/Functions"
 
+# REPL:
+# BPFactory = unreal.BlueprintFactory()
+# AT = unreal.AssetToolsHelpers.get_asset_tools()
+# EAL = unreal.EditorAssetLibrary
+# EUL = unreal.EditorUtilityLibrary # https://docs.unrealengine.com/4.27/en-US/PythonAPI/class/EditorUtilityLibrary.html
+# MEL = unreal.MaterialEditingLibrary
+
+# EUL.get_selected_assets()
+# EUL.get_selected_blueprint_classes()
+# a = EAL.load_asset("/Game/Materials/Pamux/Landscape/Functions/MF_Wetness")
+# MEL.create_material_expression_in_function(a, unreal.MaterialExpressionComment, 100, 100)
 class WetnessBuilderBase(MaterialFunctionBuilderBase):
     def __init__(self, container_name: str, package_name: str = LandscapeMaterialFunctionPackage):
         super().__init__(container_name, package_name)

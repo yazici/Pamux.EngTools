@@ -13,7 +13,7 @@ class WetnessBuilderBase(MaterialFunctionBuilderBase):
     def __init__(self, container_name: str, package_name: str = LandscapeMaterialFunctionPackage):
         super().__init__(container_name, package_name)
 
-    def getMaterialAttributesOutput(self):
+    def getMaterialAttributes(self):
         textureSampleSet = MaterialFunctionBuilderBase.TextureSampleSet(
             "/Game/Materials/Landscape/Textures/GrassyLayer/T_GrassyLayer_A", 
             "/Game/Materials/Landscape/Textures/GrassyLayer/T_GrassyLayer_R", 
@@ -26,9 +26,4 @@ class WetnessBuilderBase(MaterialFunctionBuilderBase):
         makeMaterialAttributes.opacity.comesFrom(textureSampleSet.opacity.RGB)
         makeMaterialAttributes.normal.comesFrom(textureSampleSet.normal.RGB)
 
-        materialAttributes = FunctionInput()
-        materialAttributes.input_name.set("MaterialAttributes")
-        materialAttributes.input_type.set(unreal.FunctionInputType.FUNCTION_INPUT_MATERIAL_ATTRIBUTES)
-        materialAttributes.preview.comesFrom(makeMaterialAttributes.output)
-
-        return materialAttributes.output
+        return FunctionInput.create("MaterialAttributes", unreal.FunctionInputType.FUNCTION_INPUT_MATERIAL_ATTRIBUTES, makeMaterialAttributes)

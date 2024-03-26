@@ -47,8 +47,11 @@ class InSocket(Socket):
     def __init__(self, materialExpression, name, type):
         super().__init__(materialExpression, name, type, False)
 
-    def comesFrom(self, outSocket: Socket) -> bool:
-        return MEL.connect_material_expressions(outSocket.materialExpression.asset, outSocket.name, self.materialExpression.asset, self.name)
+    def comesFrom(self, source) -> bool:
+        if isinstance(source, Socket):
+            return MEL.connect_material_expressions(source.materialExpression.asset, source.name, self.materialExpression.asset, self.name)
+        else:    
+            return MEL.connect_material_expressions(source.asset, "", self.materialExpression.asset, self.name)
 
 class OutSocket(Socket):
     def __init__(self, materialExpression, name, type):

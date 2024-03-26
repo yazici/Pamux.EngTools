@@ -375,6 +375,9 @@ class CTORParams:
     def appendInput(self, name):
         self.params.append(CTORParams.Param(name, "input"))
 
+    def appendInputOrConst(self, name):
+        self.params.append(CTORParams.Param(name, "iorc"))
+
     def declare(self):
         result = ""
         for param in self.params:
@@ -388,6 +391,12 @@ class CTORParams:
                 result += f"\n        if {param.name} is not None: self.{param.name}.set({param.name})"
             elif param.type == "input":
                 result += f"\n        if {param.name} is not None: self.{param.name}.comesFrom({param.name})"
+            elif param.type == "iorc":
+                result += f"\n        if {param.name} is not None:"
+                result += f"\n           if isinstance({param.name}, float):"
+                result += f"\n              self.const_{param.name}.set({param.name})"
+                result += f"\n           else:"
+                result += f"\n              self.{param.name}.comesFrom({param.name})"
         return result
     
 parameter_with_default_value_classes = [
@@ -399,7 +408,9 @@ parameter_with_default_value_classes = [
     "CurveAtlasRowParameter",
     "DoubleVectorParameter"]
 
-binary_op_classes = [
+binary_op_classes = []
+
+binary_op_classes_with_const = [
     "Add",
     "Multiply",
     "Subtract",
@@ -410,7 +421,9 @@ binary_op_classes = [
 
 unary_op_classes = [
     "Saturate",
-    "OneMinus"
+    "OneMinus",
+    "ComponentMask",
+    "BreakMaterialAttributes"
 ]
 
 def setup_ctor_params(pamux_wrapper_class_name):
@@ -424,9 +437,18 @@ def setup_ctor_params(pamux_wrapper_class_name):
     elif pamux_wrapper_class_name in binary_op_classes:
         result.appendInput("a")
         result.appendInput("b")
-
+    elif pamux_wrapper_class_name in binary_op_classes_with_const:
+        result.appendInputOrConst("a")
+        result.appendInputOrConst("b")
+    elif pamux_wrapper_class_name == "Constant":
+        result.appendProperty("r")
+    elif pamux_wrapper_class_name == "LinearInterpolate" or pamux_wrapper_class_name == "BlendMaterialAttributes":
+        result.appendInput("a")
+        result.appendInput("b")
+        result.appendInput("alpha")
 
     return result
+
 def write_pamux_wrapper_class(py_file, c):
     pamux_wrapper_class_name = c.__name__[len("MaterialExpression"):]
 

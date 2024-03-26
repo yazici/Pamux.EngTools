@@ -65,8 +65,16 @@ class Add(MaterialExpression):
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
 
-        if a is not None: self.a.comesFrom(a)
-        if b is not None: self.b.comesFrom(b)
+        if a is not None:
+           if isinstance(a, float):
+              self.const_a.set(a)
+           else:
+              self.a.comesFrom(a)
+        if b is not None:
+           if isinstance(b, float):
+              self.const_b.set(b)
+           else:
+              self.b.comesFrom(b)
 
 class AntialiasedTextureMask(MaterialExpression):
     def __init__(self, node_pos_x = 0, node_pos_y = 0):
@@ -341,7 +349,7 @@ class BlackBody(MaterialExpression):
 
 
 class BlendMaterialAttributes(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
+    def __init__(self, a = None, b = None, alpha = None, node_pos_x = 0, node_pos_y = 0):
         super().__init__(unreal.MaterialExpressionBlendMaterialAttributes, node_pos_x, node_pos_y)
 
         # Properties
@@ -357,9 +365,12 @@ class BlendMaterialAttributes(MaterialExpression):
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
 
+        if a is not None: self.a.comesFrom(a)
+        if b is not None: self.b.comesFrom(b)
+        if alpha is not None: self.alpha.comesFrom(alpha)
 
 class BreakMaterialAttributes(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
+    def __init__(self, input = None, node_pos_x = 0, node_pos_y = 0):
         super().__init__(unreal.MaterialExpressionBreakMaterialAttributes, node_pos_x, node_pos_y)
 
         # Properties
@@ -397,6 +408,7 @@ class BreakMaterialAttributes(MaterialExpression):
         self.shadingModel = OutSocket(self, 'ShadingModel', 'StructProperty')
         self.displacement = OutSocket(self, 'Displacement', 'StructProperty')
 
+        if input is not None: self.input.comesFrom(input)
 
 class BumpOffset(MaterialExpression):
     def __init__(self, node_pos_x = 0, node_pos_y = 0):
@@ -582,7 +594,7 @@ class Comment(MaterialExpression):
 
 
 class ComponentMask(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
+    def __init__(self, input = None, node_pos_x = 0, node_pos_y = 0):
         super().__init__(unreal.MaterialExpressionComponentMask, node_pos_x, node_pos_y)
 
         # Properties
@@ -598,6 +610,7 @@ class ComponentMask(MaterialExpression):
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
 
+        if input is not None: self.input.comesFrom(input)
 
 class Composite(MaterialExpression):
     def __init__(self, node_pos_x = 0, node_pos_y = 0):
@@ -615,7 +628,7 @@ class Composite(MaterialExpression):
 
 
 class Constant(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
+    def __init__(self, r = None, node_pos_x = 0, node_pos_y = 0):
         super().__init__(unreal.MaterialExpressionConstant, node_pos_x, node_pos_y)
 
         # Properties
@@ -628,6 +641,7 @@ class Constant(MaterialExpression):
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
 
+        if r is not None: self.r.set(r)
 
 class Constant2Vector(MaterialExpression):
     def __init__(self, node_pos_x = 0, node_pos_y = 0):
@@ -1124,8 +1138,16 @@ class Divide(MaterialExpression):
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
 
-        if a is not None: self.a.comesFrom(a)
-        if b is not None: self.b.comesFrom(b)
+        if a is not None:
+           if isinstance(a, float):
+              self.const_a.set(a)
+           else:
+              self.a.comesFrom(a)
+        if b is not None:
+           if isinstance(b, float):
+              self.const_b.set(b)
+           else:
+              self.b.comesFrom(b)
 
 class Dodge(MaterialExpression):
     def __init__(self, node_pos_x = 0, node_pos_y = 0):
@@ -1881,7 +1903,7 @@ class LightmassReplace(MaterialExpression):
 
 
 class LinearInterpolate(MaterialExpression):
-    def __init__(self, node_pos_x = 0, node_pos_y = 0):
+    def __init__(self, a = None, b = None, alpha = None, node_pos_x = 0, node_pos_y = 0):
         super().__init__(unreal.MaterialExpressionLinearInterpolate, node_pos_x, node_pos_y)
 
         # Properties
@@ -1898,6 +1920,9 @@ class LinearInterpolate(MaterialExpression):
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
 
+        if a is not None: self.a.comesFrom(a)
+        if b is not None: self.b.comesFrom(b)
+        if alpha is not None: self.alpha.comesFrom(alpha)
 
 class Logarithm(MaterialExpression):
     def __init__(self, node_pos_x = 0, node_pos_y = 0):
@@ -2649,8 +2674,16 @@ class Max(MaterialExpression):
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
 
-        if a is not None: self.a.comesFrom(a)
-        if b is not None: self.b.comesFrom(b)
+        if a is not None:
+           if isinstance(a, float):
+              self.const_a.set(a)
+           else:
+              self.a.comesFrom(a)
+        if b is not None:
+           if isinstance(b, float):
+              self.const_b.set(b)
+           else:
+              self.b.comesFrom(b)
 
 class Min(MaterialExpression):
     def __init__(self, a = None, b = None, node_pos_x = 0, node_pos_y = 0):
@@ -2668,8 +2701,16 @@ class Min(MaterialExpression):
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
 
-        if a is not None: self.a.comesFrom(a)
-        if b is not None: self.b.comesFrom(b)
+        if a is not None:
+           if isinstance(a, float):
+              self.const_a.set(a)
+           else:
+              self.a.comesFrom(a)
+        if b is not None:
+           if isinstance(b, float):
+              self.const_b.set(b)
+           else:
+              self.b.comesFrom(b)
 
 class Minus(MaterialExpression):
     def __init__(self, node_pos_x = 0, node_pos_y = 0):
@@ -2701,8 +2742,16 @@ class Multiply(MaterialExpression):
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
 
-        if a is not None: self.a.comesFrom(a)
-        if b is not None: self.b.comesFrom(b)
+        if a is not None:
+           if isinstance(a, float):
+              self.const_a.set(a)
+           else:
+              self.a.comesFrom(a)
+        if b is not None:
+           if isinstance(b, float):
+              self.const_b.set(b)
+           else:
+              self.b.comesFrom(b)
 
 class NamedRerouteBase(MaterialExpression):
     def __init__(self, node_pos_x = 0, node_pos_y = 0):
@@ -4903,8 +4952,16 @@ class Subtract(MaterialExpression):
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
 
-        if a is not None: self.a.comesFrom(a)
-        if b is not None: self.b.comesFrom(b)
+        if a is not None:
+           if isinstance(a, float):
+              self.const_a.set(a)
+           else:
+              self.a.comesFrom(a)
+        if b is not None:
+           if isinstance(b, float):
+              self.const_b.set(b)
+           else:
+              self.b.comesFrom(b)
 
 class Switch(MaterialExpression):
     def __init__(self, node_pos_x = 0, node_pos_y = 0):

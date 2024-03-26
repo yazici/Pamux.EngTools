@@ -16,32 +16,23 @@ class MF_Puddles:
         def build(self):
             materialAttributesOutput = self.getMaterialAttributesOutput()
 
-            breakMaterialAttributes = BreakMaterialAttributes()
-            breakMaterialAttributes.input.comesFrom(materialAttributesOutput)
+            breakMaterialAttributes = BreakMaterialAttributes(materialAttributesOutput)
 
             puddleColor = VectorParameter("Puddle Color", unreal.LinearColor(0.057292, 0.051375, 0.034017, 1.0))
             puddleHeight = ScalarParameter("Puddle Height", 1.0)
             puddleSlope = ScalarParameter("Puddle Slope", 0.25)
             puddleDepth = ScalarParameter("Puddle Depth", 0.75)
             puddleRoughness = ScalarParameter("Puddle Roughness", 0.15)
-            puddleSpecular = OneMinus()
-            puddleSpecular.input.comesFrom(puddleRoughness.output)
+            puddleSpecular = OneMinus(puddleRoughness.output)
 
             puddleNormal = Constant3Vector()
             puddleNormal.constant = Property(puddleNormal, 'constant', 'LinearColor') # TODO No Input
             puddleNormal.constant.set(unreal.LinearColor(0.0, 0.0, 1.0))
 
-            puddleOpacity = Constant()
-            puddleOpacity.r.set(1.0)
+            puddleOpacity = Constant(1.0)
+            puddleColorMultiply = Multiply(puddleColor.output, puddleColor.a)
 
-            puddleColorMultiply = Multiply()
-            puddleColorMultiply.a.comesFrom(puddleColor.output)
-            puddleColorMultiply.b.comesFrom(puddleColor.a)
-
-            lerp = LinearInterpolate()
-            lerp.a.comesFrom(breakMaterialAttributes.baseColor)
-            lerp.b.comesFrom(puddleColorMultiply.output)
-            lerp.alpha.comesFrom(puddleDepth.output)
+            lerp = LinearInterpolate(breakMaterialAttributes.baseColor, puddleColorMultiply.output, puddleDepth.output)
 
             makeMaterialAttributes = MakeMaterialAttributes()
             makeMaterialAttributes.baseColor.comesFrom(lerp.output)
@@ -72,29 +63,19 @@ class MF_Puddles:
             makeMaterialAttributes.shadingModel.comesFrom(breakMaterialAttributes.shadingModel)
             makeMaterialAttributes.displacement.comesFrom(breakMaterialAttributes.displacement)
 
-            componentMask = ComponentMask()
-            componentMask.input.comesFrom(breakMaterialAttributes.opacity)
+            componentMask = ComponentMask(breakMaterialAttributes.opacity)
             componentMask.r.set(True)
             componentMask.g.set(False)
             componentMask.b.set(False)
             componentMask.a.set(False)
 
-            saturate1 = Saturate(
-                            Divide(
-                                Subtract(componentMask.output, puddleHeight.output).output,
-                                puddleSlope.output
-                            ).output)
+            saturate = Saturate(OneMinus(Saturate(Divide(Subtract(componentMask, puddleHeight), puddleSlope))))
 
-            saturate2 = Saturate(OneMinus(saturate1.output).output)
-
-            blendMaterialAttributes = BlendMaterialAttributes()
-            blendMaterialAttributes.a.comesFrom(materialAttributesOutput)
-            blendMaterialAttributes.b.comesFrom(makeMaterialAttributes.output)
-            blendMaterialAttributes.alpha.comesFrom(saturate2.output)
+            blendMaterialAttributes = BlendMaterialAttributes(materialAttributesOutput, makeMaterialAttributes, saturate)
 
 
             result = self.makeFunctionOutput("Result", 0)
             MEL.connect_material_expressions(blendMaterialAttributes.asset, "", result.asset, "")
 
             puddleMask = self.makeFunctionOutput("PuddleMask", 1)
-            MEL.connect_material_expressions(saturate2.asset, "", puddleMask.asset, "")
+            MEL.connect_material_expressions(saturate.asset, "", puddleMask.asset, "")

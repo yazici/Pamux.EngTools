@@ -124,28 +124,26 @@ class MF_LandscapeBaseMaterial:
             componentMask = ComponentMask()
             componentMask.g.set(False)
 
-            self.makeMaterialAttributes = MakeMaterialAttributes()
+            makeMaterialAttributes = MakeMaterialAttributes()
             qualitySwitch = QualitySwitch()
-            self.makeMaterialAttributes.baseColor.comesFrom(qualitySwitch.output)
+            makeMaterialAttributes.baseColor.comesFrom(qualitySwitch)
 
             multiply = Multiply()
-            self.makeMaterialAttributes.roughness.comesFrom(multiply.output)
+            makeMaterialAttributes.roughness.comesFrom(multiply)
 
             multiplyAdd = Multiply() # TODO
-            self.makeMaterialAttributes.normal.comesFrom(multiplyAdd.output)
+            makeMaterialAttributes.normal.comesFrom(multiplyAdd)
 
             add = Add()
-            self.makeMaterialAttributes.opacity.comesFrom(add.output)
+            makeMaterialAttributes.opacity.comesFrom(add)
             
-            self.breakMaterialAttributes = BreakMaterialAttributes()            
-            self.breakMaterialAttributes.input.comesFrom(self.makeMaterialAttributes.output)
-
+            breakMaterialAttributes = BreakMaterialAttributes(makeMaterialAttributes)
 
             result, height = self.makeLayerFunctionOutputs()
 
             MEL.connect_material_expressions(
-                self.breakMaterialAttributes.asset,
-                self.breakMaterialAttributes.input.name,
+                breakMaterialAttributes.asset,
+                breakMaterialAttributes.input.name,
                 result.asset,
                 f"")
 

@@ -148,6 +148,9 @@ def setup_input_sockets(pamux_wrapper_class_name):
     elif pamux_wrapper_class_name == "Saturate":
         result.append(Value('', 'StructProperty'))
 
+    elif pamux_wrapper_class_name == "ComponentMask":
+        result.append(Value('', 'StructProperty'))
+
     elif pamux_wrapper_class_name == "SetMaterialAttributes":
         result.append(Value('MaterialAttributes', 'StructProperty'))
 
@@ -207,6 +210,9 @@ def setup_input_sockets(pamux_wrapper_class_name):
         result.append(Value('', 'StructProperty'))
 
     elif pamux_wrapper_class_name == "GetMaterialAttributes":
+        result.append(Value('', 'StructProperty'))
+
+    elif pamux_wrapper_class_name == "OneMinus":
         result.append(Value('', 'StructProperty'))
 
     elif pamux_wrapper_class_name == "Desaturation":
@@ -294,6 +300,13 @@ def setup_output_sockets(pamux_wrapper_class_name):
     elif pamux_wrapper_class_name == "MakeMaterialAttributes":
         result.append(Value('', 'StructProperty'))
 
+    elif pamux_wrapper_class_name == "VectorParameter":
+        result.append(Value('', 'StructProperty'))
+        result.append(Value('r', 'StructProperty'))
+        result.append(Value('g', 'StructProperty'))
+        result.append(Value('b', 'StructProperty'))
+        result.append(Value('a', 'StructProperty'))
+
     elif pamux_wrapper_class_name in material_expressions_dump_data:
         result = material_expressions_dump_data[pamux_wrapper_class_name].outputs
 
@@ -348,22 +361,33 @@ def setup_properties(doc):
     return result
 
 class CTORParams:
+    class Param:
+        def __init__(self, name, type):
+            self.name = name
+            self.type = type
+
     def __init__(self):
         self.params = []
 
-    def append(self, name):
-        self.params.append(name)
+    def appendProperty(self, name):
+        self.params.append(CTORParams.Param(name, "property"))
+
+    def appendInput(self, name):
+        self.params.append(CTORParams.Param(name, "input"))
 
     def declare(self):
         result = ""
         for param in self.params:
-            result += f", {param} = None"
+            result += f", {param.name} = None"
         return result
     
     def assign(self):
         result = ""
         for param in self.params:
-            result += f"\n        if {param} is not None: self.{param}.set({param})"
+            if param.type == "property":
+                result += f"\n        if {param.name} is not None: self.{param.name}.set({param.name})"
+            elif param.type == "input":
+                result += f"\n        if {param.name} is not None: self.{param.name}.comesFrom({param.name})"
         return result
     
 parameter_with_default_value_classes = [
@@ -384,13 +408,24 @@ binary_op_classes = [
     "Min"
 ]
 
+unary_op_classes = [
+    "Saturate",
+    "OneMinus"
+]
+
 def setup_ctor_params(pamux_wrapper_class_name):
     result = CTORParams()
 
     if pamux_wrapper_class_name in parameter_with_default_value_classes:
-        result.append("parameter_name")
-        result.append("default_value")
-    
+        result.appendProperty("parameter_name")
+        result.appendProperty("default_value")
+    elif pamux_wrapper_class_name in unary_op_classes:
+        result.appendInput("input")
+    elif pamux_wrapper_class_name in binary_op_classes:
+        result.appendInput("a")
+        result.appendInput("b")
+
+
     return result
 def write_pamux_wrapper_class(py_file, c):
     pamux_wrapper_class_name = c.__name__[len("MaterialExpression"):]
@@ -405,9 +440,9 @@ def write_pamux_wrapper_class(py_file, c):
     py_file.write("\n")
     py_file.write(f"class {pamux_wrapper_class_name}(MaterialExpression):")
     py_file.write("\n")
-    py_file.write(f"    def __init__(self, parent: MaterialExpressionContainer{ctor_params.declare()}, node_pos_x = 0, node_pos_y = 0):")
+    py_file.write(f"    def __init__(self{ctor_params.declare()}, node_pos_x = 0, node_pos_y = 0):")
     py_file.write("\n")
-    py_file.write(f"        super().__init__(parent, unreal.{c.__name__}, node_pos_x, node_pos_y)")
+    py_file.write(f"        super().__init__(unreal.{c.__name__}, node_pos_x, node_pos_y)")
     py_file.write("\n")
     py_file.write("\n")
     py_file.write(f"        # Properties")
@@ -480,6 +515,8 @@ def create_py_from_unreal_module():
         py_file.write("from pamux_unreal_tools.material_expression import MaterialExpression")
         py_file.write("\n")
         py_file.write("from pamux_unreal_tools.base.material_expression_container import *")
+        py_file.write("\n")
+
 
         for class_name in dir(unreal):
             c = getattr(unreal, class_name)

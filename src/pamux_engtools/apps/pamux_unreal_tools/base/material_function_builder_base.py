@@ -13,7 +13,7 @@ class MaterialFunctionBuilderBase(ContainerBuilderBase):
         return MaterialFunction.loadOrCreate(self.container_name, self.package_name, True)
 
     def makeFunctionOutput(self, name, sort_priority):
-        result = FunctionOutput(self.current_container)
+        result = FunctionOutput()
         result.output_name.set(name)
         result.sort_priority.set(sort_priority)
         return result

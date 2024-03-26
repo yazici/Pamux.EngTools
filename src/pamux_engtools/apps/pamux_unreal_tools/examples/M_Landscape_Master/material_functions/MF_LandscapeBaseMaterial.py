@@ -121,23 +121,23 @@ class MF_LandscapeBaseMaterial:
             call_BreakOutFloat4Components = self.callMaterialFunction(breakOutFloat4Components)
             call_BreakOutFloat4Components.float4 = commonParams.UVParams
 
-            componentMask = ComponentMask(self.current_container)
+            componentMask = ComponentMask()
             componentMask.g.set(False)
 
-            self.makeMaterialAttributes = MakeMaterialAttributes(self.current_container)
-            qualitySwitch = QualitySwitch(self.current_container)
+            self.makeMaterialAttributes = MakeMaterialAttributes()
+            qualitySwitch = QualitySwitch()
             self.makeMaterialAttributes.baseColor.comesFrom(qualitySwitch.output)
 
-            multiply = Multiply(self.current_container)
+            multiply = Multiply()
             self.makeMaterialAttributes.roughness.comesFrom(multiply.output)
 
-            multiplyAdd = Multiply(self.current_container) # TODO
+            multiplyAdd = Multiply() # TODO
             self.makeMaterialAttributes.normal.comesFrom(multiplyAdd.output)
 
-            add = Add(self.current_container)
+            add = Add()
             self.makeMaterialAttributes.opacity.comesFrom(add.output)
             
-            self.breakMaterialAttributes = BreakMaterialAttributes(self.current_container)            
+            self.breakMaterialAttributes = BreakMaterialAttributes()            
             self.breakMaterialAttributes.input.comesFrom(self.makeMaterialAttributes.output)
 
 

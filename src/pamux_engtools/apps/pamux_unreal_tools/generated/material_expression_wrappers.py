@@ -637,7 +637,6 @@ class Constant(MaterialExpression):
         self.r = Property(self, 'r', 'float')
 
         # Input Sockets
-        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -1461,13 +1460,14 @@ class FunctionInput(MaterialExpression):
 
     @staticmethod
     def create(input_name, input_type, preview):
-        result = FunctionInput()
-        result.input_name.set(input_name)
-        result.input_type.set(input_type)
-
         if isinstance(preview, float):
             preview = Constant(preview)
 
+        CurrentNodePos.x += NodePos.DeltaX
+
+        result = FunctionInput()
+        result.input_name.set(input_name)
+        result.input_type.set(input_type)
         result.preview.comesFrom(preview)
         return result
 
@@ -2813,35 +2813,38 @@ class NamedRerouteBase(MaterialExpression):
 
 
 class NamedRerouteDeclaration(MaterialExpression):
-    def __init__(self, node_pos: NodePos = None):
+    def __init__(self, name = None, input = None, nodeColor = None, node_pos: NodePos = None):
         super().__init__(unreal.MaterialExpressionNamedRerouteDeclaration, node_pos)
 
         # Properties
-        self.desc = Property(self, 'desc', 'str')
         self.name = Property(self, 'name', 'Name')
-        self.node_color = Property(self, 'node_color', 'LinearColor')
+        self.desc = Property(self, 'desc', 'str')
+        self.nodeNolor = Property(self, 'nodeNolor', 'LinearColor')
+        self.variableGuid = Property(self, 'variableGuid', 'Guid')
 
         # Input Sockets
-        self.input = InSocket(self, 'Input', 'StructProperty')
-        self.variableGuid = InSocket(self, 'VariableGuid', 'StructProperty')
+        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
 
+        if name is not None: self.name.set(name)
+        if input is not None: self.input.comesFrom(input)
+        if nodeColor is not None: self.nodeColor.set(nodeColor)
 
 class NamedRerouteUsage(MaterialExpression):
-    def __init__(self, node_pos: NodePos = None):
+    def __init__(self, declarationGuid = None, node_pos: NodePos = None):
         super().__init__(unreal.MaterialExpressionNamedRerouteUsage, node_pos)
 
         # Properties
-        self.desc = Property(self, 'desc', 'str')
+        self.declarationGuid = Property(self, 'declarationGuid', 'Guid')
 
         # Input Sockets
-        self.declarationGuid = InSocket(self, 'DeclarationGuid', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
 
+        if declarationGuid is not None: self.declarationGuid.set(declarationGuid)
 
 class NaniteReplace(MaterialExpression):
     def __init__(self, node_pos: NodePos = None):
@@ -4540,19 +4543,18 @@ class SquareRoot(MaterialExpression):
 
 
 class StaticBool(MaterialExpression):
-    def __init__(self, node_pos: NodePos = None):
+    def __init__(self, value = None, node_pos: NodePos = None):
         super().__init__(unreal.MaterialExpressionStaticBool, node_pos)
 
         # Properties
-        self.desc = Property(self, 'desc', 'str')
-        self.value = Property(self, 'value', 'bool')
+        self.value = Property(self, 'Value', 'bool')
 
         # Input Sockets
-        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
 
+        if value is not None: self.value.set(value)
 
 class StaticBoolParameter(MaterialExpression):
     def __init__(self, parameter_name = None, default_value = None, node_pos: NodePos = None):

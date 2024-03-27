@@ -1,6 +1,8 @@
 # py "C:/src/Pamux.EngTools/src/pamux_engtools/apps/pamux_unreal_tools/examples/M_Landscape_Master/M_Landscape_Master.py"
 from pathlib import Path
 import sys
+import os
+import shutil
 
 sys.path.append(str(Path(__file__).parent.parent.parent.parent.resolve()))
 
@@ -187,5 +189,9 @@ class M_Landscape_Master:
 #call_SCurve = self.callMaterialFunction(sCurve)
 #call_SCurve.In.comesFrom(baseColor)
 #call_SCurve.Power.comesFrom(Params.specularContrast)
+
+folder = "C:/src/Unreal Projects/PamuxSurvival/Content/Materials/Pamux"
+if os.path.isdir(folder):
+    shutil.rmtree(folder)
 
 material = M_Landscape_Master.Builder("M_Landscape_Master", "/Game/Materials/Pamux").get()

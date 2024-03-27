@@ -31,7 +31,7 @@ class MaterialExpressionContainer:
         return self.f_create_material_expression(self.asset, expression_class, node_pos.x, node_pos.y)
 
     def save(self):
-        self.f_layout_expression(self.asset)
+        # self.f_layout_expression(self.asset)
         if self.should_recompile:
             MEL.recompile_material(self.asset)
         EAL.save_loaded_asset(self.asset, False)

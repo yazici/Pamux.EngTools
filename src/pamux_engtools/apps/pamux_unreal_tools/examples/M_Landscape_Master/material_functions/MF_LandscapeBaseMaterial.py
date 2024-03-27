@@ -1,4 +1,5 @@
 from importlib import * 
+import uuid
 
 from pamux_unreal_tools.material_function import MaterialFunctionFactory
 from pamux_unreal_tools.base.material_function_builder_base import MaterialLayerFunctionBuilderBase
@@ -113,8 +114,64 @@ class MF_LandscapeBaseMaterial:
 
         #     return MultiplyAdd(material_function, heightTexture, computedIntensity)
 
+
+        def __build_Input(self, input_name, input_type, preview):
+            result = FunctionInput.create(input_name, input_type, preview)
+            result.use_preview_value_as_default.set(True)
+
+            CurrentNodePos.x += NodePos.DeltaX
+
+            rtResult = NamedRerouteDeclaration(f"rt{input_name}", result)
+
+            CurrentNodePos.x = 0
+            CurrentNodePos.y += NodePos.DeltaY
+
+            return result, rtResult
+
+
+        def __build_Inputs(self):
+            CurrentNodePos.x = 0
+
+            rotation, rtRotation = self.__build_Input("Rotation", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR, Constant(0.0))
+
+            bombDoRotationVariation, rtDoTextureBomb = self.__build_Input("BombDoRotationVariation", unreal.FunctionInputType.FUNCTION_INPUT_STATIC_BOOL, StaticBool(False))
+
+            bombCellScale, rtBombCellScale = self.__build_Input("BombCellScale", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR, Constant(1.0))
+
+            bombPatternScale, rtBombPatternScale = self.__build_Input("BombPatternScale", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR, Constant(1.0))
+
+            bombRandomOffset, rtBombRandomOffset = self.__build_Input("BombRandomOffset", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR, Constant(0.0))
+
+            displacement, rtDisplacement = self.__build_Input("Displacement", unreal.FunctionInputType.FUNCTION_INPUT_TEXTURE2D, TextureBase())
+
+            doTextureBomb = FunctionInput.create("DoTextureBomb", unreal.FunctionInputType.FUNCTION_INPUT_STATIC_BOOL, StaticBool(True))
+            
+            CurrentNodePos.y += NodePos.DeltaY
+            sb = StaticBool(False)
+            CurrentNodePos.y -= NodePos.DeltaY
+            CurrentNodePos.x += NodePos.DeltaX/4*3
+            qualitySwitch = QualitySwitch()
+            qualitySwitch.default.comesFrom(doTextureBomb)
+            #qualitySwitch.inputs.comesFrom(StaticBool(False))
+
+            
+            MEL.connect_material_expressions(sb.output.materialExpression.asset, "", qualitySwitch.asset, "Low")
+
+            CurrentNodePos.x += NodePos.DeltaX/2
+            rtDoTextureBomb = NamedRerouteDeclaration("rtDoTextureBomb", qualitySwitch)
+
+            CurrentNodePos.y += NodePos.DeltaY
+            CurrentNodePos.x = 0
+            
+            # rtRotationUsage = NamedRerouteUsage(rtRotation.variableGuid.get())
+
         def build(self):
+            CurrentNodePos.goto_inputs()
+            self.__build_Inputs()
+
+            CurrentNodePos.goto_process()
             commonParams = LandscapeBaseMaterialParams()
+            
 
             breakOutFloat4Components = MaterialFunctionFactory().load("BreakOutFloat4Components", "/Engine/Functions/Engine_MaterialFunctions02/Utility", True)
             call_BreakOutFloat4Components = self.callMaterialFunction(breakOutFloat4Components)
@@ -124,8 +181,8 @@ class MF_LandscapeBaseMaterial:
             componentMask.g.set(False)
 
             makeMaterialAttributes = MakeMaterialAttributes()
-            qualitySwitch = QualitySwitch()
-            makeMaterialAttributes.baseColor.comesFrom(qualitySwitch)
+            
+            #makeMaterialAttributes.baseColor.comesFrom(qualitySwitch)
 
             multiply = Multiply()
             makeMaterialAttributes.roughness.comesFrom(multiply)

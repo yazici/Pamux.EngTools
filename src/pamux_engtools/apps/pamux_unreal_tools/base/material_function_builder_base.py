@@ -10,6 +10,7 @@ class MaterialFunctionBuilderBase(ContainerBuilderBase):
         super().__init__(MaterialFunctionFactory(), None, container_name, package_name)
 
     def makeFunctionOutput(self, name, sort_priority):
+        CurrentNodePos.goto_outputs()
         result = FunctionOutput()
         result.output_name.set(name)
         result.sort_priority.set(sort_priority)

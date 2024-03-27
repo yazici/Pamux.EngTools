@@ -8,6 +8,40 @@ import types
 import json
 dump_folder = "C:/src/UNrealEngineClassDump/Class/Script"
 py_out_filepath = "C:/src/Pamux.EngTools/src/pamux_engtools/apps/pamux_unreal_tools/generated/material_expression_wrappers.py"
+material_expressions_dump_data = {}
+#input_only_classes = []
+#output_only_classes = []
+input_only_classes = [ ]
+output_only_classes = [ "Constant", "NamedRerouteUsage", "StaticBool" ]
+
+
+parameter_with_default_value_classes = [
+    "StaticBoolParameter",
+    "ScalarParameter",
+    "StaticSwitchParameter",
+    "VectorParameter",
+    "ChannelMaskParameter",
+    "CurveAtlasRowParameter",
+    "DoubleVectorParameter"]
+
+binary_op_classes = []
+
+binary_op_classes_with_const = [
+    "Add",
+    "Multiply",
+    "Subtract",
+    "Divide",
+    "Max",
+    "Min"
+]
+
+unary_op_classes = [
+    "Saturate",
+    "OneMinus",
+    "ComponentMask",
+    "BreakMaterialAttributes"
+]
+
 
 class Value:
     def __init__(self, name, type, notes = ""):
@@ -108,7 +142,6 @@ class UnrealDump:
                 elif value.is_property:
                     self.properties.append(value)
 
-material_expressions_dump_data = {}
 
 def read_dump_data():
     for path, subdirs, files in os.walk(dump_folder):
@@ -126,9 +159,6 @@ def read_dump_data():
                     continue
                 ud = UnrealDump(full_path)
                 material_expressions_dump_data[ud.pamux_name] = ud
-
-input_only_classes = []
-output_only_classes = []
 
 def setup_input_sockets(pamux_wrapper_class_name):
     result = Values()
@@ -149,6 +179,9 @@ def setup_input_sockets(pamux_wrapper_class_name):
         result.append(Value('', 'StructProperty'))
 
     elif pamux_wrapper_class_name == "ComponentMask":
+        result.append(Value('', 'StructProperty'))
+        
+    elif pamux_wrapper_class_name == "NamedRerouteDeclaration":
         result.append(Value('', 'StructProperty'))
 
     elif pamux_wrapper_class_name == "SetMaterialAttributes":
@@ -315,9 +348,27 @@ def setup_output_sockets(pamux_wrapper_class_name):
 
     return result
 
-def setup_properties(doc):
-    is_in_editor_properties = False
+def setup_properties(pamux_wrapper_class_name, doc):
     result = Values()
+    if pamux_wrapper_class_name == "NamedRerouteDeclaration":
+         result.append(Value('name', 'Name'))
+         result.append(Value('desc', 'str'))
+         result.append(Value('nodeNolor', 'LinearColor'))
+         result.append(Value('variableGuid', 'Guid'))
+         return result
+
+    if pamux_wrapper_class_name == "NamedRerouteUsage":
+        # result.append(Value('name', 'Name'))
+        result.append(Value('declarationGuid', 'Guid'))
+        return result
+    
+    if pamux_wrapper_class_name == "StaticBool":
+        result.append(Value('Value', 'bool'))
+        return result
+    
+
+    is_in_editor_properties = False
+    
     for doc_line in doc.split("\n"):
         if "Editor Properties" in doc_line:
             is_in_editor_properties = True
@@ -398,33 +449,6 @@ class CTORParams:
                 result += f"\n           else:"
                 result += f"\n              self.{param.name}.comesFrom({param.name})"
         return result
-    
-parameter_with_default_value_classes = [
-    "StaticBoolParameter",
-    "ScalarParameter",
-    "StaticSwitchParameter",
-    "VectorParameter",
-    "ChannelMaskParameter",
-    "CurveAtlasRowParameter",
-    "DoubleVectorParameter"]
-
-binary_op_classes = []
-
-binary_op_classes_with_const = [
-    "Add",
-    "Multiply",
-    "Subtract",
-    "Divide",
-    "Max",
-    "Min"
-]
-
-unary_op_classes = [
-    "Saturate",
-    "OneMinus",
-    "ComponentMask",
-    "BreakMaterialAttributes"
-]
 
 def setup_ctor_params(pamux_wrapper_class_name):
     result = CTORParams()
@@ -434,6 +458,9 @@ def setup_ctor_params(pamux_wrapper_class_name):
         result.appendProperty("default_value")
     elif pamux_wrapper_class_name in unary_op_classes:
         result.appendInput("input")
+
+    elif pamux_wrapper_class_name == "StaticBool":
+        result.appendProperty('value')
     elif pamux_wrapper_class_name in binary_op_classes:
         result.appendInput("a")
         result.appendInput("b")
@@ -442,6 +469,13 @@ def setup_ctor_params(pamux_wrapper_class_name):
         result.appendInputOrConst("b")
     elif pamux_wrapper_class_name == "Constant":
         result.appendProperty("r")
+    elif pamux_wrapper_class_name == "NamedRerouteDeclaration":
+        result.appendProperty("name")
+        result.appendInput("input")
+        #result.appendProperty("variableGuid")
+        result.appendProperty("nodeColor")
+    elif pamux_wrapper_class_name == "NamedRerouteUsage":
+        result.appendProperty("declarationGuid")
     elif pamux_wrapper_class_name == "LinearInterpolate" or pamux_wrapper_class_name == "BlendMaterialAttributes":
         result.appendInput("a")
         result.appendInput("b")
@@ -455,16 +489,18 @@ def get_custom_code(pamux_wrapper_class_name):
         return """
     @staticmethod
     def create(input_name, input_type, preview):
-        result = FunctionInput()
-        result.input_name.set(input_name)
-        result.input_type.set(input_type)
-
         if isinstance(preview, float):
             preview = Constant(preview)
 
+        CurrentNodePos.x += NodePos.DeltaX
+
+        result = FunctionInput()
+        result.input_name.set(input_name)
+        result.input_type.set(input_type)
         result.preview.comesFrom(preview)
         return result
 """
+
     if pamux_wrapper_class_name == "MakeMaterialAttributes":
         return """
     @staticmethod
@@ -509,7 +545,7 @@ def write_pamux_wrapper_class(py_file, c):
 
     inputs = setup_input_sockets(pamux_wrapper_class_name)
     outputs = setup_output_sockets(pamux_wrapper_class_name)
-    properties = setup_properties(c.__doc__)
+    properties = setup_properties(pamux_wrapper_class_name, c.__doc__)
     ctor_params = setup_ctor_params(pamux_wrapper_class_name)
     custom_code = get_custom_code(pamux_wrapper_class_name)
 

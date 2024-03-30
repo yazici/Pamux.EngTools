@@ -2,17 +2,30 @@
 # https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-engine-material-expressions-reference
 import unreal
 import os
+import sys
 import inspect
 import types
 
 import json
+
+from importlib import * 
+
+reloads = []
+for  k, v in sys.modules.items():
+    if k.startswith("pamux_unreal_tools"):
+        reloads.append(v)
+
+for module in reloads:
+    reload(module)
+
+
 dump_folder = "C:/src/UNrealEngineClassDump/Class/Script"
 py_out_filepath = "C:/src/Pamux.EngTools/src/pamux_engtools/apps/pamux_unreal_tools/generated/material_expression_wrappers.py"
 material_expressions_dump_data = {}
 #input_only_classes = []
 #output_only_classes = []
 input_only_classes = [ ]
-output_only_classes = [ "Constant", "NamedRerouteUsage", "StaticBool" ]
+output_only_classes = [ "Constant",  "Constant2Vector",  "Constant3Vector",  "Constant4Vector", "NamedRerouteUsage", "StaticBool", "TextureObject"]
 
 
 parameter_with_default_value_classes = [
@@ -184,6 +197,13 @@ def setup_input_sockets(pamux_wrapper_class_name):
     elif pamux_wrapper_class_name == "NamedRerouteDeclaration":
         result.append(Value('', 'StructProperty'))
 
+    elif pamux_wrapper_class_name == "QualitySwitch":
+        result.append(Value('Default', 'StructProperty'))
+        result.append(Value('Low', 'StructProperty'))
+        result.append(Value('High', 'StructProperty'))
+        result.append(Value('Medium', 'StructProperty'))
+        result.append(Value('Epic', 'StructProperty'))
+
     elif pamux_wrapper_class_name == "SetMaterialAttributes":
         result.append(Value('MaterialAttributes', 'StructProperty'))
 
@@ -340,6 +360,30 @@ def setup_output_sockets(pamux_wrapper_class_name):
         result.append(Value('b', 'StructProperty'))
         result.append(Value('a', 'StructProperty'))
 
+    elif pamux_wrapper_class_name == "Constant":
+        result.append(Value('', 'StructProperty'))
+        #result.append(Value('r', 'StructProperty'))
+
+    elif pamux_wrapper_class_name == "Constant2Vector":
+        result.append(Value('', 'StructProperty'))
+        result.append(Value('r', 'StructProperty'))
+        result.append(Value('g', 'StructProperty'))
+
+    elif pamux_wrapper_class_name == "Constant3Vector":
+        result.append(Value('', 'StructProperty'))
+        result.append(Value('r', 'StructProperty'))
+        result.append(Value('g', 'StructProperty'))
+        result.append(Value('b', 'StructProperty'))
+
+    elif pamux_wrapper_class_name == "Constant4Vector":
+        result.append(Value('', 'StructProperty'))
+        result.append(Value('r', 'StructProperty'))
+        result.append(Value('g', 'StructProperty'))
+        result.append(Value('b', 'StructProperty'))
+        result.append(Value('a', 'StructProperty'))
+
+
+
     elif pamux_wrapper_class_name in material_expressions_dump_data:
         result = material_expressions_dump_data[pamux_wrapper_class_name].outputs
 
@@ -461,6 +505,9 @@ def setup_ctor_params(pamux_wrapper_class_name):
 
     elif pamux_wrapper_class_name == "StaticBool":
         result.appendProperty('value')
+    elif pamux_wrapper_class_name == "TextureCoordinate":
+        result.appendProperty('u_tiling')
+        result.appendProperty('v_tiling')
     elif pamux_wrapper_class_name in binary_op_classes:
         result.appendInput("a")
         result.appendInput("b")
@@ -469,6 +516,15 @@ def setup_ctor_params(pamux_wrapper_class_name):
         result.appendInputOrConst("b")
     elif pamux_wrapper_class_name == "Constant":
         result.appendProperty("r")
+    elif pamux_wrapper_class_name == "Constant2Vector":
+        result.appendProperty("constant")
+    elif pamux_wrapper_class_name == "Constant3Vector":
+        result.appendProperty("constant")
+    elif pamux_wrapper_class_name == "Constant4Vector":
+        result.appendProperty("constant")
+    elif pamux_wrapper_class_name == "TextureObject":
+        result.appendProperty("sampler_type")
+        result.appendProperty("texture")
     elif pamux_wrapper_class_name == "NamedRerouteDeclaration":
         result.appendProperty("name")
         result.appendInput("input")
@@ -491,6 +547,8 @@ def get_custom_code(pamux_wrapper_class_name):
     def create(input_name, input_type, preview):
         if isinstance(preview, float):
             preview = Constant(preview)
+        elif isinstance(preview, unreal.LinearColor):
+            preview = Constant4Vector(preview)
 
         CurrentNodePos.x += NodePos.DeltaX
 

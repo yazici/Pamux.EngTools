@@ -11,7 +11,6 @@ from importlib import *
 reloads = []
 for  k, v in sys.modules.items():
     if k.startswith("pamux_unreal_tools"):
-        print(k)
         reloads.append(v)
 
 for module in reloads:
@@ -101,11 +100,11 @@ class M_Landscape_Master:
         #         #landscapeGrassOutput = Blocks.landscapeGrassOutputAndMasking(Params.foliageMask, Globals.LayersForGrass)
         #         pass
             
-        def __build_dependencies(self, layer_names):
+        def build_dependencies(self):
             self.MF_LandscapeBaseMaterial = MF_LandscapeBaseMaterial.Builder().get()
 
             self.MLF_Layers = {}
-            for layer_name in layer_names:
+            for layer_name in Globals.layer_names:
                 if layer_name == "ForestGround":
                     self.MLF_ForestGround = MLF_ForestGround.Builder(self.MF_LandscapeBaseMaterial).get()
                 else:
@@ -120,13 +119,13 @@ class M_Landscape_Master:
             self.MF_TextureCellBombing_Landscape = MF_TextureCellBombing_Landscape.Builder().get()
             
 
-        def __blendLandscapeLayers(self, layer_names):
+        def __blendLandscapeLayers(self):
             landscapeLayerBlend = LandscapeLayerBlend(self.material)
 
             layers = unreal.Array(unreal.LayerBlendInput)
             
 
-            for layer_name in layer_names:
+            for layer_name in Globals.layer_names:
                 layer = unreal.LayerBlendInput()
                 
                 layer.set_editor_property("blend_type", unreal.LandscapeLayerBlendType.LB_HEIGHT_BLEND)
@@ -136,7 +135,7 @@ class M_Landscape_Master:
 
             landscapeLayerBlend.layers.set(layers)
 
-            for layer_name in layer_names:
+            for layer_name in Globals.layer_names:
                 call_MLF_LayerX = self.callMaterialFunction(self.MLF_Layers[layer_name])
 
                 MEL.connect_material_expressions(call_MLF_LayerX.asset, "Result", landscapeLayerBlend.asset, f"Layer {layer_name}")
@@ -144,10 +143,9 @@ class M_Landscape_Master:
 
             return landscapeLayerBlend.output
 
-        def build(self):
-            self.__build_dependencies(Globals.layer_names)
-
-            # blendedLandscapeLayers = self.__blendLandscapeLayers(Globals.layer_names)
+        def build_process_nodes(self):
+            pass
+            # blendedLandscapeLayers = self.__blendLandscapeLayers()
 
             # call_MF_Wetness = self.callMaterialFunction(self.MF_Wetness)
             # call_MF_Wetness.input.comesFrom(blendedLandscapeLayers)

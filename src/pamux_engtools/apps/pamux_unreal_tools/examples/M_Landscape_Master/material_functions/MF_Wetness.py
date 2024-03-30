@@ -44,7 +44,13 @@ class MF_Wetness:
 
                 return BlendMaterialAttributes(prewettedMaterialAttributes, materialAttributes, saturate).output
 
-        def build(self):
+        def build_dependencies(self):
+            pass
+
+        def build_input_nodes(self):
+            pass
+
+        def build_process_nodes(self):
             materialAttributes = self.getMaterialAttributes()
 
             breakMaterialAttributes = BreakMaterialAttributes(materialAttributes)
@@ -60,5 +66,20 @@ class MF_Wetness:
             MEL.connect_material_expressions(heightBlendBasedOnInputWetnessValue.materialExpression.asset, "", result.asset, "")
 
             # self.heightBlendBasedOnInputWetnessValue.connectToFunctionOutput(self.result)
+        
+        def build_output_nodes(self):
+            pass
+
+        def finalize_node_connections(self):
+            #             MEL.connect_material_expressions(
+            #     breakMaterialAttributes.asset,
+            #     breakMaterialAttributes.input.name,
+            #     self.Result.asset,
+            #     f"")
+
+            # MEL.connect_material_expressions(componentMask.asset, "", self.Height.asset, f"")
+        
+            self.breakMaterialAttributes.connectToFunctionOutput(self.Result)
+            self.componentMask.connectToFunctionOutput(self.Height)
 
             

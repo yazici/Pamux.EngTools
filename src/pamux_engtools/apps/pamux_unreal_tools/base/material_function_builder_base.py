@@ -21,6 +21,18 @@ class MaterialFunctionBuilderBase(ContainerBuilderBase):
     
     def makeFunctionOutput_Height(self):
         return self.makeFunctionOutput("Height", 1)
+    
+    def build_dependencies(self):
+        pass
+    
+    def build_input_nodes(self):
+        pass
+
+    def build_output_nodes(self):
+        pass
+
+    def finalize_node_connections(self):
+        pass
 
 LandscapeMaterialLayerFunctionPackage = f"{LandscapeMaterialFunctionPackage}/Layers"
 
@@ -28,5 +40,9 @@ class MaterialLayerFunctionBuilderBase(MaterialFunctionBuilderBase):
     def __init__(self, container_name: str, package_name: str = LandscapeMaterialLayerFunctionPackage):
         super().__init__(container_name, package_name)
 
-    def makeLayerFunctionOutputs(self):
-        return self.makeFunctionOutput_Result(), self.makeFunctionOutput_Height()
+    def build_output_nodes(self):
+        CurrentNodePos.y = 0
+        self.Result = self.makeFunctionOutput_Result()
+
+        CurrentNodePos.y += NodePos.DeltaY
+        self.Height = self.makeFunctionOutput_Height()

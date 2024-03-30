@@ -17,8 +17,21 @@ class MLF_ForestGround:
             self.layer_name = "ForestGround"
             self.MF_LandscapeBaseMaterial = MF_LandscapeBaseMaterial
 
-        def build(self):
-            result, height = self.makeLayerFunctionOutputs()
+        def build_dependencies(self):
+            pass
+    
+        def build_input_nodes(self):
+            pass
+
+        def build_process_nodes(self):
+            pass
+        
+        def build_output_nodes(self):
+            pass
+
+        def finalize_node_connections(self):
+            pass
+
 
             # roughness = ScalarParameter(material_function)
             # roughness.parameter_name.set("Roughness")

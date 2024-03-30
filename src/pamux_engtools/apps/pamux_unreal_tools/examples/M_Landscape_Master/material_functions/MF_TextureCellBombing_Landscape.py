@@ -9,5 +9,17 @@ class MF_TextureCellBombing_Landscape:
         def __init__(self):
             super().__init__("MF_TextureCellBombing_Landscape")
 
-        def build(self):
+        def build_dependencies(self):
+            pass
+    
+        def build_input_nodes(self):
+            pass
+
+        def build_process_nodes(self):
+            pass
+        
+        def build_output_nodes(self):
+            pass
+
+        def finalize_node_connections(self):
             pass

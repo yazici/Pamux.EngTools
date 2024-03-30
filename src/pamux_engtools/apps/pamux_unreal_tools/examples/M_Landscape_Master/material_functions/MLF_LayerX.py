@@ -17,13 +17,14 @@ class MLF_LayerX:
             self.layer_name = layer_name
             self.MF_LandscapeBaseMaterial = MF_LandscapeBaseMaterial
 
-        def build(self):
-            self.call_MF_LandscapeBaseMaterial = self.callMaterialFunction(self.MF_LandscapeBaseMaterial)
+        def build_dependencies(self):
+            pass
+        
+        def build_input_nodes(self):
+            pass
 
-            result, height = self.makeLayerFunctionOutputs()
-
-            MEL.connect_material_expressions(self.call_MF_LandscapeBaseMaterial.asset, "Result", result.asset, f"")
-            MEL.connect_material_expressions(self.call_MF_LandscapeBaseMaterial.asset, "Height", height.asset, f"")
+        def build_process_nodes(self):
+            self.call_MF_LandscapeBaseMaterial = self.callMaterialFunction(self.MF_LandscapeBaseMaterial, [], [ "Result", "Height" ])
 
             #self.call_MF_LandscapeBaseMaterial.output.connectTo(result.a)
             #call_MF_LandscapeBaseMaterial.height.connectTo(height.a)
@@ -35,6 +36,13 @@ class MLF_LayerX:
             # roughness.default_value.set(0.5)
 
 
+        def finalize_node_connections(self):
+            return 
+            self.call_MF_LandscapeBaseMaterial.Result.connectToFunctionOutput(self.Result)
+            self.call_MF_LandscapeBaseMaterial.Height.connectToFunctionOutput(self.Height)
+
+            # MEL.connect_material_expressions(self.call_MF_LandscapeBaseMaterial.asset, "Result", self.Result.asset, f"")
+            # MEL.connect_material_expressions(self.call_MF_LandscapeBaseMaterial.asset, "Height", self.Hesult.asset, f"")
 
 
         # def MLF_Dirt():

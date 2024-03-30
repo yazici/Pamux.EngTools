@@ -1,7 +1,7 @@
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 
 class LandscapeBaseMaterialParams:
-
+    
     # self.DoTextureBomb = True
     # self.Albedo = Texture Object
     # self.Bomb.DoRotationVariation = false

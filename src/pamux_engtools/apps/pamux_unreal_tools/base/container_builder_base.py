@@ -1,4 +1,5 @@
 from pamux_unreal_tools.generated.material_expression_wrappers import *
+from pamux_unreal_tools.base.material_expression_container import InSocket, OutSocket
 
 from pamux_unreal_tools.material_function import MaterialFunction
 
@@ -12,17 +13,38 @@ class ContainerBuilderBase:
         self.params_factory = params_factory
         self.container_name = container_name
         self.package_name = package_name
-        
+  
+    def build_dependencies(self):
+        raise "Implement build_dependencies"
+    
+    def build_input_nodes(self):
+        raise "Implement build_input_nodes"
 
-    def build(self):
-        raise "Implement and build container blueprint here"
+    def build_process_nodes(self):
+        raise "Implement build_process_nodes"
+    
+    def build_output_nodes(self):
+        raise "Implement build_output_nodes"
+
+    def finalize_node_connections(self):
+        raise "Implement finalize_node_connections"
+
+    def build_FunctionInput(self, input_name, input_type, preview):
+            result = FunctionInput.create(input_name, input_type, preview)
+            result.use_preview_value_as_default.set(True)
+
+            CurrentNodePos.x += NodePos.DeltaX
+
+            result.rt = NamedRerouteDeclaration(f"rt{input_name}", result)
+
+            CurrentNodePos.x = 0
+            CurrentNodePos.y += NodePos.DeltaY
+
+            return result
 
     def loadOrCreate(self):
         result = self.container_factory.loadOrCreate(self.container_name, self.package_name, True)
         BuildStack.push(result)
-
-        print(result)
-        print(BuildStack.top())
 
         if self.params_factory is None:
             self.params = None
@@ -32,8 +54,18 @@ class ContainerBuilderBase:
 
     def get(self):
         result = self.loadOrCreate()
+        self.build_dependencies()
 
-        self.build()
+        CurrentNodePos.goto_inputs()
+        self.build_input_nodes()
+
+        CurrentNodePos.goto_process()
+        self.build_process_nodes()
+
+        CurrentNodePos.goto_outputs()
+        self.build_output_nodes()
+
+        self.finalize_node_connections()
         result.save()
 
         BuildStack.pop()
@@ -42,10 +74,19 @@ class ContainerBuilderBase:
     @property
     def current_container(self):
         return BuildStack.top()
-
-    def callMaterialFunction(self, materialFunctionToCall: MaterialFunction):
+    
+    def callMaterialFunction(self, materialFunctionToCall: MaterialFunction, virtual_inputs = [], virtual_outputs = []):
         result = MaterialFunctionCall()
         result.material_function.set(materialFunctionToCall.asset)
+
+        for name in virtual_inputs:
+            inSocket = InSocket(self, name, 'StructProperty')
+            exec(f"result.{name} = inSocket", locals())
+
+        for name in virtual_outputs:
+            outSocket = OutSocket(self, name, 'StructProperty')
+            exec(f"result.{name} = outSocket", locals())
+
         return result
 
     class TextureSampleSet:

@@ -644,7 +644,7 @@ class Constant(MaterialExpression):
         if r is not None: self.r.set(r)
 
 class Constant2Vector(MaterialExpression):
-    def __init__(self, node_pos: NodePos = None):
+    def __init__(self, constant = None, node_pos: NodePos = None):
         super().__init__(unreal.MaterialExpressionConstant2Vector, node_pos)
 
         # Properties
@@ -653,14 +653,16 @@ class Constant2Vector(MaterialExpression):
         self.r = Property(self, 'r', 'float')
 
         # Input Sockets
-        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
+        self.r = OutSocket(self, 'r', 'StructProperty')
+        self.g = OutSocket(self, 'g', 'StructProperty')
 
+        if constant is not None: self.constant.set(constant)
 
 class Constant3Vector(MaterialExpression):
-    def __init__(self, node_pos: NodePos = None):
+    def __init__(self, constant = None, node_pos: NodePos = None):
         super().__init__(unreal.MaterialExpressionConstant3Vector, node_pos)
 
         # Properties
@@ -668,14 +670,17 @@ class Constant3Vector(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
-        self.constant = InSocket(self, 'Constant', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
+        self.r = OutSocket(self, 'r', 'StructProperty')
+        self.g = OutSocket(self, 'g', 'StructProperty')
+        self.b = OutSocket(self, 'b', 'StructProperty')
 
+        if constant is not None: self.constant.set(constant)
 
 class Constant4Vector(MaterialExpression):
-    def __init__(self, node_pos: NodePos = None):
+    def __init__(self, constant = None, node_pos: NodePos = None):
         super().__init__(unreal.MaterialExpressionConstant4Vector, node_pos)
 
         # Properties
@@ -683,11 +688,15 @@ class Constant4Vector(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
-        self.constant = InSocket(self, 'Constant', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
+        self.r = OutSocket(self, 'r', 'StructProperty')
+        self.g = OutSocket(self, 'g', 'StructProperty')
+        self.b = OutSocket(self, 'b', 'StructProperty')
+        self.a = OutSocket(self, 'a', 'StructProperty')
 
+        if constant is not None: self.constant.set(constant)
 
 class ConstantBiasScale(MaterialExpression):
     def __init__(self, node_pos: NodePos = None):
@@ -1462,6 +1471,8 @@ class FunctionInput(MaterialExpression):
     def create(input_name, input_type, preview):
         if isinstance(preview, float):
             preview = Constant(preview)
+        elif isinstance(preview, unreal.LinearColor):
+            preview = Constant4Vector(preview)
 
         CurrentNodePos.x += NodePos.DeltaX
 
@@ -3540,7 +3551,10 @@ class QualitySwitch(MaterialExpression):
 
         # Input Sockets
         self.default = InSocket(self, 'Default', 'StructProperty')
-        self.inputs = InSocket(self, 'Inputs', 'StructProperty')
+        self.low = InSocket(self, 'Low', 'StructProperty')
+        self.high = InSocket(self, 'High', 'StructProperty')
+        self.medium = InSocket(self, 'Medium', 'StructProperty')
+        self.epic = InSocket(self, 'Epic', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
@@ -5135,7 +5149,7 @@ class TextureBase(MaterialExpression):
 
 
 class TextureCoordinate(MaterialExpression):
-    def __init__(self, node_pos: NodePos = None):
+    def __init__(self, u_tiling = None, v_tiling = None, node_pos: NodePos = None):
         super().__init__(unreal.MaterialExpressionTextureCoordinate, node_pos)
 
         # Properties
@@ -5152,9 +5166,11 @@ class TextureCoordinate(MaterialExpression):
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
 
+        if u_tiling is not None: self.u_tiling.set(u_tiling)
+        if v_tiling is not None: self.v_tiling.set(v_tiling)
 
 class TextureObject(MaterialExpression):
-    def __init__(self, node_pos: NodePos = None):
+    def __init__(self, sampler_type = None, texture = None, node_pos: NodePos = None):
         super().__init__(unreal.MaterialExpressionTextureObject, node_pos)
 
         # Properties
@@ -5164,11 +5180,12 @@ class TextureObject(MaterialExpression):
         self.texture = Property(self, 'texture', 'Texture')
 
         # Input Sockets
-        self.input = InSocket(self, '', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
 
+        if sampler_type is not None: self.sampler_type.set(sampler_type)
+        if texture is not None: self.texture.set(texture)
 
 class TextureObjectParameter(MaterialExpression):
     def __init__(self, node_pos: NodePos = None):

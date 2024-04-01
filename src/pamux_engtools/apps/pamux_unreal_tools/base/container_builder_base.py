@@ -1,5 +1,6 @@
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.base.material_expression_container import InSocket, OutSocket
+from pamux_unreal_tools.material_expression_factories import *
 
 from pamux_unreal_tools.material_function import MaterialFunction
 
@@ -29,22 +30,23 @@ class ContainerBuilderBase:
     def finalize_node_connections(self):
         raise "Implement finalize_node_connections"
 
-    def build_FunctionInput(self, input_name, input_type, preview):
-            result = FunctionInput.create(input_name, input_type, preview)
-            result.use_preview_value_as_default.set(True)
+    def build_FunctionInput(self, input_name, input_type, preview = None) -> FunctionInput:
+        result = FunctionInputFactory.create(input_name, input_type, preview)
+        result.use_preview_value_as_default.set(True)
 
-            CurrentNodePos.x += NodePos.DeltaX
+        CurrentNodePos.x += NodePos.DeltaX
 
-            result.rt = NamedRerouteDeclaration(f"rt{input_name}", result)
+        result.rt = NamedRerouteDeclaration(f"rt{input_name}", result)
 
-            CurrentNodePos.x = 0
-            CurrentNodePos.y += NodePos.DeltaY
+        CurrentNodePos.x = 0
+        CurrentNodePos.y += NodePos.DeltaY
 
-            return result
+        return result
 
     def loadOrCreate(self):
         result = self.container_factory.loadOrCreate(self.container_name, self.package_name)
         BuildStack.push(result)
+        print("pushed")
 
         if self.params_factory is None:
             self.params = None
@@ -69,6 +71,7 @@ class ContainerBuilderBase:
         result.save()
 
         BuildStack.pop()
+        print("popped")
         return result
 
     @property
@@ -85,7 +88,7 @@ class ContainerBuilderBase:
         _name = name.replace(" ", "")
         return _name[0].lower() + _name[1:]
 
-    def callMaterialFunction(self, materialFunctionToCall: MaterialFunction, virtual_inputs = [], virtual_outputs = []):
+    def callMaterialFunction(self, materialFunctionToCall: MaterialFunction, virtual_inputs = [], virtual_outputs = []) -> MaterialFunctionCall:
         result = MaterialFunctionCall()
         result.material_function.set(materialFunctionToCall.asset)
 

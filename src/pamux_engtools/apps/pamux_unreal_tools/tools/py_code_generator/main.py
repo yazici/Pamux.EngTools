@@ -46,6 +46,11 @@ class PyCodeGenerator:
         self.append_line(f"def {method_name}({', '.join(method_args)}) -> {return_type}:")
         self.indent()
 
+    def begin_static_method(self, method_name, method_args = [], return_type = "None") -> None:
+        self.append_line("@staticmethod")
+        self.append_line(f"def {method_name}({', '.join(method_args)}) -> {return_type}:")
+        self.indent()
+
     def begin_ctor(self, ctor_args = []) -> None:
         self.begin_method("__init__", ctor_args)
 
@@ -71,6 +76,9 @@ class PyCodeGenerator:
 
     def end_method(self) -> None:
         self.unindent()
+
+    def end_static_method(self) -> None:
+        self.end_method()
 
     def end_ctor(self) -> None:
         self.end_method()

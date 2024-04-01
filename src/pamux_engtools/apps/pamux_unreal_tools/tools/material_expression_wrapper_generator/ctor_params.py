@@ -4,8 +4,8 @@ from pamux_unreal_tools.tools.py_code_generator.method_params import *
 from pamux_unreal_tools.tools.material_expression_wrapper_generator.globals import *
 
 class PropertyParam(MethodParam):
-    def __init__(self, name: str):
-        super().__init__(name)
+    def __init__(self, name: str, type = None, default_value = None):
+        super().__init__(name, type, default_value)
 
     def append_assignment_lines(self, pyGen: PyCodeGenerator):
         pyGen.append_line(f"if {self.name} is not None:")
@@ -65,8 +65,10 @@ class CTORParams:
         codes = [ "self" ]
         for param in self.params:
             codes.append(param.code)
+
+        codes.append("node_pos: NodePos = None")
         return codes
-    
+                         
     def append_assignment_lines(self, pyGen: PyCodeGenerator):
         for param in self.params:
             param.append_assignment_lines(pyGen)
@@ -126,7 +128,7 @@ def setup_ctor_params(pamux_wrapper_class_name):
         result.append(PropertyParam("name"))
         result.append(InputParam("input"))
         #result.append(PropertyParam("variableGuid"))
-        result.append(PropertyParam("nodeColor"))
+        result.append(PropertyParam("nodeColor", None, "None"))
 
     elif pamux_wrapper_class_name == "NamedRerouteUsage":
         result.append(PropertyParam("declarationGuid"))

@@ -84,6 +84,10 @@ class Socket(MaterialExpressionValue):
         super().__init__(materialExpression, name, type)
         self.is_output = is_output
 
+    @property
+    def asset(self):
+        return self.materialExpression.asset
+
 class InSocket(Socket):
     def __init__(self, materialExpression, name, type):
         super().__init__(materialExpression, name, type, False)
@@ -97,6 +101,7 @@ class InSocket(Socket):
 class OutSocket(Socket):
     def __init__(self, materialExpression, name, type):
         super().__init__(materialExpression, name, type, True)
+    
 
     @dispatch(InSocket)
     def connectTo(self, inSocket: InSocket) -> bool:

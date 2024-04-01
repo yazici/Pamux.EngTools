@@ -1,6 +1,7 @@
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.base.material_expression_container import *
 from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.base.wetness_base import WetnessBuilderBase
+from pamux_unreal_tools.material_expression_factories import *
 
 class MF_Puddles:
     class Builder(WetnessBuilderBase):
@@ -34,7 +35,7 @@ class MF_Puddles:
 
             self.lerp = LinearInterpolate(self.breakMaterialAttributes.baseColor, self.puddleColorMultiply.output, self.puddleDepth.output)
 
-            self.makeMaterialAttributes = MakeMaterialAttributes.create(self.breakMaterialAttributes)
+            self.makeMaterialAttributes = MakeMaterialAttributesFactory.create(self.breakMaterialAttributes)
             self.makeMaterialAttributes.baseColor.comesFrom(self.lerp.output)
             self.makeMaterialAttributes.specular.comesFrom(self.puddleSpecular.output)
             self.makeMaterialAttributes.roughness.comesFrom(self.puddleRoughness.output)

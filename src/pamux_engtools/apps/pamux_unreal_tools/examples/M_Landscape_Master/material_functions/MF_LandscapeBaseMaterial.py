@@ -5,7 +5,7 @@ from pamux_unreal_tools.base.material_function_builder_base import MaterialLayer
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.examples.M_Landscape_Master.params import *
 from pamux_unreal_tools.examples.M_Landscape_Master.globals import *
-
+from pamux_unreal_tools.material_expression_factories import *
 from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MF_TextureCellBombing_Landscape import MF_TextureCellBombing_Landscape
 
 class MF_LandscapeBaseMaterial:
@@ -130,7 +130,7 @@ class MF_LandscapeBaseMaterial:
             self.bombPatternScale = self.build_FunctionInput("BombPatternScale", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR, Constant(1.0))
             self.bombRandomOffset = self.build_FunctionInput("BombRandomOffset", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR, Constant(0.0))
             self.displacement = self.build_FunctionInput("Displacement", unreal.FunctionInputType.FUNCTION_INPUT_TEXTURE2D, TextureBase())
-            self.doTextureBomb = FunctionInput.create("DoTextureBomb", unreal.FunctionInputType.FUNCTION_INPUT_STATIC_BOOL, StaticBool(True))
+            self.doTextureBomb = FunctionInputFactory.create("DoTextureBomb", unreal.FunctionInputType.FUNCTION_INPUT_STATIC_BOOL, StaticBool(True))
             
             CurrentNodePos.y += NodePos.DeltaY
             CurrentNodePos.y -= NodePos.DeltaY

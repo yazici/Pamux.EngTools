@@ -36,7 +36,7 @@ def generate_pamux_wrapper_class(pyGen: PyCodeGenerator, c: unreal.MaterialExpre
     outputs = setup_output_sockets(pamux_wrapper_class_name)
     properties = setup_properties(pamux_wrapper_class_name, c.__doc__)
     ctor_params = setup_ctor_params(pamux_wrapper_class_name)
-    custom_code = get_custom_code(pamux_wrapper_class_name)
+    
 
 
     pyGen.append_blank_line()
@@ -61,7 +61,7 @@ def generate_pamux_wrapper_class(pyGen: PyCodeGenerator, c: unreal.MaterialExpre
 
     # pyGen.append_blank_line()
     pyGen.begin_ctor(ctor_params.declaration_code)
-    pyGen.append_line("super().__init__()")
+    pyGen.append_line(f"super().__init__(unreal.MaterialExpression{pamux_wrapper_class_name}, node_pos)")
 
     properties.to_py("Property", pyGen)
     inputs.to_py("InSocket", pyGen)
@@ -72,9 +72,6 @@ def generate_pamux_wrapper_class(pyGen: PyCodeGenerator, c: unreal.MaterialExpre
     # pyGen.append_line(f"self.outputs = {pamux_wrapper_class_name}.Outputs()")
     
     ctor_params.append_assignment_lines(pyGen)
-
-    if custom_code is not None:
-        pyGen.append_lines(custom_code)
     pyGen.end_ctor()
 
     pyGen.end_class()

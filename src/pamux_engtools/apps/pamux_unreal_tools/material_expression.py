@@ -17,8 +17,12 @@ MEL = unreal.MaterialEditingLibrary
 
 class MaterialExpressionBase:
     def __init__(self, expression_class, node_pos: NodePos = None):
+        print("top")
+        print(BuildStack.top())
         self.parent = BuildStack.top()
         self.expression_class = expression_class
+
+        print(expression_class)
 
         self.asset = self.parent.createMaterialExpression(self.expression_class, node_pos)
 

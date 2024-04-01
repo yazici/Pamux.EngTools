@@ -1,6 +1,7 @@
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.base.material_expression_container import *
 from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.base.wetness_base import WetnessBuilderBase
+from pamux_unreal_tools.material_expression_factories import *
 # material = util.load_asset('/Game/0_Root/Material/M_standard_shd_test.M_standard_shd_test')
 # print(material) # Material
  
@@ -24,7 +25,7 @@ class MF_Wetness:
 
                 saturate = Saturate(desaturation)
 
-                makeMaterialAttributes = MakeMaterialAttributes.create(materialAttributes)
+                makeMaterialAttributes = MakeMaterialAttributesFactory.create(materialAttributes)
                 makeMaterialAttributes.baseColor.comesFrom(Multiply(saturate, wetnessDarken))
                 makeMaterialAttributes.roughness.comesFrom(wetnessRoughness)
 
@@ -35,7 +36,7 @@ class MF_Wetness:
                 breakMaterialAttributes = BreakMaterialAttributes(materialAttributes)
 
                 # wetness = FunctionInput()
-                wetness = FunctionInput.create("Wetness", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR, Constant(1.0))
+                wetness = FunctionInputFactory.create("Wetness", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR, Constant(1.0))
                 # wetness.input_name.set("Wetness")
                 # wetness.input_type.set(unreal.FunctionInputType.FUNCTION_INPUT_SCALAR)
                 # wetness.preview.comesFrom(Constant(1.0))

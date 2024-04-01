@@ -3,19 +3,27 @@ class Stack:
         self.items = []
 
     def push(self, value):
-        return self.items.append(value)
+        print(f"prepush {len(self.items)}")
+        result = self.items.append(value)
+        print(f"postpush {len(self.items)}")
+        return result
     
     def pop(self):
+        print(f"prepop {len(self.items)}")
         if len(self.items) == 0:
+            print(f"postpop {len(self.items)}")
             return None
-        return self.items.pop()
+        result = self.items.pop()
+        print(f"postpop {len(self.items)}")
+        return result
     
     def top(self):
+        print(f"pretop {len(self.items)}")
         if len(self.items) == 0:
             return None
         return self.items[len(self.items)-1]
 
-
+print("BuildStack")
 BuildStack = Stack()
 
 

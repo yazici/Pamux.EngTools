@@ -3,6 +3,7 @@ from pamux_unreal_tools.base.material_function_builder_base import MaterialFunct
 
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.base.material_expression_container import *
+from pamux_unreal_tools.material_expression_factories import *
 
 LandscapeMaterialFunctionPackage = "/Game/Materials/Pamux/Landscape/Functions"
 
@@ -34,4 +35,4 @@ class WetnessBuilderBase(MaterialFunctionBuilderBase):
         makeMaterialAttributes.opacity.comesFrom(textureSampleSet.opacity.RGB)
         makeMaterialAttributes.normal.comesFrom(textureSampleSet.normal.RGB)
 
-        return FunctionInput.create("MaterialAttributes", unreal.FunctionInputType.FUNCTION_INPUT_MATERIAL_ATTRIBUTES, makeMaterialAttributes)
+        return FunctionInputFactory.create("MaterialAttributes", unreal.FunctionInputType.FUNCTION_INPUT_MATERIAL_ATTRIBUTES, makeMaterialAttributes)

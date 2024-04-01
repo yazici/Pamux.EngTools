@@ -128,10 +128,6 @@ class MF_TextureCellBombing_Landscape:
             self.__build_RandomRotate()
             self.__build_NormalRotation()
             self.__build_PreOutput()
-        
-        def build_output_nodes(self):
-            self.outputs = MF_TextureCellBombing_Landscape.Outputs(self)
-
 
         def finalize_node_connections(self):
             return self.lerp.output.connectToFunctionOutput(self.outputs.Result)

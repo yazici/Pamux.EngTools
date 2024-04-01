@@ -6,6 +6,11 @@ from pamux_unreal_tools.base.container_builder_base import ContainerBuilderBase
 LandscapeMaterialFunctionPackage = "/Game/Materials/Pamux/Landscape/Functions"
 
 class MaterialFunctionBuilderBase(ContainerBuilderBase):
+    class Outputs_ResultOnly:
+        def __init__(self, builder):
+            CurrentNodePos.y = 0
+            self.Result = builder.makeFunctionOutput_Result()
+
     def __init__(self, container_name: str, package_name: str = LandscapeMaterialFunctionPackage):
         super().__init__(MaterialFunctionFactory(), None, container_name, package_name)
 
@@ -29,7 +34,7 @@ class MaterialFunctionBuilderBase(ContainerBuilderBase):
         pass
 
     def build_output_nodes(self):
-        pass
+        self.outputs = MaterialFunctionBuilderBase.Outputs_ResultOnly(self)
 
     def finalize_node_connections(self):
         pass

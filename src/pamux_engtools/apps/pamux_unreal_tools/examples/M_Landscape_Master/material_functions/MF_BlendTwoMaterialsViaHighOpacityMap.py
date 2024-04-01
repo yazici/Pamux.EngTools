@@ -1,24 +1,45 @@
-from pamux_unreal_tools.generated.material_expression_wrappers import *
+import unreal
+from pathlib import Path
+import sys
 
+sys.path.append(str(Path(__file__).parent.parent.parent.parent.parent.resolve()))
+
+from importlib import * 
+
+reloads = []
+for  k, v in sys.modules.items():
+    if k.startswith("pamux_unreal_tools"):
+        reloads.append(v)
+
+for module in reloads:
+    reload(module)
+## 
 from pamux_unreal_tools.base.material_function_builder_base import MaterialFunctionBuilderBase
 
+from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.base.material_expression_container import *
+from pamux_unreal_tools.material_function import MaterialFunctionFactory
 
 class MF_BlendTwoMaterialsViaHighOpacityMap:
+    class Inputs:
+        def __init__(self, builder):
+            preview_value = unreal.Vector4f(0.0, 0.0, 0.0, 1.0)
+            self.alpha = builder.build_FunctionInput("Alpha", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR)
+            self.materialA = builder.build_FunctionInput("MaterialA", unreal.FunctionInputType.FUNCTION_INPUT_MATERIAL_ATTRIBUTES)
+            self.materialB = builder.build_FunctionInput("MaterialB", unreal.FunctionInputType.FUNCTION_INPUT_MATERIAL_ATTRIBUTES)
+
     class Builder(MaterialFunctionBuilderBase):
         def __init__(self):
             super().__init__("MF_BlendTwoMaterialsViaHighOpacityMap")
 
         def build_dependencies(self):
-            pass
-    
+            factory = MaterialFunctionFactory()
+            self.heightLerpWithTwoHeightMaps = factory.load("HeightLerpWithTwoHeightMaps", "/Engine/Functions/Engine_MaterialFunctions02/Texturing")
+
         def build_input_nodes(self):
             pass
 
         def build_process_nodes(self):
-            pass
-        
-        def build_output_nodes(self):
             pass
 
         def finalize_node_connections(self):

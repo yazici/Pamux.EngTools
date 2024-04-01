@@ -38,15 +38,12 @@ class Material(MaterialExpressionContainer):
 
 
 class MaterialFactory(MaterialExpressionContainerFactory):
-    def load(self, asset_name, package_path, deleteAllMaterialExpressions = False):
+    def load(self, asset_name, package_path):
         asset = EAL.load_asset(f"{package_path}/{asset_name}")
         if asset is None:
             raise f"Can't load asset: {package_path}/{asset_name}"
 
-        result = Material(asset)
-        if deleteAllMaterialExpressions:
-            result.deleteAllMaterialExpressions()
-        return result
+        return Material(asset)
 
     def create(self, asset_name, package_path):
         return Material(AT.create_asset(asset_name, package_path, unreal.Material, unreal.MaterialFactoryNew()))

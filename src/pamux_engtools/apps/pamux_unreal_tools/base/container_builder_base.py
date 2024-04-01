@@ -43,7 +43,7 @@ class ContainerBuilderBase:
             return result
 
     def loadOrCreate(self):
-        result = self.container_factory.loadOrCreate(self.container_name, self.package_name, True)
+        result = self.container_factory.loadOrCreate(self.container_name, self.package_name)
         BuildStack.push(result)
 
         if self.params_factory is None:
@@ -75,17 +75,28 @@ class ContainerBuilderBase:
     def current_container(self):
         return BuildStack.top()
     
+    def __get_field_name(self, name):
+        if name == "X-Axis":
+            return "xAxis"
+        if name == "Y-Axis":
+            return "yAxis"
+        if name == "Z-Axis":
+            return "zAxis"
+        _name = name.replace(" ", "")
+        return _name[0].lower() + _name[1:]
+
     def callMaterialFunction(self, materialFunctionToCall: MaterialFunction, virtual_inputs = [], virtual_outputs = []):
         result = MaterialFunctionCall()
         result.material_function.set(materialFunctionToCall.asset)
 
         for name in virtual_inputs:
-            inSocket = InSocket(self, name, 'StructProperty')
-            exec(f"result.{name} = inSocket", locals())
+            
+            inSocket = InSocket(result, name, 'StructProperty')
+            exec(f"result.{self.__get_field_name(name)} = inSocket", locals())
 
         for name in virtual_outputs:
-            outSocket = OutSocket(self, name, 'StructProperty')
-            exec(f"result.{name} = outSocket", locals())
+            outSocket = OutSocket(result, name, 'StructProperty')
+            exec(f"result.{self.__get_field_name(name)} = outSocket", locals())
 
         return result
 

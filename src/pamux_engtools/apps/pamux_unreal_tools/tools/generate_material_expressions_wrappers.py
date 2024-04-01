@@ -5,6 +5,9 @@ import os
 import sys
 import inspect
 import types
+from pathlib import Path
+print(str(Path(__file__).parent.parent.parent.resolve()))
+sys.path.append(str(Path(__file__).parent.parent.parent.resolve()))
 
 import json
 
@@ -18,15 +21,14 @@ for  k, v in sys.modules.items():
 for module in reloads:
     reload(module)
 
-
 dump_folder = "C:/src/UNrealEngineClassDump/Class/Script"
-py_out_filepath = "C:/src/Pamux.EngTools/src/pamux_engtools/apps/pamux_unreal_tools/generated/material_expression_wrappers.py"
+generated_py_out_filepath = "C:/src/Pamux.EngTools/src/pamux_engtools/apps/pamux_unreal_tools/generated/material_expression_wrappers.py"
+
 material_expressions_dump_data = {}
 #input_only_classes = []
 #output_only_classes = []
 input_only_classes = [ ]
 output_only_classes = [ "Constant",  "Constant2Vector",  "Constant3Vector",  "Constant4Vector", "NamedRerouteUsage", "StaticBool", "TextureObject"]
-
 
 parameter_with_default_value_classes = [
     "StaticBoolParameter",
@@ -37,7 +39,7 @@ parameter_with_default_value_classes = [
     "CurveAtlasRowParameter",
     "DoubleVectorParameter"]
 
-binary_op_classes = []
+binary_op_classes = [ "AppendVector" ]
 
 binary_op_classes_with_const = [
     "Add",
@@ -51,7 +53,6 @@ binary_op_classes_with_const = [
 unary_op_classes = [
     "Saturate",
     "OneMinus",
-    "ComponentMask",
     "BreakMaterialAttributes"
 ]
 
@@ -178,8 +179,13 @@ def setup_input_sockets(pamux_wrapper_class_name):
 
     if pamux_wrapper_class_name in output_only_classes:
         return result
+    
+    if pamux_wrapper_class_name == "StaticSwitch":
+        result.append(Value('True', 'StructProperty'))
+        result.append(Value('False', 'StructProperty'))
+        result.append(Value('Value', 'StructProperty'))
 
-    if pamux_wrapper_class_name == "TextureSample":
+    elif pamux_wrapper_class_name == "TextureSample":
         result.append(Value('UVs', 'StructProperty'))
         result.append(Value('Tex', 'StructProperty'))
         result.append(Value('ApplyViewMipBias', 'StructProperty'))
@@ -473,6 +479,9 @@ class CTORParams:
     def appendInputOrConst(self, name):
         self.params.append(CTORParams.Param(name, "iorc"))
 
+    def appendRGBAMask(self, name = "rgbaMask"):
+        self.params.append(CTORParams.Param(name, "rgbaMask"))
+
     def declare(self):
         result = ""
         for param in self.params:
@@ -492,6 +501,19 @@ class CTORParams:
                 result += f"\n              self.const_{param.name}.set({param.name})"
                 result += f"\n           else:"
                 result += f"\n              self.{param.name}.comesFrom({param.name})"
+
+            elif param.type == "rgbaMask":
+                result += f"\n        if {param.name} is not None:"
+                result += f"\n            __mask = {param.name}.lower()"
+                result += f"\n            self.r.set('r' in __mask)"
+                result += f"\n            self.g.set('g' in __mask)"
+                result += f"\n            self.b.set('b' in __mask)"
+                result += f"\n            self.a.set('a' in __mask)"
+                result += f"\n        else:"
+                result += f"\n            self.r.set(True)"
+                result += f"\n            self.g.set(True)"
+                result += f"\n            self.b.set(False)"
+                result += f"\n            self.a.set(False)"
         return result
 
 def setup_ctor_params(pamux_wrapper_class_name):
@@ -502,9 +524,15 @@ def setup_ctor_params(pamux_wrapper_class_name):
         result.appendProperty("default_value")
     elif pamux_wrapper_class_name in unary_op_classes:
         result.appendInput("input")
-
     elif pamux_wrapper_class_name == "StaticBool":
         result.appendProperty('value')
+    elif pamux_wrapper_class_name == "ComponentMask":
+        result.appendInput("input")
+        result.appendRGBAMask()
+    elif pamux_wrapper_class_name == "StaticSwitch":
+        result.appendInput('true')
+        result.appendInput('false')
+        result.appendInput('value')
     elif pamux_wrapper_class_name == "TextureCoordinate":
         result.appendProperty('u_tiling')
         result.appendProperty('v_tiling')
@@ -676,7 +704,7 @@ skip_these_classes= [
 
 skip_these_classes = []
 def create_py_from_unreal_module():
-    with open(py_out_filepath, "w+t") as py_file:
+    with open(generated_py_out_filepath, "w+t") as py_file:
 
         py_file.write("# This file is generated. Please do NOT modify.")
         py_file.write("\n")

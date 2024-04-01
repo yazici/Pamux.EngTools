@@ -21,15 +21,12 @@ class MaterialFunction(MaterialExpressionContainer):
                          MEL.layout_material_function_expressions)
 
 class MaterialFunctionFactory(MaterialExpressionContainerFactory):
-    def load(self, asset_name, package_path, deleteAllMaterialExpressions = False):
+    def load(self, asset_name, package_path):
         asset = EAL.load_asset(f"{package_path}/{asset_name}")
         if asset is None:
             raise f"Can't load asset: {package_path}/{asset_name}"
             
-        result = MaterialFunction(asset)
-        if deleteAllMaterialExpressions:
-            result.deleteAllMaterialExpressions()
-        return result
+        return MaterialFunction(asset)
 
     def create(self, asset_name, package_path):
         return MaterialFunction(AT.create_asset(asset_name, package_path, unreal.MaterialFunction, unreal.MaterialFunctionFactoryNew()))

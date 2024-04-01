@@ -16,32 +16,32 @@ class MF_LandscapeBaseMaterial:
         def build_dependencies(self):
             factory = MaterialFunctionFactory()
 
-            self.blend_Overlay = factory.load("Blend_Overlay", "/Engine/Functions/Engine_MaterialFunctions03/Blends", True)
-            self.cheapContrast_RGB = factory.load("CheapContrast_RGB", "/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment", True)
-            self.heightLerp = factory.load("HeightLerp", "/Engine/Functions/Engine_MaterialFunctions02/Texturing", True)
-            self.multiplyAdd = factory.load("MultiplyAdd", "/Engine/Functions/Engine_MaterialFunctions02/Math", True)
-            self.breakOutFloat4Components = factory.load("BreakOutFloat4Components", "/Engine/Functions/Engine_MaterialFunctions02/Utility", True)
-            self.multiplyAdd = factory.load("MultiplyAdd", "/Engine/Functions/Engine_MaterialFunctions02/Math", True)
-            self.customRotator = factory.load("CustomRotator", "/Engine/Functions/Engine_MaterialFunctions02/Texturing", True)
+            self.blend_Overlay = factory.load("Blend_Overlay", "/Engine/Functions/Engine_MaterialFunctions03/Blends")
+            self.cheapContrast_RGB = factory.load("CheapContrast_RGB", "/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment")
+            self.heightLerp = factory.load("HeightLerp", "/Engine/Functions/Engine_MaterialFunctions02/Texturing")
+            self.multiplyAdd = factory.load("MultiplyAdd", "/Engine/Functions/Engine_MaterialFunctions02/Math")
+            self.breakOutFloat4Components = factory.load("BreakOutFloat4Components", "/Engine/Functions/Engine_MaterialFunctions02/Utility")
+            self.multiplyAdd = factory.load("MultiplyAdd", "/Engine/Functions/Engine_MaterialFunctions02/Math")
+            self.customRotator = factory.load("CustomRotator", "/Engine/Functions/Engine_MaterialFunctions02/Texturing")
 
             self.MF_TextureCellBombing_Landscape = MF_TextureCellBombing_Landscape.Builder().get()
             self.call_MF_TextureCellBombing_Landscape = {}
 
         # def baseColorPath(self, qualitySwitched, commonParams, rotatedUVs, heightTexture):
-        #         switched = self.doStuffWithTexture(material_function, commonParams.Albedo, False, qualitySwitched, commonParams, rotatedUVs)        
+        #         switched = self.doStuffWithTexture(commonParams.Albedo, False, qualitySwitched, commonParams, rotatedUVs)        
 
-        #         switchedAndMultipliedColorOverlay = Multiply(material_function, switched, commonParams.ColorOverlay)
+        #         switchedAndMultipliedColorOverlay = Multiply(switched, commonParams.ColorOverlay)
 
         #         
         #         call_Blend_Overlay = self.callMaterialFunction(blend_Overlay)
         #         call_Blend_Overlay.base = switched
         #         call_Blend_Overlay.blend = commonParams.ColorOverlay
-        #         # blendOverlay = Blend_Overlay(material_function, switched, commonParams.ColorOverlay)
+        #         # blendOverlay = Blend_Overlay(switched, commonParams.ColorOverlay)
 
 
-        #         qualitySwitched2 = QualitySwitch(material_function, call_Blend_Overlay.Result, switchedAndMultipliedColorOverlay)
+        #         qualitySwitched2 = QualitySwitch(call_Blend_Overlay.Result, switchedAndMultipliedColorOverlay)
 
-        #         lerpedColorOverlay = LinearInterpolate(material_function, switched, qualitySwitched2, commonParams.ColorOverlay.Intensity)
+        #         lerpedColorOverlay = LinearInterpolate(switched, qualitySwitched2, commonParams.ColorOverlay.Intensity)
 
         #         
         #         call_CheapContrast_RGB = self.callMaterialFunction(cheapContrast_RGB)
@@ -56,18 +56,18 @@ class MF_LandscapeBaseMaterial:
         #         return QualitySwitch(heightLerp, lerpedColorOverlay)
 
         # def roughnessPath(self, qualitySwitched, commonParams, rotatedUVs):
-        #     switched = self.doStuffWithTexture(material_function, commonParams.Roughness, False, qualitySwitched, commonParams, rotatedUVs)        
+        #     switched = self.doStuffWithTexture(commonParams.Roughness, False, qualitySwitched, commonParams, rotatedUVs)        
 
-        #     return Multiply(material_function, switched, commonParams.Roughness.Intensity)
+        #     return Multiply(switched, commonParams.Roughness.Intensity)
 
         # def normalPath(self, qualitySwitched, commonParams, rotatedUVs):
             
 
-        #     switched = self.doStuffWithTexture(material_function, commonParams.Normal, True, qualitySwitched, commonParams, rotatedUVs)
+        #     switched = self.doStuffWithTexture(commonParams.Normal, True, qualitySwitched, commonParams, rotatedUVs)
 
-        #     computedIntensity = AppendVector(material_function, commonParams.Normal.Intensity, commonParams.Normal.Intensity)
+        #     computedIntensity = AppendVector(commonParams.Normal.Intensity, commonParams.Normal.Intensity)
         #     constZero = 0
-        #     computedIntensity = AppendVector(material_function, computedIntensity, constZero)
+        #     computedIntensity = AppendVector(computedIntensity, constZero)
 
         #     call_multiplyAdd = self.callMaterialFunction(multiplyAdd)
         #     call_multiplyAdd.a.comesFrom(switched)
@@ -76,11 +76,11 @@ class MF_LandscapeBaseMaterial:
         #     return call_multiplyAdd.Result
         
         # def heightTexture(self, qualitySwitched, commonParams, rotatedUVs):
-        #     return self.doStuffWithTexture(material_function, commonParams.Displacement, False, qualitySwitched, commonParams, rotatedUVs)
+        #     return self.doStuffWithTexture(commonParams.Displacement, False, qualitySwitched, commonParams, rotatedUVs)
             
         # def doStuffWithTexture(self, texture, isNormalMap, qualitySwitched, commonParams, rotatedUVs):
         #     MF_TextureCellBombing_Landscape = MF_TextureCellBombing_Landscape.Builder().get()
-        #     call_textureCellBombing_Landscape = MaterialFunctionCall(material_function, MF_TextureCellBombing_Landscape)
+        #     call_textureCellBombing_Landscape = MaterialFunctionCall(MF_TextureCellBombing_Landscape)
 
         #     # textureCellBombing_LandscapeResult = MaterialFunctions.textureCellBombing_Landscape(
         #     #     texture,
@@ -92,9 +92,9 @@ class MF_LandscapeBaseMaterial:
         #     #     commonParams.Bomb.RotationVariation,
         #     #     isNormalMap)
             
-        #     textureSample = TextureSample(material_function, uvs = rotatedUVs, tex = texture)
+        #     textureSample = TextureSample(uvs = rotatedUVs, tex = texture)
 
-        #     return Switch(material_function, call_textureCellBombing_Landscape, textureSample, qualitySwitched)
+        #     return StaticSwitch(call_textureCellBombing_Landscape, textureSample, qualitySwitched)
 
         # def opacityPath(self, heightTexture, commonParams):
         #     # # commonParams.D.Intensity = 1
@@ -115,11 +115,11 @@ class MF_LandscapeBaseMaterial:
 
         #     # switched = Nodes.switch(textureCellBombing_LandscapeResult, textureSample, qualitySwitched)
 
-        #     computedIntensity = Power(material_function, heightTexture, commonParams.Opacity.Contrast)
-        #     computedIntensity = Multiply(material_function, computedIntensity, commonParams.Opacity.Strength)
-        #     computedIntensity = Add(material_function, computedIntensity, commonParams.Opacity.Add)
+        #     computedIntensity = Power(heightTexture, commonParams.Opacity.Contrast)
+        #     computedIntensity = Multiply(computedIntensity, commonParams.Opacity.Strength)
+        #     computedIntensity = Add(computedIntensity, commonParams.Opacity.Add)
 
-        #     return MultiplyAdd(material_function, heightTexture, computedIntensity)
+        #     return MultiplyAdd(heightTexture, computedIntensity)
 
         def build_input_nodes(self):
             CurrentNodePos.x = 0
@@ -237,21 +237,21 @@ class MF_LandscapeBaseMaterial:
             # uvParamsBA, 
             # commonParams.Rotation
             # rotatedUVs = call_CustomRotator.output
-            # customRotator(material_function, multiply.output, )
+            # customRotator(multiply.output, )
 
-            # qualitySwitched = QualitySwitch(material_function, commonParams.DoTextureBomb, False)
+            # qualitySwitched = QualitySwitch(commonParams.DoTextureBomb, False)
 
-            # heightTexture = HeightTexture(material_function, qualitySwitched, commonParams, rotatedUVs)
+            # heightTexture = HeightTexture(qualitySwitched, commonParams, rotatedUVs)
 
-            # baseColor = self.baseColorPath(material_function, qualitySwitched, commonParams, rotatedUVs, heightTexture)
-            # roughness = self.roughnessPath(material_function, qualitySwitched, commonParams, rotatedUVs)        
-            # opacity = self.opacityPath(material_function, heightTexture, commonParams)
-            # normal = self.normalPath(material_function, qualitySwitched, commonParams, rotatedUVs)
+            # baseColor = self.baseColorPath(qualitySwitched, commonParams, rotatedUVs, heightTexture)
+            # roughness = self.roughnessPath(qualitySwitched, commonParams, rotatedUVs)        
+            # opacity = self.opacityPath(heightTexture, commonParams)
+            # normal = self.normalPath(qualitySwitched, commonParams, rotatedUVs)
 
-            # sma = MakeMaterialAttributes(material_function, baseColor, roughness, normal, opacity)
-            # gma = BreakMaterialAttributes(material_function, sma)
+            # sma = MakeMaterialAttributes(baseColor, roughness, normal, opacity)
+            # gma = BreakMaterialAttributes(sma)
 
-            # gmaOpacityR = Mask(material_function, gma.Opacity, "R")
+            # gmaOpacityR = Mask(gma.Opacity, "R")
 
             # return gma, gmaOpacityR
 

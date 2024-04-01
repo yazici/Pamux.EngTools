@@ -135,7 +135,7 @@ class Append4Vector(MaterialExpression):
 
 
 class AppendVector(MaterialExpression):
-    def __init__(self, node_pos: NodePos = None):
+    def __init__(self, a = None, b = None, node_pos: NodePos = None):
         super().__init__(unreal.MaterialExpressionAppendVector, node_pos)
 
         # Properties
@@ -148,6 +148,8 @@ class AppendVector(MaterialExpression):
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
 
+        if a is not None: self.a.comesFrom(a)
+        if b is not None: self.b.comesFrom(b)
 
 class Arccosine(MaterialExpression):
     def __init__(self, node_pos: NodePos = None):
@@ -595,7 +597,7 @@ class Comment(MaterialExpression):
 
 
 class ComponentMask(MaterialExpression):
-    def __init__(self, input = None, node_pos: NodePos = None):
+    def __init__(self, input = None, rgbaMask = None, node_pos: NodePos = None):
         super().__init__(unreal.MaterialExpressionComponentMask, node_pos)
 
         # Properties
@@ -612,6 +614,17 @@ class ComponentMask(MaterialExpression):
         self.output = OutSocket(self, '', 'StructProperty')
 
         if input is not None: self.input.comesFrom(input)
+        if rgbaMask is not None:
+            __mask = rgbaMask.lower()
+            self.r.set('r' in __mask)
+            self.g.set('g' in __mask)
+            self.b.set('b' in __mask)
+            self.a.set('a' in __mask)
+        else:
+            self.r.set(True)
+            self.g.set(True)
+            self.b.set(False)
+            self.a.set(False)
 
 class Composite(MaterialExpression):
     def __init__(self, node_pos: NodePos = None):
@@ -4613,7 +4626,7 @@ class StaticComponentMaskParameter(MaterialExpression):
 
 
 class StaticSwitch(MaterialExpression):
-    def __init__(self, node_pos: NodePos = None):
+    def __init__(self, true = None, false = None, value = None, node_pos: NodePos = None):
         super().__init__(unreal.MaterialExpressionStaticSwitch, node_pos)
 
         # Properties
@@ -4621,13 +4634,16 @@ class StaticSwitch(MaterialExpression):
         self.desc = Property(self, 'desc', 'str')
 
         # Input Sockets
-        self.a = InSocket(self, 'A', 'StructProperty')
-        self.b = InSocket(self, 'B', 'StructProperty')
+        self.true = InSocket(self, 'True', 'StructProperty')
+        self.false = InSocket(self, 'False', 'StructProperty')
         self.value = InSocket(self, 'Value', 'StructProperty')
 
         # Output Sockets
         self.output = OutSocket(self, '', 'StructProperty')
 
+        if true is not None: self.true.comesFrom(true)
+        if false is not None: self.false.comesFrom(false)
+        if value is not None: self.value.comesFrom(value)
 
 class StaticSwitchParameter(MaterialExpression):
     def __init__(self, parameter_name = None, default_value = None, node_pos: NodePos = None):

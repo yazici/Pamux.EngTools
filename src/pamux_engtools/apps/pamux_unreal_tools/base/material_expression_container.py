@@ -46,15 +46,20 @@ class MaterialExpressionContainer:
         return MEL.get_material_default_texture_parameter_value(self.asset, parameterName)
 
 class MaterialExpressionContainerFactory:
-    def load(self, asset_name, package_path, deleteAllMaterialExpressions = False):
+    def load(self, asset_name, package_path):
         raise "implement load"
+
+    def loadAndClean(self, asset_name, package_path):
+        result = self.load(asset_name, package_path)
+        result.deleteAllMaterialExpressions()
+        return result
     
     def create(self, asset_name, package_path):
         raise "implement create"
     
-    def loadOrCreate(self, asset_name, package_path, deleteAllMaterialExpressions = False):
+    def loadOrCreate(self, asset_name, package_path):
         try:
-            return self.load(asset_name, package_path, deleteAllMaterialExpressions)
+            return self.loadAndClean(asset_name, package_path)
         except:
             return self.create(asset_name, package_path)
     
@@ -102,4 +107,4 @@ class OutSocket(Socket):
         return MEL.connect_material_property(self.materialExpression.asset, self.name, materialProperty)
 
     def connectToFunctionOutput(self, function_output) -> bool:
-        return MEL.connect_material_expressions(self.materialExpression.asset, self.name, function_output.asset, function_output.output_name.get())
+        return MEL.connect_material_expressions(self.materialExpression.asset, self.name, function_output.asset, "")

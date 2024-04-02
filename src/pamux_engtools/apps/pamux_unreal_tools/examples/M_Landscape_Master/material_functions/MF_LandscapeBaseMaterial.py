@@ -1,14 +1,14 @@
 from importlib import * 
 
-from pamux_unreal_tools.material_function import MaterialFunctionFactory
+from pamux_unreal_tools.factories.material_function_factory import MaterialFunctionFactory
 from pamux_unreal_tools.base.material_function_builder_base import MaterialLayerFunctionBuilderBase
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.examples.M_Landscape_Master.params import *
 from pamux_unreal_tools.examples.M_Landscape_Master.globals import *
-from pamux_unreal_tools.material_expression_factories import *
+from pamux_unreal_tools.factories.material_expression_factories import *
 from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MF_TextureCellBombing_Landscape import MF_TextureCellBombing_Landscape
 from pamux_unreal_tools.base.material_function_builder_base import *
-
+from pamux_unreal_tools.utils.node_pos import NodePos, CurrentNodePos
 class MF_LandscapeBaseMaterial:
     class Inputs:
         def __init__(self, builder: MaterialFunctionBuilderBase):
@@ -29,10 +29,11 @@ class MF_LandscapeBaseMaterial:
             self.qualitySwitch.default.comesFrom(self.doTextureBomb)
             self.qualitySwitch.low.comesFrom(StaticBool(False))
             
-            #MEL.connect_material_expressions(StaticBool(False).output.materialExpression.asset, "", qualitySwitch.asset, "Low")
+            #MEL.connect_material_expressions(StaticBool(False).output.materialExpression.unrealAsset, "", qualitySwitch.unrealAsset, "Low")
 
             CurrentNodePos.x += NodePos.DeltaX/2
-            self.doTextureBomb.rt = NamedRerouteDeclaration("rtDoTextureBomb", self.qualitySwitch)
+            NamedRerouteDeclaration("rtDoTextureBomb", self.qualitySwitch)
+            self.doTextureBomb.rt = self.qualitySwitch.rt
 
             CurrentNodePos.y += NodePos.DeltaY
             CurrentNodePos.x = 0
@@ -259,14 +260,14 @@ class MF_LandscapeBaseMaterial:
 
         def finalize_node_connections(self):
             #             MEL.connect_material_expressions(
-            #     breakMaterialAttributes.asset,
+            #     breakMaterialAttributes.unrealAsset,
             #     breakMaterialAttributes.input.name,
-            #     self.Result.asset,
+            #     self.Result.unrealAsset,
             #     f"")
 
-            # MEL.connect_material_expressions(componentMask.asset, "", self.Height.asset, f"")
+            # MEL.connect_material_expressions(componentMask.unrealAsset, "", self.Height.unrealAsset, f"")
 
-            # MEL.connect_material_expressions(self.call_BreakOutFloat4Components.output.materialExpression.asset, "", self.uvParams.asset, "Low")
+            # MEL.connect_material_expressions(self.call_BreakOutFloat4Components.output.materialExpression.unrealAsset, "", self.uvParams.unrealAsset, "Low")
         
             self.makeMaterialAttributes.output.connectToFunctionOutput(self.Result)
             self.componentMask.output.connectToFunctionOutput(self.Height)

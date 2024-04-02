@@ -19,7 +19,7 @@ for  k, v in sys.modules.items():
 for module in reloads:
     reload(module)
  
-from pamux_unreal_tools.material import MaterialFactory
+from pamux_unreal_tools.factories.material_factory import MaterialFactory
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.base.material_expression_container import *
 from pamux_unreal_tools.generated.material_expression_wrappers import *

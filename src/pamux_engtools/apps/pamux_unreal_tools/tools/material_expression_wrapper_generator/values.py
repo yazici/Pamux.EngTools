@@ -67,6 +67,17 @@ class Values:
         appended = False
         for item in self.__items:
             field_name = item.field_name(ctor)
+
+            if ctor == "MaterialExpressionEditorPropertyImpl":
+                if field_name == "desc" or field_name.startswith("material_expression_editor_"):
+                    continue
+            elif ctor == "InSocketImpl":
+                if field_name == "input":
+                    continue
+            elif ctor == "OutSocketImpl":
+                if field_name == "output":
+                    continue
+
             if not appended:
                 pyGen.append_blank_line()
                 appended = True

@@ -20,8 +20,8 @@ from pamux_unreal_tools.base.material_function_builder_base import *
 
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.base.material_expression_container import *
-from pamux_unreal_tools.material_function import MaterialFunctionFactory
-from pamux_unreal_tools.material_function import MaterialFunction
+from pamux_unreal_tools.factories.material_function_factory import MaterialFunctionFactory
+from pamux_unreal_tools.impl.material_function_impl import MaterialFunctionImpl
 
 
 from pamux_unreal_tools.base.material_function_builder_base import MaterialLayerFunctionBuilderBase
@@ -40,7 +40,7 @@ class MLF_ForestGround:
             pass
 
     class Builder(MaterialLayerFunctionBuilderBase):
-        def __init__(self, MF_LandscapeBaseMaterial: MaterialFunction):
+        def __init__(self, MF_LandscapeBaseMaterial: MaterialFunctionImpl):
             super().__init__(
                 "/Game/Materials/Pamux/Landscape/Functions/Layers/MLF_ForestGround",
                 MLF_ForestGround.Inputs,

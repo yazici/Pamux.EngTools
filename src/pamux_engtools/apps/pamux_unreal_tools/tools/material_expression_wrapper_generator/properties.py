@@ -5,7 +5,7 @@ def setup_properties(pamux_wrapper_class_name, doc):
     result = Values()
     if pamux_wrapper_class_name == "NamedRerouteDeclaration":
          result.append(PropertyInfo('name', 'Name'))
-         result.append(PropertyInfo('desc', 'str'))
+         # result.append(PropertyInfo('desc', 'str'))
          result.append(PropertyInfo('nodeNolor', 'LinearColor'))
          result.append(PropertyInfo('variableGuid', 'Guid'))
          return result
@@ -56,10 +56,10 @@ def setup_properties(pamux_wrapper_class_name, doc):
         else:
             print(notes)
 
-        if name != "material_expression_editor_x" and name != "material_expression_editor_y":
-            result.append(PropertyInfo(name, type, notes))
+        # if name != "material_expression_editor_x" and name != "material_expression_editor_y":
+        result.append(PropertyInfo(name, type, notes))
 
-    if result.is_empty:
-        result.append(PropertyInfo("desc", "str"))
+    # if result.is_empty:
+    #     result.append(PropertyInfo("desc", "str"))
         
     return result

@@ -20,10 +20,10 @@ from pamux_unreal_tools.base.material_function_builder_base import *
 
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.base.material_expression_container import *
-from pamux_unreal_tools.material_function import MaterialFunctionFactory
+from pamux_unreal_tools.factories.material_function_factory import MaterialFunctionFactory
 
 
-from pamux_unreal_tools.material_function import MaterialFunction
+from pamux_unreal_tools.impl.material_function_impl import MaterialFunctionImpl
 from pamux_unreal_tools.base.material_function_builder_base import MaterialLayerFunctionBuilderBase
 
 
@@ -37,7 +37,7 @@ class MLF_LayerX:
             self.alpha = builder.build_FunctionInput(f"{builder.layer_name}Albedo", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR)
 
     class Builder(MaterialLayerFunctionBuilderBase):
-        def __init__(self, layer_name: str, MF_LandscapeBaseMaterial: MaterialFunction):
+        def __init__(self, layer_name: str, MF_LandscapeBaseMaterial: MaterialFunctionImpl):
             super().__init__(
                 f"/Game/Materials/Pamux/Landscape/Functions/Layers/MLF_{layer_name}",
                 MLF_LayerX.Inputs,
@@ -65,8 +65,8 @@ class MLF_LayerX:
             self.call_MF_LandscapeBaseMaterial.Result.connectToFunctionOutput(self.Result)
             self.call_MF_LandscapeBaseMaterial.Height.connectToFunctionOutput(self.Height)
 
-            # MEL.connect_material_expressions(self.call_MF_LandscapeBaseMaterial.asset, "Result", self.Result.asset, f"")
-            # MEL.connect_material_expressions(self.call_MF_LandscapeBaseMaterial.asset, "Height", self.Hesult.asset, f"")
+            # MEL.connect_material_expressions(self.call_MF_LandscapeBaseMaterial.unrealAsset, "Result", self.Result.unrealAsset, f"")
+            # MEL.connect_material_expressions(self.call_MF_LandscapeBaseMaterial.unrealAsset, "Height", self.Hesult.unrealAsset, f"")
 
 
         # def MLF_Dirt():

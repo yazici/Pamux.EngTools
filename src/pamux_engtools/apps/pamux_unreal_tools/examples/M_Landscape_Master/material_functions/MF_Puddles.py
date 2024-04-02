@@ -20,12 +20,12 @@ from pamux_unreal_tools.base.material_function_builder_base import *
 
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.base.material_expression_container import *
-from pamux_unreal_tools.material_function import MaterialFunctionFactory
+from pamux_unreal_tools.factories.material_function_factory import MaterialFunctionFactory
 
 
 from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.base.wetness_base import WetnessBuilderBase
-from pamux_unreal_tools.material_expression_factories import *
-
+from pamux_unreal_tools.factories.material_expression_factories import *
+from pamux_unreal_tools.utils.node_pos import NodePos, CurrentNodePos
 class MF_Puddles:
     class Inputs:
         def __init__(self, builder: MaterialFunctionBuilderBase):
@@ -59,7 +59,7 @@ class MF_Puddles:
             self.puddleSpecular = OneMinus(self.puddleRoughness.output)
 
             self.puddleNormal = Constant3Vector()
-            self.puddleNormal.constant = Property(self.puddleNormal, 'constant', 'LinearColor') # TODO No Input
+            self.puddleNormal.constant = MaterialExpressionEditorPropertyImpl(self.puddleNormal, 'constant', 'LinearColor') # TODO No Input
             self.puddleNormal.constant.set(unreal.LinearColor(0.0, 0.0, 1.0))
 
             self.puddleOpacity = Constant(1.0)
@@ -85,5 +85,5 @@ class MF_Puddles:
             self.blendMaterialAttributes = BlendMaterialAttributes(self.materialAttributes, self.makeMaterialAttributes, self.saturate)
 
         def finalize_node_connections(self):
-            MEL.connect_material_expressions(self.blendMaterialAttributes.asset, "", self.Result.asset, "")
-            MEL.connect_material_expressions(self.saturate.asset, "", self.PuddleMask.asset, "")
+            MEL.connect_material_expressions(self.blendMaterialAttributes.unrealAsset, "", self.Result.unrealAsset, "")
+            MEL.connect_material_expressions(self.saturate.unrealAsset, "", self.PuddleMask.unrealAsset, "")

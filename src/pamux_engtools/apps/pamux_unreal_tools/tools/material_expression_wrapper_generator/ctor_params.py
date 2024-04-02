@@ -22,6 +22,16 @@ class InputParam(MethodParam):
         pyGen.append_line(f"self.{self.name}.comesFrom({self.name})")
         pyGen.end_if()
 
+class RerouteInputParam(MethodParam):
+    def __init__(self, name: str):
+        super().__init__(name)
+
+    def append_assignment_lines(self, pyGen: PyCodeGenerator):
+        pyGen.begin_if(f"{self.name} is not None")
+        pyGen.append_line(f"self.{self.name}.comesFrom({self.name})")
+        pyGen.append_line(f"{self.name}.rt = self")
+        pyGen.end_if()
+
 class InputParamWithConstProperty(MethodParam):
     def __init__(self, name: str):
         super().__init__(name)
@@ -126,7 +136,7 @@ def setup_ctor_params(pamux_wrapper_class_name):
 
     elif pamux_wrapper_class_name == "NamedRerouteDeclaration":
         result.append(PropertyParam("name"))
-        result.append(InputParam("input"))
+        result.append(RerouteInputParam("input"))
         #result.append(PropertyParam("variableGuid"))
         result.append(PropertyParam("nodeColor", None, "None"))
 

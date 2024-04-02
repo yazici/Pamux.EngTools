@@ -20,7 +20,7 @@ from pamux_unreal_tools.base.material_function_builder_base import *
 
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.base.material_expression_container import *
-from pamux_unreal_tools.material_function import MaterialFunctionFactory
+from pamux_unreal_tools.factories.material_function_factory import MaterialFunctionFactory
 
 class MF_GlancingAngleSpecCorrection:
     class Inputs:

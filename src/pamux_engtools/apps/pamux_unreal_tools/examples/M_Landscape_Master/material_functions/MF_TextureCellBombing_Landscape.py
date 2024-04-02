@@ -19,7 +19,7 @@ from pamux_unreal_tools.base.material_function_builder_base import *
 
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.base.material_expression_container import *
-from pamux_unreal_tools.material_function import MaterialFunctionFactory
+from pamux_unreal_tools.factories.material_function_factory import MaterialFunctionFactory
 
 class MF_TextureCellBombing_Landscape:
     class Inputs:
@@ -48,7 +48,9 @@ class MF_TextureCellBombing_Landscape:
             self.patternScaledInputTexture.tex.comesFrom(self.texture.rt)
             self.patternScaledInputTexture.sampler_source.set(unreal.SamplerSourceMode.SSM_WRAP_WORLD_GROUP_SETTINGS)
             self.patternScaledInputTexture.sampler_type.set(unreal.MaterialSamplerType.SAMPLERTYPE_COLOR)
-            self.patternScaledInputTexture.rt = NamedRerouteDeclaration(f"rtPatternScaledInputTexture", self.patternScaledInputTexture.RGB)
+
+            NamedRerouteDeclaration("rtPatternScaledInputTexture.RGB", self.patternScaledInputTexture.RGB)
+
 
     # [ "Texture", "UVs", "CellScale", "PatternScale", "DoRotationVariation", "RandomOffsetVariation", "RandomRotationVariation", "IsNormalMap" ], [ "Result" ]
     class Builder(MaterialFunctionBuilderBase):
@@ -75,7 +77,7 @@ class MF_TextureCellBombing_Landscape:
             self.rotateAboutWorldAxis_cheap.call_result.worldPosition.comesFrom(self.worldPosition)
 
             usage = NamedRerouteUsage(None)
-            #usage.asset.set_editor_property("Declaration", self.inputs.doRotationVariation.rt)
+            #usage.unrealAsset.set_editor_property("Declaration", self.inputs.doRotationVariation.rt)
 
             # self.inputs.doRotationVariation.rt
             switch = StaticSwitch(Add(self.rotateAboutWorldAxis_cheap.call_result.zAxis, self.worldPosition), self.worldPosition, usage)
@@ -93,6 +95,7 @@ class MF_TextureCellBombing_Landscape:
             self.rotatedInputTexture.sampler_source.set(unreal.SamplerSourceMode.SSM_WRAP_WORLD_GROUP_SETTINGS)
             self.rotatedInputTexture.sampler_type.set(unreal.MaterialSamplerType.SAMPLERTYPE_COLOR)
             self.rotatedInputTexture.rt = NamedRerouteDeclaration(f"rtRotatedInputTexture", self.rotatedInputTexture.RGB)
+            #self.rotatedInputTexture.rt.material_expression_editor_x.set(self.rotatedInputTexture.material_expression_editor_x.get() + 50)
 
             self.rotateAboutWorldAxis_cheap.call()
             self.rotateAboutWorldAxis_cheap.call_result.rotationAmount.comesFrom(self.negativeRotationVariation)
@@ -107,7 +110,7 @@ class MF_TextureCellBombing_Landscape:
             switch1 = StaticSwitch(self.normalRotation, self.rotatedInputTexture.rt, self.inputs.isNormalMap.rt)
             switch2 = StaticSwitch(switch1, self.rotatedInputTexture.rt, self.inputs.doRotationVariation.rt)
 
-            self.lerp = LinearInterpolate(self.inputs.patternScaledInputTexture.rt, switch2, self.textureSample.a.rt)
+            self.lerp = LinearInterpolate(self.inputs.patternScaledInputTexture.RGB.rt, switch2, self.textureSample.a.rt)
 
         def __build_PostInput(self):
             self.textureSample = TextureSample()

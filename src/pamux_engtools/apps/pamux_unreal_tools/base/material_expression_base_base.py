@@ -1,0 +1,2 @@
+class MaterialExpressionBaseBase:
+    pass

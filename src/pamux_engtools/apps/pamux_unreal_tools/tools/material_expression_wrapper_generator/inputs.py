@@ -20,14 +20,14 @@ def setup_input_sockets(pamux_wrapper_class_name):
         result.append(InputSocketInfo('UVs', 'StructProperty'))
         result.append(InputSocketInfo('ApplyViewMipBias', 'StructProperty'))
 
-    elif pamux_wrapper_class_name == "Saturate":
-        result.append(InputSocketInfo('', 'StructProperty'))
+    # elif pamux_wrapper_class_name == "Saturate":
+    #     result.append(InputSocketInfo('', 'StructProperty'))
 
-    elif pamux_wrapper_class_name == "ComponentMask":
-        result.append(InputSocketInfo('', 'StructProperty'))
+    # elif pamux_wrapper_class_name == "ComponentMask":
+    #     result.append(InputSocketInfo('', 'StructProperty'))
         
-    elif pamux_wrapper_class_name == "NamedRerouteDeclaration":
-        result.append(InputSocketInfo('', 'StructProperty'))
+    # elif pamux_wrapper_class_name == "NamedRerouteDeclaration":
+    #     result.append(InputSocketInfo('', 'StructProperty'))
 
     elif pamux_wrapper_class_name == "QualitySwitch":
         result.append(InputSocketInfo('Default', 'StructProperty'))
@@ -92,23 +92,23 @@ def setup_input_sockets(pamux_wrapper_class_name):
         result.append(InputSocketInfo('ShadingModel', 'StructProperty'))
         result.append(InputSocketInfo('Displacement', 'StructProperty'))
 
-    elif pamux_wrapper_class_name == "BreakMaterialAttributes":
-        result.append(InputSocketInfo('', 'StructProperty'))
+    # elif pamux_wrapper_class_name == "BreakMaterialAttributes":
+    #     result.append(InputSocketInfo('', 'StructProperty'))
 
-    elif pamux_wrapper_class_name == "GetMaterialAttributes":
-        result.append(InputSocketInfo('', 'StructProperty'))
+    # elif pamux_wrapper_class_name == "GetMaterialAttributes":
+    #     result.append(InputSocketInfo('', 'StructProperty'))
 
-    elif pamux_wrapper_class_name == "OneMinus":
-        result.append(InputSocketInfo('', 'StructProperty'))
+    # elif pamux_wrapper_class_name == "OneMinus":
+    #     result.append(InputSocketInfo('', 'StructProperty'))
 
     elif pamux_wrapper_class_name == "Desaturation":
-        result.append(InputSocketInfo('', 'StructProperty'))
+        # result.append(InputSocketInfo('', 'StructProperty'))
         result.append(InputSocketInfo('Fraction', 'StructProperty'))
     
     elif pamux_wrapper_class_name in material_expressions_dump_data:
          result = material_expressions_dump_data[pamux_wrapper_class_name].inputs
 
-    if result.is_empty:
-        result.append(InputSocketInfo("", "StructProperty"))
+    # if result.is_empty:
+    #     result.append(InputSocketInfo("", "StructProperty"))
         
     return result

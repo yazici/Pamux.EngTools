@@ -20,14 +20,14 @@ from pamux_unreal_tools.base.material_function_builder_base import *
 
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.base.material_expression_container import *
-from pamux_unreal_tools.material_function import MaterialFunctionFactory
+from pamux_unreal_tools.factories.material_function_factory import MaterialFunctionFactory
 
 
 
 
 
 from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.base.wetness_base import WetnessBuilderBase
-from pamux_unreal_tools.material_expression_factories import *
+from pamux_unreal_tools.factories.material_expression_factories import *
 # material = util.load_asset('/Game/0_Root/Material/M_standard_shd_test.M_standard_shd_test')
 # print(material) # Material
  
@@ -94,19 +94,19 @@ class MF_Wetness:
 
             result = self.makeFunctionOutput("Result", 0)
 
-            MEL.connect_material_expressions(heightBlendBasedOnInputWetnessValue.materialExpression.asset, "", result.asset, "")
+            MEL.connect_material_expressions(heightBlendBasedOnInputWetnessValue.material_expression.unrealAsset, "", result.unrealAsset, "")
 
             # self.heightBlendBasedOnInputWetnessValue.connectToFunctionOutput(self.result)
         
 
         def finalize_node_connections(self):
             #             MEL.connect_material_expressions(
-            #     breakMaterialAttributes.asset,
+            #     breakMaterialAttributes.unrealAsset,
             #     breakMaterialAttributes.input.name,
-            #     self.Result.asset,
+            #     self.Result.unrealAsset,
             #     f"")
 
-            # MEL.connect_material_expressions(componentMask.asset, "", self.Height.asset, f"")
+            # MEL.connect_material_expressions(componentMask.unrealAsset, "", self.Height.unrealAsset, f"")
         
             self.breakMaterialAttributes.connectToFunctionOutput(self.Result)
             self.componentMask.connectToFunctionOutput(self.Height)

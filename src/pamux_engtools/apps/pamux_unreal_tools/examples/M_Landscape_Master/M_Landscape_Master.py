@@ -138,8 +138,8 @@ class M_Landscape_Master:
             for layer_name in Globals.layer_names:
                 call_MLF_LayerX = self.MLF_Layers[layer_name].call()
 
-                MEL.connect_material_expressions(call_MLF_LayerX.asset, "Result", landscapeLayerBlend.asset, f"Layer {layer_name}")
-                MEL.connect_material_expressions(call_MLF_LayerX.asset, "Height", landscapeLayerBlend.asset, f"Height {layer_name}")
+                MEL.connect_material_expressions(call_MLF_LayerX.unrealAsset, "Result", landscapeLayerBlend.unrealAsset, f"Layer {layer_name}")
+                MEL.connect_material_expressions(call_MLF_LayerX.unrealAsset, "Height", landscapeLayerBlend.unrealAsset, f"Height {layer_name}")
 
             return landscapeLayerBlend.output
 

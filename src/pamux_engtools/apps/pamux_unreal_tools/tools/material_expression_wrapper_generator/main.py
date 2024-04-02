@@ -7,8 +7,8 @@ import types
 from pathlib import Path
 from importlib import * 
 
-print(str(Path(__file__).parent.parent.parent.resolve()))
-sys.path.append(str(Path(__file__).parent.parent.parent.resolve()))
+print(str(Path(__file__).parent.parent.parent.parent.resolve()))
+sys.path.append(str(Path(__file__).parent.parent.parent.parent.resolve()))
 
 reloads = []
 for  k, v in sys.modules.items():
@@ -27,7 +27,7 @@ from pamux_unreal_tools.tools.material_expression_wrapper_generator.unreal_dump 
 from pamux_unreal_tools.tools.material_expression_wrapper_generator.inputs import *
 from pamux_unreal_tools.tools.material_expression_wrapper_generator.outputs import *
 from pamux_unreal_tools.tools.material_expression_wrapper_generator.properties import *
-from pamux_unreal_tools.tools.material_expression_wrapper_generator.custom_code import *
+from pamux_unreal_tools.tools.material_expression_wrapper_generator import custom_base_classes
 
 def generate_pamux_wrapper_class(pyGen: PyCodeGenerator, c: unreal.MaterialExpression):
     pamux_wrapper_class_name = c.__name__[len("MaterialExpression"):]
@@ -36,36 +36,24 @@ def generate_pamux_wrapper_class(pyGen: PyCodeGenerator, c: unreal.MaterialExpre
     outputs = setup_output_sockets(pamux_wrapper_class_name)
     properties = setup_properties(pamux_wrapper_class_name, c.__doc__)
     ctor_params = setup_ctor_params(pamux_wrapper_class_name)
-    
 
+    
+    base_class_candidate_name = f"{pamux_wrapper_class_name}Base"
+    if hasattr(custom_base_classes, base_class_candidate_name):
+        base_class_name = base_class_candidate_name
+    else:
+        base_class_name = "MaterialExpressionImpl"
 
     pyGen.append_blank_line()
-    pyGen.begin_class(pamux_wrapper_class_name, "MaterialExpression")
+    pyGen.begin_class(pamux_wrapper_class_name, base_class_name)
     
-    # pyGen.begin_class("Properties")
-    # pyGen.begin_ctor(["self"])
-    # pyGen.end_ctor()
-    # pyGen.end_class()
-
-    # pyGen.begin_class("Inputs")
-    # pyGen.begin_ctor(["self"])
-    # inputs.to_py("InSocket", pyGen)
-    # pyGen.end_ctor()
-    # pyGen.end_class()
-
-    # pyGen.begin_class("Outputs")
-    # pyGen.begin_ctor(["self"])
-    # outputs.to_py("OutSocket", pyGen)
-    # pyGen.end_ctor()
-    # pyGen.end_class()
-
     # pyGen.append_blank_line()
     pyGen.begin_ctor(ctor_params.declaration_code)
     pyGen.append_line(f"super().__init__(unreal.MaterialExpression{pamux_wrapper_class_name}, node_pos)")
 
-    properties.to_py("Property", pyGen)
-    inputs.to_py("InSocket", pyGen)
-    outputs.to_py("OutSocket", pyGen)
+    properties.to_py("MaterialExpressionEditorPropertyImpl", pyGen)
+    inputs.to_py("InSocketImpl", pyGen)
+    outputs.to_py("OutSocketImpl", pyGen)
 
     # pyGen.append_line(f"self.properties = {pamux_wrapper_class_name}.Properties()")
     # pyGen.append_line(f"self.inputs = {pamux_wrapper_class_name}.Inputs()")
@@ -81,9 +69,14 @@ def generate_pamux_wrapper_classes():
 
     pyGen = PyCodeGenerator()
     pyGen.append_import("unreal")
-    pyGen.append_import_from("pamux_unreal_tools.material_expression", "MaterialExpression")
+
+    pyGen.append_import_from("pamux_unreal_tools.impl.material_expression_impl", "MaterialExpressionImpl")
+    pyGen.append_import_from("pamux_unreal_tools.tools.material_expression_wrapper_generator.custom_base_classes", "*")
+    pyGen.append_import_from("pamux_unreal_tools.impl.material_expression_editor_property_impl", "MaterialExpressionEditorPropertyImpl")
+    pyGen.append_import_from("pamux_unreal_tools.impl.in_socket_impl", "InSocketImpl")
+    pyGen.append_import_from("pamux_unreal_tools.impl.out_socket_impl", "OutSocketImpl")
     pyGen.append_import_from("pamux_unreal_tools.base.material_expression_container", "*")
-    pyGen.append_import_from("pamux_unreal_tools.utils.build_stack", "NodePos")
+    pyGen.append_import_from("pamux_unreal_tools.utils.node_pos", "NodePos")
 
     for class_name in dir(unreal):
         c = getattr(unreal, class_name)

@@ -1,12 +1,14 @@
 from pamux_unreal_tools.generated.material_expression_wrappers import *
-from pamux_unreal_tools.base.material_expression_container import InSocket, OutSocket
-from pamux_unreal_tools.material_expression_factories import *
 
-from pamux_unreal_tools.material_function import MaterialFunction
+from pamux_unreal_tools.base.material_function_base import MaterialFunctionBase
+
+from pamux_unreal_tools.factories.material_function_factory import MaterialFunctionFactory
+from pamux_unreal_tools.factories.material_expression_container_factory import MaterialExpressionContainerFactory
+from pamux_unreal_tools.factories.material_expression_factories import FunctionInputFactory
 
 from pamux_unreal_tools.utils.build_stack import BuildStack
-from pamux_unreal_tools.material_function import MaterialFunction, MaterialFunctionFactory
-from pamux_unreal_tools.utils.pamux_asset_utils import PamuxAssetUtils
+from pamux_unreal_tools.utils.node_pos import NodePos, CurrentNodePos
+from pamux_unreal_tools.utils.types import *
 
 class ContainerBuilderBase:
     def __init__(self,
@@ -24,7 +26,7 @@ class ContainerBuilderBase:
 
         self.material_function_factory = MaterialFunctionFactory()
 
-    def load_MF(self, function_path, virtual_inputs, virtual_outputs) -> MaterialFunction:
+    def load_MF(self, function_path: str, virtual_inputs: SocketNames, virtual_outputs: SocketNames) -> MaterialFunctionBase:
         return self.material_function_factory.load(self, function_path, virtual_inputs, virtual_outputs)
 
     def build_dependencies(self):
@@ -42,22 +44,22 @@ class ContainerBuilderBase:
     def finalize_node_connections(self):
         pass
 
-    def build_FunctionInput(self, input_name, input_type, preview = None) -> FunctionInput:
+    def build_FunctionInput(self, input_name: str, input_type: str, preview = None) -> FunctionInput:
         result = FunctionInputFactory.create(input_name, input_type, preview)
         result.use_preview_value_as_default.set(True)
 
-        CurrentNodePos.x += NodePos.DeltaX
-        result.rt = NamedRerouteDeclaration(f"rt{input_name}", result)
-
+        NamedRerouteDeclaration(f"rt{input_name}", result.output)
+        result.rt = result.output.rt
+        result.output.rt.material_expression_editor_x.set(result.material_expression_editor_x.get() + NodePos.DeltaX)
+        
         CurrentNodePos.x = 0
         CurrentNodePos.y += NodePos.DeltaY
 
         return result
 
-    def __loadAndCleanOrCreate(self, virtual_inputs, virtual_outputs):
+    def __loadAndCleanOrCreate(self, virtual_inputs: SocketNames, virtual_outputs: SocketNames):
         result = self.container_factory.loadAndCleanOrCreate(self, self.container_path, virtual_inputs, virtual_outputs)
         BuildStack.push(result)
-        print("pushed")
 
         if self.params_factory is None:
             self.params = None
@@ -65,7 +67,7 @@ class ContainerBuilderBase:
             self.params = self.params_factory(result)
         return result
 
-    def get(self, virtual_inputs = [], virtual_outputs = []):
+    def get(self, virtual_inputs: SocketNames = [], virtual_outputs: SocketNames = []):
         result = self.__loadAndCleanOrCreate(virtual_inputs, virtual_outputs)
         self.build_dependencies()
 
@@ -89,7 +91,7 @@ class ContainerBuilderBase:
     def current_container(self):
         return BuildStack.top()
     
-    def get_field_name(self, name):
+    def get_field_name(self, name: str):
         if name == "X-Axis":
             return "xAxis"
         if name == "Y-Axis":
@@ -98,17 +100,3 @@ class ContainerBuilderBase:
             return "zAxis"
         _name = name.replace(" ", "")
         return _name[0].lower() + _name[1:]
-
-    # def callMaterialFunction(self, materialFunctionToCall: MaterialFunction, virtual_inputs, virtual_outputs) -> MaterialFunctionCall:
-    #     result = MaterialFunctionCall()
-    #     result.material_function.set(materialFunctionToCall.asset)
-
-    #     for name in materialFunctionToCall.virtual_inputs:
-    #         inSocket = InSocket(result, name, 'StructProperty')
-    #         exec(f"result.{self.__get_field_name(name)} = inSocket", locals())
-
-    #     for name in materialFunctionToCall.virtual_outputs:
-    #         outSocket = OutSocket(result, name, 'StructProperty')
-    #         exec(f"result.{self.__get_field_name(name)} = outSocket", locals())
-
-    #     return result

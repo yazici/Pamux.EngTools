@@ -10,136 +10,42 @@ ATH = unreal.AssetToolsHelpers
 AT = ATH.get_asset_tools()
 EAL = unreal.EditorAssetLibrary
 AUL = unreal.EditorUtilityLibrary
+
 from pamux_unreal_tools.utils.pamux_asset_utils import PamuxAssetUtils
+# from pamux_unreal_tools.generated.material_expression_wrappers import NamedRerouteDeclaration
+from pamux_unreal_tools.utils.node_pos import NodePos, CurrentNodePos
 # Assertion failed: Outputs.Num() == AttributeGetTypes.Num() + 1 [File:D:\build\++UE5\Sync\Engine\Source\Runtime\Engine\Private\Materials\MaterialExpressions.cpp] [Line: 7213]
 
 # https://docs.unrealengine.com/5.3/en-US/PythonAPI/class/MaterialEditingLibrary.html
 class MaterialExpressionContainer:
-    def __init__(self, asset, f_create_material_expression, f_delete_all_material_expression, f_layout_expression, should_recompile = False):
-        self.asset = asset
+    # unreal.Material | unreal.MaterialFunction
+    def __init__(self, unrealAsset, f_create_material_expression, f_delete_all_material_expression, f_layout_expression, should_recompile: bool = False) -> None:
+        self.unrealAsset: unreal.Material | unreal.MaterialFunction = unrealAsset
         self.f_create_material_expression = f_create_material_expression
         self.f_delete_all_material_expression = f_delete_all_material_expression
         self.f_layout_expression = f_layout_expression
         self.should_recompile = should_recompile
 
-    def deleteAllMaterialExpressions(self):
-        self.f_delete_all_material_expression(self.asset)
+    def deleteAllMaterialExpressions(self) -> None:
+        self.f_delete_all_material_expression(self.unrealAsset)
 
-    def createMaterialExpression(self, expression_class, node_pos: NodePos = None):
+    def createMaterialExpression(self, expression_class: unreal.Class, node_pos: NodePos = None) -> unreal.MaterialExpression:
         if node_pos is None:
             node_pos = CurrentNodePos
-        return self.f_create_material_expression(self.asset, expression_class, node_pos.x, node_pos.y)
+        return self.f_create_material_expression(self.unrealAsset, expression_class, node_pos.x, node_pos.y)
 
-    def save(self):
-        # self.f_layout_expression(self.asset)
+    def save(self) -> None:
+        # self.f_layout_expression(self.unrealAsset)
         if self.should_recompile:
-            MEL.recompile_material(self.asset)
-        EAL.save_loaded_asset(self.asset, False)
+            MEL.recompile_material(self.unrealAsset)
+        EAL.save_loaded_asset(self.unrealAsset, False)
 
-    def getDefaultScalarParameterValue(self, parameterName):
-        return MEL.get_material_default_scalar_parameter_value(self.asset, parameterName)
+    def getDefaultScalarParameterValue(self, parameter_name: str) -> float:
+        return MEL.get_material_default_scalar_parameter_value(self.unrealAsset, parameter_name)
     
-    def getDefaultStaticSwitchParameterValue(self, parameterName):
-        return MEL.get_material_default_static_switch_parameter_value(self.asset, parameterName)
+    def getDefaultStaticSwitchParameterValue(self, parameter_name: str) -> bool:
+        return MEL.get_material_default_static_switch_parameter_value(self.unrealAsset, parameter_name)
     
-    def getDefaultTextureParameterValue(self, parameterName):
-        return MEL.get_material_default_texture_parameter_value(self.asset, parameterName)
+    def getDefaultTextureParameterValue(self, parameter_name: str) -> unreal.Texture:
+        return MEL.get_material_default_texture_parameter_value(self.unrealAsset, parameter_name)
 
-class MaterialExpressionContainerFactory:
-    def __init__(self, asset_class: unreal.Class, asset_factory: unreal.Factory, container_wrapper_class):
-        self.asset_class = asset_class
-        self.asset_factory = asset_factory
-        self.container_wrapper_class = container_wrapper_class
-
-    def load(self, builder, container_path, virtual_inputs, virtual_outputs) -> MaterialExpressionContainer:
-        return self.__load_wrapped_asset(builder, container_path, virtual_inputs, virtual_outputs)
-
-    def loadAndClean(self, builder, container_path, virtual_inputs, virtual_outputs) -> MaterialExpressionContainer:
-        result = self.__load_wrapped_asset(builder, container_path, virtual_inputs, virtual_outputs)
-        result.deleteAllMaterialExpressions()
-        return result
-
-    def loadAndCleanOrCreate(self, builder, container_path, virtual_inputs, virtual_outputs) -> MaterialExpressionContainer:
-        try:
-            return self.loadAndClean(builder, container_path, virtual_inputs, virtual_outputs)
-        except:
-            return self.__create_wrapped_asset(builder, container_path, virtual_inputs, virtual_outputs)
-
-    def __load_wrapped_asset(self, builder, asset_path: str, virtual_inputs: list, virtual_outputs: list) -> MaterialExpressionContainer:
-        result = self.__load_and_wrap_asset(asset_path)
-        result.builder = builder
-        result.virtual_inputs = virtual_inputs
-        result.virtual_outputs = virtual_outputs
-        return result
-
-    def __create_wrapped_asset(self, builder, asset_path: str, virtual_inputs: list, virtual_outputs: list) -> MaterialExpressionContainer:
-        result = self.__create_and_wrap_asset(asset_path)
-        result.builder = builder
-        result.virtual_inputs = virtual_inputs
-        result.virtual_outputs = virtual_outputs
-        return result
-
-    def __load_and_wrap_asset(self, asset_path: str) -> MaterialExpressionContainer:
-        asset = EAL.load_asset(asset_path)
-        if asset is None:
-            raise f"Can't load asset: {asset_path}"
-        return self.container_wrapper_class(asset)
-
-    def __create_and_wrap_asset(self, asset_path: str) -> MaterialExpressionContainer:
-        package_path, asset_name = PamuxAssetUtils.split_asset_path(asset_path)
-        
-        asset = AT.create_asset(asset_name, package_path, self.asset_class, self.asset_factory)
-        if asset is None:
-            raise f"Can't create asset: {asset_path}"
-        return self.container_wrapper_class(asset)
-
-class MaterialExpressionValue:
-    def __init__(self, materialExpression, name, type):
-        self.materialExpression = materialExpression
-        self.name = name
-        self.type = type
-
-class Property(MaterialExpressionValue):
-    def __init__(self, materialExpression, name, type):
-        super().__init__(materialExpression, name, type)
-
-    def set(self, val):
-        self.materialExpression.asset.set_editor_property(self.name, val)
-
-    def get(self):
-        return self.materialExpression.asset.get_editor_property(self.name)
-
-class Socket(MaterialExpressionValue):
-    def __init__(self, materialExpression, name, type, is_output = False):
-        super().__init__(materialExpression, name, type)
-        self.is_output = is_output
-
-    @property
-    def asset(self):
-        return self.materialExpression.asset
-
-class InSocket(Socket):
-    def __init__(self, materialExpression, name, type):
-        super().__init__(materialExpression, name, type, False)
-
-    def comesFrom(self, source) -> bool:
-        if isinstance(source, Socket):
-            return MEL.connect_material_expressions(source.materialExpression.asset, source.name, self.materialExpression.asset, self.name)
-        else:    
-            return MEL.connect_material_expressions(source.asset, "", self.materialExpression.asset, self.name)
-
-class OutSocket(Socket):
-    def __init__(self, materialExpression, name, type):
-        super().__init__(materialExpression, name, type, True)
-    
-
-    @dispatch(InSocket)
-    def connectTo(self, inSocket: InSocket) -> bool:
-        return MEL.connect_material_expressions(self.materialExpression.asset, self.name, inSocket.materialExpression.asset, inSocket.name)
-    
-    @dispatch(unreal.MaterialProperty)
-    def connectTo(self, materialProperty: unreal.MaterialProperty) -> bool:
-        return MEL.connect_material_property(self.materialExpression.asset, self.name, materialProperty)
-
-    def connectToFunctionOutput(self, function_output) -> bool:
-        return MEL.connect_material_expressions(self.materialExpression.asset, self.name, function_output.asset, "")

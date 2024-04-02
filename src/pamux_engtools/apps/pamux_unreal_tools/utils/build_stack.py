@@ -43,7 +43,7 @@ class NodePos:
         self.y = 0
 
     def goto_outputs(self):
-        self.x = 6 * NodePos.DeltaX
+        self.x = 10 * NodePos.DeltaX
         self.y = 0
 
     def dump(self, s):

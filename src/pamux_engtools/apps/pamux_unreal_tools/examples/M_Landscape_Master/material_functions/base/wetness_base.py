@@ -4,24 +4,14 @@ from pamux_unreal_tools.base.material_function_builder_base import *
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.base.material_expression_container import *
 from pamux_unreal_tools.material_expression_factories import *
+from pamux_unreal_tools.base.texture_sample_set import TextureSampleSet
 
-# REPL:
-# BPFactory = unreal.BlueprintFactory()
-# AT = unreal.AssetToolsHelpers.get_asset_tools()
-# EAL = unreal.EditorAssetLibrary
-# EUL = unreal.EditorUtilityLibrary # https://docs.unrealengine.com/4.27/en-US/PythonAPI/class/EditorUtilityLibrary.html
-# MEL = unreal.MaterialEditingLibrary
-
-# EUL.get_selected_assets()
-# EUL.get_selected_blueprint_classes()
-# a = EAL.load_asset("/Game/Materials/Pamux/Landscape/Functions/MF_Wetness")
-# MEL.create_material_expression_in_function(a, unreal.MaterialExpressionComment, 100, 100)
 class WetnessBuilderBase(MaterialFunctionBuilderBase):
     def __init__(self, container_path: str):
         super().__init__(container_path)
 
-    def getMaterialAttributes(self):
-        textureSampleSet = MaterialFunctionBuilderBase.TextureSampleSet(
+    def getMaterialAttributes(self) -> FunctionInput:
+        textureSampleSet = TextureSampleSet(
             "/Game/Materials/Landscape/Textures/GrassyLayer/T_GrassyLayer_A", 
             "/Game/Materials/Landscape/Textures/GrassyLayer/T_GrassyLayer_R", 
             "/Game/Materials/Landscape/Textures/GrassyLayer/T_GrassyLayer_D", 

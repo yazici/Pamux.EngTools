@@ -5,51 +5,28 @@ from pamux_unreal_tools.base.container_builder_base import ContainerBuilderBase
 
 class MaterialFunctionOutputs:
     class Result:
-        def __init__(self, builder):
-            CurrentNodePos.y = 0
-            self.Result = builder.makeFunctionOutput_Result()
+        def __init__(self, builder: ContainerBuilderBase) -> None:
+            CurrentNodePos.goto_outputs()
+            self.Result = builder.makeFunctionOutput("Result", 0)
 
     class ResultAndHeight(Result):
-        def __init__(self, builder):
+        def __init__(self, builder: ContainerBuilderBase) -> None:
             super().__init__(builder)
-            self.Height = builder.makeFunctionOutput_Height()
+            CurrentNodePos.y += NodePos.DeltaY
+            self.Height = builder.makeFunctionOutput("Height", 1)
 
 class MaterialFunctionBuilderBase(ContainerBuilderBase):
-    def __init__(self, container_path: str, inputs_class, outputs_class):
+    def __init__(self, container_path: str, inputs_class, outputs_class = MaterialFunctionOutputs.Result) -> None:
         super().__init__(MaterialFunctionFactory(), None, container_path, inputs_class, outputs_class)
 
-    def makeFunctionOutput(self, name, sort_priority):
-        CurrentNodePos.goto_outputs()
+    def makeFunctionOutput(self, name, sort_priority) -> FunctionOutput:
         result = FunctionOutput()
         result.output_name.set(name)
         result.sort_priority.set(sort_priority)
         return result
 
-    def makeFunctionOutput_Result(self):
-        return self.makeFunctionOutput("Result", 0)
-    
-    def makeFunctionOutput_Height(self):
-        return self.makeFunctionOutput("Height", 1)
-    
-    def build_dependencies(self):
-        pass
-    
-    def build_input_nodes(self):
-        pass
-
-    def build_output_nodes(self):
-        self.outputs = MaterialFunctionOutputs.Result(self)
-
-    def finalize_node_connections(self):
-        pass
 
 class MaterialLayerFunctionBuilderBase(MaterialFunctionBuilderBase):
-    def __init__(self, container_path: str):
-        super().__init__(container_path)
+    def __init__(self, container_path: str, inputs_class, outputs_class = MaterialFunctionOutputs.ResultAndHeight) -> None:
+        super().__init__(container_path, inputs_class, outputs_class)
 
-    def build_output_nodes(self):
-        CurrentNodePos.y = 0
-        self.Result = self.makeFunctionOutput_Result()
-
-        CurrentNodePos.y += NodePos.DeltaY
-        self.Height = self.makeFunctionOutput_Height()

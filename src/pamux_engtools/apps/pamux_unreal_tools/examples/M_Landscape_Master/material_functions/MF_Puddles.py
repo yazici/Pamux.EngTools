@@ -31,10 +31,9 @@ class MF_Puddles:
         def __init__(self, builder: MaterialFunctionBuilderBase):
             pass
 
-    class Outputs:
+    class Outputs(MaterialFunctionOutputs.Result):
         def __init__(self, builder: MaterialFunctionBuilderBase):
-            CurrentNodePos.y = 0
-            self.Result = builder.makeFunctionOutput("Result", 0)
+            CurrentNodePos.y += NodePos.DeltaY
             self.PuddleMask = builder.makeFunctionOutput("PuddleMask", 1)
 
     class Builder(WetnessBuilderBase):

@@ -12,7 +12,37 @@ from pamux_unreal_tools.base.material_function_builder_base import *
 class MF_LandscapeBaseMaterial:
     class Inputs:
         def __init__(self, builder: MaterialFunctionBuilderBase):
-            pass
+            CurrentNodePos.x = 0
+
+            self.rotation = builder.build_FunctionInput("Rotation", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR, Constant(0.0))
+            self.bombDoRotationVariation = builder.build_FunctionInput("BombDoRotationVariation", unreal.FunctionInputType.FUNCTION_INPUT_STATIC_BOOL, StaticBool(False))
+            self.bombCellScale = builder.build_FunctionInput("BombCellScale", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR, Constant(1.0))
+            self.bombPatternScale = builder.build_FunctionInput("BombPatternScale", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR, Constant(1.0))
+            self.bombRandomOffset = builder.build_FunctionInput("BombRandomOffset", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR, Constant(0.0))
+            self.displacement = builder.build_FunctionInput("Displacement", unreal.FunctionInputType.FUNCTION_INPUT_TEXTURE2D, TextureBase())
+            self.doTextureBomb = FunctionInputFactory.create("DoTextureBomb", unreal.FunctionInputType.FUNCTION_INPUT_STATIC_BOOL, StaticBool(True))
+            
+            CurrentNodePos.y += NodePos.DeltaY
+            CurrentNodePos.y -= NodePos.DeltaY
+            CurrentNodePos.x += NodePos.DeltaX/4*3
+            self.qualitySwitch = QualitySwitch()
+            self.qualitySwitch.default.comesFrom(self.doTextureBomb)
+            self.qualitySwitch.low.comesFrom(StaticBool(False))
+            
+            #MEL.connect_material_expressions(StaticBool(False).output.materialExpression.asset, "", qualitySwitch.asset, "Low")
+
+            CurrentNodePos.x += NodePos.DeltaX/2
+            self.doTextureBomb.rt = NamedRerouteDeclaration("rtDoTextureBomb", self.qualitySwitch)
+
+            CurrentNodePos.y += NodePos.DeltaY
+            CurrentNodePos.x = 0
+            
+            self.uvParams = builder.build_FunctionInput("UVParams", unreal.FunctionInputType.FUNCTION_INPUT_VECTOR4, unreal.LinearColor(1.0, 1.0, 0.5, 0.5))
+
+            self.albedo = builder.build_FunctionInput("Albedo", unreal.FunctionInputType.FUNCTION_INPUT_TEXTURE2D, TextureObject())
+            self.colorOverlay = builder.build_FunctionInput("ColorOverlay", unreal.FunctionInputType.FUNCTION_INPUT_VECTOR3, unreal.LinearColor(1.0, 1.0, 1.0))
+            self.roughness = builder.build_FunctionInput("Roughness", unreal.FunctionInputType.FUNCTION_INPUT_TEXTURE2D, TextureObject())
+            self.normal = builder.build_FunctionInput("Normal", unreal.FunctionInputType.FUNCTION_INPUT_TEXTURE2D, TextureObject(unreal.MaterialSamplerType.SAMPLERTYPE_NORMAL))
 
     class Builder(MaterialLayerFunctionBuilderBase):
         def __init__(self):
@@ -127,40 +157,6 @@ class MF_LandscapeBaseMaterial:
 
         #     return MultiplyAdd(heightTexture, computedIntensity)
 
-        def build_input_nodes(self):
-            CurrentNodePos.x = 0
-
-            self.rotation = self.build_FunctionInput("Rotation", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR, Constant(0.0))
-            self.bombDoRotationVariation = self.build_FunctionInput("BombDoRotationVariation", unreal.FunctionInputType.FUNCTION_INPUT_STATIC_BOOL, StaticBool(False))
-            self.bombCellScale = self.build_FunctionInput("BombCellScale", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR, Constant(1.0))
-            self.bombPatternScale = self.build_FunctionInput("BombPatternScale", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR, Constant(1.0))
-            self.bombRandomOffset = self.build_FunctionInput("BombRandomOffset", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR, Constant(0.0))
-            self.displacement = self.build_FunctionInput("Displacement", unreal.FunctionInputType.FUNCTION_INPUT_TEXTURE2D, TextureBase())
-            self.doTextureBomb = FunctionInputFactory.create("DoTextureBomb", unreal.FunctionInputType.FUNCTION_INPUT_STATIC_BOOL, StaticBool(True))
-            
-            CurrentNodePos.y += NodePos.DeltaY
-            CurrentNodePos.y -= NodePos.DeltaY
-            CurrentNodePos.x += NodePos.DeltaX/4*3
-            self.qualitySwitch = QualitySwitch()
-            self.qualitySwitch.default.comesFrom(self.doTextureBomb)
-            self.qualitySwitch.low.comesFrom(StaticBool(False))
-            
-            #MEL.connect_material_expressions(StaticBool(False).output.materialExpression.asset, "", qualitySwitch.asset, "Low")
-
-            CurrentNodePos.x += NodePos.DeltaX/2
-            self.doTextureBomb.rt = NamedRerouteDeclaration("rtDoTextureBomb", self.qualitySwitch)
-
-            CurrentNodePos.y += NodePos.DeltaY
-            CurrentNodePos.x = 0
-            
-            self.uvParams = self.build_FunctionInput("UVParams", unreal.FunctionInputType.FUNCTION_INPUT_VECTOR4, unreal.LinearColor(1.0, 1.0, 0.5, 0.5))
-
-            self.albedo = self.build_FunctionInput("Albedo", unreal.FunctionInputType.FUNCTION_INPUT_TEXTURE2D, TextureObject())
-            self.colorOverlay = self.build_FunctionInput("ColorOverlay", unreal.FunctionInputType.FUNCTION_INPUT_VECTOR3, unreal.LinearColor(1.0, 1.0, 1.0))
-            self.roughness = self.build_FunctionInput("Roughness", unreal.FunctionInputType.FUNCTION_INPUT_TEXTURE2D, TextureObject())
-            self.normal = self.build_FunctionInput("Normal", unreal.FunctionInputType.FUNCTION_INPUT_TEXTURE2D, TextureObject(unreal.MaterialSamplerType.SAMPLERTYPE_NORMAL))
-
-            # unreal.MaterialParameterInfo(, unreal.MaterialParameterAssociation.BLEND_PARAMETER, )
 
         def __build_cellBombing(self, map_name):
             return

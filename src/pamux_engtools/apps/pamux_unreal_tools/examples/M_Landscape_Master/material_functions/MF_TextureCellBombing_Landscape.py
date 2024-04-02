@@ -23,7 +23,7 @@ from pamux_unreal_tools.material_function import MaterialFunctionFactory
 
 class MF_TextureCellBombing_Landscape:
     class Inputs:
-        def __init__(self, builder):
+        def __init__(self, builder: MaterialFunctionBuilderBase):
             self.patternScale = builder.build_FunctionInput("PatternScale", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR, Constant(10.0))
             self.UVs = builder.build_FunctionInput("UVs", unreal.FunctionInputType.FUNCTION_INPUT_VECTOR2, TextureCoordinate(1.0, 1.0))
             self.randomOffsetVariation = builder.build_FunctionInput("RandomOffsetVariation", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR, Constant(1.0))
@@ -33,27 +33,6 @@ class MF_TextureCellBombing_Landscape:
             self.isNormalMap = builder.build_FunctionInput("IsNormalMap", unreal.FunctionInputType.FUNCTION_INPUT_STATIC_BOOL, StaticBool(False))
             self.texture = builder.build_FunctionInput("Texture", unreal.FunctionInputType.FUNCTION_INPUT_TEXTURE2D, TextureObject())
             self.texture.use_preview_value_as_default.set(False)
-
-    class Outputs:
-        def __init__(self, builder):
-            CurrentNodePos.y = 0
-            self.Result = builder.makeFunctionOutput_Result()
-
-    # [ "Texture", "UVs", "CellScale", "PatternScale", "DoRotationVariation", "RandomOffsetVariation", "RandomRotationVariation", "IsNormalMap" ], [ "Result" ]
-    class Builder(MaterialFunctionBuilderBase):
-        def __init__(self):
-            super().__init__(
-                "/Game/Materials/Pamux/Landscape/Functions/MF_TextureCellBombing_Landscape",
-                MF_TextureCellBombing_Landscape.Inputs,
-                MF_TextureCellBombing_Landscape.Outputs)
-
-        def build_dependencies(self):
-            self.rotateAboutWorldAxis_cheap = self.load_MF(
-                "/Engine/Functions/Engine_MaterialFunctions02/WorldPositionOffset/RotateAboutWorldAxis_cheap",
-                [ "Rotation Amount", "PivotPoint", "WorldPosition" ], [ "X-Axis", "Y-Axis", "Z-Axis" ])
-
-        def build_input_nodes(self):
-            # self.inputs = MF_TextureCellBombing_Landscape.Inputs(self)
 
             self.UVs3Vector = AppendVector(self.inputs.UVs.rt, Constant(0.0))
 
@@ -69,6 +48,19 @@ class MF_TextureCellBombing_Landscape:
             self.patternScaledInputTexture.sampler_source.set(unreal.SamplerSourceMode.SSM_WRAP_WORLD_GROUP_SETTINGS)
             self.patternScaledInputTexture.sampler_type.set(unreal.MaterialSamplerType.SAMPLERTYPE_COLOR)
             self.patternScaledInputTexture.rt = NamedRerouteDeclaration(f"rtPatternScaledInputTexture", self.patternScaledInputTexture.RGB)
+
+    # [ "Texture", "UVs", "CellScale", "PatternScale", "DoRotationVariation", "RandomOffsetVariation", "RandomRotationVariation", "IsNormalMap" ], [ "Result" ]
+    class Builder(MaterialFunctionBuilderBase):
+        def __init__(self):
+            super().__init__(
+                "/Game/Materials/Pamux/Landscape/Functions/MF_TextureCellBombing_Landscape",
+                MF_TextureCellBombing_Landscape.Inputs,
+                MaterialFunctionOutputs.Result)
+
+        def build_dependencies(self):
+            self.rotateAboutWorldAxis_cheap = self.load_MF(
+                "/Engine/Functions/Engine_MaterialFunctions02/WorldPositionOffset/RotateAboutWorldAxis_cheap",
+                [ "Rotation Amount", "PivotPoint", "WorldPosition" ], [ "X-Axis", "Y-Axis", "Z-Axis" ])
 
 
         def __build_RandomRotate(self):

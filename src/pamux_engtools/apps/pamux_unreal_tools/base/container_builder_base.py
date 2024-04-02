@@ -18,34 +18,29 @@ class ContainerBuilderBase:
 
         self.container_factory = container_factory
         self.params_factory = params_factory
-
         self.container_path = container_path
-
         self.inputs_class = inputs_class
-        self.inputs = self.inputs_class(self)
-
         self.outputs_class = outputs_class
-        self.outputs = self.outputs_class(self)
 
         self.material_function_factory = MaterialFunctionFactory()
 
-    def load_MF(self, function_path, virtual_inputs, virtual_outputs):
+    def load_MF(self, function_path, virtual_inputs, virtual_outputs) -> MaterialFunction:
         return self.material_function_factory.load(self, function_path, virtual_inputs, virtual_outputs)
 
     def build_dependencies(self):
-        raise "Implement build_dependencies"
-    
+        pass
+
     def build_input_nodes(self):
         self.inputs = self.inputs_class(self)
+
+    def build_process_nodes(self):
+        pass
 
     def build_output_nodes(self):
         self.outputs = self.outputs_class(self)
 
-    def build_process_nodes(self):
-        raise "Implement build_process_nodes"
-
     def finalize_node_connections(self):
-        raise "Implement finalize_node_connections"
+        pass
 
     def build_FunctionInput(self, input_name, input_type, preview = None) -> FunctionInput:
         result = FunctionInputFactory.create(input_name, input_type, preview)
@@ -94,7 +89,7 @@ class ContainerBuilderBase:
     def current_container(self):
         return BuildStack.top()
     
-    def __get_field_name(self, name):
+    def get_field_name(self, name):
         if name == "X-Axis":
             return "xAxis"
         if name == "Y-Axis":
@@ -117,27 +112,3 @@ class ContainerBuilderBase:
     #         exec(f"result.{self.__get_field_name(name)} = outSocket", locals())
 
     #     return result
-
-    class TextureSampleSet:
-        def __init__(self, baseColor, roughness, opacity, normal):
-            self.baseColor = TextureSample()
-            self.baseColor.sampler_source.set(unreal.SamplerSourceMode.SSM_WRAP_WORLD_GROUP_SETTINGS)
-            self.baseColor.sampler_type.set(unreal.MaterialSamplerType.SAMPLERTYPE_COLOR)
-            self.baseColor.texture.set(unreal.load_asset(baseColor))
-
-            self.roughness = TextureSample()
-            self.roughness.sampler_source.set(unreal.SamplerSourceMode.SSM_WRAP_WORLD_GROUP_SETTINGS)
-            self.roughness.sampler_type.set(unreal.MaterialSamplerType.SAMPLERTYPE_COLOR)
-            self.roughness.texture.set(unreal.load_asset(roughness))
-
-            self.opacity = TextureSample()
-            self.opacity.sampler_source.set(unreal.SamplerSourceMode.SSM_WRAP_WORLD_GROUP_SETTINGS)
-            self.opacity.sampler_type.set(unreal.MaterialSamplerType.SAMPLERTYPE_LINEAR_COLOR)
-            self.opacity.texture.set(unreal.load_asset(opacity))
-
-            self.normal = TextureSample()
-            self.normal.sampler_source.set(unreal.SamplerSourceMode.SSM_WRAP_WORLD_GROUP_SETTINGS)
-            self.normal.sampler_type.set(unreal.MaterialSamplerType.SAMPLERTYPE_NORMAL)
-            self.normal.texture.set(unreal.load_asset(normal))
-
-        

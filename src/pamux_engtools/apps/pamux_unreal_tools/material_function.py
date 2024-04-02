@@ -27,11 +27,11 @@ class MaterialFunction(MaterialExpressionContainer):
 
         for name in self.virtual_inputs:
             inSocket = InSocket(result, name, 'StructProperty')
-            exec(f"result.{self.builder.__get_field_name(name)} = inSocket", locals())
+            exec(f"result.{self.builder.get_field_name(name)} = inSocket", locals())
 
         for name in self.virtual_outputs:
             outSocket = OutSocket(result, name, 'StructProperty')
-            exec(f"result.{self.builder.__get_field_name(name)} = outSocket", locals())
+            exec(f"result.{self.builder.get_field_name(name)} = outSocket", locals())
 
         self.call_result = result
         return result

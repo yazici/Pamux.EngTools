@@ -46,8 +46,8 @@ class M_Landscape_Master:
         #     virtualTextureFeatureSwitch.in1.comesFrom(MF_BlendTwoMaterialsViaHighOpacityMap_Output)
         #     virtualTextureFeatureSwitch.in2.comesFrom(makeMaterialAttributes)
 
-        #     call_MF_GlancingAngleSpecCorrection = self.MF_GlancingAngleSpecCorrection.call(self)
-        #     call_MF_GlancingAngleSpecCorrection.in1.comesFrom(virtualTextureFeatureSwitch.output)
+        #     self.MF_GlancingAngleSpecCorrection.call()
+        #     self.MF_GlancingAngleSpecCorrection.call_result.in1.comesFrom(virtualTextureFeatureSwitch.output)
 
         #     qualitySwitch = QualitySwitch(self.material)
         #     qualitySwitch.in1.comesFrom(call_MF_GlancingAngleSpecCorrection.output)
@@ -59,7 +59,7 @@ class M_Landscape_Master:
 
         # def __rvtSpecular(self, baseColor):
         #     sCurve = MaterialFunctionFactory().load("SCurve", "/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment", True)
-        #     call_SCurve = sCurve.call(self)
+        #     call_SCurve = sCurve.call()
         #     call_SCurve.In.comesFrom(baseColor)
         #     call_SCurve.Power.comesFrom(Params.specularContrast)
 
@@ -136,7 +136,7 @@ class M_Landscape_Master:
             landscapeLayerBlend.layers.set(layers)
 
             for layer_name in Globals.layer_names:
-                call_MLF_LayerX = self.MLF_Layers[layer_name].call(self)
+                call_MLF_LayerX = self.MLF_Layers[layer_name].call()
 
                 MEL.connect_material_expressions(call_MLF_LayerX.asset, "Result", landscapeLayerBlend.asset, f"Layer {layer_name}")
                 MEL.connect_material_expressions(call_MLF_LayerX.asset, "Height", landscapeLayerBlend.asset, f"Height {layer_name}")
@@ -147,12 +147,12 @@ class M_Landscape_Master:
             pass
             # blendedLandscapeLayers = self.__blendLandscapeLayers()
 
-            # call_MF_Wetness = self.MF_Wetness.call(self)
+            # call_MF_Wetness = self.MF_Wetness.call()
             # call_MF_Wetness.input.comesFrom(blendedLandscapeLayers)
 
             # return call_MF_Wetness.output
 
-            # call_MF_Puddles = self.MF_Puddles.call(self)
+            # call_MF_Puddles = self.MF_Puddles.call()
             # call_MF_Puddles.input.comesFrom(call_MF_Wetness.output)
 
             # subtractHalf = Subtract(self.material)

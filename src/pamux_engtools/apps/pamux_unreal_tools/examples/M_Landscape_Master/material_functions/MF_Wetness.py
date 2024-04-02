@@ -81,9 +81,6 @@ class MF_Wetness:
         def build_dependencies(self):
             pass
 
-        def build_input_nodes(self):
-            self.inputs = MF_Wetness.Inputs(self)
-
         def build_process_nodes(self):
             materialAttributes = self.getMaterialAttributes()
 
@@ -101,8 +98,6 @@ class MF_Wetness:
 
             # self.heightBlendBasedOnInputWetnessValue.connectToFunctionOutput(self.result)
         
-        def build_output_nodes(self):
-            pass
 
         def finalize_node_connections(self):
             #             MEL.connect_material_expressions(

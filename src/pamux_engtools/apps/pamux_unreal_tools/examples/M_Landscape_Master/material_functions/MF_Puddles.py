@@ -1,17 +1,50 @@
+import unreal
+from pathlib import Path
+import sys
+import os
+import shutil
+
+sys.path.append(str(Path(__file__).parent.parent.parent.parent.parent.resolve()))
+
+from importlib import * 
+
+reloads = []
+for  k, v in sys.modules.items():
+    if k.startswith("pamux_unreal_tools"):
+        reloads.append(v)
+
+for module in reloads:
+    reload(module)
+
+from pamux_unreal_tools.base.material_function_builder_base import *
+
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.base.material_expression_container import *
+from pamux_unreal_tools.material_function import MaterialFunctionFactory
+
+
 from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.base.wetness_base import WetnessBuilderBase
 from pamux_unreal_tools.material_expression_factories import *
 
 class MF_Puddles:
-    class Builder(WetnessBuilderBase):
-        def __init__(self):
-            super().__init__("MF_Puddles")
-
-        def build_dependencies(self):
+    class Inputs:
+        def __init__(self, builder: MaterialFunctionBuilderBase):
             pass
 
-        def build_input_nodes(self):
+    class Outputs:
+        def __init__(self, builder: MaterialFunctionBuilderBase):
+            CurrentNodePos.y = 0
+            self.Result = builder.makeFunctionOutput("Result", 0)
+            self.PuddleMask = builder.makeFunctionOutput("PuddleMask", 1)
+
+    class Builder(WetnessBuilderBase):
+        def __init__(self):
+            super().__init__(
+                "/Game/Materials/Pamux/Landscape/Functions/MF_Puddles",
+                MF_Puddles.Inputs,
+                MF_Puddles.Outputs)
+
+        def build_dependencies(self):
             pass
 
         def build_process_nodes(self):
@@ -51,11 +84,6 @@ class MF_Puddles:
             self.saturate = Saturate(OneMinus(Saturate(Divide(Subtract(self.componentMask, self.puddleHeight), self.puddleSlope))))
 
             self.blendMaterialAttributes = BlendMaterialAttributes(self.materialAttributes, self.makeMaterialAttributes, self.saturate)
-
-
-        def build_output_nodes(self):
-            self.Result = self.makeFunctionOutput("Result", 0)
-            self.PuddleMask = self.makeFunctionOutput("PuddleMask", 1)
 
         def finalize_node_connections(self):
             MEL.connect_material_expressions(self.blendMaterialAttributes.asset, "", self.Result.asset, "")

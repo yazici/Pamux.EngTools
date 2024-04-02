@@ -16,7 +16,7 @@ for  k, v in sys.modules.items():
 for module in reloads:
     reload(module)
 
-from pamux_unreal_tools.base.material_function_builder_base import MaterialFunctionBuilderBase
+from pamux_unreal_tools.base.material_function_builder_base import *
 
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.base.material_expression_container import *
@@ -27,7 +27,6 @@ class MF_BlendTwoMaterialsViaHighOpacityMap:
         def __init__(self, builder: MaterialFunctionBuilderBase):
             preview_value = unreal.Vector4f()
             preview_value.set_editor_property("w", 1.0)
-
 
             self.alpha = builder.build_FunctionInput("Alpha", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR)
             self.alpha.preview_value.set(preview_value)
@@ -44,23 +43,29 @@ class MF_BlendTwoMaterialsViaHighOpacityMap:
             self.materialB.sort_priority.set(1)
             self.materialB.use_preview_value_as_default.set(False)
 
+    class Outputs:
+        def __init__(self, builder: MaterialFunctionBuilderBase):
+            pass
+
     class Builder(MaterialFunctionBuilderBase):
         def __init__(self):
-            super().__init__("MF_BlendTwoMaterialsViaHighOpacityMap")
+            super().__init__(
+                "/Game/Materials/Pamux/Landscape/Functions/MF_BlendTwoMaterialsViaHighOpacityMap",
+                MF_BlendTwoMaterialsViaHighOpacityMap.Inputs,
+                MaterialFunctionOutputs.Result)
 
         def build_dependencies(self):
-            factory = MaterialFunctionFactory()
-            self.heightLerpWithTwoHeightMaps = factory.load("HeightLerpWithTwoHeightMaps", "/Engine/Functions/Engine_MaterialFunctions02/Texturing")
-
-        def build_input_nodes(self):
-            self.inputs = MF_BlendTwoMaterialsViaHighOpacityMap.Inputs(self)
+            self.heightLerpWithTwoHeightMaps = self.load_MF(
+                "/Engine/Functions/Engine_MaterialFunctions02/Texturing/HeightLerpWithTwoHeightMaps",
+                [ "Transistion Phase", "Height Texture 1", "Height Texture 2" ],
+                [ "Alpha" ])
 
         def build_process_nodes(self):
             breakMaterialAttributesA = BreakMaterialAttributes(self.inputs.materialA.rt)
             breakMaterialAttributesB = BreakMaterialAttributes(self.inputs.materialB.rt)
 
             # Transistion is misspelled in the built in function
-            lerp = self.callMaterialFunction(self.heightLerpWithTwoHeightMaps, [ "Transistion Phase", "Height Texture 1", "Height Texture 2" ], [ "Alpha" ])
+            lerp = self.heightLerpWithTwoHeightMaps.call(self)
             lerp.transistionPhase.comesFrom(self.inputs.alpha.rt)
             lerp.heightTexture1.comesFrom(breakMaterialAttributesA.opacity)
             lerp.heightTexture2.comesFrom(breakMaterialAttributesB.opacity)

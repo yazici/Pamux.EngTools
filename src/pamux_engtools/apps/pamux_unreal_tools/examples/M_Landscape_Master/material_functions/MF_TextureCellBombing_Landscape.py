@@ -15,7 +15,7 @@ for  k, v in sys.modules.items():
 for module in reloads:
     reload(module)
 ## 
-from pamux_unreal_tools.base.material_function_builder_base import MaterialFunctionBuilderBase
+from pamux_unreal_tools.base.material_function_builder_base import *
 
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.base.material_expression_container import *
@@ -38,17 +38,22 @@ class MF_TextureCellBombing_Landscape:
         def __init__(self, builder):
             CurrentNodePos.y = 0
             self.Result = builder.makeFunctionOutput_Result()
-        
+
+    # [ "Texture", "UVs", "CellScale", "PatternScale", "DoRotationVariation", "RandomOffsetVariation", "RandomRotationVariation", "IsNormalMap" ], [ "Result" ]
     class Builder(MaterialFunctionBuilderBase):
         def __init__(self):
-            super().__init__("MF_TextureCellBombing_Landscape")
+            super().__init__(
+                "/Game/Materials/Pamux/Landscape/Functions/MF_TextureCellBombing_Landscape",
+                MF_TextureCellBombing_Landscape.Inputs,
+                MF_TextureCellBombing_Landscape.Outputs)
 
         def build_dependencies(self):
-            factory = MaterialFunctionFactory()
-            self.rotateAboutWorldAxis_cheap = factory.load("RotateAboutWorldAxis_cheap", "/Engine/Functions/Engine_MaterialFunctions02/WorldPositionOffset")
+            self.rotateAboutWorldAxis_cheap = self.load_MF(
+                "/Engine/Functions/Engine_MaterialFunctions02/WorldPositionOffset/RotateAboutWorldAxis_cheap",
+                [ "Rotation Amount", "PivotPoint", "WorldPosition" ], [ "X-Axis", "Y-Axis", "Z-Axis" ])
 
         def build_input_nodes(self):
-            self.inputs = MF_TextureCellBombing_Landscape.Inputs(self)
+            # self.inputs = MF_TextureCellBombing_Landscape.Inputs(self)
 
             self.UVs3Vector = AppendVector(self.inputs.UVs.rt, Constant(0.0))
 
@@ -71,15 +76,15 @@ class MF_TextureCellBombing_Landscape:
 
             self.worldPosition = Add(self.patternScaledUVs3Vector, self.offsetVariation)
 
-            rotated = self.callMaterialFunction(self.rotateAboutWorldAxis_cheap, [ "Rotation Amount", "PivotPoint", "WorldPosition" ], [ "X-Axis", "Y-Axis", "Z-Axis" ])
-            rotated.rotationAmount.comesFrom(self.rotationVariation)
-            rotated.pivotPoint.comesFrom(pivotPoint)
-            rotated.worldPosition.comesFrom(self.worldPosition)
+            self.rotateAboutWorldAxis_cheap.call()
+            self.rotateAboutWorldAxis_cheap.call_result.rotationAmount.comesFrom(self.rotationVariation)
+            self.rotateAboutWorldAxis_cheap.call_result.pivotPoint.comesFrom(pivotPoint)
+            self.rotateAboutWorldAxis_cheap.call_result.worldPosition.comesFrom(self.worldPosition)
 
             usage = NamedRerouteUsage()
             usage.asset.set_editor_property("Declaration", self.inputs.doRotationVariation.rt)
 
-            switch = StaticSwitch(Add(rotated.zAxis, self.worldPosition), self.worldPosition, usage ) # self.inputs.doRotationVariation.rt
+            switch = StaticSwitch(Add(self.rotateAboutWorldAxis_cheap.call_result.zAxis, self.worldPosition), self.worldPosition, usage ) # self.inputs.doRotationVariation.rt
 
             self.randomRotateRG = ComponentMask(switch, "RG")
 
@@ -95,12 +100,12 @@ class MF_TextureCellBombing_Landscape:
             self.rotatedInputTexture.sampler_type.set(unreal.MaterialSamplerType.SAMPLERTYPE_COLOR)
             self.rotatedInputTexture.rt = NamedRerouteDeclaration(f"rtRotatedInputTexture", self.rotatedInputTexture.RGB)
 
-            rotated = self.callMaterialFunction(self.rotateAboutWorldAxis_cheap, [ "Rotation Amount", "PivotPoint", "WorldPosition" ], [ "X-Axis", "Y-Axis", "Z-Axis" ])
-            rotated.rotationAmount.comesFrom(self.negativeRotationVariation)
-            rotated.pivotPoint.comesFrom(pivotPoint)
-            rotated.worldPosition.comesFrom(self.rotatedInputTexture.rt)
+            self.rotateAboutWorldAxis_cheap.call()
+            self.rotateAboutWorldAxis_cheap.call_result.rotationAmount.comesFrom(self.negativeRotationVariation)
+            self.rotateAboutWorldAxis_cheap.call_result.pivotPoint.comesFrom(pivotPoint)
+            self.rotateAboutWorldAxis_cheap.call_result.worldPosition.comesFrom(self.rotatedInputTexture.rt)
 
-            self.normalRotation = Add(rotated.zAxis, self.rotatedInputTexture.rt)
+            self.normalRotation = Add(self.rotateAboutWorldAxis_cheap.call_result.zAxis, self.rotatedInputTexture.rt)
 
             return self.normalRotation
 

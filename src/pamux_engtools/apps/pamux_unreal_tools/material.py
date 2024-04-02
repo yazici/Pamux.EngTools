@@ -5,7 +5,7 @@ import unreal
 from unreal import GuidLibrary
 from pamux_unreal_tools.utils.build_stack import NodePos
 from pamux_unreal_tools.base.material_expression_container import *
-
+from pamux_unreal_tools.utils.pamux_asset_utils import PamuxAssetUtils
 MEL = unreal.MaterialEditingLibrary
 ATH = unreal.AssetToolsHelpers
 AT = ATH.get_asset_tools()
@@ -38,12 +38,6 @@ class Material(MaterialExpressionContainer):
 
 
 class MaterialFactory(MaterialExpressionContainerFactory):
-    def load(self, asset_name, package_path):
-        asset = EAL.load_asset(f"{package_path}/{asset_name}")
-        if asset is None:
-            raise f"Can't load asset: {package_path}/{asset_name}"
+    def __init__(self):
+        super().__init__(unreal.Material, unreal.MaterialFactoryNew(), Material)
 
-        return Material(asset)
-
-    def create(self, asset_name, package_path):
-        return Material(AT.create_asset(asset_name, package_path, unreal.Material, unreal.MaterialFactoryNew()))

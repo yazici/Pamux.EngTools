@@ -10,7 +10,7 @@ ATH = unreal.AssetToolsHelpers
 AT = ATH.get_asset_tools()
 EAL = unreal.EditorAssetLibrary
 AUL = unreal.EditorUtilityLibrary
-
+from pamux_unreal_tools.utils.pamux_asset_utils import PamuxAssetUtils
 # Assertion failed: Outputs.Num() == AttributeGetTypes.Num() + 1 [File:D:\build\++UE5\Sync\Engine\Source\Runtime\Engine\Private\Materials\MaterialExpressions.cpp] [Line: 7213]
 
 # https://docs.unrealengine.com/5.3/en-US/PythonAPI/class/MaterialEditingLibrary.html
@@ -46,23 +46,53 @@ class MaterialExpressionContainer:
         return MEL.get_material_default_texture_parameter_value(self.asset, parameterName)
 
 class MaterialExpressionContainerFactory:
-    def load(self, asset_name, package_path):
-        raise "implement load"
+    def __init__(self, asset_class: unreal.Class, asset_factory: unreal.Factory, container_wrapper_class):
+        self.asset_class = asset_class
+        self.asset_factory = asset_factory
+        self.container_wrapper_class = container_wrapper_class
 
-    def loadAndClean(self, asset_name, package_path):
-        result = self.load(asset_name, package_path)
+    def load(self, builder, container_path, virtual_inputs, virtual_outputs) -> MaterialExpressionContainer:
+        return self.__load_wrapped_asset(builder, container_path, virtual_inputs, virtual_outputs)
+
+    def loadAndClean(self, builder, container_path, virtual_inputs, virtual_outputs) -> MaterialExpressionContainer:
+        result = self.__load_wrapped_asset(builder, container_path, virtual_inputs, virtual_outputs)
         result.deleteAllMaterialExpressions()
         return result
-    
-    def create(self, asset_name, package_path):
-        raise "implement create"
-    
-    def loadOrCreate(self, asset_name, package_path):
+
+    def loadAndCleanOrCreate(self, builder, container_path, virtual_inputs, virtual_outputs) -> MaterialExpressionContainer:
         try:
-            return self.loadAndClean(asset_name, package_path)
+            return self.loadAndClean(builder, container_path, virtual_inputs, virtual_outputs)
         except:
-            return self.create(asset_name, package_path)
-    
+            return self.__create_wrapped_asset(builder, container_path, virtual_inputs, virtual_outputs)
+
+    def __load_wrapped_asset(self, builder, asset_path: str, virtual_inputs: list, virtual_outputs: list) -> MaterialExpressionContainer:
+        result = self.__load_and_wrap_asset(asset_path)
+        result.builder = builder
+        result.virtual_inputs = virtual_inputs
+        result.virtual_outputs = virtual_outputs
+        return result
+
+    def __create_wrapped_asset(self, builder, asset_path: str, virtual_inputs: list, virtual_outputs: list) -> MaterialExpressionContainer:
+        result = self.__create_and_wrap_asset(asset_path)
+        result.builder = builder
+        result.virtual_inputs = virtual_inputs
+        result.virtual_outputs = virtual_outputs
+        return result
+
+    def __load_and_wrap_asset(self, asset_path: str) -> MaterialExpressionContainer:
+        asset = EAL.load_asset(asset_path)
+        if asset is None:
+            raise f"Can't load asset: {asset_path}"
+        return self.container_wrapper_class(asset)
+
+    def __create_and_wrap_asset(self, asset_path: str) -> MaterialExpressionContainer:
+        package_path, asset_name = PamuxAssetUtils.split_asset_path(asset_path)
+        
+        asset = AT.create_asset(asset_name, package_path, self.asset_class, self.asset_factory)
+        if asset is None:
+            raise f"Can't create asset: {asset_path}"
+        return self.container_wrapper_class(asset)
+
 class MaterialExpressionValue:
     def __init__(self, materialExpression, name, type):
         self.materialExpression = materialExpression

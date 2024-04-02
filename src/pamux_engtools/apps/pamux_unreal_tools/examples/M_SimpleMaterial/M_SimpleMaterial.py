@@ -23,18 +23,16 @@ from pamux_unreal_tools.material import MaterialFactory
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.base.material_expression_container import *
 from pamux_unreal_tools.generated.material_expression_wrappers import *
+from pamux_unreal_tools.base.material_function_builder_base import *
 
 from pamux_unreal_tools.base.material_builder_base import MaterialBuilderBase
 class M_SimpleMaterial:
     class Builder(MaterialBuilderBase):
-        def __init__(self, material_name: str, package_name: str):
-            super().__init__(None, material_name, package_name)
-
-    def build_dependencies(self):
-        pass
-
-    def build_input_nodes(self):
-        pass
+        def __init__(self, container_path: str):
+            super().__init__(
+                container_path,
+                M_SimpleMaterial.Inputs,
+                MaterialFunctionOutputs.Result)
 
     def build_process_nodes(self):
         self.colorParameter = VectorParameter("Color", unreal.LinearColor(0.259027, 0.320382, 0.383775, 1.0))
@@ -42,9 +40,6 @@ class M_SimpleMaterial:
         self.roughness = ScalarParameter("Roughness", 0.5)
         self.textureCoord = TextureCoordinate(0.5, 0.5)
         self.textureSample = TextureSample()
-
-    def build_output_nodes(self):
-        pass
 
     def finalize_node_connections(self):
         self.colorParameter.output.connectTo(unreal.MaterialProperty.MP_BASE_COLOR)
@@ -54,4 +49,4 @@ class M_SimpleMaterial:
         self.textureSample.UVs.comesFrom(self.textureCoord.output)
 
 
-material = M_SimpleMaterial.Builder("M_SimpleMaterial", "/Game/Materials/Pamux").get()
+M_SimpleMaterial.Builder("/Game/Materials/Pamux/M_SimpleMaterial").get()

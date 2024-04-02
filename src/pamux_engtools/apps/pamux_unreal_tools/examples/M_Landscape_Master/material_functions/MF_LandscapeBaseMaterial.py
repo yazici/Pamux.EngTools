@@ -7,33 +7,39 @@ from pamux_unreal_tools.examples.M_Landscape_Master.params import *
 from pamux_unreal_tools.examples.M_Landscape_Master.globals import *
 from pamux_unreal_tools.material_expression_factories import *
 from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MF_TextureCellBombing_Landscape import MF_TextureCellBombing_Landscape
+from pamux_unreal_tools.base.material_function_builder_base import *
 
 class MF_LandscapeBaseMaterial:
+    class Inputs:
+        def __init__(self, builder: MaterialFunctionBuilderBase):
+            pass
+
     class Builder(MaterialLayerFunctionBuilderBase):
         def __init__(self):
-            super().__init__("MF_LandscapeBaseMaterial")
+            super().__init__(
+                "/Game/Materials/Pamux/Landscape/Functions/Layers/MF_LandscapeBaseMaterial",
+                MF_LandscapeBaseMaterial.Inputs,
+                MaterialFunctionOutputs.ResultAndHeight)
 
         def build_dependencies(self):
-            factory = MaterialFunctionFactory()
-
-            self.blend_Overlay = factory.load("Blend_Overlay", "/Engine/Functions/Engine_MaterialFunctions03/Blends")
-            self.cheapContrast_RGB = factory.load("CheapContrast_RGB", "/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment")
-            self.heightLerp = factory.load("HeightLerp", "/Engine/Functions/Engine_MaterialFunctions02/Texturing")
-            self.multiplyAdd = factory.load("MultiplyAdd", "/Engine/Functions/Engine_MaterialFunctions02/Math")
-            self.breakOutFloat4Components = factory.load("BreakOutFloat4Components", "/Engine/Functions/Engine_MaterialFunctions02/Utility")
-            self.multiplyAdd = factory.load("MultiplyAdd", "/Engine/Functions/Engine_MaterialFunctions02/Math")
-            self.customRotator = factory.load("CustomRotator", "/Engine/Functions/Engine_MaterialFunctions02/Texturing")
+            self.blend_Overlay = self.load_MF("/Engine/Functions/Engine_MaterialFunctions03/Blends/Blend_Overlay", [ "Base", "Blend" ], [ "Result" ])
+            self.cheapContrast_RGB = self.load_MF("/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment/CheapContrast_RGB", [ "In", "Contrast" ], [ "Result" ])
+            self.heightLerp = self.load_MF("/Engine/Functions/Engine_MaterialFunctions02/Texturing/HeightLerp", [ "A", "B", "Transition Phase", "Height Texture", "Contrast" ], [ "Results", "Alpha", "Lerp Alpha No Contrast" ])
+            self.multiplyAdd = self.load_MF("/Engine/Functions/Engine_MaterialFunctions02/Math/MultiplyAdd", [ "Base", "Add" ], [ "Result" ])
+            self.breakOutFloat4Components = self.load_MF("/Engine/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat4Components", [ "Float4" ], [ "R", "G", "B", "A" ])
+            self.customRotator = self.load_MF("/Engine/Functions/Engine_MaterialFunctions02/Texturing/CustomRotator", [ "UVs", "Rotation Center", "Rotation Angle" ], [ "Rotated Values" ])
 
             self.MF_TextureCellBombing_Landscape = MF_TextureCellBombing_Landscape.Builder().get()
+            # 
             self.call_MF_TextureCellBombing_Landscape = {}
 
         # def baseColorPath(self, qualitySwitched, commonParams, rotatedUVs, heightTexture):
-        #         switched = self.doStuffWithTexture(commonParams.Albedo, False, qualitySwitched, commonParams, rotatedUVs)        
+        #         switched = self.doStuffWithTexture(commonParams.Albedo, False, qualitySwitched, commonParams, rotatedUVs)
 
         #         switchedAndMultipliedColorOverlay = Multiply(switched, commonParams.ColorOverlay)
 
         #         
-        #         call_Blend_Overlay = self.callMaterialFunction(blend_Overlay)
+        #         call_Blend_Overlay = self.blend_Overlay(self)
         #         call_Blend_Overlay.base = switched
         #         call_Blend_Overlay.blend = commonParams.ColorOverlay
         #         # blendOverlay = Blend_Overlay(switched, commonParams.ColorOverlay)
@@ -44,10 +50,10 @@ class MF_LandscapeBaseMaterial:
         #         lerpedColorOverlay = LinearInterpolate(switched, qualitySwitched2, commonParams.ColorOverlay.Intensity)
 
         #         
-        #         call_CheapContrast_RGB = self.callMaterialFunction(cheapContrast_RGB)
+        #         call_CheapContrast_RGB = cheapContrast_RGB.call()
         #         call_CheapContrast_RGB.In = lerpedColorOverlay
         #         call_CheapContrast_RGB.Contrast = commonParams.Contrast
-        #         call_HeightLerp = self.callMaterialFunction(heightLerp)
+        #         call_HeightLerp = heightLerp.call()
         #         call_HeightLerp.A = lerpedColorOverlay
         #         call_HeightLerp.B = call_CheapContrast_RGB.Result
         #         call_HeightLerp.TransitionPhase = commonParams.Contrast.Variation
@@ -69,7 +75,7 @@ class MF_LandscapeBaseMaterial:
         #     constZero = 0
         #     computedIntensity = AppendVector(computedIntensity, constZero)
 
-        #     call_multiplyAdd = self.callMaterialFunction(multiplyAdd)
+        #     call_multiplyAdd = multiplyAdd.call()
         #     call_multiplyAdd.a.comesFrom(switched)
         #     call_multiplyAdd.b.comesFrom(computedIntensity)
 
@@ -158,7 +164,7 @@ class MF_LandscapeBaseMaterial:
 
         def __build_cellBombing(self, map_name):
             return
-            call = self.callMaterialFunction(self.MF_TextureCellBombing_Landscape, [ "Texture", "UVs", "CellScale", "PatternScale", "DoRotationVariation", "RandomOffsetVariation", "RandomRotationVariation", "IsNormalMap" ], [ "Result" ])
+            call = self.MF_TextureCellBombing_Landscape.call()
 
             self.call_MF_TextureCellBombing_Landscape[map_name] = call
             
@@ -183,17 +189,17 @@ class MF_LandscapeBaseMaterial:
             self.landscapeLayerCoords.mapping_type.set(unreal.TerrainCoordMappingType.TCMT_AUTO)
             self.landscapeLayerCoords.custom_uv_type.set(unreal.LandscapeCustomizedCoordType.LCCT_NONE)
 
-            self.call_BreakOutFloat4Components = self.callMaterialFunction(self.breakOutFloat4Components, [ "Float4" ], [ "R", "G", "B", "A" ])
-            # self.call_BreakOutFloat4Components.float4.comesFrom(self.uvParams)
-            # self.uvParamsRG = AppendVector(self.call_BreakOutFloat4Components.r, self.call_BreakOutFloat4Components.g)
-            # self.uvParamsBA = AppendVector(self.call_BreakOutFloat4Components.b, self.call_BreakOutFloat4Components.a)
+            self.breakOutFloat4Components.call()
+            # self.breakOutFloat4Components.call_result.float4.comesFrom(self.uvParams)
+            # self.uvParamsRG = AppendVector(self.breakOutFloat4Components.call_result.r, self.breakOutFloat4Components.call_result.g)
+            # self.uvParamsBA = AppendVector(self.breakOutFloat4Components.call_result, self.breakOutFloat4Components.call_result.a)
 
             # self.multiply = Multiply(self.landscapeLayerCoords, self.uvParamsRG)
 
-            self.call_CustomRotator = self.callMaterialFunction(self.customRotator, ["UVs", "RotationCenter", "RotationAngle"], ["RotatedValues"])
-            # self.call_CustomRotator.UVs.comesFrom(self.multiply)
-            # lf.call_CustomRotator.RotationCenter.comesFrom(self.uvParamsBA)
-            # self.call_CustomRotator.RotationAngle.comesFrom(self.rotation.rt)
+            self.customRotator.call()
+            # self.customRotator.call_result.UVs.comesFrom(self.multiply)
+            # self.customRotator.call_result.rotationCenter.comesFrom(self.uvParamsBA)
+            # self.customRotator.call_result.rotationAngle.comesFrom(self.rotation.rt)
 
             
             self.__build_cellBombing("albedo")
@@ -211,10 +217,9 @@ class MF_LandscapeBaseMaterial:
             # self.multiply = Multiply()
             # self.makeMaterialAttributes.roughness.comesFrom(self.multiply)
 
-
-            # self.call_multiplyAdd = self.callMaterialFunction(self.multiplyAdd)
-            # # call_multiplyAdd.a.comesFrom(switched)
-            # # call_multiplyAdd.b.comesFrom(computedIntensity)
+            self.multiplyAdd.call()
+            # self.multiplyAdd.call_result.a.comesFrom(switched)
+            # self.multiplyAdd.call_result.b.comesFrom(computedIntensity)
 
 
             # # makeMaterialAttributes.normal.comesFrom(multiplyAdd)

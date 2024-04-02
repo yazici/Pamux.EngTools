@@ -35,8 +35,8 @@ from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MF_Foliag
 # https://github.com/SomeRanDev/Haxe-UnrealEngine5/blob/d17e0b1f9d8973ed0641484148c55d552ba69dff/Externs/generated_5_0_3/MaterialExpressionLinearInterpolate.hx#L4
 class M_Landscape_Master:
     class Builder(MaterialBuilderBase):
-        def __init__(self, material_name: str, package_name: str):
-            super().__init__(Params, material_name, package_name)
+        def __init__(self, asset_path: str):
+            super().__init__(Params, asset_path)
 
         # def __buildMainPath(self, MF_BlendTwoMaterialsViaHighOpacityMap_Output):
         #     makeMaterialAttributes = MakeMaterialAttributes(self.material)
@@ -46,7 +46,7 @@ class M_Landscape_Master:
         #     virtualTextureFeatureSwitch.in1.comesFrom(MF_BlendTwoMaterialsViaHighOpacityMap_Output)
         #     virtualTextureFeatureSwitch.in2.comesFrom(makeMaterialAttributes)
 
-        #     call_MF_GlancingAngleSpecCorrection = self.callMaterialFunction(self.MF_GlancingAngleSpecCorrection)
+        #     call_MF_GlancingAngleSpecCorrection = self.MF_GlancingAngleSpecCorrection.call(self)
         #     call_MF_GlancingAngleSpecCorrection.in1.comesFrom(virtualTextureFeatureSwitch.output)
 
         #     qualitySwitch = QualitySwitch(self.material)
@@ -59,7 +59,7 @@ class M_Landscape_Master:
 
         # def __rvtSpecular(self, baseColor):
         #     sCurve = MaterialFunctionFactory().load("SCurve", "/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment", True)
-        #     call_SCurve = self.callMaterialFunction(sCurve)
+        #     call_SCurve = sCurve.call(self)
         #     call_SCurve.In.comesFrom(baseColor)
         #     call_SCurve.Power.comesFrom(Params.specularContrast)
 
@@ -136,7 +136,7 @@ class M_Landscape_Master:
             landscapeLayerBlend.layers.set(layers)
 
             for layer_name in Globals.layer_names:
-                call_MLF_LayerX = self.callMaterialFunction(self.MLF_Layers[layer_name])
+                call_MLF_LayerX = self.MLF_Layers[layer_name].call(self)
 
                 MEL.connect_material_expressions(call_MLF_LayerX.asset, "Result", landscapeLayerBlend.asset, f"Layer {layer_name}")
                 MEL.connect_material_expressions(call_MLF_LayerX.asset, "Height", landscapeLayerBlend.asset, f"Height {layer_name}")
@@ -147,12 +147,12 @@ class M_Landscape_Master:
             pass
             # blendedLandscapeLayers = self.__blendLandscapeLayers()
 
-            # call_MF_Wetness = self.callMaterialFunction(self.MF_Wetness)
+            # call_MF_Wetness = self.MF_Wetness.call(self)
             # call_MF_Wetness.input.comesFrom(blendedLandscapeLayers)
 
             # return call_MF_Wetness.output
 
-            # call_MF_Puddles = self.callMaterialFunction(self.MF_Puddles)
+            # call_MF_Puddles = self.MF_Puddles.call(self)
             # call_MF_Puddles.input.comesFrom(call_MF_Wetness.output)
 
             # subtractHalf = Subtract(self.material)
@@ -168,7 +168,7 @@ class M_Landscape_Master:
 
             # # saturatedWetmess = Chain(self.material, Saturate(Divide(Subtract(self.params.Wetness.output, 0.5), 0.5))
 
-            # call_MF_BlendTwoMaterialsViaHighOpacityMap = self.callMaterialFunction(self.MF_BlendTwoMaterialsViaHighOpacityMap)
+            # call_MF_BlendTwoMaterialsViaHighOpacityMap = self.MF_BlendTwoMaterialsViaHighOpacityMap(self)
             # call_MF_BlendTwoMaterialsViaHighOpacityMap.in1.comesFrom(call_MF_Wetness.output)
             # call_MF_BlendTwoMaterialsViaHighOpacityMap.in2.comesFrom(call_MF_Puddles.output)
             # call_MF_BlendTwoMaterialsViaHighOpacityMap.in3.comesFrom(saturatedWetmess.output)
@@ -184,7 +184,7 @@ class M_Landscape_Master:
 
 
 #sCurve = MaterialFunctionFactory().load("SCurve", "/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment", True)
-#call_SCurve = self.callMaterialFunction(sCurve)
+#call_SCurve = sCurve.call()
 #call_SCurve.In.comesFrom(baseColor)
 #call_SCurve.Power.comesFrom(Params.specularContrast)
 

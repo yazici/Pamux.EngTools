@@ -1,5 +1,31 @@
+import unreal
+from pathlib import Path
+import sys
+import os
+import shutil
+
+sys.path.append(str(Path(__file__).parent.parent.parent.parent.parent.resolve()))
+
+from importlib import * 
+
+reloads = []
+for  k, v in sys.modules.items():
+    if k.startswith("pamux_unreal_tools"):
+        reloads.append(v)
+
+for module in reloads:
+    reload(module)
+
+from pamux_unreal_tools.base.material_function_builder_base import *
+
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.base.material_expression_container import *
+from pamux_unreal_tools.material_function import MaterialFunctionFactory
+
+
+
+
+
 from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.base.wetness_base import WetnessBuilderBase
 from pamux_unreal_tools.material_expression_factories import *
 # material = util.load_asset('/Game/0_Root/Material/M_standard_shd_test.M_standard_shd_test')
@@ -8,9 +34,16 @@ from pamux_unreal_tools.material_expression_factories import *
 # node_set = unreal.MaterialEditingLibrary.get_material_selected_nodes(material)
 
 class MF_Wetness:
+    class Inputs:
+        def __init__(self, builder: MaterialFunctionBuilderBase):
+            pass
+
     class Builder(WetnessBuilderBase):
         def __init__(self):
-            super().__init__("MF_Wetness")
+            super().__init__(
+                "/Game/Materials/Pamux/Landscape/Functions/MF_Wetness",
+                MF_Wetness.Inputs,
+                MaterialFunctionOutputs.ResultAndHeight)
 
         # Blocks are based on the comments section in the original material
         class WetnessBlock:
@@ -49,7 +82,7 @@ class MF_Wetness:
             pass
 
         def build_input_nodes(self):
-            pass
+            self.inputs = MF_Wetness.Inputs(self)
 
         def build_process_nodes(self):
             materialAttributes = self.getMaterialAttributes()

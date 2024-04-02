@@ -3,16 +3,20 @@ from pamux_unreal_tools.material_function import MaterialFunction, MaterialFunct
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.base.container_builder_base import ContainerBuilderBase
 
-LandscapeMaterialFunctionPackage = "/Game/Materials/Pamux/Landscape/Functions"
-
-class MaterialFunctionBuilderBase(ContainerBuilderBase):
-    class Outputs_ResultOnly:
+class MaterialFunctionOutputs:
+    class Result:
         def __init__(self, builder):
             CurrentNodePos.y = 0
             self.Result = builder.makeFunctionOutput_Result()
 
-    def __init__(self, container_name: str, package_name: str = LandscapeMaterialFunctionPackage):
-        super().__init__(MaterialFunctionFactory(), None, container_name, package_name)
+    class ResultAndHeight(Result):
+        def __init__(self, builder):
+            super().__init__(builder)
+            self.Height = builder.makeFunctionOutput_Height()
+
+class MaterialFunctionBuilderBase(ContainerBuilderBase):
+    def __init__(self, container_path: str, inputs_class, outputs_class):
+        super().__init__(MaterialFunctionFactory(), None, container_path, inputs_class, outputs_class)
 
     def makeFunctionOutput(self, name, sort_priority):
         CurrentNodePos.goto_outputs()
@@ -34,16 +38,14 @@ class MaterialFunctionBuilderBase(ContainerBuilderBase):
         pass
 
     def build_output_nodes(self):
-        self.outputs = MaterialFunctionBuilderBase.Outputs_ResultOnly(self)
+        self.outputs = MaterialFunctionOutputs.Result(self)
 
     def finalize_node_connections(self):
         pass
 
-LandscapeMaterialLayerFunctionPackage = f"{LandscapeMaterialFunctionPackage}/Layers"
-
 class MaterialLayerFunctionBuilderBase(MaterialFunctionBuilderBase):
-    def __init__(self, container_name: str, package_name: str = LandscapeMaterialLayerFunctionPackage):
-        super().__init__(container_name, package_name)
+    def __init__(self, container_path: str):
+        super().__init__(container_path)
 
     def build_output_nodes(self):
         CurrentNodePos.y = 0

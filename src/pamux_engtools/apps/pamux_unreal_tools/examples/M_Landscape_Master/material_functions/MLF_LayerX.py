@@ -1,30 +1,54 @@
-from pamux_unreal_tools.material_function import MaterialFunction
-from pamux_unreal_tools.base.material_function_builder_base import MaterialLayerFunctionBuilderBase
-from pamux_unreal_tools.material_function import MaterialFunction
+import unreal
+from pathlib import Path
+import sys
+import os
+import shutil
+
+sys.path.append(str(Path(__file__).parent.parent.parent.parent.parent.resolve()))
+
+from importlib import * 
+
+reloads = []
+for  k, v in sys.modules.items():
+    if k.startswith("pamux_unreal_tools"):
+        reloads.append(v)
+
+for module in reloads:
+    reload(module)
+
+from pamux_unreal_tools.base.material_function_builder_base import *
 
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.base.material_expression_container import *
+from pamux_unreal_tools.material_function import MaterialFunctionFactory
+
+
+from pamux_unreal_tools.material_function import MaterialFunction
+from pamux_unreal_tools.base.material_function_builder_base import MaterialLayerFunctionBuilderBase
+
 
 # self.weight = LLWeightParameter(f"{name}")
 # self.foliageThreshold = ScalarParameter(f"{name}FoliageThreshold")
 # self.foliageEnabled = StaticBoolParameter(f"{name}FoliageEnabled", foliageEnabledDefaultValue)
 
 class MLF_LayerX:
+    class Inputs:
+        def __init__(self, builder: MaterialFunctionBuilderBase):
+            self.alpha = builder.build_FunctionInput(f"{builder.layer_name}Albedo", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR)
+
     class Builder(MaterialLayerFunctionBuilderBase):
         def __init__(self, layer_name: str, MF_LandscapeBaseMaterial: MaterialFunction):
-            super().__init__(f"MLF_{layer_name}")
+            super().__init__(
+                f"/Game/Materials/Pamux/Landscape/Functions/Layers/MLF_{layer_name}",
+                MLF_LayerX.Inputs,
+                MaterialFunctionOutputs.ResultAndHeight)
 
             self.layer_name = layer_name
             self.MF_LandscapeBaseMaterial = MF_LandscapeBaseMaterial
 
-        def build_dependencies(self):
-            pass
-        
-        def build_input_nodes(self):
-            pass
 
         def build_process_nodes(self):
-            self.call_MF_LandscapeBaseMaterial = self.callMaterialFunction(self.MF_LandscapeBaseMaterial, [], [ "Result", "Height" ])
+            self.call_MF_LandscapeBaseMaterial = self.MF_LandscapeBaseMaterial.call()
 
             #self.call_MF_LandscapeBaseMaterial.output.connectTo(result.a)
             #call_MF_LandscapeBaseMaterial.height.connectTo(height.a)

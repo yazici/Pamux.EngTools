@@ -10,7 +10,7 @@ AUL = unreal.EditorUtilityLibrary
 
 from pamux_unreal_tools.base.material_expression_container import *
 from pamux_unreal_tools.utils.build_stack import NodePos
-
+from pamux_unreal_tools.generated.material_expression_wrappers import *
 # https://docs.unrealengine.com/5.3/en-US/PythonAPI/class/MaterialEditingLibrary.html
 
 class MaterialFunction(MaterialExpressionContainer):
@@ -20,13 +20,22 @@ class MaterialFunction(MaterialExpressionContainer):
                          MEL.delete_all_material_expressions_in_function,
                          MEL.layout_material_function_expressions)
 
-class MaterialFunctionFactory(MaterialExpressionContainerFactory):
-    def load(self, asset_name, package_path):
-        asset = EAL.load_asset(f"{package_path}/{asset_name}")
-        if asset is None:
-            raise f"Can't load asset: {package_path}/{asset_name}"
-            
-        return MaterialFunction(asset)
 
-    def create(self, asset_name, package_path):
-        return MaterialFunction(AT.create_asset(asset_name, package_path, unreal.MaterialFunction, unreal.MaterialFunctionFactoryNew()))
+    def call(self) -> MaterialFunctionCall:
+        result = MaterialFunctionCall()
+        result.material_function.set(self.asset)
+
+        for name in self.virtual_inputs:
+            inSocket = InSocket(result, name, 'StructProperty')
+            exec(f"result.{self.builder.__get_field_name(name)} = inSocket", locals())
+
+        for name in self.virtual_outputs:
+            outSocket = OutSocket(result, name, 'StructProperty')
+            exec(f"result.{self.builder.__get_field_name(name)} = outSocket", locals())
+
+        self.call_result = result
+        return result
+
+class MaterialFunctionFactory(MaterialExpressionContainerFactory):
+    def __init__(self):
+        super().__init__(unreal.MaterialFunction, unreal.MaterialFunctionFactoryNew(), MaterialFunction)

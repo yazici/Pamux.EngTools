@@ -41,10 +41,6 @@ class ContainerBuilderBase:
         result = FunctionInputFactory.create(input_name, input_type, preview)
         result.use_preview_value_as_default.set(True)
 
-        NamedRerouteDeclaration(f"rt{input_name}", result.output)
-        result.rt = result.output.rt
-        result.output.rt.material_expression_editor_x.set(result.material_expression_editor_x.get() + NodePos.DeltaX)
-        
         CurrentNodePos.x = 0
         CurrentNodePos.y += NodePos.DeltaY
 

@@ -10,14 +10,6 @@ class InSocketImpl(InSocket):
         super().__init__(material_expression, name, type)
 
     def comesFrom(self, param) -> bool:
-        # print("BARIS X")
-        # print(param)
-        # print(type(param))
-        # print(isinstance(param, MaterialExpressionBase))
-        # #print(issubclass(self.inputs.materialAttributes, MaterialExpressionBase))
-        # print(isinstance(param, OutSocket))
-        # #print(issubclass(self.inputs.materialAttributes, OutSocket))
-        
         if isinstance(param, OutSocket):
             return self.__comesFrom_OutSocket(param)
         

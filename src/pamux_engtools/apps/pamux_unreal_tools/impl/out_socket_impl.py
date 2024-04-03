@@ -12,6 +12,26 @@ class OutSocketImpl(OutSocket):
     def __init__(self, material_expression: MaterialExpressionBase, name: str, type: str) -> None:
         super().__init__(material_expression, name, type)
 
+    # def connectTo(self, param1, param2 = None, param3 = None) -> bool:
+    #     if isinstance(param1, unreal.MaterialProperty):
+    #         return self.__connectTo_MaterialProperty(param1)
+        
+    #     if isinstance(param1, str) and param1 is not None and isinstance(param2, MaterialExpressionBase) and isinstance(param3, str) and param3 is not None:
+    #         return self.__comesFrom_MaterialExpressionBase(param1, param2, param3)
+
+    #     raise Exception(f"Don't know how to call connectTo for type[s]: {str(param1)}, {str(param2)}")
+    
+
+    # def __connectTo_MaterialProperty(self, materialProperty: unreal.MaterialProperty) -> bool:
+    #     return MEL.connect_material_property(self.unrealAsset, "", materialProperty)
+
+    # def __comesFrom_MaterialExpressionBase(self, outPortName: str, material_expression: MaterialExpressionBase, inPortName: str) -> bool:
+    #     return MEL.connect_material_expressions(self.unrealAsset, outPortName, material_expression.unrealAsset, inPortName)
+
+    # @dispatch(MaterialExpressionBase, str)
+    # def connectTo(self, OutSocket) -> bool:
+    #     return MEL.connect_material_expressions(self.unrealAsset, "", materialExpression.unrealAsset, inPortName)
+
     def connectTo(self, param) -> bool:
         if isinstance(param, InSocket):
             return self.__connectToInSocket(param)
@@ -36,12 +56,21 @@ class OutSocketImpl(OutSocket):
         frame = inspect.currentframe()
         frame = inspect.getouterframes(frame)[1]
         string = inspect.getframeinfo(frame[0]).code_context[0].strip()
+
         if not string.endswith(".add_rt()"):
             raise Exception("Cannot find string ending with .add_rt() in call stack to set the name of the reroute")
 
+        if string.startswith("self."):
+            string = string[len("self."):]
+
         parts = string[0:-len(".add_rt()")].split(".")
         name = "rt"
+        isFirst = True
         for part in parts:
+            if isFirst:
+                isFirst = False
+            else:
+                name += "."
             name += part[0:1].upper() + part[1:]
 
         return self.material_expression.container.add_rt(name, self)

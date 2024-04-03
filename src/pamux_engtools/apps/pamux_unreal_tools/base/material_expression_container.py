@@ -52,12 +52,7 @@ class MaterialExpressionContainer:
     def getDefaultTextureParameterValue(self, parameter_name: str) -> unreal.Texture:
         return MEL.get_material_default_texture_parameter_value(self.unrealAsset, parameter_name)
 
-    def add_rt(self, name: str, outSocket: OutSocket):
-        NamedRerouteDeclaration(name, outSocket)
-        # node_pos = CurrentNodePos
-        # outSocket.rt = self.createMaterialExpression(unreal.MaterialExpressionNamedRerouteDeclaration, node_pos)
-        # outSocket.rt.name = MaterialExpressionEditorPropertyImpl(self, 'name', 'Name')
-    #     self.rt.nodeNolor = MaterialExpressionEditorPropertyImpl(self, 'nodeNolor', 'LinearColor')
-    #     self.rt.variableGuid = MaterialExpressionEditorPropertyImpl(self, 'variableGuid', 'Guid')
-
-    #     self.rt.name.set(name)
+    def add_rt(self, name: str, outSocket: OutSocket) -> NamedRerouteDeclaration:
+        rt = NamedRerouteDeclaration(name, outSocket)
+        rt.material_expression_editor_x.set(outSocket.material_expression.material_expression_editor_x.get() + NodePos.DeltaX)
+        return rt

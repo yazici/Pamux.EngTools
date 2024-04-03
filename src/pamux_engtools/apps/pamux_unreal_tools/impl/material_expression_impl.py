@@ -22,11 +22,18 @@ class MaterialExpressionImpl(MaterialExpressionBase):
 
         self.output = OutSocketImpl(self, '', 'StructProperty')
 
-    def comesFrom(self, param) -> bool:
-        return self.input.comesFrom(param)
+    def comesFrom(self, param1) -> bool:
+        return self.input.comesFrom(param1)
     
     def connectTo(self, param1) -> bool:
         return self.output.connectTo(param1)
+    
+    @property
+    def rt(self):
+        return self.output.rt
+
+    def add_rt(self):
+        return self.output.add_rt()
 
     def gotoRightOf(self, sourceMaterialExpression: MaterialExpressionBase):
         self.material_expression_editor_x.set(sourceMaterialExpression.material_expression_editor_x.get() + NodePos.DeltaX)

@@ -33,7 +33,9 @@ class MF_GlancingAngleSpecCorrection:
     class Inputs:
         def __init__(self, builder: ContainerBuilderBase):
             self.materialAttributes = builder.build_FunctionInput("In", unreal.FunctionInputType.FUNCTION_INPUT_MATERIAL_ATTRIBUTES)
+            self.materialAttributes.add_rt()
             self.pixelDepth = PixelDepth()
+            self.pixelDepth.add_rt()
 
             preview_value = unreal.Vector4f()
             preview_value.set_editor_property("w", 1.0)

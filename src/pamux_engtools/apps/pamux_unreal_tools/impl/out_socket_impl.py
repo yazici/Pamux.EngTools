@@ -53,24 +53,30 @@ class OutSocketImpl(OutSocket):
         return MEL.connect_material_expressions(self.material_expression.unrealAsset, self.name, function_output.unrealAsset, "")
 
     def add_rt(self):
-        frame = inspect.currentframe()
-        frame = inspect.getouterframes(frame)[1]
-        string = inspect.getframeinfo(frame[0]).code_context[0].strip()
+        requiredLineEnding = ".add_rt()"
+        for frame in inspect.getouterframes(inspect.currentframe()):
+            for line in frame.code_context:
+                line = line.strip()
+                if not line.endswith(requiredLineEnding):
+                    continue
+                if line == "return self.output.add_rt()":
+                    continue
 
-        if not string.endswith(".add_rt()"):
-            raise Exception("Cannot find string ending with .add_rt() in call stack to set the name of the reroute")
+                line = line[0:-len(requiredLineEnding)]
 
-        if string.startswith("self."):
-            string = string[len("self."):]
+                if line.startswith("self."):
+                    line = line[len("self."):]
 
-        parts = string[0:-len(".add_rt()")].split(".")
-        name = "rt"
-        isFirst = True
-        for part in parts:
-            if isFirst:
-                isFirst = False
-            else:
-                name += "."
-            name += part[0:1].upper() + part[1:]
+                parts = line.split(".")
+                name = "rt"
+                isFirst = True
+                for part in parts:
+                    if isFirst:
+                        isFirst = False
+                    else:
+                        name += "."
+                    name += part[0:1].upper() + part[1:]
 
-        return self.material_expression.container.add_rt(name, self)
+                return self.material_expression.container.add_rt(name, self)
+
+        raise Exception(f"Cannot find string ending with .add_rt() in call stack to set the name of the reroute")

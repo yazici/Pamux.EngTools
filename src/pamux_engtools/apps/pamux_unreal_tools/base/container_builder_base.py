@@ -79,7 +79,6 @@ class ContainerBuilderBase:
         result.save()
 
         BuildStack.pop()
-        print("popped")
         return result
 
     def makeFunctionOutput(self, name, sort_priority) -> FunctionOutput:

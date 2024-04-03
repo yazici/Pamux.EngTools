@@ -65,7 +65,7 @@ class AntialiasedTextureMask(MaterialExpressionImpl):
         self.applyViewMipBias = InSocketImpl(self, 'ApplyViewMipBias', 'StructProperty')
 
 class AppendVector(MaterialExpressionImpl):
-    def __init__(self, a, b, node_pos: NodePos = None) -> None:
+    def __init__(self, a = None, b = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionAppendVector, node_pos)
 
         self.a = InSocketImpl(self, 'A', 'StructProperty')
@@ -171,7 +171,7 @@ class BlendMaterialAttributes(MaterialExpressionImpl):
                 self.alpha.comesFrom(alpha)
 
 class BreakMaterialAttributes(MaterialExpressionImpl):
-    def __init__(self, input, node_pos: NodePos = None) -> None:
+    def __init__(self, input = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionBreakMaterialAttributes, node_pos)
 
         self.materialAttributes = InSocketImpl(self, 'MaterialAttributes', 'StructProperty')
@@ -231,7 +231,7 @@ class Ceil(MaterialExpressionImpl):
         super().__init__(unreal.MaterialExpressionCeil, node_pos)
 
 class ChannelMaskParameter(MaterialExpressionImpl):
-    def __init__(self, parameter_name, default_value, node_pos: NodePos = None) -> None:
+    def __init__(self, parameter_name = None, default_value = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionChannelMaskParameter, node_pos)
 
         self.channel_names = MaterialExpressionEditorPropertyImpl(self, 'channel_names', 'ParameterChannelNames')
@@ -292,7 +292,7 @@ class Comment(MaterialExpressionImpl):
         self.commentColor = InSocketImpl(self, 'CommentColor', 'StructProperty')
 
 class ComponentMask(MaterialExpressionImpl):
-    def __init__(self, input, rgbaMask, node_pos: NodePos = None) -> None:
+    def __init__(self, input = None, rgbaMask: str = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionComponentMask, node_pos)
 
         self.a = MaterialExpressionEditorPropertyImpl(self, 'a', 'bool')
@@ -320,7 +320,7 @@ class Composite(MaterialExpressionImpl):
         self.subgraph_name = MaterialExpressionEditorPropertyImpl(self, 'subgraph_name', 'str')
 
 class Constant(MaterialExpressionImpl):
-    def __init__(self, r, node_pos: NodePos = None) -> None:
+    def __init__(self, r = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionConstant, node_pos)
 
         self.r = MaterialExpressionEditorPropertyImpl(self, 'r', 'float')
@@ -328,7 +328,7 @@ class Constant(MaterialExpressionImpl):
             self.r.set(r)
 
 class Constant2Vector(MaterialExpressionImpl):
-    def __init__(self, constant, node_pos: NodePos = None) -> None:
+    def __init__(self, constant = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionConstant2Vector, node_pos)
 
         self.g = MaterialExpressionEditorPropertyImpl(self, 'g', 'float')
@@ -340,7 +340,7 @@ class Constant2Vector(MaterialExpressionImpl):
             self.constant.set(constant)
 
 class Constant3Vector(MaterialExpressionImpl):
-    def __init__(self, constant, node_pos: NodePos = None) -> None:
+    def __init__(self, constant = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionConstant3Vector, node_pos)
 
         self.constant = MaterialExpressionEditorPropertyImpl(self, 'constant', 'LinearColor')
@@ -352,7 +352,7 @@ class Constant3Vector(MaterialExpressionImpl):
             self.constant.set(constant)
 
 class Constant4Vector(MaterialExpressionImpl):
-    def __init__(self, constant, node_pos: NodePos = None) -> None:
+    def __init__(self, constant = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionConstant4Vector, node_pos)
 
         self.constant = MaterialExpressionEditorPropertyImpl(self, 'constant', 'LinearColor')
@@ -391,7 +391,7 @@ class CrossProduct(MaterialExpressionImpl):
         self.b = InSocketImpl(self, 'B', 'StructProperty')
 
 class CurveAtlasRowParameter(MaterialExpressionImpl):
-    def __init__(self, parameter_name, default_value, node_pos: NodePos = None) -> None:
+    def __init__(self, parameter_name = None, default_value = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionCurveAtlasRowParameter, node_pos)
 
         self.atlas = MaterialExpressionEditorPropertyImpl(self, 'atlas', 'CurveLinearColorAtlas')
@@ -576,7 +576,7 @@ class DotProduct(MaterialExpressionImpl):
         self.b = InSocketImpl(self, 'B', 'StructProperty')
 
 class DoubleVectorParameter(MaterialExpressionImpl):
-    def __init__(self, parameter_name, default_value, node_pos: NodePos = None) -> None:
+    def __init__(self, parameter_name = None, default_value = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionDoubleVectorParameter, node_pos)
 
         self.default_value = MaterialExpressionEditorPropertyImpl(self, 'default_value', 'Vector4d')
@@ -629,7 +629,7 @@ class FeatureLevelSwitch(MaterialExpressionImpl):
         self.default = InSocketImpl(self, 'Default', 'StructProperty')
 
 class Floor(MaterialExpressionImpl):
-    def __init__(self, input, node_pos: NodePos = None) -> None:
+    def __init__(self, input = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionFloor, node_pos)
         if input is not None:
             self.input.comesFrom(input)
@@ -1270,8 +1270,8 @@ class NamedRerouteBase(MaterialExpressionImpl):
     def __init__(self, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionNamedRerouteBase, node_pos)
 
-class NamedRerouteDeclaration(NamedRerouteDeclarationBase):
-    def __init__(self, name, input, nodeColor = None, node_pos: NodePos = None) -> None:
+class NamedRerouteDeclaration(MaterialExpressionImpl):
+    def __init__(self, name = None, input = None, nodeColor = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionNamedRerouteDeclaration, node_pos)
 
         self.name = MaterialExpressionEditorPropertyImpl(self, 'name', 'Name')
@@ -1288,7 +1288,7 @@ class NamedRerouteDeclaration(NamedRerouteDeclarationBase):
             self.nodeColor.set(nodeColor)
 
 class NamedRerouteUsage(MaterialExpressionImpl):
-    def __init__(self, declarationGuid, node_pos: NodePos = None) -> None:
+    def __init__(self, declarationGuid = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionNamedRerouteUsage, node_pos)
 
         self.declarationGuid = MaterialExpressionEditorPropertyImpl(self, 'declarationGuid', 'Guid')
@@ -1346,7 +1346,7 @@ class ObjectRadius(MaterialExpressionImpl):
         super().__init__(unreal.MaterialExpressionObjectRadius, node_pos)
 
 class OneMinus(MaterialExpressionImpl):
-    def __init__(self, input, node_pos: NodePos = None) -> None:
+    def __init__(self, input = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionOneMinus, node_pos)
         if input is not None:
             self.input.comesFrom(input)
@@ -1675,13 +1675,13 @@ class SamplePhysicsVectorField(MaterialExpressionImpl):
         self.worldPosition = InSocketImpl(self, 'WorldPosition', 'StructProperty')
 
 class Saturate(MaterialExpressionImpl):
-    def __init__(self, input, node_pos: NodePos = None) -> None:
+    def __init__(self, input = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionSaturate, node_pos)
         if input is not None:
             self.input.comesFrom(input)
 
 class ScalarParameter(MaterialExpressionImpl):
-    def __init__(self, parameter_name, default_value, node_pos: NodePos = None) -> None:
+    def __init__(self, parameter_name = None, default_value = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionScalarParameter, node_pos)
 
         self.default_value = MaterialExpressionEditorPropertyImpl(self, 'default_value', 'float')
@@ -1988,7 +1988,7 @@ class SquareRoot(MaterialExpressionImpl):
         super().__init__(unreal.MaterialExpressionSquareRoot, node_pos)
 
 class StaticBool(MaterialExpressionImpl):
-    def __init__(self, value, node_pos: NodePos = None) -> None:
+    def __init__(self, value = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionStaticBool, node_pos)
 
         self.value = MaterialExpressionEditorPropertyImpl(self, 'Value', 'bool')
@@ -1996,7 +1996,7 @@ class StaticBool(MaterialExpressionImpl):
             self.value.set(value)
 
 class StaticBoolParameter(MaterialExpressionImpl):
-    def __init__(self, parameter_name, default_value, node_pos: NodePos = None) -> None:
+    def __init__(self, parameter_name = None, default_value = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionStaticBoolParameter, node_pos)
 
         self.default_value = MaterialExpressionEditorPropertyImpl(self, 'default_value', 'bool')
@@ -2026,7 +2026,7 @@ class StaticComponentMaskParameter(MaterialExpressionImpl):
         self.expressionGUID = InSocketImpl(self, 'ExpressionGUID', 'StructProperty')
 
 class StaticSwitch(MaterialExpressionImpl):
-    def __init__(self, true, false, value, node_pos: NodePos = None) -> None:
+    def __init__(self, true = None, false = None, value = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionStaticSwitch, node_pos)
 
         self.default_value = MaterialExpressionEditorPropertyImpl(self, 'default_value', 'bool')
@@ -2042,7 +2042,7 @@ class StaticSwitch(MaterialExpressionImpl):
             self.value.comesFrom(value)
 
 class StaticSwitchParameter(MaterialExpressionImpl):
-    def __init__(self, parameter_name, default_value, node_pos: NodePos = None) -> None:
+    def __init__(self, parameter_name = None, default_value = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionStaticSwitchParameter, node_pos)
 
         self.default_value = MaterialExpressionEditorPropertyImpl(self, 'default_value', 'bool')
@@ -2232,7 +2232,7 @@ class TextureBase(MaterialExpressionImpl):
         self.texture = MaterialExpressionEditorPropertyImpl(self, 'texture', 'Texture')
 
 class TextureCoordinate(MaterialExpressionImpl):
-    def __init__(self, u_tiling, v_tiling, node_pos: NodePos = None) -> None:
+    def __init__(self, u_tiling = None, v_tiling = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionTextureCoordinate, node_pos)
 
         self.coordinate_index = MaterialExpressionEditorPropertyImpl(self, 'coordinate_index', 'int32')
@@ -2246,7 +2246,7 @@ class TextureCoordinate(MaterialExpressionImpl):
             self.v_tiling.set(v_tiling)
 
 class TextureObject(MaterialExpressionImpl):
-    def __init__(self, sampler_type, texture, node_pos: NodePos = None) -> None:
+    def __init__(self, sampler_type = None, texture = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionTextureObject, node_pos)
 
         self.is_default_meshpaint_texture = MaterialExpressionEditorPropertyImpl(self, 'is_default_meshpaint_texture', 'bool')
@@ -2501,7 +2501,7 @@ class VectorNoise(MaterialExpressionImpl):
         self.position = InSocketImpl(self, 'Position', 'StructProperty')
 
 class VectorParameter(MaterialExpressionImpl):
-    def __init__(self, parameter_name, default_value, node_pos: NodePos = None) -> None:
+    def __init__(self, parameter_name = None, default_value = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionVectorParameter, node_pos)
 
         self.channel_names = MaterialExpressionEditorPropertyImpl(self, 'channel_names', 'ParameterChannelNames')

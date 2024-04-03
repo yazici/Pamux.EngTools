@@ -7,8 +7,8 @@ from pamux_unreal_tools.factories.material_expression_factories import FunctionI
 from pamux_unreal_tools.base.texture_sample_set import TextureSampleSet
 
 class WetnessBuilderBase(MaterialFunctionBuilderBase):
-    def __init__(self, container_path: str):
-        super().__init__(container_path)
+    def __init__(self, container_path: str, dependencies_class, inputs_class, outputs_class = MaterialFunctionOutputs.Result):
+        super().__init__(container_path, dependencies_class, inputs_class, outputs_class)
 
     def getMaterialAttributes(self) -> FunctionInput:
         textureSampleSet = TextureSampleSet(

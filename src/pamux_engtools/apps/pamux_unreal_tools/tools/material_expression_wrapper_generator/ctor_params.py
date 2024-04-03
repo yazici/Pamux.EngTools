@@ -4,7 +4,7 @@ from pamux_unreal_tools.tools.py_code_generator.method_params import *
 from pamux_unreal_tools.tools.material_expression_wrapper_generator.globals import *
 
 class PropertyParam(MethodParam):
-    def __init__(self, name: str, type = None, default_value = None):
+    def __init__(self, name: str, type: str = None, default_value: str = "None"):
         super().__init__(name, type, default_value)
 
     def append_assignment_lines(self, pyGen: PyCodeGenerator):
@@ -14,7 +14,7 @@ class PropertyParam(MethodParam):
         pyGen.unindent()
 
 class InputParam(MethodParam):
-    def __init__(self, name: str, type: str = None, default_value: str = None):
+    def __init__(self, name: str, type: str = None, default_value: str = "None"):
         super().__init__(name, type, default_value)
 
     def append_assignment_lines(self, pyGen: PyCodeGenerator):
@@ -23,8 +23,8 @@ class InputParam(MethodParam):
         pyGen.end_if()
 
 class RerouteInputParam(MethodParam):
-    def __init__(self, name: str):
-        super().__init__(name)
+    def __init__(self, name: str, type: str = None, default_value: str = "None"):
+        super().__init__(name, type, default_value)
 
     def append_assignment_lines(self, pyGen: PyCodeGenerator):
         pyGen.begin_if(f"{self.name} is not None")
@@ -47,7 +47,7 @@ class InputParamWithConstProperty(MethodParam):
         
 class RGBAMaskParam(MethodParam):
     def __init__(self):
-        super().__init__("rgbaMask")
+        super().__init__("rgbaMask", "str", "None")
 
     def append_assignment_lines(self, pyGen: PyCodeGenerator):
         pyGen.begin_if(f"{self.name} is not None")
@@ -136,9 +136,9 @@ def setup_ctor_params(pamux_wrapper_class_name):
 
     elif pamux_wrapper_class_name == "NamedRerouteDeclaration":
         result.append(PropertyParam("name"))
-        result.append(RerouteInputParam("input"))
+        result.append(RerouteInputParam("input", None, "None"))
         #result.append(PropertyParam("variableGuid"))
-        result.append(PropertyParam("nodeColor", None, "None"))
+        result.append(PropertyParam("nodeColor", None))
 
     elif pamux_wrapper_class_name == "NamedRerouteUsage":
         result.append(PropertyParam("declarationGuid"))
@@ -149,6 +149,6 @@ def setup_ctor_params(pamux_wrapper_class_name):
         result.append(InputParamWithConstProperty("alpha"))
 
     elif pamux_wrapper_class_name == "Transform":
-        result.append(InputParam("input", default_value = "None"))
+        result.append(InputParam("input"))
 
     return result

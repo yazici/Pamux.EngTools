@@ -38,8 +38,11 @@ class OutSocketImpl(OutSocket):
         
         if isinstance(param, unreal.MaterialProperty):
             return self.__connectToMaterialProperty(param)
+        
+        if isinstance(param, MaterialExpressionBase):
+            return self.__connectToMaterialExpression(param)
 
-        raise Exception("Don't know how to call connectTo for type: " + str(param))
+        raise Exception(f"Don't know how to call connectTo for type: {str(param)}")
     
     def __connectToInSocket(self, inSocket: InSocket) -> bool:
         self.material_expression.material_expression_editor_x.set(inSocket.material_expression.material_expression_editor_x.get() - NodePos.DeltaX)
@@ -48,9 +51,9 @@ class OutSocketImpl(OutSocket):
     def __connectToMaterialProperty(self, materialProperty: unreal.MaterialProperty) -> bool:
         return MEL.connect_material_property(self.material_expression.unrealAsset, self.name, materialProperty)
 
-    def connectToFunctionOutput(self, function_output) -> bool:
-        self.material_expression.material_expression_editor_x.set(function_output.material_expression_editor_x.get() - NodePos.DeltaX)
-        return MEL.connect_material_expressions(self.material_expression.unrealAsset, self.name, function_output.unrealAsset, "")
+    def __connectToMaterialExpression(self, material_expression: MaterialExpressionBase) -> bool:
+        self.material_expression.material_expression_editor_x.set(material_expression.material_expression_editor_x.get() - NodePos.DeltaX)
+        return MEL.connect_material_expressions(self.material_expression.unrealAsset, self.name, material_expression.unrealAsset, "")
 
     def add_rt(self):
         requiredLineEnding = ".add_rt()"

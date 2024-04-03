@@ -19,7 +19,10 @@ class InSocketImpl(InSocket):
         raise Exception("Don't know how to call comesFrom for type: " + str(param))
 
     def __comesFrom_OutSocket(self, sourceOutSocket: OutSocket) -> bool:
-        return self.__comesFrom_impl(sourceOutSocket.material_expression, sourceOutSocket.name)
+        if hasattr(sourceOutSocket, "rt"):
+            return self.comesFrom(sourceOutSocket.rt)
+        else:
+            return self.__comesFrom_impl(sourceOutSocket.material_expression, sourceOutSocket.name)
 
     def __comesFrom_MaterialExpressionBase(self, sourceMaterialExpression: MaterialExpressionBase) -> bool:
         return self.__comesFrom_impl(sourceMaterialExpression, "")

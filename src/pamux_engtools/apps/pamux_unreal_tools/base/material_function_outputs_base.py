@@ -12,10 +12,10 @@ class MaterialFunctionOutputs:
     class Result(MaterialFunctionOutputsBase):
         def __init__(self, builder: ContainerBuilderBase) -> None:
             super().__init__(builder)
-            self.Result = builder.makeFunctionOutput("Result", 0)
+            self.result = builder.makeFunctionOutput("Result", 0)
 
     class ResultAndHeight(Result):
         def __init__(self, builder: ContainerBuilderBase) -> None:
             super().__init__(builder)
             CurrentNodePos.y += NodePos.DeltaY
-            self.Height = builder.makeFunctionOutput("Height", 1)
+            self.height = builder.makeFunctionOutput("Height", 1)

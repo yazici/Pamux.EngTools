@@ -33,12 +33,73 @@ class MF_Puddles:
 
     class Inputs:
         def __init__(self, builder: ContainerBuilderBase):
-            pass
+            self.materialAttributes = builder.getMaterialAttributes()
+            self.materialAttributes.add_rt()
+
+            self.breakMaterialAttributes = BreakMaterialAttributes(self.materialAttributes)
+            self.breakMaterialAttributes.baseColor.add_rt()
+            self.breakMaterialAttributes.metallic.add_rt()
+            self.breakMaterialAttributes.specular.add_rt()
+            self.breakMaterialAttributes.roughness.add_rt()
+            self.breakMaterialAttributes.anisotropy.add_rt()
+            self.breakMaterialAttributes.emissiveColor.add_rt()
+            self.breakMaterialAttributes.opacity.add_rt()
+            self.breakMaterialAttributes.opacityMask.add_rt()
+            self.breakMaterialAttributes.normal.add_rt()
+            self.breakMaterialAttributes.tangent.add_rt()
+            self.breakMaterialAttributes.worldPositionOffset.add_rt()
+            self.breakMaterialAttributes.subsurfaceColor.add_rt()
+            self.breakMaterialAttributes.clearCoat.add_rt()
+            self.breakMaterialAttributes.clearCoatRoughness.add_rt()
+            self.breakMaterialAttributes.ambientOcclusion.add_rt()
+            self.breakMaterialAttributes.refraction.add_rt()
+            self.breakMaterialAttributes.customizedUV0.add_rt()
+            self.breakMaterialAttributes.customizedUV1.add_rt()
+            self.breakMaterialAttributes.customizedUV2.add_rt()
+            self.breakMaterialAttributes.customizedUV3.add_rt()
+            self.breakMaterialAttributes.customizedUV4.add_rt()
+            self.breakMaterialAttributes.customizedUV5.add_rt()
+            self.breakMaterialAttributes.customizedUV6.add_rt()
+            self.breakMaterialAttributes.customizedUV7.add_rt()
+            self.breakMaterialAttributes.pixelDepthOffset.add_rt()
+            self.breakMaterialAttributes.shadingModel.add_rt()
+            self.breakMaterialAttributes.displacement.add_rt()
+
+            self.puddleColor = VectorParameter("Puddle Color", unreal.LinearColor(0.057292, 0.051375, 0.034017, 1.0))
+            self.puddleColor.add_rt()
+            self.puddleColor.a.add_rt()
+            
+            self.puddleHeight = ScalarParameter("Puddle Height", 1.0)
+            self.puddleHeight.add_rt()
+            
+            self.puddleSlope = ScalarParameter("Puddle Slope", 0.25)
+            self.puddleSlope.add_rt()
+            
+            self.puddleDepth = ScalarParameter("Puddle Depth", 0.75)
+            self.puddleDepth.add_rt()
+            
+            self.puddleRoughness = ScalarParameter("Puddle Roughness", 0.15)
+            self.puddleRoughness.add_rt()
+
+            self.puddleSpecular = OneMinus(self.puddleRoughness)
+            self.puddleSpecular.add_rt()
+
+            self.puddleNormal = Constant3Vector()
+            self.puddleNormal.add_rt()
+            self.puddleNormal.constant = MaterialExpressionEditorPropertyImpl(self.puddleNormal, 'constant', 'LinearColor') # TODO No Input
+            self.puddleNormal.constant.set(unreal.LinearColor(0.0, 0.0, 1.0))
+
+            self.puddleOpacity = Constant(1.0)
+            self.puddleOpacity.add_rt()
+
+            self.puddleColorMultiply = Multiply(self.puddleColor.output, self.puddleColor.a)
+            self.puddleColorMultiply.add_rt()
 
     class Outputs(MaterialFunctionOutputs.Result):
         def __init__(self, builder: ContainerBuilderBase):
+            super().__init__(builder)
             CurrentNodePos.y += NodePos.DeltaY
-            self.PuddleMask = builder.makeFunctionOutput("PuddleMask", 1)
+            self.puddleMask = builder.makeFunctionOutput("PuddleMask", 1)
 
     class Builder(WetnessBuilderBase):
         def __init__(self):
@@ -49,44 +110,24 @@ class MF_Puddles:
                 MF_Puddles.Outputs)
 
         def build(self):
-            self.materialAttributes = self.getMaterialAttributes()
+            lerp = LinearInterpolate(self.inputs.breakMaterialAttributes.baseColor, self.inputs.puddleColorMultiply, self.inputs.puddleDepth)
+            lerp.add_rt()
 
-            self.breakMaterialAttributes = BreakMaterialAttributes(self.materialAttributes)
+            makeMaterialAttributes = MakeMaterialAttributesFactory.create(self.inputs.breakMaterialAttributes)
+            makeMaterialAttributes.add_rt()
+            makeMaterialAttributes.baseColor.comesFrom(lerp)
+            makeMaterialAttributes.specular.comesFrom(self.inputs.puddleSpecular)
+            makeMaterialAttributes.roughness.comesFrom(self.inputs.puddleRoughness)
+            makeMaterialAttributes.opacity.comesFrom(self.inputs.puddleOpacity)
+            makeMaterialAttributes.normal.comesFrom(self.inputs.puddleNormal)
 
-            self.puddleColor = VectorParameter("Puddle Color", unreal.LinearColor(0.057292, 0.051375, 0.034017, 1.0))
-            self.puddleHeight = ScalarParameter("Puddle Height", 1.0)
-            self.puddleSlope = ScalarParameter("Puddle Slope", 0.25)
-            self.puddleDepth = ScalarParameter("Puddle Depth", 0.75)
-            self.puddleRoughness = ScalarParameter("Puddle Roughness", 0.15)
-            self.puddleSpecular = OneMinus(self.puddleRoughness.output)
+            componentMask = ComponentMask(self.inputs.breakMaterialAttributes.opacity, "r")
 
-            self.puddleNormal = Constant3Vector()
-            self.puddleNormal.constant = MaterialExpressionEditorPropertyImpl(self.puddleNormal, 'constant', 'LinearColor') # TODO No Input
-            self.puddleNormal.constant.set(unreal.LinearColor(0.0, 0.0, 1.0))
+            saturate = Saturate(OneMinus(Saturate(Divide(Subtract(componentMask, self.inputs.puddleHeight), self.inputs.puddleSlope))))
 
-            self.puddleOpacity = Constant(1.0)
-            self.puddleColorMultiply = Multiply(self.puddleColor.output, self.puddleColor.a)
+            blendMaterialAttributes = BlendMaterialAttributes(self.inputs.materialAttributes, makeMaterialAttributes, saturate)
 
-            self.lerp = LinearInterpolate(self.breakMaterialAttributes.baseColor, self.puddleColorMultiply.output, self.puddleDepth.output)
+            blendMaterialAttributes.connectTo(self.outputs.result)
+            saturate.connectTo(self.outputs.puddleMask)
 
-            self.makeMaterialAttributes = MakeMaterialAttributesFactory.create(self.breakMaterialAttributes)
-            self.makeMaterialAttributes.baseColor.comesFrom(self.lerp.output)
-            self.makeMaterialAttributes.specular.comesFrom(self.puddleSpecular.output)
-            self.makeMaterialAttributes.roughness.comesFrom(self.puddleRoughness.output)
-            self.makeMaterialAttributes.opacity.comesFrom(self.puddleOpacity.output)
-            self.makeMaterialAttributes.normal.comesFrom(self.puddleNormal.output)
-
-            self.componentMask = ComponentMask(self.breakMaterialAttributes.opacity)
-            self.componentMask.r.set(True)
-            self.componentMask.g.set(False)
-            self.componentMask.b.set(False)
-            self.componentMask.a.set(False)
-
-            self.saturate = Saturate(OneMinus(Saturate(Divide(Subtract(self.componentMask, self.puddleHeight), self.puddleSlope))))
-
-            self.blendMaterialAttributes = BlendMaterialAttributes(self.materialAttributes, self.makeMaterialAttributes, self.saturate)
-
-            MEL.connect_material_expressions(self.blendMaterialAttributes.unrealAsset, "", self.Result.unrealAsset, "")
-            MEL.connect_material_expressions(self.saturate.unrealAsset, "", self.PuddleMask.unrealAsset, "")
-
-MF_Puddles.Builder().get()
+# MF_Puddles.Builder().get()

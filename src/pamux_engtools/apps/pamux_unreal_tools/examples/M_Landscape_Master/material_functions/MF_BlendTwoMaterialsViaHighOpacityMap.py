@@ -21,7 +21,7 @@ from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.base.material_function_builder_base import MaterialFunctionBuilderBase
 from pamux_unreal_tools.base.material_function_outputs_base import MaterialFunctionOutputs
 
-from pamux_unreal_tools.base.material_expression_container import ContainerBuilderBase
+from pamux_unreal_tools.base.container_builder_base import ContainerBuilderBase
 
 class MF_BlendTwoMaterialsViaHighOpacityMap:
     class Dependencies:

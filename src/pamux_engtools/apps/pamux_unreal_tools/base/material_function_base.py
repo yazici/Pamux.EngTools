@@ -2,12 +2,12 @@ import unreal
 
 MEL = unreal.MaterialEditingLibrary
 
-from pamux_unreal_tools.base.material_expression_container import *
 from pamux_unreal_tools.generated.material_expression_wrappers import *
-from pamux_unreal_tools.impl.in_socket_impl import InSocketImpl
-from pamux_unreal_tools.impl.out_socket_impl import OutSocketImpl
 from pamux_unreal_tools.utils.types import *
 
+from pamux_unreal_tools.base.material_function_builder_base import MaterialExpressionContainer
+from pamux_unreal_tools.impl.in_socket_impl import InSocketImpl
+from pamux_unreal_tools.impl.out_socket_impl import OutSocketImpl
 class MaterialFunctionBase(MaterialExpressionContainer):
     def __init__(self, unrealAsset: unreal.MaterialFunction):
         super().__init__(unrealAsset,

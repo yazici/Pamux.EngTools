@@ -14,16 +14,14 @@ for  k, v in sys.modules.items():
 for module in reloads:
     reload(module)
 
-from pamux_unreal_tools.base.material_function_builder_base import *
-
 from pamux_unreal_tools.generated.material_expression_wrappers import *
-from pamux_unreal_tools.base.material_expression_container import *
-from pamux_unreal_tools.factories.material_function_factory import MaterialFunctionFactory
+
 from pamux_unreal_tools.base.material_function_dependencies_base import MaterialFunctionDependenciesBase
 
 from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.base.wetness_base import WetnessBuilderBase
-from pamux_unreal_tools.factories.material_expression_factories import *
-from pamux_unreal_tools.base.material_expression_sockets_base import OutSocket
+from pamux_unreal_tools.base.material_function_outputs_base import MaterialFunctionOutputs
+from pamux_unreal_tools.base.container_builder_base import ContainerBuilderBase
+from pamux_unreal_tools.factories.material_expression_factories import MakeMaterialAttributesFactory
 
 class MF_Wetness:
     class Inputs:
@@ -75,10 +73,6 @@ class MF_Wetness:
             saturate2 = Saturate(add)
 
             blend = BlendMaterialAttributes(self.inputs.materialAttributes, makeMaterialAttributes.output, saturate2)
-
             blend.connectTo(self.outputs.result)
-               
-        
-            
 
 #MF_Wetness.Builder().get()

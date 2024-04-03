@@ -1,11 +1,9 @@
 # This file is generated. Please do NOT modify.
 import unreal
 from pamux_unreal_tools.impl.material_expression_impl import MaterialExpressionImpl
-from pamux_unreal_tools.tools.material_expression_wrapper_generator.custom_base_classes import *
 from pamux_unreal_tools.impl.material_expression_editor_property_impl import MaterialExpressionEditorPropertyImpl
 from pamux_unreal_tools.impl.in_socket_impl import InSocketImpl
 from pamux_unreal_tools.impl.out_socket_impl import OutSocketImpl
-from pamux_unreal_tools.base.material_expression_container import *
 from pamux_unreal_tools.utils.node_pos import NodePos
 
 class Abs(MaterialExpressionImpl):

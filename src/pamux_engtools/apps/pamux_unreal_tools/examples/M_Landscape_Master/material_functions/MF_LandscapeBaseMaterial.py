@@ -1,17 +1,30 @@
-from importlib import * 
+import unreal
+from pathlib import Path
+import sys
 import os
 import shutil
 
-from pamux_unreal_tools.factories.material_function_factory import MaterialFunctionFactory
-from pamux_unreal_tools.base.material_function_builder_base import MaterialLayerFunctionBuilderBase
+sys.path.append(str(Path(__file__).parent.parent.parent.parent.parent.resolve()))
+
+from importlib import * 
+
+reloads = []
+for  k, v in sys.modules.items():
+    if k.startswith("pamux_unreal_tools"):
+        reloads.append(v)
+
+for module in reloads:
+    reload(module)
+
 from pamux_unreal_tools.generated.material_expression_wrappers import *
-from pamux_unreal_tools.examples.M_Landscape_Master.params import *
-from pamux_unreal_tools.examples.M_Landscape_Master.globals import *
-from pamux_unreal_tools.factories.material_expression_factories import *
+
+from pamux_unreal_tools.base.container_builder_base import ContainerBuilderBase
+
 from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MF_TextureCellBombing_Landscape import MF_TextureCellBombing_Landscape
-from pamux_unreal_tools.base.material_function_builder_base import *
+
+from pamux_unreal_tools.base.material_function_builder_base import MaterialLayerFunctionBuilderBase
 from pamux_unreal_tools.utils.node_pos import NodePos, CurrentNodePos
-from pamux_unreal_tools.base.material_function_dependencies_base import MaterialFunctionDependenciesBase
+from pamux_unreal_tools.base.material_function_outputs_base import MaterialFunctionOutputs
 
 class MF_LandscapeBaseMaterial:
     class Dependencies:
@@ -49,7 +62,7 @@ class MF_LandscapeBaseMaterial:
             self.displacement = builder.build_FunctionInput("Displacement", unreal.FunctionInputType.FUNCTION_INPUT_TEXTURE2D, TextureBase())
             self.displacement.add_rt()
 
-            self.doTextureBomb = FunctionInputFactory.create("DoTextureBomb", unreal.FunctionInputType.FUNCTION_INPUT_STATIC_BOOL, StaticBool(True))
+            self.doTextureBomb = builder.build_FunctionInput("DoTextureBomb", unreal.FunctionInputType.FUNCTION_INPUT_STATIC_BOOL, StaticBool(True))
             self.doTextureBomb.add_rt()
 
             CurrentNodePos.y += NodePos.DeltaY

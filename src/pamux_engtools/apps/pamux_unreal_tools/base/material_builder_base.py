@@ -1,6 +1,4 @@
-
 from pamux_unreal_tools.factories.material_factory import MaterialFactory
-from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.base.container_builder_base import ContainerBuilderBase
 
 class MaterialBuilderBase(ContainerBuilderBase):

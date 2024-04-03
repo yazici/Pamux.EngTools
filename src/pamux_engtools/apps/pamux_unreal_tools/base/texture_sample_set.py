@@ -1,4 +1,5 @@
 import unreal
+
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 
 class TextureSampleSet:

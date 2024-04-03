@@ -16,7 +16,8 @@ for  k, v in sys.modules.items():
 for module in reloads:
     reload(module)
 
-from pamux_unreal_tools.base.material_function_builder_base import ContainerBuilderBase, MaterialFunctionBuilderBase
+from pamux_unreal_tools.base.material_function_builder_base import MaterialFunctionBuilderBase
+from pamux_unreal_tools.base.container_builder_base import ContainerBuilderBase
 
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.base.material_function_dependencies_base import MaterialFunctionDependenciesBase

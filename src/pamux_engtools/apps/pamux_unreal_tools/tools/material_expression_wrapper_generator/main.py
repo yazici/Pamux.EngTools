@@ -71,11 +71,9 @@ def generate_pamux_wrapper_classes():
     pyGen.append_import("unreal")
 
     pyGen.append_import_from("pamux_unreal_tools.impl.material_expression_impl", "MaterialExpressionImpl")
-    pyGen.append_import_from("pamux_unreal_tools.tools.material_expression_wrapper_generator.custom_base_classes", "*")
     pyGen.append_import_from("pamux_unreal_tools.impl.material_expression_editor_property_impl", "MaterialExpressionEditorPropertyImpl")
     pyGen.append_import_from("pamux_unreal_tools.impl.in_socket_impl", "InSocketImpl")
     pyGen.append_import_from("pamux_unreal_tools.impl.out_socket_impl", "OutSocketImpl")
-    pyGen.append_import_from("pamux_unreal_tools.base.material_expression_container", "*")
     pyGen.append_import_from("pamux_unreal_tools.utils.node_pos", "NodePos")
 
     for class_name in dir(unreal):

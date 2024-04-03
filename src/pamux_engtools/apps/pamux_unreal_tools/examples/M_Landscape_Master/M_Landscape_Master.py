@@ -1,12 +1,11 @@
-# py "C:/src/Pamux.EngTools/src/pamux_engtools/apps/pamux_unreal_tools/examples/M_Landscape_Master/M_Landscape_Master.py"
+import unreal
+MEL = unreal.MaterialEditingLibrary
+
 from pathlib import Path
 import sys
-import os
-import shutil
+from importlib import * 
 
 sys.path.append(str(Path(__file__).parent.parent.parent.parent.resolve()))
-
-from importlib import * 
 
 reloads = []
 for  k, v in sys.modules.items():
@@ -19,18 +18,21 @@ for module in reloads:
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 
 from pamux_unreal_tools.base.material_builder_base import MaterialBuilderBase
+from pamux_unreal_tools.base.container_builder_base import ContainerBuilderBase
 
 from pamux_unreal_tools.examples.M_Landscape_Master.params import *
 from pamux_unreal_tools.examples.M_Landscape_Master.globals import *
-from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MF_LandscapeBaseMaterial import *
-from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MF_Wetness import *
-from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MF_Puddles import *
-from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MLF_LayerX import *
-from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MF_BlendTwoMaterialsViaHighOpacityMap import *
-from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MF_GlancingAngleSpecCorrection import *
-from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MF_TextureCellBombing_Landscape import *
-from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MLF_ForestGround import *
-from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MF_FoliageMask import *
+
+from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MF_LandscapeBaseMaterial import MF_LandscapeBaseMaterial
+from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MF_Wetness import MF_Wetness
+from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MF_Puddles import MF_Puddles
+from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MF_BlendTwoMaterialsViaHighOpacityMap import MF_BlendTwoMaterialsViaHighOpacityMap
+from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MF_GlancingAngleSpecCorrection import MF_GlancingAngleSpecCorrection
+from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MF_TextureCellBombing_Landscape import MF_TextureCellBombing_Landscape
+from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MF_FoliageMask import MF_FoliageMask
+
+from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MLF_LayerX import MLF_LayerX
+from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MLF_ForestGround import MLF_ForestGround
 
 # https://github.com/SomeRanDev/Haxe-UnrealEngine5/blob/d17e0b1f9d8973ed0641484148c55d552ba69dff/Externs/generated_5_0_3/MaterialExpressionLinearInterpolate.hx#L4
 class M_Landscape_Master:
@@ -45,6 +47,7 @@ class M_Landscape_Master:
              
     class Dependencies:
         def __init__(self, builder: ContainerBuilderBase) -> None:
+            self.SCurve = builder.load_MF("SCurve", "/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment")
             self.MF_LandscapeBaseMaterial = MF_LandscapeBaseMaterial.Builder().get()
 
             self.MLF_Layers = {}
@@ -191,9 +194,9 @@ class M_Landscape_Master:
             # self.__buildRVTOutputPath(call_MF_BlendTwoMaterialsViaHighOpacityMap.output)
             # self.__buildLandscapeGrassOutputAndMaskingPath(call_MF_BlendTwoMaterialsViaHighOpacityMap.output)
 
-#sCurve = MaterialFunctionFactory().load("SCurve", "/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment", True)
+#
 #call_SCurve = sCurve.call()
 #call_SCurve.In.comesFrom(baseColor)
 #call_SCurve.Power.comesFrom(Params.specularContrast)
 
-M_Landscape_Master.Builder("M_Landscape_Master", "/Game/Materials/Pamux").get(purge=True)
+M_Landscape_Master.Builder("/Game/Materials/Pamux/M_Landscape_Master").get(purge=True)

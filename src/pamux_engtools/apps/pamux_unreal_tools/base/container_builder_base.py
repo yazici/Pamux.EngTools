@@ -57,7 +57,6 @@ class ContainerBuilderBase:
         return result
 
     def get(self, virtual_inputs: SocketNames = [], virtual_outputs: SocketNames = [], purge = False):
-
         if purge:
             folder = "C:/src/Unreal Projects/PamuxSurvival/Content/Materials/Pamux"
             if os.path.isdir(folder):

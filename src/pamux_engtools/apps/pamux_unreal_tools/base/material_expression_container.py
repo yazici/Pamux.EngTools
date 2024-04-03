@@ -2,22 +2,54 @@
 
 import unreal
 
-from pamux_unreal_tools.utils.build_stack import *
+# from pamux_unreal_tools.utils.build_stack import BuildStack
 
 MEL = unreal.MaterialEditingLibrary
-ATH = unreal.AssetToolsHelpers
-AT = ATH.get_asset_tools()
 EAL = unreal.EditorAssetLibrary
-AUL = unreal.EditorUtilityLibrary
 
-from pamux_unreal_tools.utils.pamux_asset_utils import PamuxAssetUtils
+
+# from pamux_unreal_tools.utils.pamux_asset_utils import PamuxAssetUtils
 # from pamux_unreal_tools.generated.material_expression_wrappers import NamedRerouteDeclaration
 from pamux_unreal_tools.utils.node_pos import NodePos, CurrentNodePos
 # Assertion failed: Outputs.Num() == AttributeGetTypes.Num() + 1 [File:D:\build\++UE5\Sync\Engine\Source\Runtime\Engine\Private\Materials\MaterialExpressions.cpp] [Line: 7213]
 
 from pamux_unreal_tools.base.material_expression_sockets_base import OutSocket
-from pamux_unreal_tools.impl.material_expression_editor_property_impl import MaterialExpressionEditorPropertyImpl
+# from pamux_unreal_tools.impl.material_expression_editor_property_impl import MaterialExpressionEditorPropertyImpl
 from pamux_unreal_tools.generated.material_expression_wrappers import NamedRerouteDeclaration
+
+# from pamux_unreal_tools.impl.material_expression_impl import MaterialExpressionImpl
+#from pamux_unreal_tools.impl.material_expression_editor_property_impl import MaterialExpressionEditorPropertyImpl
+# from pamux_unreal_tools.impl.in_socket_impl import InSocketImpl
+# from pamux_unreal_tools.impl.out_socket_impl import OutSocketImpl
+
+#from pamux_unreal_tools.base.material_expression_base import MaterialExpressionBase
+
+# class NamedRerouteDeclarationSpecial(MaterialExpressionBase):
+    # def __init__(self, name = None, input = None, nodeColor = None, node_pos: NodePos = None) -> None:
+    #     super().__init__(unreal.MaterialExpressionNamedRerouteDeclaration, node_pos)
+
+    #     self.desc = MaterialExpressionEditorPropertyImpl(self, 'desc', 'str')
+
+    #     self.material_expression_editor_x = MaterialExpressionEditorPropertyImpl(self, 'material_expression_editor_x', 'int32')
+    #     self.material_expression_editor_y = MaterialExpressionEditorPropertyImpl(self, 'material_expression_editor_y', 'int32')
+
+    #     self.input = InSocketImpl(self, '', 'StructProperty')
+
+    #     self.output = OutSocketImpl(self, '', 'StructProperty')
+
+
+    #     self.name = MaterialExpressionEditorPropertyImpl(self, 'name', 'Name')
+    #     self.nodeNolor = MaterialExpressionEditorPropertyImpl(self, 'nodeNolor', 'LinearColor')
+    #     self.variableGuid = MaterialExpressionEditorPropertyImpl(self, 'variableGuid', 'Guid')
+
+    #     self.variableGuid = InSocketImpl(self, 'VariableGuid', 'StructProperty')
+    #     if name is not None:
+    #         self.name.set(name)
+    #     if input is not None:
+    #         self.input.comesFrom(input)
+    #         input.rt = self
+    #     if nodeColor is not None:
+    #         self.nodeColor.set(nodeColor)
 
 # https://docs.unrealengine.com/5.3/en-US/PythonAPI/class/MaterialEditingLibrary.html
 class MaterialExpressionContainer:

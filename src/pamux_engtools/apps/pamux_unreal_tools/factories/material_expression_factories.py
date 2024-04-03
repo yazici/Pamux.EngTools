@@ -1,11 +1,8 @@
-import unreal
-from pamux_unreal_tools.base.material_expression_container import *
 from pamux_unreal_tools.generated.material_expression_wrappers import *
-from pamux_unreal_tools.utils.node_pos import NodePos, CurrentNodePos
 
 class FunctionInputFactory:
     @staticmethod
-    def create(input_name, input_type, preview = None) -> FunctionInput:
+    def create(input_name: str, input_type: str, preview = None) -> FunctionInput:
         if isinstance(preview, float):
             preview = Constant(preview)
         elif isinstance(preview, unreal.LinearColor):
@@ -14,6 +11,7 @@ class FunctionInputFactory:
         result = FunctionInput()
         result.input_name.set(input_name)
         result.input_type.set(input_type)
+
         if preview is not None:
             result.preview.comesFrom(preview)
         return result
@@ -23,6 +21,7 @@ class MakeMaterialAttributesFactory:
     @staticmethod
     def create(materialAttributes) -> MakeMaterialAttributes:
         result = MakeMaterialAttributes()
+
         result.baseColor.comesFrom(materialAttributes.baseColor)
         result.metallic.comesFrom(materialAttributes.metallic)
         result.specular.comesFrom(materialAttributes.specular)
@@ -50,4 +49,5 @@ class MakeMaterialAttributesFactory:
         result.pixelDepthOffset.comesFrom(materialAttributes.pixelDepthOffset)
         result.shadingModel.comesFrom(materialAttributes.shadingModel)
         result.displacement.comesFrom(materialAttributes.displacement)
+
         return result

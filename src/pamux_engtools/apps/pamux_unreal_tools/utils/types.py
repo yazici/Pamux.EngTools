@@ -5,7 +5,24 @@ from typing import NewType
 
 SocketNames = list[str]
 
-TAssetPath = NewType('TAssetPath', str)
+class TResult:
+    pass
+class THeight:
+    pass
+
+class TMaterialAttributes:
+    pass
+
+TFloatParam = float
+
+
+# https://realpython.com/primer-on-python-decorators/
+
+def material_function_interface(path):
+    pass
+
+def parameter_name_prefix(prefix):
+    pass
 
 class VecFBase:
     def __init__(self):

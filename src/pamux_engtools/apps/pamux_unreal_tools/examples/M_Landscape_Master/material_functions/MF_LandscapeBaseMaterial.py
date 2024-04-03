@@ -27,14 +27,33 @@ from pamux_unreal_tools.base.material_function_outputs_base import MaterialFunct
 class MF_LandscapeBaseMaterial:
     class Dependencies:
         def __init__(self, builder: ContainerBuilderBase) -> None:
-            self.blend_Overlay = builder.load_MF("/Engine/Functions/Engine_MaterialFunctions03/Blends/Blend_Overlay", [ "Base", "Blend" ], [ "Result" ])
-            self.cheapContrast_RGB = builder.load_MF("/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment/CheapContrast_RGB", [ "In", "Contrast" ], [ "Result" ])
-            self.heightLerp = builder.load_MF("/Engine/Functions/Engine_MaterialFunctions02/Texturing/HeightLerp", [ "A", "B", "Transition Phase", "Height Texture", "Contrast" ], [ "Results", "Alpha", "Lerp Alpha No Contrast" ])
-            self.multiplyAdd = builder.load_MF("/Engine/Functions/Engine_MaterialFunctions02/Math/MultiplyAdd", [ "Base", "Add" ], [ "Result" ])
-            self.breakOutFloat4Components = builder.load_MF("/Engine/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat4Components", [ "Float4" ], [ "R", "G", "B", "A" ])
-            self.customRotator = builder.load_MF("/Engine/Functions/Engine_MaterialFunctions02/Texturing/CustomRotator", [ "UVs", "Rotation Center", "Rotation Angle" ], [ "Rotated Values" ])
+            self.blend_Overlay                      = builder.load_MF("/Engine/Functions/Engine_MaterialFunctions03/Blends/Blend_Overlay",
+                                                                      [ "Base", "Blend" ],
+                                                                      [ "Result" ])
 
-            self.MF_TextureCellBombing_Landscape = builder.load_MF("/Game/Materials/Pamux/Landscape/Functions/MF_TextureCellBombing_Landscape", [], [])
+            self.cheapContrast_RGB                  = builder.load_MF("/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment/CheapContrast_RGB",
+                                                                      [ "In", "Contrast" ],
+                                                                      [ "Result" ])
+
+            self.heightLerp                         = builder.load_MF("/Engine/Functions/Engine_MaterialFunctions02/Texturing/HeightLerp",
+                                                                      [ "A", "B", "Transition Phase", "Height Texture", "Contrast" ],
+                                                                      [ "Results", "Alpha", "Lerp Alpha No Contrast" ])
+
+            self.multiplyAdd                        = builder.load_MF("/Engine/Functions/Engine_MaterialFunctions02/Math/MultiplyAdd",
+                                                                      [ "Base", "Add" ],
+                                                                      [ "Result" ])
+
+            self.breakOutFloat4Components           = builder.load_MF("/Engine/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat4Components",
+                                                                      [ "Float4" ],
+                                                                      [ "R", "G", "B", "A" ])
+
+            self.customRotator                      = builder.load_MF("/Engine/Functions/Engine_MaterialFunctions02/Texturing/CustomRotator",
+                                                                      [ "UVs", "Rotation Center", "Rotation Angle" ],
+                                                                      [ "Rotated Values" ])
+
+            self.MF_TextureCellBombing_Landscape    = builder.load_MF("/Game/Materials/Pamux/Landscape/Functions/MF_TextureCellBombing_Landscape",
+                                                                      [],
+                                                                      [])
 
     class Inputs:
         def __init__(self, builder: ContainerBuilderBase):
@@ -43,29 +62,24 @@ class MF_LandscapeBaseMaterial:
             self.albedo                     = builder.build_FunctionInput("Albedo",                         0,      TextureObject())
             self.colorOverlay               = builder.build_FunctionInput("ColorOverlay",                   1,      Vec3f(1.0, 1.0, 1.0))
             self.colorOverlayIntensity      = builder.build_FunctionInput("ColorOverlayIntensity",          2,      1.0)
-
+            self.contrast                   = builder.build_FunctionInput("Contrast",                       3,      0.0)
+            self.contrastVariation          = builder.build_FunctionInput("ContrastVariation",              4,      1.0)
             self.roughness                  = builder.build_FunctionInput("Roughness",                      5,      TextureObject())
             self.roughnessIntensity         = builder.build_FunctionInput("RoughnessIntensity",             6,      1.0)
-            
             self.normal                     = builder.build_FunctionInput("Normal",                         7,      TextureObject(unreal.MaterialSamplerType.SAMPLERTYPE_NORMAL))
-            self.normalIntensity            = builder.build_FunctionInput("NormalIntensity",                7,      0.0)
-
-            self.displacement               = builder.build_FunctionInput("Displacement",                   8,      TextureObject()) # Color/Normal
-
-            self.uvParams                   = builder.build_FunctionInput("UVParams",                       9       Vec4f(1.0, 1.0, 0.5, 0.5))
-
-            self.rotation                   = builder.build_FunctionInput("Rotation",                       10,     0.0)
-
-            self.doTextureBomb              = builder.build_FunctionInput("DoTextureBomb",                  11,     True)
-            self.bombDoRotationVariation    = builder.build_FunctionInput("BombDoRotationVariation",        12,     False)
-            self.bombCellScale              = builder.build_FunctionInput("BombCellScale",                  13,     1.0)
-            self.bombPatternScale           = builder.build_FunctionInput("BombPatternScale",               14,     1.0)
-            self.bombRandomOffset           = builder.build_FunctionInput("BombRandomOffset",               15,     0.0)
-            self.bombRotationVariation      = builder.build_FunctionInput("BombRotationVariation",          16,     0.0)
-
-            self.opacityAdd                 = builder.build_FunctionInput("OpacityAdd",                     20,     0.0)
+            self.normalIntensity            = builder.build_FunctionInput("NormalIntensity",                8,      0.0)
+            self.displacement               = builder.build_FunctionInput("Displacement",                   9,      TextureObject()) # Color/Normal
+            self.uvParams                   = builder.build_FunctionInput("UVParams",                       10       Vec4f(1.0, 1.0, 0.5, 0.5))
+            self.rotation                   = builder.build_FunctionInput("Rotation",                       11,     0.0)
+            self.doTextureBomb              = builder.build_FunctionInput("DoTextureBomb",                  12,     True)
+            self.bombDoRotationVariation    = builder.build_FunctionInput("BombDoRotationVariation",        13,     False)
+            self.bombCellScale              = builder.build_FunctionInput("BombCellScale",                  14,     1.0)
+            self.bombPatternScale           = builder.build_FunctionInput("BombPatternScale",               15,     1.0)
+            self.bombRandomOffset           = builder.build_FunctionInput("BombRandomOffset",               16,     0.0)
+            self.bombRotationVariation      = builder.build_FunctionInput("BombRotationVariation",          17,     0.0)
+            self.opacityStrength            = builder.build_FunctionInput("OpacityStrength",                18,     1.0)
+            self.opacityAdd                 = builder.build_FunctionInput("OpacityAdd",                     19,     0.0)
             self.opacityContrast            = builder.build_FunctionInput("OpacityContrast",                20,     1.0)
-            self.opacityStrength            = builder.build_FunctionInput("OpacityStrength",                20,     1.0)
 
 
     class Builder(MaterialLayerFunctionBuilderBase):

@@ -67,15 +67,18 @@ class OutSocketImpl(OutSocket):
                 if line.startswith("self."):
                     line = line[len("self."):]
 
-                parts = line.split(".")
                 name = "rt"
-                isFirst = True
-                for part in parts:
-                    if isFirst:
-                        isFirst = False
-                    else:
-                        name += "."
-                    name += part[0:1].upper() + part[1:]
+                if "." in line:
+                    parts = line.split(".")
+                    isFirst = True
+                    for part in parts:
+                        if isFirst:
+                            isFirst = False
+                        else:
+                            name += "."
+                        name += part[0:1].upper() + part[1:]
+                else:
+                    name += line[0:1].upper() + line[1:] + ".Output"
 
                 return self.material_expression.container.add_rt(name, self)
 

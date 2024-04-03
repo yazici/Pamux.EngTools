@@ -16,45 +16,39 @@ for  k, v in sys.modules.items():
 for module in reloads:
     reload(module)
 
-from pamux_unreal_tools.base.material_function_builder_base import *
+from pamux_unreal_tools.base.material_function_builder_base import ContainerBuilderBase, MaterialFunctionBuilderBase
 
 from pamux_unreal_tools.generated.material_expression_wrappers import *
-from pamux_unreal_tools.base.material_expression_container import *
-from pamux_unreal_tools.factories.material_function_factory import MaterialFunctionFactory
 from pamux_unreal_tools.base.material_function_dependencies_base import MaterialFunctionDependenciesBase
-from pamux_unreal_tools.factories.material_expression_factories import FunctionInputFactory
-from pamux_unreal_tools.base.material_expression_base import MaterialExpressionBase
+from pamux_unreal_tools.base.material_function_outputs_base import MaterialFunctionOutputs
 
 class MF_GlancingAngleSpecCorrection:
-    class Dependencies:
-        def __init__(self, builder: ContainerBuilderBase) -> None:
-             pass
-
     class Inputs:
         def __init__(self, builder: ContainerBuilderBase):
             self.materialAttributes = builder.build_FunctionInput("In", unreal.FunctionInputType.FUNCTION_INPUT_MATERIAL_ATTRIBUTES)
             self.materialAttributes.add_rt()
-            self.pixelDepth = PixelDepth()
-            self.pixelDepth.add_rt()
 
             preview_value = unreal.Vector4f()
             preview_value.set_editor_property("w", 1.0)
             self.materialAttributes.preview_value.set(preview_value)
 
+            self.pixelDepth = PixelDepth()
+            self.pixelDepth.add_rt()
+
             self.edgeSpecularFalloffPower = ScalarParameter("EdgeSpecularFalloffPower", 4.0)
-            self.edgeSpecularFalloffPower.output.add_rt()
+            self.edgeSpecularFalloffPower.add_rt()
 
             self.edgeSpecularCorrectionStartDistance = ScalarParameter("EdgeSpecularCorrectionStartDistance", 1000.0)
-            self.edgeSpecularCorrectionStartDistance.output.add_rt()
+            self.edgeSpecularCorrectionStartDistance.add_rt()
 
             self.edgeSpecularCorrectionFadeDistance = ScalarParameter("EdgeSpecularCorrectionFadeDistance", 500.0)
-            self.edgeSpecularCorrectionFadeDistance.output.add_rt()
+            self.edgeSpecularCorrectionFadeDistance.add_rt()
 
             self.edgeSpecularCorrection = ScalarParameter("EdgeSpecularCorrection", 0.25)
-            self.edgeSpecularCorrection.output.add_rt()
+            self.edgeSpecularCorrection.add_rt()
 
             self.specLerp = ScalarParameter("SpecLerp", 0.5)
-            self.specLerp.output.add_rt()
+            self.specLerp.add_rt()
 
 
     class Builder(MaterialFunctionBuilderBase):
@@ -97,4 +91,4 @@ class MF_GlancingAngleSpecCorrection:
 
             self.outputs.Result.comesFrom(makeMaterialAttributes)
 
-MF_GlancingAngleSpecCorrection.Builder().get()
+#MF_GlancingAngleSpecCorrection.Builder().get()

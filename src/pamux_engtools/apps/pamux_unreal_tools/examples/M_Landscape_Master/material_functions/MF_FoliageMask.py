@@ -30,9 +30,16 @@ class MF_FoliageMask:
     class Inputs:
         def __init__(self, builder: ContainerBuilderBase):
             self.layerSample = builder.build_FunctionInput("LayerSample", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR)
+            self.layerSample.add_rt()
+
             self.foliageMask = builder.build_FunctionInput("FoliageMask", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR)
+            self.foliageMask.add_rt()
+
             self.threshold = builder.build_FunctionInput("Threshold", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR)
+            self.threshold.add_rt()
+
             self.enabled = builder.build_FunctionInput("Enabled", unreal.FunctionInputType.FUNCTION_INPUT_STATIC_BOOL, StaticBool(True))
+            self.enabled.add_rt()
 
     class Builder(MaterialFunctionBuilderBase):
         def __init__(self):
@@ -43,13 +50,13 @@ class MF_FoliageMask:
                 MaterialFunctionOutputs.Result)
 
         def build(self):
-            divide = Divide(self.inputs.layerSample, self.inputs.threshold)
+            divide = Divide(self.inputs.layerSample.rt, self.inputs.threshold.rt)
             floor = Floor(divide.output)
-            lerp = LinearInterpolate(0.0, self.inputs.layerSample, floor)
+            lerp = LinearInterpolate(0.0, self.inputs.layerSample.rt, floor)
             subtract = Subtract(lerp.output, self.inputs.foliageMask.rt)
             saturate = Saturate(subtract.output)
 
-            switch = StaticSwitch(saturate, Constant(0.0), self.inputs.enabled)
+            switch = StaticSwitch(saturate, Constant(0.0), self.inputs.enabled.rt)
 
             switch.output.connectToFunctionOutput(self.outputs.Result)
 

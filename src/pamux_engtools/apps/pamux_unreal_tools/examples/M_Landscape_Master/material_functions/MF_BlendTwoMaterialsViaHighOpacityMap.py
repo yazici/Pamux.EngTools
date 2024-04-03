@@ -37,16 +37,19 @@ class MF_BlendTwoMaterialsViaHighOpacityMap:
             preview_value.set_editor_property("w", 1.0)
 
             self.alpha = builder.build_FunctionInput("Alpha", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR)
+            self.alpha.add_rt()
             self.alpha.preview_value.set(preview_value)
             self.alpha.sort_priority.set(2)
             self.alpha.use_preview_value_as_default.set(False)
 
             self.materialA = builder.build_FunctionInput("MaterialA", unreal.FunctionInputType.FUNCTION_INPUT_MATERIAL_ATTRIBUTES)
+            self.materialA.add_rt()
             self.materialA.preview_value.set(preview_value)
             self.materialA.sort_priority.set(0)
             self.materialA.use_preview_value_as_default.set(False)
 
             self.materialB = builder.build_FunctionInput("MaterialB", unreal.FunctionInputType.FUNCTION_INPUT_MATERIAL_ATTRIBUTES)
+            self.materialB.add_rt()
             self.materialB.preview_value.set(preview_value)
             self.materialB.sort_priority.set(1)
             self.materialB.use_preview_value_as_default.set(False)

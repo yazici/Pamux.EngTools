@@ -55,6 +55,6 @@ class MF_FoliageMask:
 
             switch = StaticSwitch(saturate, Constant(0.0), self.inputs.enabled.rt)
 
-            switch.output.connectToFunctionOutput(self.outputs.Result)
+            switch.output.connectTo(self.outputs.Result)
 
 # MF_FoliageMask.Builder().get()

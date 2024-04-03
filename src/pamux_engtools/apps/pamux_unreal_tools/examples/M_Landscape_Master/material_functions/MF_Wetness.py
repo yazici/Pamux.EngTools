@@ -34,7 +34,20 @@ class MF_Wetness:
 
     class Inputs:
         def __init__(self, builder: ContainerBuilderBase):
-            pass
+            self.materialAttributes = builder.getMaterialAttributes()
+            self.materialAttributes.add_rt()
+
+            self.wetnessSaturation = ScalarParameter("Wetness Saturation", -0.5)
+            self.wetnessSaturation.add_rt()
+
+            self.wetnessDarken = ScalarParameter("Wetness Darken", 0.5)
+            self.wetnessDarken.add_rt()
+
+            self.wetnessRoughness = ScalarParameter("Wetness Roughness", 0.3)
+            self.wetnessRoughness.add_rt()
+
+            self.wetness = builder.build_FunctionInput("Wetness", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR, Constant(1.0))
+            self.wetness.add_rt()
 
     class Builder(WetnessBuilderBase):
         def __init__(self):
@@ -42,66 +55,36 @@ class MF_Wetness:
                 "/Game/Materials/Pamux/Landscape/Functions/MF_Wetness",
                 MaterialFunctionDependenciesBase,
                 MF_Wetness.Inputs,
-                MaterialFunctionOutputs.ResultAndHeight)
-
-        # Blocks are based on the comments section in the original material
-        class WetnessBlock:
-            def build(self, materialAttributes: OutSocket, baseColor: OutSocket):
-                wetnessSaturation = ScalarParameter("Wetness Saturation", -0.5)
-                wetnessDarken = ScalarParameter("Wetness Darken", 0.5)
-                wetnessRoughness = ScalarParameter("Wetness Roughness", 0.3)
-
-                desaturation = Desaturation()
-                desaturation.input.comesFrom(baseColor)
-                desaturation.fraction.comesFrom(wetnessSaturation.output)
-
-                saturate = Saturate(desaturation)
-
-                makeMaterialAttributes = MakeMaterialAttributesFactory.create(materialAttributes)
-                makeMaterialAttributes.baseColor.comesFrom(Multiply(saturate, wetnessDarken))
-                makeMaterialAttributes.roughness.comesFrom(wetnessRoughness)
-
-                return makeMaterialAttributes.output
-
-        class HeightBlendBasedOnInputWetnessValueBlock:
-            def build(self, prewettedMaterialAttributes: OutSocket, materialAttributes: OutSocket):
-                breakMaterialAttributes = BreakMaterialAttributes(materialAttributes)
-
-                # wetness = FunctionInput()
-                wetness = FunctionInputFactory.create("Wetness", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR, Constant(1.0))
-                # wetness.input_name.set("Wetness")
-                # wetness.input_type.set(unreal.FunctionInputType.FUNCTION_INPUT_SCALAR)
-                # wetness.preview.comesFrom(Constant(1.0))
-
-                saturate = Saturate(Add(Subtract(breakMaterialAttributes.opacity, Constant(1.0)), Multiply(wetness, 2.0)))
-
-                return BlendMaterialAttributes(prewettedMaterialAttributes, materialAttributes, saturate).output
+                MaterialFunctionOutputs.Result)
 
         def build(self):
-            materialAttributes = self.getMaterialAttributes()
+            breakMaterialAttributes = BreakMaterialAttributes(self.inputs.materialAttributes)
+            breakMaterialAttributes.baseColor.add_rt()
 
-            breakMaterialAttributes = BreakMaterialAttributes(materialAttributes)
+            desaturation = Desaturation()
+            desaturation.input.comesFrom(breakMaterialAttributes.baseColor)
+            desaturation.fraction.comesFrom(self.inputs.wetnessSaturation)
 
-            wetness = MF_Wetness.Builder.WetnessBlock().build(breakMaterialAttributes, breakMaterialAttributes.baseColor)
-            
-            heightBlendBasedOnInputWetnessValue = MF_Wetness.Builder.HeightBlendBasedOnInputWetnessValueBlock().build(
-                materialAttributes,
-                wetness)
+            saturate1 = Saturate(desaturation)
 
-            result = self.makeFunctionOutput("Result", 0)
+            multiply1 = Multiply(saturate1, self.inputs.wetnessDarken)
 
-            MEL.connect_material_expressions(heightBlendBasedOnInputWetnessValue.material_expression.unrealAsset, "", result.unrealAsset, "")
+            makeMaterialAttributes = MakeMaterialAttributesFactory.create(breakMaterialAttributes)
+            makeMaterialAttributes.baseColor.comesFrom(multiply1)
+            makeMaterialAttributes.roughness.comesFrom(self.inputs.wetnessRoughness)
 
-            # self.heightBlendBasedOnInputWetnessValue.connectToFunctionOutput(self.result)
-            #             MEL.connect_material_expressions(
-            #     breakMaterialAttributes.unrealAsset,
-            #     breakMaterialAttributes.input.name,
-            #     self.Result.unrealAsset,
-            #     f"")
+            breakMaterialAttributes = BreakMaterialAttributes(makeMaterialAttributes)
 
-            # MEL.connect_material_expressions(componentMask.unrealAsset, "", self.Height.unrealAsset, f"")
+            subtract = Subtract(breakMaterialAttributes.opacity, Constant(1.0))
+            multiply2 = Multiply(self.inputs.wetness, 2.0)
+            add = Add(subtract, multiply2)
+            saturate2 = Saturate(add)
+
+            blend = BlendMaterialAttributes(self.inputs.materialAttributes, makeMaterialAttributes.output, saturate2)
+
+            blend.connectTo(self.outputs.result)
+               
         
-            self.breakMaterialAttributes.connectToFunctionOutput(self.Result)
-            self.componentMask.connectToFunctionOutput(self.Height)
+            
 
-MF_Wetness.Builder().get()
+#MF_Wetness.Builder().get()

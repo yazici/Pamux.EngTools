@@ -1,3 +1,6 @@
+import os
+import shutil
+
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 
 from pamux_unreal_tools.base.material_function_base import MaterialFunctionBase
@@ -15,12 +18,14 @@ class ContainerBuilderBase:
                  container_factory: MaterialExpressionContainerFactory,
                  params_factory,
                  container_path: str,
+                 dependencies_class = None,
                  inputs_class = None,
                  outputs_class = None):
 
         self.container_factory = container_factory
         self.params_factory = params_factory
         self.container_path = container_path
+        self.dependencies_class = dependencies_class
         self.inputs_class = inputs_class
         self.outputs_class = outputs_class
 
@@ -29,19 +34,7 @@ class ContainerBuilderBase:
     def load_MF(self, function_path: str, virtual_inputs: SocketNames, virtual_outputs: SocketNames) -> MaterialFunctionBase:
         return self.material_function_factory.load(self, function_path, virtual_inputs, virtual_outputs)
 
-    def build_dependencies(self):
-        pass
-
-    def build_input_nodes(self):
-        self.inputs = self.inputs_class(self)
-
-    def build_process_nodes(self):
-        pass
-
-    def build_output_nodes(self):
-        self.outputs = self.outputs_class(self)
-
-    def finalize_node_connections(self):
+    def build(self):
         pass
 
     def build_FunctionInput(self, input_name: str, input_type: str, preview = None) -> FunctionInput:
@@ -67,24 +60,36 @@ class ContainerBuilderBase:
             self.params = self.params_factory(result)
         return result
 
-    def get(self, virtual_inputs: SocketNames = [], virtual_outputs: SocketNames = []):
+    def get(self, virtual_inputs: SocketNames = [], virtual_outputs: SocketNames = [], purge = False):
+
+        if purge:
+            folder = "C:/src/Unreal Projects/PamuxSurvival/Content/Materials/Pamux"
+            if os.path.isdir(folder):
+                shutil.rmtree(folder)
+            
         result = self.__loadAndCleanOrCreate(virtual_inputs, virtual_outputs)
-        self.build_dependencies()
+
+        self.dependencies = self.dependencies_class(self)
 
         CurrentNodePos.goto_inputs()
-        self.build_input_nodes()
-
-        CurrentNodePos.goto_process()
-        self.build_process_nodes()
+        self.inputs = self.inputs_class(self)
 
         CurrentNodePos.goto_outputs()
-        self.build_output_nodes()
+        self.outputs = self.outputs_class(self)
 
-        self.finalize_node_connections()
+        CurrentNodePos.goto_process()
+        self.build()
+
         result.save()
 
         BuildStack.pop()
         print("popped")
+        return result
+
+    def makeFunctionOutput(self, name, sort_priority) -> FunctionOutput:
+        result = FunctionOutput()
+        result.output_name.set(name)
+        result.sort_priority.set(sort_priority)
         return result
 
     @property

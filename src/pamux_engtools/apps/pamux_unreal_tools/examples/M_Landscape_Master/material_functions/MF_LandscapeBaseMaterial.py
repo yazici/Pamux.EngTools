@@ -1,4 +1,6 @@
 from importlib import * 
+import os
+import shutil
 
 from pamux_unreal_tools.factories.material_function_factory import MaterialFunctionFactory
 from pamux_unreal_tools.base.material_function_builder_base import MaterialLayerFunctionBuilderBase
@@ -9,9 +11,24 @@ from pamux_unreal_tools.factories.material_expression_factories import *
 from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MF_TextureCellBombing_Landscape import MF_TextureCellBombing_Landscape
 from pamux_unreal_tools.base.material_function_builder_base import *
 from pamux_unreal_tools.utils.node_pos import NodePos, CurrentNodePos
+from pamux_unreal_tools.base.material_function_dependencies_base import MaterialFunctionDependenciesBase
+
 class MF_LandscapeBaseMaterial:
+    class Dependencies:
+        def __init__(self, builder: ContainerBuilderBase) -> None:
+            self.blend_Overlay = builder.load_MF("/Engine/Functions/Engine_MaterialFunctions03/Blends/Blend_Overlay", [ "Base", "Blend" ], [ "Result" ])
+            self.cheapContrast_RGB = builder.load_MF("/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment/CheapContrast_RGB", [ "In", "Contrast" ], [ "Result" ])
+            self.heightLerp = builder.load_MF("/Engine/Functions/Engine_MaterialFunctions02/Texturing/HeightLerp", [ "A", "B", "Transition Phase", "Height Texture", "Contrast" ], [ "Results", "Alpha", "Lerp Alpha No Contrast" ])
+            self.multiplyAdd = builder.load_MF("/Engine/Functions/Engine_MaterialFunctions02/Math/MultiplyAdd", [ "Base", "Add" ], [ "Result" ])
+            self.breakOutFloat4Components = builder.load_MF("/Engine/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat4Components", [ "Float4" ], [ "R", "G", "B", "A" ])
+            self.customRotator = builder.load_MF("/Engine/Functions/Engine_MaterialFunctions02/Texturing/CustomRotator", [ "UVs", "Rotation Center", "Rotation Angle" ], [ "Rotated Values" ])
+
+            self.MF_TextureCellBombing_Landscape = MF_TextureCellBombing_Landscape.Builder().get()
+            # 
+            self.call_MF_TextureCellBombing_Landscape = {}
+
     class Inputs:
-        def __init__(self, builder: MaterialFunctionBuilderBase):
+        def __init__(self, builder: ContainerBuilderBase):
             CurrentNodePos.x = 0
 
             self.rotation = builder.build_FunctionInput("Rotation", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR, Constant(0.0))
@@ -49,20 +66,9 @@ class MF_LandscapeBaseMaterial:
         def __init__(self):
             super().__init__(
                 "/Game/Materials/Pamux/Landscape/Functions/Layers/MF_LandscapeBaseMaterial",
+                MF_LandscapeBaseMaterial.Dependencies,
                 MF_LandscapeBaseMaterial.Inputs,
                 MaterialFunctionOutputs.ResultAndHeight)
-
-        def build_dependencies(self):
-            self.blend_Overlay = self.load_MF("/Engine/Functions/Engine_MaterialFunctions03/Blends/Blend_Overlay", [ "Base", "Blend" ], [ "Result" ])
-            self.cheapContrast_RGB = self.load_MF("/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment/CheapContrast_RGB", [ "In", "Contrast" ], [ "Result" ])
-            self.heightLerp = self.load_MF("/Engine/Functions/Engine_MaterialFunctions02/Texturing/HeightLerp", [ "A", "B", "Transition Phase", "Height Texture", "Contrast" ], [ "Results", "Alpha", "Lerp Alpha No Contrast" ])
-            self.multiplyAdd = self.load_MF("/Engine/Functions/Engine_MaterialFunctions02/Math/MultiplyAdd", [ "Base", "Add" ], [ "Result" ])
-            self.breakOutFloat4Components = self.load_MF("/Engine/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat4Components", [ "Float4" ], [ "R", "G", "B", "A" ])
-            self.customRotator = self.load_MF("/Engine/Functions/Engine_MaterialFunctions02/Texturing/CustomRotator", [ "UVs", "Rotation Center", "Rotation Angle" ], [ "Rotated Values" ])
-
-            self.MF_TextureCellBombing_Landscape = MF_TextureCellBombing_Landscape.Builder().get()
-            # 
-            self.call_MF_TextureCellBombing_Landscape = {}
 
         # def baseColorPath(self, qualitySwitched, commonParams, rotatedUVs, heightTexture):
         #         switched = self.doStuffWithTexture(commonParams.Albedo, False, qualitySwitched, commonParams, rotatedUVs)
@@ -179,7 +185,7 @@ class MF_LandscapeBaseMaterial:
 
             call.Result.rt = NamedRerouteDeclaration(f"rtMF_TextureCellBombing_Landscape_{map_name}", call.Result)
 
-        def build_process_nodes(self):
+        def build(self):
             # commonParams = LandscapeBaseMaterialParams()
 
             self.landscapeLayerCoords = LandscapeLayerCoords()
@@ -227,13 +233,7 @@ class MF_LandscapeBaseMaterial:
             self.breakMaterialAttributes = BreakMaterialAttributes(self.makeMaterialAttributes)
 
 
-
             
-
-            # 
-
-           
-            # 
 
             # call_CustomRotator.
             # uvParamsBA, 
@@ -257,8 +257,9 @@ class MF_LandscapeBaseMaterial:
 
             # return gma, gmaOpacityR
 
+            self.makeMaterialAttributes.output.connectToFunctionOutput(self.Result)
+            self.componentMask.output.connectToFunctionOutput(self.Height)
 
-        def finalize_node_connections(self):
             #             MEL.connect_material_expressions(
             #     breakMaterialAttributes.unrealAsset,
             #     breakMaterialAttributes.input.name,
@@ -268,6 +269,5 @@ class MF_LandscapeBaseMaterial:
             # MEL.connect_material_expressions(componentMask.unrealAsset, "", self.Height.unrealAsset, f"")
 
             # MEL.connect_material_expressions(self.call_BreakOutFloat4Components.output.materialExpression.unrealAsset, "", self.uvParams.unrealAsset, "Low")
-        
-            self.makeMaterialAttributes.output.connectToFunctionOutput(self.Result)
-            self.componentMask.output.connectToFunctionOutput(self.Height)
+
+MF_LandscapeBaseMaterial.Builder().get()

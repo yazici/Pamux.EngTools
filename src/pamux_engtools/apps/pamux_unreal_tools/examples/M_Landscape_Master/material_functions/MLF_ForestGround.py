@@ -25,7 +25,7 @@ from pamux_unreal_tools.impl.material_function_impl import MaterialFunctionImpl
 
 
 from pamux_unreal_tools.base.material_function_builder_base import MaterialLayerFunctionBuilderBase
-
+from pamux_unreal_tools.base.material_function_dependencies_base import MaterialFunctionDependenciesBase
 
 
 
@@ -35,32 +35,27 @@ from pamux_unreal_tools.base.material_function_builder_base import MaterialLayer
 # self.foliageEnabled = StaticBoolParameter(f"{name}FoliageEnabled", foliageEnabledDefaultValue)
 
 class MLF_ForestGround:
+    class Dependencies:
+        def __init__(self, builder: ContainerBuilderBase) -> None:
+             pass
+
     class Inputs:
-        def __init__(self, builder: MaterialFunctionBuilderBase):
+        def __init__(self, builder: ContainerBuilderBase):
             pass
 
     class Builder(MaterialLayerFunctionBuilderBase):
         def __init__(self, MF_LandscapeBaseMaterial: MaterialFunctionImpl):
             super().__init__(
                 "/Game/Materials/Pamux/Landscape/Functions/Layers/MLF_ForestGround",
+                MaterialFunctionDependenciesBase,
                 MLF_ForestGround.Inputs,
                 MaterialFunctionOutputs.ResultAndHeight)
 
             self.layer_name = "ForestGround"
             self.MF_LandscapeBaseMaterial = MF_LandscapeBaseMaterial
 
-        def build_dependencies(self):
+        def build(self):
             pass
-    
-        def build_process_nodes(self):
-            pass
-        
-        def build_output_nodes(self):
-            pass
-
-        def finalize_node_connections(self):
-            pass
-
 
             # roughness = ScalarParameter(material_function)
             # roughness.parameter_name.set("Roughness")
@@ -92,3 +87,6 @@ class MLF_ForestGround:
 #             materialAttributes.specular,
 #             materialAttributes.roughness
 #         ), height
+
+
+MLF_ForestGround.Builder().get()

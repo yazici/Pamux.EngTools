@@ -37,6 +37,7 @@ binary_op_classes_with_const = [
 unary_op_classes = [
     "Saturate",
     "OneMinus",
+    "Floor",
     "BreakMaterialAttributes"
 ]
 

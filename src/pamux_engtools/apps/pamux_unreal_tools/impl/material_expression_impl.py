@@ -30,7 +30,7 @@ class MaterialExpressionImpl(MaterialExpressionBase):
         return MEL.connect_material_property(self.unrealAsset, "", materialProperty)
 
     @dispatch(str, MaterialExpressionBase, str)
-    def connectTo(self, outPortName: str, materialExpression: MaterialExpressionBase, inPortName: str) -> bool:
+    def connectTo(self, outPortName: str, material_expression: MaterialExpressionBase, inPortName: str) -> bool:
         return MEL.connect_material_expressions(self.unrealAsset, outPortName, materialExpression.unrealAsset, inPortName)
     
     def gotoRightOf(self, sourceMaterialExpression: MaterialExpressionBase):

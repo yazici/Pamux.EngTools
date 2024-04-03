@@ -21,27 +21,26 @@ from pamux_unreal_tools.base.material_function_builder_base import *
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.base.material_expression_container import *
 from pamux_unreal_tools.factories.material_function_factory import MaterialFunctionFactory
-
-
-
-
+from pamux_unreal_tools.base.material_function_dependencies_base import MaterialFunctionDependenciesBase
 
 from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.base.wetness_base import WetnessBuilderBase
 from pamux_unreal_tools.factories.material_expression_factories import *
-# material = util.load_asset('/Game/0_Root/Material/M_standard_shd_test.M_standard_shd_test')
-# print(material) # Material
- 
-# node_set = unreal.MaterialEditingLibrary.get_material_selected_nodes(material)
+from pamux_unreal_tools.base.material_expression_sockets_base import OutSocket
 
 class MF_Wetness:
+    class Dependencies:
+        def __init__(self, builder: ContainerBuilderBase) -> None:
+             pass
+
     class Inputs:
-        def __init__(self, builder: MaterialFunctionBuilderBase):
+        def __init__(self, builder: ContainerBuilderBase):
             pass
 
     class Builder(WetnessBuilderBase):
         def __init__(self):
             super().__init__(
                 "/Game/Materials/Pamux/Landscape/Functions/MF_Wetness",
+                MaterialFunctionDependenciesBase,
                 MF_Wetness.Inputs,
                 MaterialFunctionOutputs.ResultAndHeight)
 
@@ -78,10 +77,7 @@ class MF_Wetness:
 
                 return BlendMaterialAttributes(prewettedMaterialAttributes, materialAttributes, saturate).output
 
-        def build_dependencies(self):
-            pass
-
-        def build_process_nodes(self):
+        def build(self):
             materialAttributes = self.getMaterialAttributes()
 
             breakMaterialAttributes = BreakMaterialAttributes(materialAttributes)
@@ -97,9 +93,6 @@ class MF_Wetness:
             MEL.connect_material_expressions(heightBlendBasedOnInputWetnessValue.material_expression.unrealAsset, "", result.unrealAsset, "")
 
             # self.heightBlendBasedOnInputWetnessValue.connectToFunctionOutput(self.result)
-        
-
-        def finalize_node_connections(self):
             #             MEL.connect_material_expressions(
             #     breakMaterialAttributes.unrealAsset,
             #     breakMaterialAttributes.input.name,
@@ -111,4 +104,4 @@ class MF_Wetness:
             self.breakMaterialAttributes.connectToFunctionOutput(self.Result)
             self.componentMask.connectToFunctionOutput(self.Height)
 
-            
+MF_Wetness.Builder().get()

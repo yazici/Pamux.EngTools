@@ -155,11 +155,20 @@ class BlendMaterialAttributes(MaterialExpressionImpl):
         self.b = InSocketImpl(self, 'B', 'StructProperty')
         self.alpha = InSocketImpl(self, 'Alpha', 'StructProperty')
         if a is not None:
-            self.a.comesFrom(a)
+            if isinstance(a, float):
+                self.const_a.set(a)
+            else:
+                self.a.comesFrom(a)
         if b is not None:
-            self.b.comesFrom(b)
+            if isinstance(b, float):
+                self.const_b.set(b)
+            else:
+                self.b.comesFrom(b)
         if alpha is not None:
-            self.alpha.comesFrom(alpha)
+            if isinstance(alpha, float):
+                self.const_alpha.set(alpha)
+            else:
+                self.alpha.comesFrom(alpha)
 
 class BreakMaterialAttributes(MaterialExpressionImpl):
     def __init__(self, input, node_pos: NodePos = None) -> None:
@@ -620,8 +629,10 @@ class FeatureLevelSwitch(MaterialExpressionImpl):
         self.default = InSocketImpl(self, 'Default', 'StructProperty')
 
 class Floor(MaterialExpressionImpl):
-    def __init__(self, node_pos: NodePos = None) -> None:
+    def __init__(self, input, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionFloor, node_pos)
+        if input is not None:
+            self.input.comesFrom(input)
 
 class Fmod(MaterialExpressionImpl):
     def __init__(self, node_pos: NodePos = None) -> None:
@@ -895,11 +906,20 @@ class LinearInterpolate(MaterialExpressionImpl):
         self.b = InSocketImpl(self, 'B', 'StructProperty')
         self.alpha = InSocketImpl(self, 'Alpha', 'StructProperty')
         if a is not None:
-            self.a.comesFrom(a)
+            if isinstance(a, float):
+                self.const_a.set(a)
+            else:
+                self.a.comesFrom(a)
         if b is not None:
-            self.b.comesFrom(b)
+            if isinstance(b, float):
+                self.const_b.set(b)
+            else:
+                self.b.comesFrom(b)
         if alpha is not None:
-            self.alpha.comesFrom(alpha)
+            if isinstance(alpha, float):
+                self.const_alpha.set(alpha)
+            else:
+                self.alpha.comesFrom(alpha)
 
 class Logarithm(MaterialExpressionImpl):
     def __init__(self, node_pos: NodePos = None) -> None:
@@ -2442,11 +2462,13 @@ class Time(MaterialExpressionImpl):
         self.period = MaterialExpressionEditorPropertyImpl(self, 'period', 'float')
 
 class Transform(MaterialExpressionImpl):
-    def __init__(self, node_pos: NodePos = None) -> None:
+    def __init__(self, input = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionTransform, node_pos)
 
         self.transform_source_type = MaterialExpressionEditorPropertyImpl(self, 'transform_source_type', 'MaterialVectorCoordTransformSource')
         self.transform_type = MaterialExpressionEditorPropertyImpl(self, 'transform_type', 'MaterialVectorCoordTransform')
+        if input is not None:
+            self.input.comesFrom(input)
 
 class TransformPosition(MaterialExpressionImpl):
     def __init__(self, node_pos: NodePos = None) -> None:

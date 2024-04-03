@@ -24,24 +24,24 @@ from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.base.material_expression_container import *
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.base.material_function_builder_base import *
-
+from pamux_unreal_tools.base.material_function_dependencies_base import MaterialFunctionDependenciesBase
 from pamux_unreal_tools.base.material_builder_base import MaterialBuilderBase
 class M_SimpleMaterial:
     class Builder(MaterialBuilderBase):
         def __init__(self, container_path: str):
             super().__init__(
                 container_path,
+                MaterialFunctionDependenciesBase,
                 M_SimpleMaterial.Inputs,
                 MaterialFunctionOutputs.Result)
 
-    def build_process_nodes(self):
+    def build(self):
         self.colorParameter = VectorParameter("Color", unreal.LinearColor(0.259027, 0.320382, 0.383775, 1.0))
         self.constHalf = Constant(0.5)
         self.roughness = ScalarParameter("Roughness", 0.5)
         self.textureCoord = TextureCoordinate(0.5, 0.5)
         self.textureSample = TextureSample()
 
-    def finalize_node_connections(self):
         self.colorParameter.output.connectTo(unreal.MaterialProperty.MP_BASE_COLOR)
         self.constHalf.output.connectTo(unreal.MaterialProperty.MP_METALLIC)
         self.roughness.output.connectTo(unreal.MaterialProperty.MP_ROUGHNESS)

@@ -2,7 +2,6 @@
 
 import unreal
 
-from multipledispatch import dispatch
 from pamux_unreal_tools.utils.build_stack import *
 
 MEL = unreal.MaterialEditingLibrary
@@ -15,6 +14,10 @@ from pamux_unreal_tools.utils.pamux_asset_utils import PamuxAssetUtils
 # from pamux_unreal_tools.generated.material_expression_wrappers import NamedRerouteDeclaration
 from pamux_unreal_tools.utils.node_pos import NodePos, CurrentNodePos
 # Assertion failed: Outputs.Num() == AttributeGetTypes.Num() + 1 [File:D:\build\++UE5\Sync\Engine\Source\Runtime\Engine\Private\Materials\MaterialExpressions.cpp] [Line: 7213]
+
+from pamux_unreal_tools.base.material_expression_sockets_base import OutSocket
+from pamux_unreal_tools.impl.material_expression_editor_property_impl import MaterialExpressionEditorPropertyImpl
+from pamux_unreal_tools.generated.material_expression_wrappers import NamedRerouteDeclaration
 
 # https://docs.unrealengine.com/5.3/en-US/PythonAPI/class/MaterialEditingLibrary.html
 class MaterialExpressionContainer:
@@ -49,3 +52,12 @@ class MaterialExpressionContainer:
     def getDefaultTextureParameterValue(self, parameter_name: str) -> unreal.Texture:
         return MEL.get_material_default_texture_parameter_value(self.unrealAsset, parameter_name)
 
+    def add_rt(self, name: str, outSocket: OutSocket):
+        NamedRerouteDeclaration(name, outSocket)
+        # node_pos = CurrentNodePos
+        # outSocket.rt = self.createMaterialExpression(unreal.MaterialExpressionNamedRerouteDeclaration, node_pos)
+        # outSocket.rt.name = MaterialExpressionEditorPropertyImpl(self, 'name', 'Name')
+    #     self.rt.nodeNolor = MaterialExpressionEditorPropertyImpl(self, 'nodeNolor', 'LinearColor')
+    #     self.rt.variableGuid = MaterialExpressionEditorPropertyImpl(self, 'variableGuid', 'Guid')
+
+    #     self.rt.name.set(name)

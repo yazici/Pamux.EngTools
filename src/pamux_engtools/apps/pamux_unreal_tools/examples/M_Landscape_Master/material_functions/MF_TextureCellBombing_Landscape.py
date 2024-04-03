@@ -20,10 +20,14 @@ from pamux_unreal_tools.base.material_function_builder_base import *
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.base.material_expression_container import *
 from pamux_unreal_tools.factories.material_function_factory import MaterialFunctionFactory
-
+from pamux_unreal_tools.base.material_function_dependencies_base import MaterialFunctionDependenciesBase
 class MF_TextureCellBombing_Landscape:
+    class Dependencies:
+        def __init__(self, builder: ContainerBuilderBase) -> None:
+             pass
+
     class Inputs:
-        def __init__(self, builder: MaterialFunctionBuilderBase):
+        def __init__(self, builder: ContainerBuilderBase):
             self.patternScale = builder.build_FunctionInput("PatternScale", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR, Constant(10.0))
             self.UVs = builder.build_FunctionInput("UVs", unreal.FunctionInputType.FUNCTION_INPUT_VECTOR2, TextureCoordinate(1.0, 1.0))
             self.randomOffsetVariation = builder.build_FunctionInput("RandomOffsetVariation", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR, Constant(1.0))
@@ -57,6 +61,7 @@ class MF_TextureCellBombing_Landscape:
         def __init__(self):
             super().__init__(
                 "/Game/Materials/Pamux/Landscape/Functions/MF_TextureCellBombing_Landscape",
+                MaterialFunctionDependenciesBase,
                 MF_TextureCellBombing_Landscape.Inputs,
                 MaterialFunctionOutputs.Result)
 
@@ -130,17 +135,12 @@ class MF_TextureCellBombing_Landscape:
 
             # return self.inputs.patternScaledUVs3Vector.output, self.textureSample.a.rt, self.offsetVariation.output, self.rotationVariation.output
 
-        def build_process_nodes(self):
+        def build(self):
             self.__build_PostInput()
             self.__build_RandomRotate()
             self.__build_NormalRotation()
             self.__build_PreOutput()
 
-        def finalize_node_connections(self):
-            return self.lerp.output.connectToFunctionOutput(self.outputs.Result)
+            self.lerp.output.connectToFunctionOutput(self.outputs.Result)
 
-folder = "C:/src/Unreal Projects/PamuxSurvival/Content/Materials/Pamux"
-if os.path.isdir(folder):
-    shutil.rmtree(folder)
-
-material = MF_TextureCellBombing_Landscape.Builder().get()
+MF_TextureCellBombing_Landscape.Builder().get()

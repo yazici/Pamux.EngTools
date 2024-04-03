@@ -14,8 +14,8 @@ class PropertyParam(MethodParam):
         pyGen.unindent()
 
 class InputParam(MethodParam):
-    def __init__(self, name: str):
-        super().__init__(name)
+    def __init__(self, name: str, type: str = None, default_value: str = None):
+        super().__init__(name, type, default_value)
 
     def append_assignment_lines(self, pyGen: PyCodeGenerator):
         pyGen.begin_if(f"{self.name} is not None")
@@ -144,8 +144,11 @@ def setup_ctor_params(pamux_wrapper_class_name):
         result.append(PropertyParam("declarationGuid"))
 
     elif pamux_wrapper_class_name == "LinearInterpolate" or pamux_wrapper_class_name == "BlendMaterialAttributes":
-        result.append(InputParam("a"))
-        result.append(InputParam("b"))
-        result.append(InputParam("alpha"))
+        result.append(InputParamWithConstProperty("a"))
+        result.append(InputParamWithConstProperty("b"))
+        result.append(InputParamWithConstProperty("alpha"))
+
+    elif pamux_wrapper_class_name == "Transform":
+        result.append(InputParam("input", default_value = "None"))
 
     return result

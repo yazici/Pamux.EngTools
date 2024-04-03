@@ -1,6 +1,5 @@
 import unreal
 
-from pamux_unreal_tools.base.material_expression_container import *
 from pamux_unreal_tools.base.material_expression_value_base import MaterialExpressionValueBase
 from pamux_unreal_tools.base.material_expression_base_base import MaterialExpressionBaseBase
 

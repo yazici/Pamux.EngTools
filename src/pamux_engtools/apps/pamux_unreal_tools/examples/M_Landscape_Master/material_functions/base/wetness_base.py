@@ -3,7 +3,7 @@ from pamux_unreal_tools.base.material_function_builder_base import *
 
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.base.material_expression_container import *
-from pamux_unreal_tools.factories.material_expression_factories import *
+from pamux_unreal_tools.factories.material_expression_factories import FunctionInputFactory
 from pamux_unreal_tools.base.texture_sample_set import TextureSampleSet
 
 class WetnessBuilderBase(MaterialFunctionBuilderBase):

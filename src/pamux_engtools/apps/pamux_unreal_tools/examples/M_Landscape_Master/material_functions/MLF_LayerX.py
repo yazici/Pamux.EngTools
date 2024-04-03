@@ -25,7 +25,7 @@ from pamux_unreal_tools.factories.material_function_factory import MaterialFunct
 
 from pamux_unreal_tools.impl.material_function_impl import MaterialFunctionImpl
 from pamux_unreal_tools.base.material_function_builder_base import MaterialLayerFunctionBuilderBase
-
+from pamux_unreal_tools.base.material_function_dependencies_base import MaterialFunctionDependenciesBase
 
 # self.weight = LLWeightParameter(f"{name}")
 # self.foliageThreshold = ScalarParameter(f"{name}FoliageThreshold")
@@ -33,13 +33,14 @@ from pamux_unreal_tools.base.material_function_builder_base import MaterialLayer
 
 class MLF_LayerX:
     class Inputs:
-        def __init__(self, builder: MaterialFunctionBuilderBase):
+        def __init__(self, builder: ContainerBuilderBase):
             self.alpha = builder.build_FunctionInput(f"{builder.layer_name}Albedo", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR)
 
     class Builder(MaterialLayerFunctionBuilderBase):
         def __init__(self, layer_name: str, MF_LandscapeBaseMaterial: MaterialFunctionImpl):
             super().__init__(
                 f"/Game/Materials/Pamux/Landscape/Functions/Layers/MLF_{layer_name}",
+                MaterialFunctionDependenciesBase,
                 MLF_LayerX.Inputs,
                 MaterialFunctionOutputs.ResultAndHeight)
 
@@ -47,7 +48,7 @@ class MLF_LayerX:
             self.MF_LandscapeBaseMaterial = MF_LandscapeBaseMaterial
 
 
-        def build_process_nodes(self):
+        def build(self):
             self.call_MF_LandscapeBaseMaterial = self.MF_LandscapeBaseMaterial.call()
 
             #self.call_MF_LandscapeBaseMaterial.output.connectTo(result.a)
@@ -60,8 +61,6 @@ class MLF_LayerX:
             # roughness.default_value.set(0.5)
 
 
-        def finalize_node_connections(self):
-            return 
             self.call_MF_LandscapeBaseMaterial.Result.connectToFunctionOutput(self.Result)
             self.call_MF_LandscapeBaseMaterial.Height.connectToFunctionOutput(self.Height)
 
@@ -71,3 +70,5 @@ class MLF_LayerX:
 
         # def MLF_Dirt():
         #     return MaterialFunctions.landscapeBaseMaterial(Params.Dirt)
+
+MLF_LayerX.Builder().get()

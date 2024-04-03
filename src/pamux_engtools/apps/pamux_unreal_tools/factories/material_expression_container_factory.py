@@ -59,7 +59,7 @@ class MaterialExpressionContainerFactory:
     def __load_and_wrap_asset(self, asset_path: str) -> MaterialExpressionContainer:
         unrealAsset = EAL.load_asset(asset_path)
         if unrealAsset is None:
-            raise f"Can't load asset: {asset_path}"
+            raise Exception(f"Can't load asset: {asset_path}")
         return self.container_wrapper_class(unrealAsset)
 
     #  -> MaterialBase | MaterialFunctionBase
@@ -68,7 +68,7 @@ class MaterialExpressionContainerFactory:
         
         unrealAsset = AT.create_asset(asset_name, package_path, self.asset_class, self.asset_factory)
         if unrealAsset is None:
-            raise f"Can't create asset: {asset_path}"
+            raise Exception(f"Can't create asset: {asset_path}")
         return self.container_wrapper_class(unrealAsset)
 
 # class MaterialExpressionValue:
@@ -78,8 +78,8 @@ class MaterialExpressionContainerFactory:
 #         self.type = type
 
 # class Property(MaterialExpressionValue):
-#     def __init__(self, materialExpression, name, type):
-#         super().__init__(materialExpression, name, type)
+#     def __init__(self, material_expression, name, type):
+#         super().__init__(material_expression, name, type)
 
 #     def set(self, val):
 #         self.materialExpression.unrealAsset.set_editor_property(self.name, val)

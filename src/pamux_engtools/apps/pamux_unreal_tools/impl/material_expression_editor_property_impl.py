@@ -2,8 +2,8 @@ from pamux_unreal_tools.base.material_expression_editor_property_base import Mat
 from pamux_unreal_tools.base.material_expression_base import MaterialExpressionBase
 
 class MaterialExpressionEditorPropertyImpl(MaterialExpressionEditorPropertyBase):
-    def __init__(self, materialExpression: MaterialExpressionBase, name: str, type: str):
-        super().__init__(materialExpression, name, type)
+    def __init__(self, material_expression: MaterialExpressionBase, name: str, type: str):
+        super().__init__(material_expression, name, type)
 
     def set(self, val):
         self.material_expression.unrealAsset.set_editor_property(self.name, val)

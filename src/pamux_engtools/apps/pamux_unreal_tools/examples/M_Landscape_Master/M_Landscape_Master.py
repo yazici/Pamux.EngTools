@@ -34,9 +34,42 @@ from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MF_Foliag
 
 # https://github.com/SomeRanDev/Haxe-UnrealEngine5/blob/d17e0b1f9d8973ed0641484148c55d552ba69dff/Externs/generated_5_0_3/MaterialExpressionLinearInterpolate.hx#L4
 class M_Landscape_Master:
+
+    class Inputs:
+        def __init__(self, builder: ContainerBuilderBase) -> None:
+            pass
+
+    class Outputs:
+        def __init__(self, builder: ContainerBuilderBase) -> None:
+            pass
+             
+    class Dependencies:
+        def __init__(self, builder: ContainerBuilderBase) -> None:
+            self.MF_LandscapeBaseMaterial = MF_LandscapeBaseMaterial.Builder().get()
+
+            self.MLF_Layers = {}
+            for layer_name in Globals.layer_names:
+                if layer_name == "ForestGround":
+                    self.MLF_ForestGround = MLF_ForestGround.Builder(self.MF_LandscapeBaseMaterial).get()
+                else:
+                    self.MLF_Layers[layer_name] = MLF_LayerX.Builder(layer_name, self.MF_LandscapeBaseMaterial).get()
+
+            self.MF_Wetness = MF_Wetness.Builder().get()
+            self.MF_Puddles = MF_Puddles.Builder().get()
+            self.MF_BlendTwoMaterialsViaHighOpacityMap = MF_BlendTwoMaterialsViaHighOpacityMap.Builder().get()
+            self.MF_GlancingAngleSpecCorrection = MF_GlancingAngleSpecCorrection.Builder().get()
+
+            self.MF_FoliageMask = MF_FoliageMask.Builder().get()
+            self.MF_TextureCellBombing_Landscape = MF_TextureCellBombing_Landscape.Builder().get()
+
     class Builder(MaterialBuilderBase):
         def __init__(self, asset_path: str):
-            super().__init__(Params, asset_path)
+            super().__init__(
+                Params,
+                asset_path,
+                M_Landscape_Master.Dependencies,
+                M_Landscape_Master.Inputs,
+                M_Landscape_Master.Outputs)
 
         # def __buildMainPath(self, MF_BlendTwoMaterialsViaHighOpacityMap_Output):
         #     makeMaterialAttributes = MakeMaterialAttributes(self.material)
@@ -99,25 +132,6 @@ class M_Landscape_Master:
         # def __buildLandscapeGrassOutputAndMaskingPath(self, MF_BlendTwoMaterialsViaHighOpacityMap_Output):
         #         #landscapeGrassOutput = Blocks.landscapeGrassOutputAndMasking(Params.foliageMask, Globals.LayersForGrass)
         #         pass
-            
-        def build_dependencies(self):
-            self.MF_LandscapeBaseMaterial = MF_LandscapeBaseMaterial.Builder().get()
-
-            self.MLF_Layers = {}
-            for layer_name in Globals.layer_names:
-                if layer_name == "ForestGround":
-                    self.MLF_ForestGround = MLF_ForestGround.Builder(self.MF_LandscapeBaseMaterial).get()
-                else:
-                    self.MLF_Layers[layer_name] = MLF_LayerX.Builder(layer_name, self.MF_LandscapeBaseMaterial).get()
-
-            self.MF_Wetness = MF_Wetness.Builder().get()
-            self.MF_Puddles = MF_Puddles.Builder().get()
-            self.MF_BlendTwoMaterialsViaHighOpacityMap = MF_BlendTwoMaterialsViaHighOpacityMap.Builder().get()
-            self.MF_GlancingAngleSpecCorrection = MF_GlancingAngleSpecCorrection.Builder().get()
-
-            self.MF_FoliageMask = MF_FoliageMask.Builder().get()
-            self.MF_TextureCellBombing_Landscape = MF_TextureCellBombing_Landscape.Builder().get()
-            
 
         def __blendLandscapeLayers(self):
             landscapeLayerBlend = LandscapeLayerBlend(self.material)
@@ -143,7 +157,7 @@ class M_Landscape_Master:
 
             return landscapeLayerBlend.output
 
-        def build_process_nodes(self):
+        def build(self):
             pass
             # blendedLandscapeLayers = self.__blendLandscapeLayers()
 
@@ -177,19 +191,9 @@ class M_Landscape_Master:
             # self.__buildRVTOutputPath(call_MF_BlendTwoMaterialsViaHighOpacityMap.output)
             # self.__buildLandscapeGrassOutputAndMaskingPath(call_MF_BlendTwoMaterialsViaHighOpacityMap.output)
 
-            
-            return
-
-
-
-
 #sCurve = MaterialFunctionFactory().load("SCurve", "/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment", True)
 #call_SCurve = sCurve.call()
 #call_SCurve.In.comesFrom(baseColor)
 #call_SCurve.Power.comesFrom(Params.specularContrast)
 
-folder = "C:/src/Unreal Projects/PamuxSurvival/Content/Materials/Pamux"
-if os.path.isdir(folder):
-    shutil.rmtree(folder)
-
-material = M_Landscape_Master.Builder("M_Landscape_Master", "/Game/Materials/Pamux").get()
+M_Landscape_Master.Builder("M_Landscape_Master", "/Game/Materials/Pamux").get(purge=True)

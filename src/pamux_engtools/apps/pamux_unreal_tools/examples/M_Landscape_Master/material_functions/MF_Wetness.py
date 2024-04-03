@@ -26,8 +26,7 @@ from pamux_unreal_tools.factories.material_expression_factories import MakeMater
 class MF_Wetness:
     class Inputs:
         def __init__(self, builder: ContainerBuilderBase):
-            self.materialAttributes = builder.getMaterialAttributes()
-            self.materialAttributes.add_rt()
+            self.materialAttributes = builder.build_FunctionInput("MaterialAttributes", 0, self.textureSampleSet, False)
 
             self.wetnessSaturation = ScalarParameter("Wetness Saturation", -0.5)
             self.wetnessSaturation.add_rt()
@@ -38,8 +37,7 @@ class MF_Wetness:
             self.wetnessRoughness = ScalarParameter("Wetness Roughness", 0.3)
             self.wetnessRoughness.add_rt()
 
-            self.wetness = builder.build_FunctionInput("Wetness", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR, Constant(1.0))
-            self.wetness.add_rt()
+            self.wetness = builder.build_FunctionInput("Wetness", 1, 1.0, False)
 
     class Builder(WetnessBuilderBase):
         def __init__(self):

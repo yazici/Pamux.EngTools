@@ -24,17 +24,11 @@ from pamux_unreal_tools.base.material_function_outputs_base import MaterialFunct
 class MF_FoliageMask:
     class Inputs:
         def __init__(self, builder: ContainerBuilderBase):
-            self.layerSample = builder.build_FunctionInput("LayerSample", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR)
-            self.layerSample.add_rt()
-
-            self.foliageMask = builder.build_FunctionInput("FoliageMask", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR)
-            self.foliageMask.add_rt()
-
-            self.threshold = builder.build_FunctionInput("Threshold", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR)
-            self.threshold.add_rt()
-
-            self.enabled = builder.build_FunctionInput("Enabled", unreal.FunctionInputType.FUNCTION_INPUT_STATIC_BOOL, StaticBool(True))
-            self.enabled.add_rt()
+            # No Preview
+            self.layerSample    = builder.build_FunctionInput("LayerSample",    0, 0.0, False) 
+            self.foliageMask    = builder.build_FunctionInput("FoliageMask",    1, 0.0, False)
+            self.threshold      = builder.build_FunctionInput("Threshold",      2, 0.0, False)
+            self.enabled        = builder.build_FunctionInput("Enabled",        3, True)
 
     class Builder(MaterialFunctionBuilderBase):
         def __init__(self):

@@ -24,7 +24,37 @@ from pamux_unreal_tools.base.container_builder_base import ContainerBuilderBase
 class MLF_LayerX:
     class Inputs:
         def __init__(self, builder: ContainerBuilderBase):
-            self.alpha = builder.build_FunctionInput(f"{builder.layer_name}Albedo", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR)
+            self.Albedo = None
+            self.ColorOverlay = None
+            self.ColorOverlay_Intensity = None
+
+            self.Contrast = None
+            self.Contrast_Variation = None
+
+            self.Roughness = None
+            self.Roughness_Intensity = None
+
+            self.Normal_Intensity = None
+            self.Normal = None
+
+            self.Displacement = None
+
+            self.UVParams = None # Append(Result, RotCenterY -A-)
+
+            self.Rotation = None
+
+            self.DoTextureBomb = None
+            self.Bomb_DoRotationVariation = None
+            self.Bomb_DoCellScale = None
+            self.Bomb_PatternScale = None
+            self.Bomb_RandomOffset = None
+            self.Bomb_RotationVariation = None
+
+            self.Opacity_Strength = None
+            self.Opacity_Add = None
+            self.Opacity_Contrast = None
+            
+            self.albedo = TextureObjectParameter(f"{builder.layer_name}Albedo")
             self.roughness = ScalarParameter("Roughness", 0.5)
 
     class Builder(MaterialLayerFunctionBuilderBase):

@@ -30,8 +30,7 @@ class MF_Puddles:
 
     class Inputs:
         def __init__(self, builder: ContainerBuilderBase):
-            self.materialAttributes = builder.getMaterialAttributes()
-            self.materialAttributes.add_rt()
+            self.materialAttributes = builder.build_FunctionInput("MaterialAttributes", 0, self.textureSampleSet, False)
 
             self.breakMaterialAttributes = BreakMaterialAttributes(self.materialAttributes)
             self.breakMaterialAttributes.baseColor.add_rt()

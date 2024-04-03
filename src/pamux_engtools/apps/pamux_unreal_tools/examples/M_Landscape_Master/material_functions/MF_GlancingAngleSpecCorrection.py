@@ -26,12 +26,7 @@ from pamux_unreal_tools.base.material_function_outputs_base import MaterialFunct
 class MF_GlancingAngleSpecCorrection:
     class Inputs:
         def __init__(self, builder: ContainerBuilderBase):
-            self.materialAttributes = builder.build_FunctionInput("In", unreal.FunctionInputType.FUNCTION_INPUT_MATERIAL_ATTRIBUTES)
-            self.materialAttributes.add_rt()
-
-            preview_value = unreal.Vector4f()
-            preview_value.set_editor_property("w", 1.0)
-            self.materialAttributes.preview_value.set(preview_value)
+            self.materialAttributes = builder.build_FunctionInput("In", 0,  unreal.FunctionInputType.FUNCTION_INPUT_MATERIAL_ATTRIBUTES, False)
 
             self.pixelDepth = PixelDepth()
             self.pixelDepth.add_rt()

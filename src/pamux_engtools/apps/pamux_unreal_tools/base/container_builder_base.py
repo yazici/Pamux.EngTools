@@ -2,6 +2,7 @@ import os
 import shutil
 
 from pamux_unreal_tools.generated.material_expression_wrappers import *
+from pamux_unreal_tools.utils.types import *
 
 from pamux_unreal_tools.base.material_function_base import MaterialFunctionBase
 
@@ -11,9 +12,10 @@ from pamux_unreal_tools.factories.material_expression_factories import FunctionI
 
 from pamux_unreal_tools.utils.build_stack import BuildStack
 from pamux_unreal_tools.utils.node_pos import NodePos, CurrentNodePos
-from pamux_unreal_tools.utils.types import *
+from pamux_unreal_tools.base.texture_sample_set import TextureSampleSet
 
 class ContainerBuilderBase:
+    
     def __init__(self,
                  container_factory: MaterialExpressionContainerFactory,
                  params_factory,
@@ -31,16 +33,54 @@ class ContainerBuilderBase:
 
         self.material_function_factory = MaterialFunctionFactory()
 
+        self.unitW = unreal.Vector4f()
+        self.unitW.set_editor_property("w", 1.0)
+
     def load_MF(self, function_path: str, virtual_inputs: SocketNames, virtual_outputs: SocketNames) -> MaterialFunctionBase:
         return self.material_function_factory.load(self, function_path, virtual_inputs, virtual_outputs)
 
     def build(self):
         pass
 
-    def build_FunctionInput(self, input_name: str, input_type: str, preview = None) -> FunctionInput:
-        result = FunctionInputFactory.create(input_name, input_type, preview)
-        result.use_preview_value_as_default.set(True)
+    def build_FunctionInput(self, input_name: str, sort_priority: int, preview, use_preview_value_as_default: bool = True) -> FunctionInput:
+        if isinstance(preview, float):
+            return self.__build_FunctionInput_impl(input_name, unreal.FunctionInputType.FUNCTION_INPUT_SCALAR, sort_priority, Constant(preview), use_preview_value_as_default)
 
+        if isinstance(preview, bool):
+            return self.__build_FunctionInput_impl(input_name, unreal.FunctionInputType.FUNCTION_INPUT_STATIC_BOOL, sort_priority, StaticBool(preview), use_preview_value_as_default)
+
+        if isinstance(preview, VecFBase):
+            return self.__build_FunctionInput_impl(input_name, preview.functionInputType, sort_priority, preview.linearColor, use_preview_value_as_default)
+        
+        if isinstance(preview, TextureObject):
+            return self.__build_FunctionInput_impl(input_name, unreal.FunctionInputType.FUNCTION_INPUT_TEXTURE2D, sort_priority, preview, use_preview_value_as_default)
+        
+        if isinstance(preview, TextureCoordinate):
+            return self.__build_FunctionInput_impl(input_name, unreal.FunctionInputType.FUNCTION_INPUT_VECTOR2, sort_priority, preview, use_preview_value_as_default)
+        
+        if isinstance(preview, MakeMaterialAttributes):
+            return self.__build_FunctionInput_impl(input_name, unreal.FunctionInputType.FUNCTION_INPUT_MATERIAL_ATTRIBUTES, sort_priority, preview, use_preview_value_as_default)
+        
+        if isinstance(preview, TextureSampleSet):
+            makeMaterialAttributes = MakeMaterialAttributes()
+            makeMaterialAttributes.baseColor.comesFrom(preview.baseColor.RGB)
+            makeMaterialAttributes.roughness.comesFrom(preview.roughness.RGB)
+            makeMaterialAttributes.opacity.comesFrom(preview.opacity.RGB)
+            makeMaterialAttributes.normal.comesFrom(preview.normal.RGB)
+
+            return self.__build_FunctionInput_impl(input_name, unreal.FunctionInputType.FUNCTION_INPUT_MATERIAL_ATTRIBUTES, sort_priority, makeMaterialAttributes, use_preview_value_as_default)
+        
+        raise Exception(f"Unsupported preview type calling build_FunctionInput with input_name: {input_name}")
+
+
+    def __build_FunctionInput_impl(self, input_name: str, input_type: str, sort_priority: int, preview, use_preview_value_as_default: bool) -> FunctionInput:
+        result = FunctionInputFactory.create(input_name, input_type, preview)
+        result.add_rt()
+        result.sort_priority.set(sort_priority)
+
+        result.preview_value.set(self.unitW)
+        result.use_preview_value_as_default.set(use_preview_value_as_default)
+        
         CurrentNodePos.x = 0
         CurrentNodePos.y += NodePos.DeltaY
 

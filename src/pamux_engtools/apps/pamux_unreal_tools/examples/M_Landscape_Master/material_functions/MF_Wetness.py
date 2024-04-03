@@ -1,8 +1,6 @@
 import unreal
 from pathlib import Path
 import sys
-import os
-import shutil
 
 sys.path.append(str(Path(__file__).parent.parent.parent.parent.parent.resolve()))
 
@@ -28,10 +26,6 @@ from pamux_unreal_tools.factories.material_expression_factories import *
 from pamux_unreal_tools.base.material_expression_sockets_base import OutSocket
 
 class MF_Wetness:
-    class Dependencies:
-        def __init__(self, builder: ContainerBuilderBase) -> None:
-             pass
-
     class Inputs:
         def __init__(self, builder: ContainerBuilderBase):
             self.materialAttributes = builder.getMaterialAttributes()

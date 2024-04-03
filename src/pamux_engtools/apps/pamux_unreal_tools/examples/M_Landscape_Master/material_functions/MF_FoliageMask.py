@@ -24,9 +24,6 @@ from pamux_unreal_tools.base.material_function_dependencies_base import Material
 from pamux_unreal_tools.factories.material_function_factory import MaterialFunctionFactory
 
 class MF_FoliageMask:
-    class Dependencies:
-        def __init__(self, builder: ContainerBuilderBase):
-            pass
     class Inputs:
         def __init__(self, builder: ContainerBuilderBase):
             self.layerSample = builder.build_FunctionInput("LayerSample", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR)

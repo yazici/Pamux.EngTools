@@ -32,35 +32,55 @@ class MF_LandscapeBaseMaterial:
             CurrentNodePos.x = 0
 
             self.rotation = builder.build_FunctionInput("Rotation", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR, Constant(0.0))
+            self.rotation.add_rt()
+
             self.bombDoRotationVariation = builder.build_FunctionInput("BombDoRotationVariation", unreal.FunctionInputType.FUNCTION_INPUT_STATIC_BOOL, StaticBool(False))
+            self.bombDoRotationVariation.add_rt()
+
             self.bombCellScale = builder.build_FunctionInput("BombCellScale", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR, Constant(1.0))
+            self.bombCellScale.add_rt()
+
             self.bombPatternScale = builder.build_FunctionInput("BombPatternScale", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR, Constant(1.0))
+            self.bombPatternScale.add_rt()
+
             self.bombRandomOffset = builder.build_FunctionInput("BombRandomOffset", unreal.FunctionInputType.FUNCTION_INPUT_SCALAR, Constant(0.0))
+            self.bombRandomOffset.add_rt()
+
             self.displacement = builder.build_FunctionInput("Displacement", unreal.FunctionInputType.FUNCTION_INPUT_TEXTURE2D, TextureBase())
+            self.displacement.add_rt()
+
             self.doTextureBomb = FunctionInputFactory.create("DoTextureBomb", unreal.FunctionInputType.FUNCTION_INPUT_STATIC_BOOL, StaticBool(True))
-            
+            self.doTextureBomb.add_rt()
+
             CurrentNodePos.y += NodePos.DeltaY
             CurrentNodePos.y -= NodePos.DeltaY
             CurrentNodePos.x += NodePos.DeltaX/4*3
+
             self.qualitySwitch = QualitySwitch()
+            self.qualitySwitch.add_rt()
+
             self.qualitySwitch.default.comesFrom(self.doTextureBomb)
             self.qualitySwitch.low.comesFrom(StaticBool(False))
             
             #MEL.connect_material_expressions(StaticBool(False).output.materialExpression.unrealAsset, "", qualitySwitch.unrealAsset, "Low")
 
-            CurrentNodePos.x += NodePos.DeltaX/2
-            NamedRerouteDeclaration("rtDoTextureBomb", self.qualitySwitch)
-            self.doTextureBomb.rt = self.qualitySwitch.rt
-
             CurrentNodePos.y += NodePos.DeltaY
             CurrentNodePos.x = 0
             
             self.uvParams = builder.build_FunctionInput("UVParams", unreal.FunctionInputType.FUNCTION_INPUT_VECTOR4, unreal.LinearColor(1.0, 1.0, 0.5, 0.5))
+            self.uvParams.add_rt()
 
             self.albedo = builder.build_FunctionInput("Albedo", unreal.FunctionInputType.FUNCTION_INPUT_TEXTURE2D, TextureObject())
+            self.albedo.add_rt()
+
             self.colorOverlay = builder.build_FunctionInput("ColorOverlay", unreal.FunctionInputType.FUNCTION_INPUT_VECTOR3, unreal.LinearColor(1.0, 1.0, 1.0))
+            self.colorOverlay.add_rt()
+
             self.roughness = builder.build_FunctionInput("Roughness", unreal.FunctionInputType.FUNCTION_INPUT_TEXTURE2D, TextureObject())
+            self.roughness.add_rt()
+
             self.normal = builder.build_FunctionInput("Normal", unreal.FunctionInputType.FUNCTION_INPUT_TEXTURE2D, TextureObject(unreal.MaterialSamplerType.SAMPLERTYPE_NORMAL))
+            self.normal.add_rt()
 
     class Builder(MaterialLayerFunctionBuilderBase):
         def __init__(self):
@@ -231,9 +251,6 @@ class MF_LandscapeBaseMaterial:
             # self.makeMaterialAttributes.opacity.comesFrom(self.add)
             
             self.breakMaterialAttributes = BreakMaterialAttributes(self.makeMaterialAttributes)
-
-
-            
 
             # call_CustomRotator.
             # uvParamsBA, 

@@ -2,6 +2,9 @@ from unreal import LinearColor, FunctionInputType
 
 from typing import NewType
 #from typing import TypeAlias
+from functools import wraps
+import functools
+from typing import Any, Callable
 
 SocketNames = list[str]
 
@@ -33,6 +36,20 @@ class parameter_name_prefix:
     def __call__(self, func):
         func._parameter_name_prefix = self.prefix
         return func
+
+class class_builder:
+    def __init__(self, class_name):
+        self.class_name = class_name
+
+    def __call__(self, original_function):
+        def wrapper(*args, **kwargs):
+            _self = args[0]
+            _self.begin_class(self.class_name)
+            result = original_function(*args, **kwargs)
+            _self.end_class()
+            return result
+        return wrapper
+
 
 class VecFBase:
     def __init__(self):

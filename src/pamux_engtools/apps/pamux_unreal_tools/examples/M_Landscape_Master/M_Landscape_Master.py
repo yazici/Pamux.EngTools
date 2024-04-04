@@ -18,7 +18,7 @@ for module in reloads:
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 
 from pamux_unreal_tools.builders.material_builder import MaterialBuilder
-from pamux_unreal_tools.base.container_builder_base import ContainerBuilderBase
+from pamux_unreal_tools.base.material_expression.material_expression_container_builder_base import MaterialExpressionContainerBuilderBase
 
 from pamux_unreal_tools.examples.M_Landscape_Master.params import *
 from pamux_unreal_tools.examples.M_Landscape_Master.globals import *
@@ -38,15 +38,15 @@ from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MLF_Fores
 class M_Landscape_Master:
 
     class Inputs:
-        def __init__(self, builder: ContainerBuilderBase) -> None:
+        def __init__(self, builder: MaterialExpressionContainerBuilderBase) -> None:
             pass
 
     class Outputs:
-        def __init__(self, builder: ContainerBuilderBase) -> None:
+        def __init__(self, builder: MaterialExpressionContainerBuilderBase) -> None:
             pass
              
     class Dependencies:
-        def __init__(self, builder: ContainerBuilderBase) -> None:
+        def __init__(self, builder: MaterialExpressionContainerBuilderBase) -> None:
             self.SCurve = builder.load_MF("/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment/SCurve", [ "In", "Power" ], [ "Result" ])
 
             self.MF_LandscapeBaseMaterial = MF_LandscapeBaseMaterial.Builder().get()
@@ -199,4 +199,5 @@ class M_Landscape_Master:
 #call_SCurve.In.comesFrom(baseColor)
 #call_SCurve.Power.comesFrom(Params.specularContrast)
 
-M_Landscape_Master.Builder("/Game/Materials/Pamux/M_Landscape_Master").get(purge=True)
+if __name__=="__main__":
+    M_Landscape_Master.Builder("/Game/Materials/Pamux/M_Landscape_Master").get(purge=True)

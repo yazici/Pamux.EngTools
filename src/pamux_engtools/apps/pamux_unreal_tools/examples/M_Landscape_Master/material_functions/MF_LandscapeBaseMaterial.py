@@ -2,27 +2,27 @@ import unreal
 from pathlib import Path
 import sys
 
-sys.path.append(str(Path(__file__).parent.parent.parent.parent.parent.resolve()))
+# sys.path.append(str(Path(__file__).parent.parent.parent.parent.parent.resolve()))
 
-from importlib import * 
+# from importlib import * 
 
-reloads = []
-for  k, v in sys.modules.items():
-    if k.startswith("pamux_unreal_tools"):
-        reloads.append(v)
+# reloads = []
+# for  k, v in sys.modules.items():
+#     if k.startswith("pamux_unreal_tools"):
+#         reloads.append(v)
 
-for module in reloads:
-    reload(module)
+# for module in reloads:
+#     reload(module)
 
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.utils.types import *
-from pamux_unreal_tools.base.container_builder_base import ContainerBuilderBase
+from pamux_unreal_tools.base.material_expression.material_expression_container_builder_base import MaterialExpressionContainerBuilderBase
 
 from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MF_TextureCellBombing_Landscape import MF_TextureCellBombing_Landscape
 
-from pamux_unreal_tools.base.material_function_builder_base import MaterialLayerFunctionBuilderBase
+from pamux_unreal_tools.builders.material_function_builder import MaterialLayerFunctionBuilder
 from pamux_unreal_tools.utils.node_pos import NodePos, CurrentNodePos
-from pamux_unreal_tools.base.material_function_outputs_base import MaterialFunctionOutputs
+from pamux_unreal_tools.base.material_function.material_function_outputs_base import MaterialFunctionOutputs
 
 from pamux_unreal_tools.interfaces.IBlend_Overlay import IBlend_Overlay
 from pamux_unreal_tools.interfaces.ICheapContrast_RGB import ICheapContrast_RGB
@@ -36,7 +36,7 @@ from pamux_unreal_tools.examples.M_Landscape_Master.interfaces.ITextureCellBombi
 
 class MF_LandscapeBaseMaterial:
     class Dependencies:
-        def __init__(self, builder: ContainerBuilderBase) -> None:
+        def __init__(self, builder: MaterialExpressionContainerBuilderBase) -> None:
             self.blend_Overlay                      = builder.load_MF("/Engine/Functions/Engine_MaterialFunctions03/Blends/Blend_Overlay",
                                                                       [ "Base", "Blend" ],
                                                                       [ "Result" ])
@@ -66,7 +66,7 @@ class MF_LandscapeBaseMaterial:
                                                                       [])
 
     class Inputs:
-        def __init__(self, builder: ContainerBuilderBase):
+        def __init__(self, builder: MaterialExpressionContainerBuilderBase):
             CurrentNodePos.x = 0
 
             self.albedo                     = builder.build_FunctionInput("Albedo",                         0,      TextureObject())
@@ -91,10 +91,9 @@ class MF_LandscapeBaseMaterial:
             self.opacityAdd                 = builder.build_FunctionInput("OpacityAdd",                     19,     0.0)
             self.opacityContrast            = builder.build_FunctionInput("OpacityContrast",                20,     1.0)
 
-    class Builder(MaterialLayerFunctionBuilderBase):
+    class Builder(MaterialLayerFunctionBuilder):
         def __init__(self):
             super().__init__(
-                ILandscapeBaseMaterial,
                 "/Game/Materials/Pamux/Landscape/Functions/Layers/MF_LandscapeBaseMaterial",
                 MF_LandscapeBaseMaterial.Dependencies,
                 MF_LandscapeBaseMaterial.Inputs,

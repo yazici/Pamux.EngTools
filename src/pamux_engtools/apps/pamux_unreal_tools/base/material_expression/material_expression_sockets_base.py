@@ -1,7 +1,7 @@
 import unreal
 
-from pamux_unreal_tools.base.material_expression_value_base import MaterialExpressionValueBase
-from pamux_unreal_tools.base.material_expression_base_base import MaterialExpressionBaseBase
+from pamux_unreal_tools.base.material_expression.material_expression_value_base import MaterialExpressionValueBase
+from pamux_unreal_tools.base.material_expression.material_expression_base_base import MaterialExpressionBaseBase
 
 class Socket(MaterialExpressionValueBase):
     def __init__(self, material_expression: MaterialExpressionBaseBase, name: str, type, is_output: bool = False):

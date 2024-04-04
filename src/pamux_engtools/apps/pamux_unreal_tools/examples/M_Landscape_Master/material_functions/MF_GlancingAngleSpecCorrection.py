@@ -1,33 +1,33 @@
 import unreal
 from pathlib import Path
 import sys
-import os
-import shutil
+# import os
+# import shutil
 
-sys.path.append(str(Path(__file__).parent.parent.parent.parent.parent.resolve()))
+# sys.path.append(str(Path(__file__).parent.parent.parent.parent.parent.resolve()))
 
-from importlib import * 
+# from importlib import * 
 
-reloads = []
-for  k, v in sys.modules.items():
-    if k.startswith("pamux_unreal_tools"):
-        reloads.append(v)
+# reloads = []
+# for  k, v in sys.modules.items():
+#     if k.startswith("pamux_unreal_tools"):
+#         reloads.append(v)
 
-for module in reloads:
-    reload(module)
+# for module in reloads:
+#     reload(module)
 
 from pamux_unreal_tools.builders.material_function_builder import MaterialFunctionBuilder
-from pamux_unreal_tools.base.container_builder_base import ContainerBuilderBase
+from pamux_unreal_tools.base.material_expression.material_expression_container_builder_base import MaterialExpressionContainerBuilderBase
 
 from pamux_unreal_tools.generated.material_expression_wrappers import *
-from pamux_unreal_tools.base.material_function_dependencies_base import MaterialFunctionDependenciesBase
-from pamux_unreal_tools.base.material_function_outputs_base import MaterialFunctionOutputs
+from pamux_unreal_tools.base.material_function.material_function_dependencies_base import MaterialFunctionDependenciesBase
+from pamux_unreal_tools.base.material_function.material_function_outputs_base import MaterialFunctionOutputs
 from pamux_unreal_tools.examples.M_Landscape_Master.interfaces.IGlancingAngleSpecCorrection import IGlancingAngleSpecCorrection
 from pamux_unreal_tools.factories.material_function_factory import MaterialFunctionFactory
 
 class MF_GlancingAngleSpecCorrection:
     class Inputs:
-        def __init__(self, builder: ContainerBuilderBase):
+        def __init__(self, builder: MaterialExpressionContainerBuilderBase):
             self.materialAttributes = builder.build_FunctionInput("In", 0,  unreal.FunctionInputType.FUNCTION_INPUT_MATERIAL_ATTRIBUTES, False)
 
             self.pixelDepth = PixelDepth()

@@ -3,28 +3,28 @@ from pathlib import Path
 import sys
 from importlib import * 
 
-sys.path.append(str(Path(__file__).parent.parent.parent.parent.parent.resolve()))
+# sys.path.append(str(Path(__file__).parent.parent.parent.parent.parent.resolve()))
 
-reloads = []
-for  k, v in sys.modules.items():
-    if k.startswith("pamux_unreal_tools"):
-        reloads.append(v)
+# reloads = []
+# for  k, v in sys.modules.items():
+#     if k.startswith("pamux_unreal_tools"):
+#         reloads.append(v)
 
-for module in reloads:
-    reload(module)
+# for module in reloads:
+#     reload(module)
 
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 
 from pamux_unreal_tools.impl.material_function_impl import MaterialFunctionImpl
-from pamux_unreal_tools.base.material_function_builder_base import MaterialLayerFunctionBuilderBase
-from pamux_unreal_tools.base.material_function_dependencies_base import MaterialFunctionDependenciesBase
-from pamux_unreal_tools.base.material_function_outputs_base import MaterialFunctionOutputs
-from pamux_unreal_tools.base.container_builder_base import ContainerBuilderBase
+from pamux_unreal_tools.builders.material_function_builder import MaterialLayerFunctionBuilder
+from pamux_unreal_tools.base.material_function.material_function_dependencies_base import MaterialFunctionDependenciesBase
+from pamux_unreal_tools.base.material_function.material_function_outputs_base import MaterialFunctionOutputs
+from pamux_unreal_tools.base.material_expression.material_expression_container_builder_base import MaterialExpressionContainerBuilderBase
 from pamux_unreal_tools.examples.M_Landscape_Master.interfaces.ILayerX import ILayerX
 
 class MLF_LayerX:
     class Inputs:
-        def __init__(self, builder: ContainerBuilderBase):
+        def __init__(self, builder: MaterialExpressionContainerBuilderBase):
             self.Albedo = None
             self.ColorOverlay = None
             self.ColorOverlay_Intensity = None
@@ -58,7 +58,7 @@ class MLF_LayerX:
             self.albedo = TextureObjectParameter(f"{builder.layer_name}Albedo")
             self.roughness = ScalarParameter("Roughness", 0.5)
 
-    class Builder(MaterialLayerFunctionBuilderBase):
+    class Builder(MaterialLayerFunctionBuilder):
         def __init__(self, layer_name: str, MF_LandscapeBaseMaterial: MaterialFunctionImpl):
             super().__init__(
                 ILayerX,

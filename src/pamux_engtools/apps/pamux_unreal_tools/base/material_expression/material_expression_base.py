@@ -1,8 +1,8 @@
 import unreal
 
-from pamux_unreal_tools.base.material_expression_editor_property_base import MaterialExpressionEditorPropertyBase
-from pamux_unreal_tools.base.material_expression_sockets_base import InSocket, OutSocket
-from pamux_unreal_tools.base.material_expression_base_base import MaterialExpressionBaseBase
+from pamux_unreal_tools.base.material_expression.material_expression_editor_property_base import MaterialExpressionEditorPropertyBase
+from pamux_unreal_tools.base.material_expression.material_expression_sockets_base import InSocket, OutSocket
+from pamux_unreal_tools.base.material_expression.material_expression_base_base import MaterialExpressionBaseBase
 
 from pamux_unreal_tools.utils.build_stack import BuildStack
 from pamux_unreal_tools.utils.node_pos import NodePos

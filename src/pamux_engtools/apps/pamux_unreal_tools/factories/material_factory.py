@@ -1,8 +1,9 @@
 import unreal
 
-from pamux_unreal_tools.factories.material_expression_container_factory import MaterialExpressionContainerFactory
 from pamux_unreal_tools.impl.material_impl import MaterialImpl
 
-class MaterialFactory(MaterialExpressionContainerFactory):
+from pamux_unreal_tools.base.material.material_factory_base import MaterialFactoryBase
+
+class MaterialFactory(MaterialFactoryBase):
     def __init__(self):
         super().__init__(unreal.Material, unreal.MaterialFactoryNew(), MaterialImpl)

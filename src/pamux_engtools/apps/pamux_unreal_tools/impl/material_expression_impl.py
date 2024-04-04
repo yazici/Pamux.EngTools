@@ -1,6 +1,6 @@
 import unreal
 
-from pamux_unreal_tools.base.material_expression_base import MaterialExpressionBase
+from pamux_unreal_tools.base.material_expression.material_expression_base import MaterialExpressionBase
 
 from pamux_unreal_tools.utils.node_pos import NodePos
 from pamux_unreal_tools.impl.in_socket_impl import InSocketImpl

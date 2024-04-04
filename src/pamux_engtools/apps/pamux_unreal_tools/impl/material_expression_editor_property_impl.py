@@ -1,5 +1,5 @@
 from pamux_unreal_tools.base.material_expression_editor_property_base import MaterialExpressionEditorPropertyBase
-from pamux_unreal_tools.base.material_expression_base_base import MaterialExpressionBaseBase
+from pamux_unreal_tools.base.material_expression.material_expression_base_base import MaterialExpressionBaseBase
 
 class MaterialExpressionEditorPropertyImpl(MaterialExpressionEditorPropertyBase):
     def __init__(self, material_expression: MaterialExpressionBaseBase, name: str, type: str):

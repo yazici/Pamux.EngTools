@@ -16,14 +16,14 @@ for module in reloads:
 
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 
-from pamux_unreal_tools.base.material_function_dependencies_base import MaterialFunctionDependenciesBase
+from pamux_unreal_tools.base.material_function.material_function_dependencies_base import MaterialFunctionDependenciesBase
 from pamux_unreal_tools.builders.material_builder import MaterialBuilder
-from pamux_unreal_tools.base.material_function_outputs_base import MaterialFunctionOutputs
-from pamux_unreal_tools.base.container_builder_base import ContainerBuilderBase
+from pamux_unreal_tools.base.material_function.material_function_outputs_base import MaterialFunctionOutputs
+from pamux_unreal_tools.base.material_expression.material_expression_container_builder_base import MaterialExpressionContainerBuilderBase
 
 class M_SimpleMaterial:
     class Inputs:
-        def __init__(self, builder: ContainerBuilderBase):
+        def __init__(self, builder: MaterialExpressionContainerBuilderBase):
             self.colorParameter = VectorParameter("Color", unreal.LinearColor(0.259027, 0.320382, 0.383775, 1.0))
             self.constHalf = Constant(0.5)
             self.roughness = ScalarParameter("Roughness", 0.5)

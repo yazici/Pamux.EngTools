@@ -1,25 +1,24 @@
 from pathlib import Path
 import sys
 
-sys.path.append(str(Path(__file__).parent.parent.parent.parent.parent.resolve()))
+# sys.path.append(str(Path(__file__).parent.parent.parent.parent.parent.resolve()))
 
-from importlib import * 
+# from importlib import * 
 
-reloads = []
-for  k, v in sys.modules.items():
-    if k.startswith("pamux_unreal_tools"):
-        reloads.append(v)
+# reloads = []
+# for  k, v in sys.modules.items():
+#     if k.startswith("pamux_unreal_tools"):
+#         reloads.append(v)
 
-for module in reloads:
-    reload(module)
-
+# for module in reloads:
+#     reload(module)
 
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 
 from pamux_unreal_tools.builders.material_function_builder import MaterialFunctionBuilder
-from pamux_unreal_tools.base.container_builder_base import ContainerBuilderBase
+from pamux_unreal_tools.base.material_expression.material_expression_container_builder_base import MaterialExpressionContainerBuilderBase
 
-from pamux_unreal_tools.base.material_function_outputs_base import MaterialFunctionOutputs
+from pamux_unreal_tools.base.material_function.material_function_outputs_base import MaterialFunctionOutputs
 from pamux_unreal_tools.interfaces.IRotateAboutWorldAxis_cheap import IRotateAboutWorldAxis_cheap
 
 from pamux_unreal_tools.examples.M_Landscape_Master.interfaces.ITextureCellBombing_Landscape import ITextureCellBombing_Landscape
@@ -28,14 +27,14 @@ from pamux_unreal_tools.factories.material_function_factory import MaterialFunct
 
 class MF_TextureCellBombing_Landscape:
     class Dependencies:
-        def __init__(self, builder: ContainerBuilderBase) -> None:
+        def __init__(self, builder: MaterialExpressionContainerBuilderBase) -> None:
             self.rotateAboutWorldAxis_cheap = builder.load_MF(
                 "/Engine/Functions/Engine_MaterialFunctions02/WorldPositionOffset/RotateAboutWorldAxis_cheap",
                 [ "Rotation Amount", "PivotPoint", "WorldPosition" ], [ "X-Axis", "Y-Axis", "Z-Axis" ])
 
 
     class Inputs:
-        def __init__(self, builder: ContainerBuilderBase):
+        def __init__(self, builder: MaterialExpressionContainerBuilderBase):
             self.texture                    = builder.build_FunctionInput("Texture",                    0, TextureObject(unreal.MaterialSamplerType.SAMPLERTYPE_COLOR, None), False)
             self.UVs                        = builder.build_FunctionInput("UVs",                        1, TextureCoordinate(1.0, 1.0))
 

@@ -1,7 +1,6 @@
 
-from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.utils.interface_types import *
-from pamux_unreal_tools.base.texture_sample_set import TextureSampleSet
+from pamux_unreal_tools.utils.texture_sample_set import TextureSampleSet
 
 @material_function_interface("{asset_path_root}/Functions/MF_Wetness")
 def IWetness(

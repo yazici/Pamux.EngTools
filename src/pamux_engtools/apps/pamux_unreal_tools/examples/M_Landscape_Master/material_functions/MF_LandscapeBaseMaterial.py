@@ -91,7 +91,6 @@ class MF_LandscapeBaseMaterial:
             self.opacityAdd                 = builder.build_FunctionInput("OpacityAdd",                     19,     0.0)
             self.opacityContrast            = builder.build_FunctionInput("OpacityContrast",                20,     1.0)
 
-
     class Builder(MaterialLayerFunctionBuilderBase):
         def __init__(self):
             super().__init__(

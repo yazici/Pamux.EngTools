@@ -49,7 +49,6 @@ class MF_TextureCellBombing_Landscape:
     class Builder(MaterialFunctionBuilder):
         def __init__(self):
             super().__init__(
-                MaterialFunctionFactory(),
                 "/Game/Materials/Pamux/Landscape/Functions/MF_TextureCellBombing_Landscape",
                 MF_TextureCellBombing_Landscape.Dependencies,
                 MF_TextureCellBombing_Landscape.Inputs,

@@ -4,30 +4,25 @@ import shutil
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.utils.types import *
 
-from pamux_engtools.apps.pamux_unreal_tools.base.material_function.material_function_base import MaterialFunctionBase
+from pamux_unreal_tools.base.material_function.material_function_base import MaterialFunctionBase
 
 from pamux_unreal_tools.factories.material_expression_factories import FunctionInputFactory
 
 from pamux_unreal_tools.utils.build_stack import BuildStack
 from pamux_unreal_tools.utils.node_pos import NodePos, CurrentNodePos
 from pamux_unreal_tools.utils.texture_sample_set import TextureSampleSet
-# from pamux_unreal_tools.base.interface_implementer import InterfaceImplementer
+from pamux_unreal_tools.base.material_function.material_function_factory_base import MaterialFunctionFactoryBase
+from pamux_unreal_tools.base.material_expression.material_expression_container_factory_base import MaterialExpressionContainerFactoryBase
 
 class MaterialExpressionContainerBuilderBase:
-    # class Nodes:
-    #     def __init__(self, builder) -> None:
-    #         self.builder = builder
-
     def __init__(self,
                  # interface,
-                 material_function_factory,
-                 container_factory,
+                 material_function_factory: MaterialFunctionFactoryBase,
+                 container_factory: MaterialExpressionContainerFactoryBase,
                  container_path: str,
                  dependencies_class = None,
                  inputs_class = None,
                  outputs_class = None):
-
-        # self.interface_implementer = InterfaceImplementer(self, interface)
 
         self.material_function_factory = material_function_factory
         self.container_factory = container_factory
@@ -102,19 +97,12 @@ class MaterialExpressionContainerBuilderBase:
             
         result = self.__loadAndCleanOrCreate(virtual_inputs, virtual_outputs)
 
-        #self.dependencies = ContainerBuilderBase.Nodes(self)
-        #self.inputs = ContainerBuilderBase.Nodes(self)
-        #self.outputs = ContainerBuilderBase.Nodes(self)
-
-        # self.interface_implementer.implement_dependencies_object(self.dependencies)
         self.dependencies = self.dependencies_class(self)
 
         CurrentNodePos.goto_inputs()
-        # self.interface_implementer.implement_inputs_object(self.inputs)
         self.inputs = self.inputs_class(self)
 
         CurrentNodePos.goto_outputs()
-        # self.interface_implementer.implement_outputs_object(self.outputs)
         self.outputs = self.outputs_class(self)
 
         CurrentNodePos.goto_process()

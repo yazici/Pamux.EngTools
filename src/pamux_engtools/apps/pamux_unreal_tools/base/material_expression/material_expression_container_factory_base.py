@@ -6,7 +6,7 @@ AT = ATH.get_asset_tools()
 from pamux_unreal_tools.generated.material_expression_wrappers import NamedRerouteDeclaration
 
 from pamux_unreal_tools.base.material.material_base import MaterialBase
-from pamux_engtools.apps.pamux_unreal_tools.base.material_function.material_function_base import MaterialFunctionBase
+from pamux_unreal_tools.base.material_function.material_function_base import MaterialFunctionBase
 from pamux_unreal_tools.base.material_expression.material_expression_container_base import MaterialExpressionContainerBase
 
 from pamux_unreal_tools.utils.build_stack import BuildStack

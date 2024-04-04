@@ -2,7 +2,7 @@
 import unreal
 MEL = unreal.MaterialEditingLibrary
 
-from pamux_unreal_tools.base.material_expression_sockets_base import InSocket, OutSocket
+from pamux_unreal_tools.base.material_expression.material_expression_sockets_base import InSocket, OutSocket
 from pamux_unreal_tools.base.material_expression.material_expression_base_base import MaterialExpressionBaseBase
 
 class InSocketImpl(InSocket):

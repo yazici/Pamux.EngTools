@@ -24,6 +24,16 @@ from pamux_unreal_tools.base.material_function_builder_base import MaterialLayer
 from pamux_unreal_tools.utils.node_pos import NodePos, CurrentNodePos
 from pamux_unreal_tools.base.material_function_outputs_base import MaterialFunctionOutputs
 
+from pamux_unreal_tools.interfaces.IBlend_Overlay import IBlend_Overlay
+from pamux_unreal_tools.interfaces.ICheapContrast_RGB import ICheapContrast_RGB
+from pamux_unreal_tools.interfaces.IHeightLerp import IHeightLerp
+from pamux_unreal_tools.interfaces.IMultiplyAdd import IMultiplyAdd
+from pamux_unreal_tools.interfaces.IBreakOutFloat4Components import IBreakOutFloat4Components
+from pamux_unreal_tools.interfaces.ICustomRotator import ICustomRotator
+
+from pamux_unreal_tools.examples.M_Landscape_Master.interfaces.ILandscapeBaseMaterial import ILandscapeBaseMaterial
+from pamux_unreal_tools.examples.M_Landscape_Master.interfaces.ITextureCellBombing_Landscape import ITextureCellBombing_Landscape
+
 class MF_LandscapeBaseMaterial:
     class Dependencies:
         def __init__(self, builder: ContainerBuilderBase) -> None:
@@ -85,6 +95,7 @@ class MF_LandscapeBaseMaterial:
     class Builder(MaterialLayerFunctionBuilderBase):
         def __init__(self):
             super().__init__(
+                ILandscapeBaseMaterial,
                 "/Game/Materials/Pamux/Landscape/Functions/Layers/MF_LandscapeBaseMaterial",
                 MF_LandscapeBaseMaterial.Dependencies,
                 MF_LandscapeBaseMaterial.Inputs,

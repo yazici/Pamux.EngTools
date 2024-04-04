@@ -20,6 +20,10 @@ from pamux_unreal_tools.base.material_function_builder_base import MaterialFunct
 from pamux_unreal_tools.base.container_builder_base import ContainerBuilderBase
 
 from pamux_unreal_tools.base.material_function_outputs_base import MaterialFunctionOutputs
+from pamux_unreal_tools.interfaces.IRotateAboutWorldAxis_cheap import IRotateAboutWorldAxis_cheap
+
+from pamux_unreal_tools.examples.M_Landscape_Master.interfaces.ITextureCellBombing_Landscape import ITextureCellBombing_Landscape
+
 
 class MF_TextureCellBombing_Landscape:
     class Dependencies:
@@ -45,6 +49,7 @@ class MF_TextureCellBombing_Landscape:
     class Builder(MaterialFunctionBuilderBase):
         def __init__(self):
             super().__init__(
+                ITextureCellBombing_Landscape,
                 "/Game/Materials/Pamux/Landscape/Functions/MF_TextureCellBombing_Landscape",
                 MF_TextureCellBombing_Landscape.Dependencies,
                 MF_TextureCellBombing_Landscape.Inputs,

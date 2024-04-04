@@ -13,6 +13,10 @@ class PyCodeGenerator:
             for line in self.lines:
                 py_file.write(f"\n{line}")
 
+    def print_code(self) -> None:
+        for line in self.lines:
+            print(line)
+
     def indent(self) -> None:
         self.indentation += self.indentation_amount
 

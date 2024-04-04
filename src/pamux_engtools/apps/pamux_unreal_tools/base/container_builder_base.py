@@ -13,16 +13,20 @@ from pamux_unreal_tools.factories.material_expression_factories import FunctionI
 from pamux_unreal_tools.utils.build_stack import BuildStack
 from pamux_unreal_tools.utils.node_pos import NodePos, CurrentNodePos
 from pamux_unreal_tools.base.texture_sample_set import TextureSampleSet
+from pamux_unreal_tools.base.interface_implementer import InterfaceImplementer
 
 class ContainerBuilderBase:
     
     def __init__(self,
+                 interface,
                  container_factory: MaterialExpressionContainerFactory,
                  params_factory,
                  container_path: str,
                  dependencies_class = None,
                  inputs_class = None,
                  outputs_class = None):
+
+        self.interface_implementer = InterfaceImplementer(interface)
 
         self.container_factory = container_factory
         self.params_factory = params_factory
@@ -104,6 +108,7 @@ class ContainerBuilderBase:
             
         result = self.__loadAndCleanOrCreate(virtual_inputs, virtual_outputs)
 
+        self.dependencies = self.interface_implementer.implement_dependencies_object()
         self.dependencies = self.dependencies_class(self)
 
         CurrentNodePos.goto_inputs()
@@ -139,3 +144,6 @@ class ContainerBuilderBase:
             return "zAxis"
         _name = name.replace(" ", "")
         return _name[0].lower() + _name[1:]
+
+    def __create_interface_dependencies_object(self):
+        print(self.interface)

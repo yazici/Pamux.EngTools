@@ -23,12 +23,9 @@ from pamux_unreal_tools.base.material_function_dependencies_base import Material
 from pamux_unreal_tools.base.material_function_outputs_base import MaterialFunctionOutputs
 from pamux_unreal_tools.base.container_builder_base import ContainerBuilderBase
 from pamux_unreal_tools.impl.material_function_impl import MaterialFunctionImpl
+from pamux_unreal_tools.examples.M_Landscape_Master.interfaces.IForestGround import IForestGround
 
 class MLF_ForestGround:
-    class Dependencies:
-        def __init__(self, builder: ContainerBuilderBase) -> None:
-             pass
-
     class Inputs:
         def __init__(self, builder: ContainerBuilderBase):
             pass
@@ -36,6 +33,7 @@ class MLF_ForestGround:
     class Builder(MaterialLayerFunctionBuilderBase):
         def __init__(self, MF_LandscapeBaseMaterial: MaterialFunctionImpl):
             super().__init__(
+                IForestGround,
                 "/Game/Materials/Pamux/Landscape/Functions/Layers/MLF_ForestGround",
                 MaterialFunctionDependenciesBase,
                 MLF_ForestGround.Inputs,

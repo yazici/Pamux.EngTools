@@ -22,12 +22,9 @@ from pamux_unreal_tools.base.material_function_dependencies_base import Material
 from pamux_unreal_tools.utils.node_pos import NodePos, CurrentNodePos
 from pamux_unreal_tools.factories.material_expression_factories import MakeMaterialAttributesFactory
 from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.base.wetness_base import WetnessBuilderBase
+from pamux_unreal_tools.examples.M_Landscape_Master.interfaces.IPuddles import IPuddles
 
 class MF_Puddles:
-    class Dependencies:
-        def __init__(self, builder: ContainerBuilderBase) -> None:
-             pass
-
     class Inputs:
         def __init__(self, builder: ContainerBuilderBase):
             self.materialAttributes = builder.build_FunctionInput("MaterialAttributes", 0, self.textureSampleSet, False)
@@ -100,6 +97,7 @@ class MF_Puddles:
     class Builder(WetnessBuilderBase):
         def __init__(self):
             super().__init__(
+                IPuddles,
                 "/Game/Materials/Pamux/Landscape/Functions/MF_Puddles",
                 MaterialFunctionDependenciesBase,
                 MF_Puddles.Inputs,

@@ -20,6 +20,7 @@ from pamux_unreal_tools.base.material_function_builder_base import MaterialLayer
 from pamux_unreal_tools.base.material_function_dependencies_base import MaterialFunctionDependenciesBase
 from pamux_unreal_tools.base.material_function_outputs_base import MaterialFunctionOutputs
 from pamux_unreal_tools.base.container_builder_base import ContainerBuilderBase
+from pamux_unreal_tools.examples.M_Landscape_Master.interfaces.ILayerX import ILayerX
 
 class MLF_LayerX:
     class Inputs:
@@ -60,6 +61,7 @@ class MLF_LayerX:
     class Builder(MaterialLayerFunctionBuilderBase):
         def __init__(self, layer_name: str, MF_LandscapeBaseMaterial: MaterialFunctionImpl):
             super().__init__(
+                ILayerX,
                 f"/Game/Materials/Pamux/Landscape/Functions/Layers/MLF_{layer_name}",
                 MaterialFunctionDependenciesBase,
                 MLF_LayerX.Inputs,

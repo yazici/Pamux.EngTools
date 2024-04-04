@@ -20,6 +20,7 @@ from pamux_unreal_tools.base.container_builder_base import ContainerBuilderBase
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.base.material_function_dependencies_base import MaterialFunctionDependenciesBase
 from pamux_unreal_tools.base.material_function_outputs_base import MaterialFunctionOutputs
+from pamux_unreal_tools.examples.M_Landscape_Master.interfaces.IFoliageMask import IFoliageMask
 
 class MF_FoliageMask:
     class Inputs:
@@ -33,6 +34,7 @@ class MF_FoliageMask:
     class Builder(MaterialFunctionBuilderBase):
         def __init__(self):
             super().__init__(
+                IFoliageMask,
                 "/Game/Materials/Pamux/Landscape/Functions/MF_FoliageMask",
                 MaterialFunctionDependenciesBase,
                 MF_FoliageMask.Inputs,

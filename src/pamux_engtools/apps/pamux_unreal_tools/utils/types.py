@@ -17,12 +17,22 @@ TFloatParam = float
 
 
 # https://realpython.com/primer-on-python-decorators/
+import inspect
+class material_function_interface:
+    def __init__(self, asset_path):
+        self.asset_path = asset_path
 
-def material_function_interface(path):
-    pass
+    def __call__(self, func):
+        func._asset_path = self.asset_path
+        return func
 
-def parameter_name_prefix(prefix):
-    pass
+class parameter_name_prefix:
+    def __init__(self, prefix):
+        self.prefix = prefix
+
+    def __call__(self, func):
+        func._parameter_name_prefix = self.prefix
+        return func
 
 class VecFBase:
     def __init__(self):

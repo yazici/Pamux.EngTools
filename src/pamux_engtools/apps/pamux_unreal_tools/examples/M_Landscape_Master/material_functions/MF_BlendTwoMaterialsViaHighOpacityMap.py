@@ -23,6 +23,9 @@ from pamux_unreal_tools.base.material_function_outputs_base import MaterialFunct
 
 from pamux_unreal_tools.base.container_builder_base import ContainerBuilderBase
 
+from pamux_unreal_tools.interfaces.IHeightLerpWithTwoHeightMaps import IHeightLerpWithTwoHeightMaps
+from pamux_unreal_tools.examples.M_Landscape_Master.interfaces.IBlendTwoMaterialsViaHighOpacityMap import IBlendTwoMaterialsViaHighOpacityMap
+
 class MF_BlendTwoMaterialsViaHighOpacityMap:
     class Dependencies:
         def __init__(self, builder: ContainerBuilderBase) -> None:
@@ -41,6 +44,7 @@ class MF_BlendTwoMaterialsViaHighOpacityMap:
     class Builder(MaterialFunctionBuilderBase):
         def __init__(self):
             super().__init__(
+                IBlendTwoMaterialsViaHighOpacityMap,
                 "/Game/Materials/Pamux/Landscape/Functions/MF_BlendTwoMaterialsViaHighOpacityMap",
                 MF_BlendTwoMaterialsViaHighOpacityMap.Dependencies,
                 MF_BlendTwoMaterialsViaHighOpacityMap.Inputs,

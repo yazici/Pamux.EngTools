@@ -23,7 +23,6 @@ import inspect
 from pamux_unreal_tools.examples.M_Landscape_Master.interfaces.IBlendTwoMaterialsViaHighOpacityMap import IBlendTwoMaterialsViaHighOpacityMap
 from pamux_unreal_tools.examples.M_Landscape_Master.interfaces.IForestGround import IForestGround
 
-
 from pamux_unreal_tools.tools.py_code_generator.main import *
 from pamux_unreal_tools.tools.py_code_generator.method_params import *
 from pamux_unreal_tools.utils.types import *
@@ -32,8 +31,18 @@ import functools
 from typing import Any, Callable
 
 type_to_function_output_map = { "SomeType": "varName" }
+
+class DummyBuilder:
+    def __init__(self) -> None:
+        pass
+
+class Nodes:
+    def __init__(self, builder) -> None:
+        self.builder = builder
+
 class InterfaceImplementer:
-    def __init__(self, interface):
+    def __init__(self, builder, interface):
+        self.builder = builder
         self.interface = interface
         self.function_name = None
         self.function_parameters = []
@@ -91,18 +100,22 @@ class InterfaceImplementer:
         elif hasattr(self.interface, "_parameter_name_prefix"):
             self.parameter_name_prefix = self.interface._parameter_name_prefix
 
-    @class_builder("Dependencies")
-    def implement_dependencies_object(self):
-        self.pyGen.append_line(f"self.{self.field_name} = builder.load_MF(\"{self.asset_path}\", [], [])")
+    def implement_dependencies_object(self, node_container):
+        line = f"node_container.{self.field_name} = builder.load_MF(\"{self.asset_path}\", [{self.function_inputs}], [{self.function_outputs}])"
 
+    
 
-    @class_builder("Inputs")
-    def implement_inputs_object(self):
-        self.pyGen.append_line(f"self.{self.field_name} = builder.load_MF(\"{self.asset_path}\", [{self.function_inputs}], [{self.function_outputs}])")
+    def implement_inputs_object(self, node_container):
+        # self.albedo                     = builder.build_FunctionInput("Albedo",                         0,      TextureObject())
+        signature = inspect.signature(self.interface)
+        sort_priority = 0
+        for p in signature.parameters:
 
-    @class_builder("Outputs")
-    def implement_outputs_object(self):
-        self.pyGen.append_line(f"self.{self.field_name} = builder.load_MF(\"{self.asset_path}\", [], [])")
+            line = f"node_container.{field_name} = builder.build_FunctionInput(\"{input_name}\", {sort_priority}, {preview}, {use_preview_value_as_default})"
+            sort_priority += 1
+
+    def implement_outputs_object(self, node_container):
+        pass
 
     def begin_class(self, class_name):
         self.pyGen.begin_class(class_name, None)
@@ -111,6 +124,8 @@ class InterfaceImplementer:
     def end_class(self):
         self.pyGen.end_ctor()
         self.pyGen.end_class()
+
+    
 
     def implement(self):
         self.parse_interface()
@@ -122,9 +137,11 @@ class InterfaceImplementer:
         self.pyGen.append_import_from("pamux_unreal_tools.base.container_builder_base", "ContainerBuilderBase")
         self.pyGen.append_blank_line()
 
-        self.implement_dependencies_object()
-        self.implement_inputs_object()
-        self.implement_outputs_object()
+        node_container = Nodes(self.builder)
+
+        self.implement_dependencies_object(node_container)
+        self.implement_inputs_object(node_container)
+        self.implement_outputs_object(node_container)
 
         self.pyGen.print_code()
         # print(".")
@@ -138,7 +155,7 @@ class InterfaceImplementer:
         # print(".")
 
 
-ii = InterfaceImplementer(IForestGround)
+ii = InterfaceImplementer(DummyBuilder(), IForestGround)
 ii.implement()
 
 # class Dependencies:

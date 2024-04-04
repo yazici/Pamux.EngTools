@@ -13,12 +13,15 @@ from pamux_unreal_tools.factories.material_expression_factories import FunctionI
 from pamux_unreal_tools.utils.build_stack import BuildStack
 from pamux_unreal_tools.utils.node_pos import NodePos, CurrentNodePos
 from pamux_unreal_tools.base.texture_sample_set import TextureSampleSet
-from pamux_unreal_tools.base.interface_implementer import InterfaceImplementer
+# from pamux_unreal_tools.base.interface_implementer import InterfaceImplementer
 
 class ContainerBuilderBase:
-    
+    # class Nodes:
+    #     def __init__(self, builder) -> None:
+    #         self.builder = builder
+
     def __init__(self,
-                 interface,
+                 # interface,
                  container_factory: MaterialExpressionContainerFactory,
                  params_factory,
                  container_path: str,
@@ -26,7 +29,7 @@ class ContainerBuilderBase:
                  inputs_class = None,
                  outputs_class = None):
 
-        self.interface_implementer = InterfaceImplementer(interface)
+        # self.interface_implementer = InterfaceImplementer(self, interface)
 
         self.container_factory = container_factory
         self.params_factory = params_factory
@@ -108,13 +111,19 @@ class ContainerBuilderBase:
             
         result = self.__loadAndCleanOrCreate(virtual_inputs, virtual_outputs)
 
-        self.dependencies = self.interface_implementer.implement_dependencies_object()
-        self.dependencies = self.dependencies_class(self)
+        #self.dependencies = ContainerBuilderBase.Nodes(self)
+        #self.inputs = ContainerBuilderBase.Nodes(self)
+        #self.outputs = ContainerBuilderBase.Nodes(self)
+
+        # self.interface_implementer.implement_dependencies_object(self.dependencies)
+         self.dependencies = self.dependencies_class(self)
 
         CurrentNodePos.goto_inputs()
+        # self.interface_implementer.implement_inputs_object(self.inputs)
         self.inputs = self.inputs_class(self)
 
         CurrentNodePos.goto_outputs()
+        # self.interface_implementer.implement_outputs_object(self.outputs)
         self.outputs = self.outputs_class(self)
 
         CurrentNodePos.goto_process()

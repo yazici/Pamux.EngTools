@@ -2,12 +2,11 @@
 
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 
-from pamux_unreal_tools.factories.material_expression_factories import FunctionInputFactory
 from pamux_unreal_tools.base.texture_sample_set import TextureSampleSet
 from pamux_unreal_tools.base.material_function_outputs_base import MaterialFunctionOutputs
-from pamux_unreal_tools.base.material_function_builder_base import MaterialFunctionBuilderBase
+from pamux_unreal_tools.builders.material_function_builder import MaterialFunctionBuilder
 
-class WetnessBuilderBase(MaterialFunctionBuilderBase):
+class WetnessBuilder(MaterialFunctionBuilder):
     def __init__(self, container_path: str, dependencies_class, inputs_class, outputs_class = MaterialFunctionOutputs.Result):
         super().__init__(container_path, dependencies_class, inputs_class, outputs_class)
 

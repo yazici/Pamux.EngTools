@@ -16,13 +16,14 @@ for module in reloads:
 
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 
-from pamux_unreal_tools.base.material_function_builder_base import MaterialFunctionBuilderBase
+from pamux_unreal_tools.builders.material_function_builder import MaterialFunctionBuilder
 from pamux_unreal_tools.base.container_builder_base import ContainerBuilderBase
 
 from pamux_unreal_tools.base.material_function_outputs_base import MaterialFunctionOutputs
 from pamux_unreal_tools.interfaces.IRotateAboutWorldAxis_cheap import IRotateAboutWorldAxis_cheap
 
 from pamux_unreal_tools.examples.M_Landscape_Master.interfaces.ITextureCellBombing_Landscape import ITextureCellBombing_Landscape
+from pamux_unreal_tools.factories.material_function_factory import MaterialFunctionFactory
 
 
 class MF_TextureCellBombing_Landscape:
@@ -46,10 +47,10 @@ class MF_TextureCellBombing_Landscape:
             self.isNormalMap                = builder.build_FunctionInput("IsNormalMap",                8, False)
 
     # [ "Texture", "UVs", "CellScale", "PatternScale", "DoRotationVariation", "RandomOffsetVariation", "RandomRotationVariation", "IsNormalMap" ], [ "Result" ]
-    class Builder(MaterialFunctionBuilderBase):
+    class Builder(MaterialFunctionBuilder):
         def __init__(self):
             super().__init__(
-                ITextureCellBombing_Landscape,
+                MaterialFunctionFactory(),
                 "/Game/Materials/Pamux/Landscape/Functions/MF_TextureCellBombing_Landscape",
                 MF_TextureCellBombing_Landscape.Dependencies,
                 MF_TextureCellBombing_Landscape.Inputs,
@@ -128,4 +129,4 @@ class MF_TextureCellBombing_Landscape:
             lerp = LinearInterpolate(patternScaledInputTexture.RGB, switch2, cellScaledInputTexture.a)
             lerp.connectTo(self.outputs.result)
 
-MF_TextureCellBombing_Landscape.Builder().get()
+# MF_TextureCellBombing_Landscape.Builder().get()

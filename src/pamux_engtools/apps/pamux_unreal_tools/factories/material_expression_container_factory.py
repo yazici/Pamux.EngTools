@@ -70,19 +70,3 @@ class MaterialExpressionContainerFactory:
         if unrealAsset is None:
             raise Exception(f"Can't create asset: {asset_path}")
         return self.container_wrapper_class(unrealAsset)
-
-# class MaterialExpressionValue:
-#     def __init__(self, materialExpression, name, type):
-#         self.materialExpression = materialExpression
-#         self.name = name
-#         self.type = type
-
-# class Property(MaterialExpressionValue):
-#     def __init__(self, material_expression, name, type):
-#         super().__init__(material_expression, name, type)
-
-#     def set(self, val):
-#         self.materialExpression.unrealAsset.set_editor_property(self.name, val)
-
-#     def get(self):
-#         return self.materialExpression.unrealAsset.get_editor_property(self.name)

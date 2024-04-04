@@ -6,8 +6,6 @@ from pamux_unreal_tools.utils.types import *
 
 from pamux_unreal_tools.base.material_function_base import MaterialFunctionBase
 
-from pamux_unreal_tools.factories.material_function_factory import MaterialFunctionFactory
-from pamux_unreal_tools.factories.material_expression_container_factory import MaterialExpressionContainerFactory
 from pamux_unreal_tools.factories.material_expression_factories import FunctionInputFactory
 
 from pamux_unreal_tools.utils.build_stack import BuildStack
@@ -22,8 +20,9 @@ class ContainerBuilderBase:
 
     def __init__(self,
                  # interface,
-                 container_factory: MaterialExpressionContainerFactory,
-                 params_factory,
+                 material_function_factory,
+                 container_factory,
+
                  container_path: str,
                  dependencies_class = None,
                  inputs_class = None,
@@ -31,14 +30,13 @@ class ContainerBuilderBase:
 
         # self.interface_implementer = InterfaceImplementer(self, interface)
 
+        self.material_function_factory = material_function_factory
         self.container_factory = container_factory
-        self.params_factory = params_factory
+
         self.container_path = container_path
         self.dependencies_class = dependencies_class
         self.inputs_class = inputs_class
         self.outputs_class = outputs_class
-
-        self.material_function_factory = MaterialFunctionFactory()
 
         self.unitW = unreal.Vector4f()
         self.unitW.set_editor_property("w", 1.0)
@@ -79,7 +77,6 @@ class ContainerBuilderBase:
         
         raise Exception(f"Unsupported preview type calling build_FunctionInput with input_name: {input_name}")
 
-
     def __build_FunctionInput_impl(self, input_name: str, input_type: str, sort_priority: int, preview, use_preview_value_as_default: bool) -> FunctionInput:
         result = FunctionInputFactory.create(input_name, input_type, preview)
         result.add_rt()
@@ -96,11 +93,6 @@ class ContainerBuilderBase:
     def __loadAndCleanOrCreate(self, virtual_inputs: SocketNames, virtual_outputs: SocketNames):
         result = self.container_factory.loadAndCleanOrCreate(self, self.container_path, virtual_inputs, virtual_outputs)
         BuildStack.push(result)
-
-        if self.params_factory is None:
-            self.params = None
-        else:
-            self.params = self.params_factory(result)
         return result
 
     def get(self, virtual_inputs: SocketNames = [], virtual_outputs: SocketNames = [], purge = False):
@@ -116,7 +108,7 @@ class ContainerBuilderBase:
         #self.outputs = ContainerBuilderBase.Nodes(self)
 
         # self.interface_implementer.implement_dependencies_object(self.dependencies)
-         self.dependencies = self.dependencies_class(self)
+        self.dependencies = self.dependencies_class(self)
 
         CurrentNodePos.goto_inputs()
         # self.interface_implementer.implement_inputs_object(self.inputs)

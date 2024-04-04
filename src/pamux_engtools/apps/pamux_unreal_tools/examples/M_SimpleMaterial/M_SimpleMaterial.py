@@ -17,7 +17,7 @@ for module in reloads:
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 
 from pamux_unreal_tools.base.material_function_dependencies_base import MaterialFunctionDependenciesBase
-from pamux_unreal_tools.base.material_builder_base import MaterialBuilderBase
+from pamux_unreal_tools.builders.material_builder import MaterialBuilder
 from pamux_unreal_tools.base.material_function_outputs_base import MaterialFunctionOutputs
 from pamux_unreal_tools.base.container_builder_base import ContainerBuilderBase
 
@@ -30,7 +30,7 @@ class M_SimpleMaterial:
             self.textureCoord = TextureCoordinate(0.5, 0.5)
             self.textureSample = TextureSample()
 
-    class Builder(MaterialBuilderBase):
+    class Builder(MaterialBuilder):
         def __init__(self, container_path: str):
             super().__init__(
                 container_path,

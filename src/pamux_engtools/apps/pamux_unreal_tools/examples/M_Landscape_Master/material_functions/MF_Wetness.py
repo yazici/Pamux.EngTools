@@ -17,11 +17,11 @@ for module in reloads:
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 
 from pamux_unreal_tools.base.material_function_dependencies_base import MaterialFunctionDependenciesBase
-
-from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.base.wetness_base import WetnessBuilderBase
 from pamux_unreal_tools.base.material_function_outputs_base import MaterialFunctionOutputs
 from pamux_unreal_tools.base.container_builder_base import ContainerBuilderBase
+
 from pamux_unreal_tools.factories.material_expression_factories import MakeMaterialAttributesFactory
+from pamux_unreal_tools.builders.wetness_builder import WetnessBuilder
 from pamux_unreal_tools.examples.M_Landscape_Master.interfaces.IWetness import IWetness
 
 class MF_Wetness:
@@ -40,10 +40,9 @@ class MF_Wetness:
 
             self.wetness = builder.build_FunctionInput("Wetness", 1, 1.0, False)
 
-    class Builder(WetnessBuilderBase):
+    class Builder(WetnessBuilder):
         def __init__(self):
             super().__init__(
-                IWetness,
                 "/Game/Materials/Pamux/Landscape/Functions/MF_Wetness",
                 MaterialFunctionDependenciesBase,
                 MF_Wetness.Inputs,

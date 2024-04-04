@@ -18,13 +18,14 @@ for module in reloads:
 
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 
-from pamux_unreal_tools.base.material_function_builder_base import MaterialFunctionBuilderBase
+from pamux_unreal_tools.builders.material_function_builder import MaterialFunctionBuilder
 from pamux_unreal_tools.base.material_function_outputs_base import MaterialFunctionOutputs
 
 from pamux_unreal_tools.base.container_builder_base import ContainerBuilderBase
 
 from pamux_unreal_tools.interfaces.IHeightLerpWithTwoHeightMaps import IHeightLerpWithTwoHeightMaps
 from pamux_unreal_tools.examples.M_Landscape_Master.interfaces.IBlendTwoMaterialsViaHighOpacityMap import IBlendTwoMaterialsViaHighOpacityMap
+from pamux_unreal_tools.factories.material_function_factory import MaterialFunctionFactory
 
 class MF_BlendTwoMaterialsViaHighOpacityMap:
     class Dependencies:
@@ -35,16 +36,16 @@ class MF_BlendTwoMaterialsViaHighOpacityMap:
                 [ "Alpha" ])
 
     class Inputs:
-        def __init__(self, builder: ContainerBuilderBase):
+        def __init__(self, builder: ContainerBuilderBase) -> None:
             # No Preview
             self.alpha      = builder.build_FunctionInput("Alpha",      2, 0.0, False)
             self.materialA  = builder.build_FunctionInput("MaterialA",  0, unreal.FunctionInputType.FUNCTION_INPUT_MATERIAL_ATTRIBUTES, False)
             self.materialB  = builder.build_FunctionInput("MaterialB",  1, unreal.FunctionInputType.FUNCTION_INPUT_MATERIAL_ATTRIBUTES, False)
 
-    class Builder(MaterialFunctionBuilderBase):
-        def __init__(self):
+    class Builder(MaterialFunctionBuilder):
+        def __init__(self) -> None:
             super().__init__(
-                IBlendTwoMaterialsViaHighOpacityMap,
+                MaterialFunctionFactory(),
                 "/Game/Materials/Pamux/Landscape/Functions/MF_BlendTwoMaterialsViaHighOpacityMap",
                 MF_BlendTwoMaterialsViaHighOpacityMap.Dependencies,
                 MF_BlendTwoMaterialsViaHighOpacityMap.Inputs,

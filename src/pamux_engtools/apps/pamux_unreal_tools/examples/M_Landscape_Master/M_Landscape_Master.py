@@ -17,7 +17,7 @@ for module in reloads:
 
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 
-from pamux_unreal_tools.base.material_builder_base import MaterialBuilderBase
+from pamux_unreal_tools.builders.material_builder import MaterialBuilder
 from pamux_unreal_tools.base.container_builder_base import ContainerBuilderBase
 
 from pamux_unreal_tools.examples.M_Landscape_Master.params import *
@@ -47,7 +47,8 @@ class M_Landscape_Master:
              
     class Dependencies:
         def __init__(self, builder: ContainerBuilderBase) -> None:
-            self.SCurve = builder.load_MF("SCurve", "/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment")
+            self.SCurve = builder.load_MF("/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment/SCurve", [ "In", "Power" ], [ "Result" ])
+
             self.MF_LandscapeBaseMaterial = MF_LandscapeBaseMaterial.Builder().get()
 
             self.MLF_Layers = {}
@@ -65,10 +66,9 @@ class M_Landscape_Master:
             self.MF_FoliageMask = MF_FoliageMask.Builder().get()
             self.MF_TextureCellBombing_Landscape = MF_TextureCellBombing_Landscape.Builder().get()
 
-    class Builder(MaterialBuilderBase):
+    class Builder(MaterialBuilder):
         def __init__(self, asset_path: str):
             super().__init__(
-                Params,
                 asset_path,
                 M_Landscape_Master.Dependencies,
                 M_Landscape_Master.Inputs,

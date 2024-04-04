@@ -79,7 +79,7 @@ class MF_LandscapeBaseMaterial:
             self.normal                     = builder.build_FunctionInput("Normal",                         7,      TextureObject(unreal.MaterialSamplerType.SAMPLERTYPE_NORMAL))
             self.normalIntensity            = builder.build_FunctionInput("NormalIntensity",                8,      0.0)
             self.displacement               = builder.build_FunctionInput("Displacement",                   9,      TextureObject()) # Color/Normal
-            self.uvParams                   = builder.build_FunctionInput("UVParams",                       10       Vec4f(1.0, 1.0, 0.5, 0.5))
+            self.uvParams                   = builder.build_FunctionInput("UVParams",                       10,     Vec4f(1.0, 1.0, 0.5, 0.5))
             self.rotation                   = builder.build_FunctionInput("Rotation",                       11,     0.0)
             self.doTextureBomb              = builder.build_FunctionInput("DoTextureBomb",                  12,     True)
             self.bombDoRotationVariation    = builder.build_FunctionInput("BombDoRotationVariation",        13,     False)
@@ -310,4 +310,4 @@ class MF_LandscapeBaseMaterial:
 
             # MEL.connect_material_expressions(self.call_BreakOutFloat4Components.output.materialExpression.unrealAsset, "", self.uvParams.unrealAsset, "Low")
 
-MF_LandscapeBaseMaterial.Builder().get()
+# MF_LandscapeBaseMaterial.Builder().get()

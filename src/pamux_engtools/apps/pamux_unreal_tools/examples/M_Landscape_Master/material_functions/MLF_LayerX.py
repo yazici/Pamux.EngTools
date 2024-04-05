@@ -1,10 +1,3 @@
-import unreal
-import inspect
-import logging
-logger = logging.getLogger(__name__)
-
-MEL = unreal.MaterialEditingLibrary
-
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 
 from pamux_unreal_tools.builders.material_function_builder import MaterialLayerFunctionBuilder
@@ -14,7 +7,6 @@ from pamux_unreal_tools.base.material_expression.material_expression_container_b
 from pamux_unreal_tools.examples.M_Landscape_Master.interfaces.ILayerX import ILayerX
 from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.base.layer_inputs import LayerInputs
 from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.base.layer_build import LayerBuild
-from pamux_unreal_tools.utils.texture_sample_set import TMaterialTextures
 
 class MLF_LayerX:
     class Inputs(LayerInputs):
@@ -35,6 +27,3 @@ class MLF_LayerX:
             call = LayerBuild.call_and_connect_LandscapeBaseMaterial(self)
 
             call.outputs.result.connectTo(self.outputs.result)
-
-
-# MLF_LayerX.Builder().get()

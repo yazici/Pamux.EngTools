@@ -1,30 +1,20 @@
-import unreal
-
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 
 from pamux_unreal_tools.builders.material_function_builder import MaterialLayerFunctionBuilder
-from pamux_unreal_tools.base.material_function.material_function_dependencies_base import MaterialFunctionDependenciesBase
 from pamux_unreal_tools.base.material_function.material_function_outputs_base import MaterialFunctionOutputs
 from pamux_unreal_tools.base.material_expression.material_expression_container_builder_base import MaterialExpressionContainerBuilderBase
 from pamux_unreal_tools.impl.material_function_impl import MaterialFunctionImpl
 from pamux_unreal_tools.examples.M_Landscape_Master.interfaces.IForestGround import IForestGround
 
-from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MLF_LayerX import MLF_LayerX
 from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.base.layer_inputs import LayerInputs
 from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.base.layer_build import LayerBuild
-from pamux_unreal_tools.utils.texture_sample_set import TMaterialTextures
-
 
 class MLF_ForestGround:
     class Dependencies:
         def __init__(self, builder: MaterialExpressionContainerBuilderBase):
-           
-            
             self.fuzzyShading = builder.load_MF("/Engine/Functions/Engine_MaterialFunctions01/Shading/FuzzyShading.FuzzyShading",
                                                [ "BaseColor", "Normal", "CoreDarkness", "Power", "EdgeBrightness" ],
                                                [ "Result" ])
-            
-            pass
 
     class Inputs(LayerInputs):
         def __init__(self, builder: MaterialExpressionContainerBuilderBase):
@@ -53,7 +43,6 @@ class MLF_ForestGround:
             call.outputs.result.connectTo(breakMaterialAttributes)
 
             fuzzShading =  self.dependencies.fuzzyShading.call()
-
             fuzzShading.inputs.baseColor.comesFrom(breakMaterialAttributes.baseColor)
             fuzzShading.inputs.normal.comesFrom(breakMaterialAttributes.normal)
             fuzzShading.inputs.coreDarkness.comesFrom(self.inputs.fuzzCoreDarkness)
@@ -63,46 +52,10 @@ class MLF_ForestGround:
             roughnessB = ComponentMask(breakMaterialAttributes.roughness, "B")
             lerp = LinearInterpolate(breakMaterialAttributes.baseColor, fuzzShading.outputs.result, roughnessB)
 
-
             makeMaterialAttributes = MakeMaterialAttributes()
             makeMaterialAttributes.baseColor.comesFrom(lerp.output)
             makeMaterialAttributes.normal.comesFrom(breakMaterialAttributes.normal)
             makeMaterialAttributes.specular.comesFrom(breakMaterialAttributes.specular)
             makeMaterialAttributes.roughness.comesFrom(breakMaterialAttributes.roughness)
 
-
             makeMaterialAttributes.output.connectTo(self.outputs.result)
-
-            # roughness = ScalarParameter(material_function)
-            # roughness.parameter_name.set("Roughness")
-            # roughness.default_value.set(0.5)
-
-            # roughness.connectTo(unreal.MaterialProperty.MP_ROUGHNESS)
-
-
-# def MLF_ForestGround():
-#         result, height = MaterialFunctions.landscapeBaseMaterial(Params.ForestGround, Params.ForestGround.Opacity)
-
-#         materialAttributes = Nodes.breakMaterialAttributes(result)
-
-#         fuzzyShading = Nodes.fuzzyShading(
-#             materialAttributes.baseColor,
-#             materialAttributes.normal,
-#             Params.ForestGround.FuzzCoreDarkness,
-#             Params.ForestGround.FuzzPower,
-#             Params.ForestGround.FuzzBrightness
-#         )
-
-#         rouhgnessB = Nodes.mask(materialAttributes.rouhgness, "B")
-
-#         lerped = Nodes.lerp(materialAttributes.baseColor, fuzzyShading, rouhgnessB)
-
-#         return Nodes.makeMaterialAttributes(
-#             lerped,
-#             materialAttributes.normal,
-#             materialAttributes.specular,
-#             materialAttributes.roughness
-#         ), height
-
-
-# MLF_ForestGround.Builder().get()

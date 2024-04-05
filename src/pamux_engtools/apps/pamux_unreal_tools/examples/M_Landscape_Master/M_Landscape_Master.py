@@ -62,10 +62,10 @@ class M_Landscape_Master:
 
             self.MLF_ForestGround = MLF_ForestGround.Builder(self.MF_LandscapeBaseMaterial).get()
 
-            # self.MLF_Layers = {}
-            # for layer_name in Globals.layer_names:
-            #     if layer_name == "ForestGround":
-            #         self.MLF_Layers[layer_name] = MLF_LayerX.Builder(layer_name, self.MF_LandscapeBaseMaterial).get()
+            self.MLF_Layers = {}
+            for layer_name in Globals.layer_names:
+                if layer_name != "ForestGround":
+                    self.MLF_Layers[layer_name] = MLF_LayerX.Builder(layer_name, self.MF_LandscapeBaseMaterial).get()
 
             
     class Builder(MaterialBuilder):

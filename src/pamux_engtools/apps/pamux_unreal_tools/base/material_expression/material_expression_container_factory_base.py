@@ -1,4 +1,7 @@
 import unreal
+import logging
+logger = logging.getLogger(__name__)
+
 EAL = unreal.EditorAssetLibrary
 ATH = unreal.AssetToolsHelpers
 AT = ATH.get_asset_tools()
@@ -33,9 +36,12 @@ class MaterialExpressionContainerFactoryBase:
     #  -> MaterialBase | MaterialFunctionBase
     def loadAndCleanOrCreate(self, builder, container_path, virtual_inputs: SocketNames, virtual_outputs: SocketNames) -> MaterialExpressionContainerBase:
         try:
-            return self.loadAndClean(builder, container_path, virtual_inputs, virtual_outputs)
+            if EAL.does_asset_exist(container_path):
+                return self.loadAndClean(builder, container_path, virtual_inputs, virtual_outputs)
         except:
-            return self.__create_wrapped_asset(builder, container_path, virtual_inputs, virtual_outputs)
+            logger.error(f"Exception loading: {container_path}")
+
+        return self.__create_wrapped_asset(builder, container_path, virtual_inputs, virtual_outputs)
 
     #  -> MaterialBase | MaterialFunctionBase
     def __load_wrapped_asset(self, builder, asset_path: str, virtual_inputs: SocketNames, virtual_outputs: SocketNames) -> MaterialExpressionContainerBase:

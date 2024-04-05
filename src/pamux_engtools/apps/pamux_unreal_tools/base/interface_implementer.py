@@ -103,15 +103,13 @@ class InterfaceImplementer:
     def implement_dependencies_object(self, node_container):
         line = f"node_container.{self.field_name} = builder.load_MF(\"{self.asset_path}\", [{self.function_inputs}], [{self.function_outputs}])"
 
-    
-
     def implement_inputs_object(self, node_container):
         # self.albedo                     = builder.build_FunctionInput("Albedo",                         0,      TextureObject())
         signature = inspect.signature(self.interface)
         sort_priority = 0
         for p in signature.parameters:
 
-            line = f"node_container.{field_name} = builder.build_FunctionInput(\"{input_name}\", {sort_priority}, {preview}, {use_preview_value_as_default})"
+            #line = f"node_container.{field_name} = builder.build_FunctionInput(\"{input_name}\", {sort_priority}, {preview}, {use_preview_value_as_default})"
             sort_priority += 1
 
     def implement_outputs_object(self, node_container):

@@ -1,4 +1,6 @@
 import unreal
+import logging
+logger = logging.getLogger(__name__)
 
 from pamux_unreal_tools.base.material_expression.material_expression_base import MaterialExpressionBase
 
@@ -21,7 +23,6 @@ class MaterialExpressionImpl(MaterialExpressionBase):
         self.input = InSocketImpl(self, '', 'StructProperty')
 
         self.output = OutSocketImpl(self, '', 'StructProperty')
-
 
     def gotoRightOf(self, sourceMaterialExpression: MaterialExpressionBase):
         self.material_expression_editor_x.set(sourceMaterialExpression.material_expression_editor_x.get() + NodePos.DeltaX)

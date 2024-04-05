@@ -53,16 +53,18 @@ class MF_BlendTwoMaterialsViaHighOpacityMap:
 
         def build(self):
             breakMaterialAttributesA = BreakMaterialAttributes(self.inputs.materialA)
+            breakMaterialAttributesA.opacity.add_rt()
+
             breakMaterialAttributesB = BreakMaterialAttributes(self.inputs.materialB)
+            breakMaterialAttributesB.opacity.add_rt()
 
-            # Transistion is misspelled in the built in function
             lerp = self.dependencies.heightLerpWithTwoHeightMaps.call()
-            lerp.transistionPhase.comesFrom(self.inputs.alpha)
-            lerp.heightTexture1.comesFrom(breakMaterialAttributesA.opacity)
-            lerp.heightTexture2.comesFrom(breakMaterialAttributesB.opacity)
+            lerp.inputs.transistionPhase.comesFrom(self.inputs.alpha) # Transistion is misspelled in the built in function
+            lerp.inputs.heightTexture1.comesFrom(breakMaterialAttributesA.opacity)
+            lerp.inputs.heightTexture2.comesFrom(breakMaterialAttributesB.opacity)
 
-            self.blendMaterialAttributes = BlendMaterialAttributes(self.inputs.materialA, self.inputs.materialB, lerp.alpha)
+            blendMaterialAttributes = BlendMaterialAttributes(self.inputs.materialA, self.inputs.materialB, lerp.outputs.alpha)
 
-            self.blendMaterialAttributes.connectTo(self.outputs.result)
+            blendMaterialAttributes.connectTo(self.outputs.result)
 
 # MF_BlendTwoMaterialsViaHighOpacityMap.Builder().get()

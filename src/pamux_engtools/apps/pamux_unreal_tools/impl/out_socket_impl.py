@@ -1,6 +1,8 @@
 
 import unreal
 import inspect
+import logging
+logger = logging.getLogger(__name__)
 MEL = unreal.MaterialEditingLibrary
 
 from pamux_unreal_tools.base.material_expression.material_expression_sockets_base import InSocket, OutSocket
@@ -20,7 +22,6 @@ class OutSocketImpl(OutSocket):
     #         return self.__comesFrom_MaterialExpressionBase(param1, param2, param3)
 
     #     raise Exception(f"Don't know how to call connectTo for type[s]: {str(param1)}, {str(param2)}")
-    
 
     # def __connectTo_MaterialProperty(self, materialProperty: unreal.MaterialProperty) -> bool:
     #     return MEL.connect_material_property(self.unrealAsset, "", materialProperty)
@@ -55,9 +56,28 @@ class OutSocketImpl(OutSocket):
         self.material_expression.material_expression_editor_x.set(material_expression.material_expression_editor_x.get() - NodePos.DeltaX)
         return MEL.connect_material_expressions(self.material_expression.unrealAsset, self.name, material_expression.unrealAsset, "")
 
-    def add_rt(self):
+    def __make_reroute_name_from_parts(self, parts: list):
+        isFirst = True
+        result = None
+        for part in parts:
+            if part is None:
+                continue
+            if isFirst:
+                isFirst = False
+                result = "rt"
+            else:
+                result += "."
+            result += part[0].upper() + part[1:]
+        return result
+
+    def __get_reroute_name_from_stack(self):
+
         requiredLineEnding = ".add_rt()"
+        _self = "self."
         for frame in inspect.getouterframes(inspect.currentframe()):
+            # if type(self.material_expression).__name__ == "MF_LandscapeBaseMaterial":
+            #     logger.warning("*****************************")
+
             for line in frame.code_context:
                 line = line.strip()
                 if not line.endswith(requiredLineEnding):
@@ -65,24 +85,33 @@ class OutSocketImpl(OutSocket):
                 if line == "return self.output.add_rt()":
                     continue
 
-                line = line[0:-len(requiredLineEnding)]
-
-                if line.startswith("self."):
-                    line = line[len("self."):]
-
-                name = "rt"
-                if "." in line:
-                    parts = line.split(".")
-                    isFirst = True
-                    for part in parts:
-                        if isFirst:
-                            isFirst = False
-                        else:
-                            name += "."
-                        name += part[0:1].upper() + part[1:]
+                if line.startswith(_self):
+                    start = len(_self )
                 else:
-                    name += line[0:1].upper() + line[1:] + ".Output"
+                    start = 0
 
-                return self.material_expression.container.add_rt(name, self)
+                line = line[start:-len(requiredLineEnding)]
 
+                if "." in line:
+                    return self.__make_reroute_name_from_parts(line.split("."))
+
+                return self.__make_reroute_name_from_parts([line, "Output"])
+
+    def add_rt(self, container_name:str = None, socket_name:str = None):
+        if container_name is None:
+            name = None
+        else:
+            if socket_name is None:
+                name = self.__make_reroute_name_from_parts([container_name])
+            else:
+                name = self.__make_reroute_name_from_parts([container_name, socket_name])
+
+        if name is None:
+            name = self.__get_reroute_name_from_stack()
+
+        result = self.material_expression.container.add_rt(name, self)
+
+        self.rt = result
+
+        return result
         raise Exception(f"Cannot find string ending with .add_rt() in call stack to set the name of the reroute")

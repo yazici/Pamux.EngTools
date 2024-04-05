@@ -7,7 +7,7 @@ import types
 from pathlib import Path
 from importlib import * 
 # from abc import ABC, abstractmethod
-print(str(Path(__file__).parent.parent.parent.parent.resolve()))
+# print(str(Path(__file__).parent.parent.parent.parent.resolve()))
 sys.path.append(str(Path(__file__).parent.parent.parent.parent.resolve()))
 
 reloads = []
@@ -132,21 +132,21 @@ generate_pamux_wrapper_classes()
     # inspect.getmembers(addObject, predicate=inspect.ismethod)
     # members = inspect.getmembers(addObject, predicate=lambda x: not (inspect.ismethod(x) or inspect.isclass(x)))
 
-def pred(x):
-    if inspect.ismethod(x):
-        return False
-    # if inspect.ismethodwrapper(x):
-    #     return False
-    if inspect.isbuiltin(x):
-        return False
-    if inspect.isclass(x):
-        return False
-    if isinstance(x,  types.MethodWrapperType):
-        return False   
+# def pred(x):
+#     if inspect.ismethod(x):
+#         return False
+#     # if inspect.ismethodwrapper(x):
+#     #     return False
+#     if inspect.isbuiltin(x):
+#         return False
+#     if inspect.isclass(x):
+#         return False
+#     if isinstance(x,  types.MethodWrapperType):
+#         return False   
 
     
-    print(x)
-    return True
+#     print(x)
+#     return True
     # inspect.getmembers(unreal.MaterialExpressionAntialiasedTextureMask(), predicate=pred)
 
 

@@ -47,9 +47,11 @@ class M_Landscape_Master:
              
     class Dependencies:
         def __init__(self, builder: MaterialExpressionContainerBuilderBase) -> None:
-            self.SCurve = builder.load_MF("/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment/SCurve", [ "In", "Power" ], [ "Result" ])
+            # self.SCurve = builder.load_MF("/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment/SCurve", [ "In", "Power" ], [ "Result" ])
 
             self.MF_TextureCellBombing_Landscape = MF_TextureCellBombing_Landscape.Builder().get()
+
+            self.MF_LandscapeBaseMaterial = MF_LandscapeBaseMaterial.Builder().get()
 
             self.MF_Wetness = MF_Wetness.Builder().get()
             self.MF_Puddles = MF_Puddles.Builder().get()
@@ -58,15 +60,12 @@ class M_Landscape_Master:
 
             self.MF_FoliageMask = MF_FoliageMask.Builder().get()
 
+            self.MLF_ForestGround = MLF_ForestGround.Builder(self.MF_LandscapeBaseMaterial).get()
 
-            self.MF_LandscapeBaseMaterial = MF_LandscapeBaseMaterial.Builder().get()
-
-            self.MLF_Layers = {}
-            for layer_name in Globals.layer_names:
-                if layer_name == "ForestGround":
-                    self.MLF_ForestGround = MLF_ForestGround.Builder(self.MF_LandscapeBaseMaterial).get()
-                else:
-                    self.MLF_Layers[layer_name] = MLF_LayerX.Builder(layer_name, self.MF_LandscapeBaseMaterial).get()
+            # self.MLF_Layers = {}
+            # for layer_name in Globals.layer_names:
+            #     if layer_name == "ForestGround":
+            #         self.MLF_Layers[layer_name] = MLF_LayerX.Builder(layer_name, self.MF_LandscapeBaseMaterial).get()
 
             
     class Builder(MaterialBuilder):
@@ -164,7 +163,7 @@ class M_Landscape_Master:
             return landscapeLayerBlend.output
 
         def build(self):
-            pass
+            return
             # blendedLandscapeLayers = self.__blendLandscapeLayers()
 
             # call_MF_Wetness = self.MF_Wetness.call()

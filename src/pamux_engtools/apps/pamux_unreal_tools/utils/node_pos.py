@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 class NodePos:
     DeltaX = 400
     DeltaY = 300
@@ -18,6 +21,7 @@ class NodePos:
         self.y = 0
 
     def dump(self, s):
-        print(f"{s}: {self.x} {self.y}")
+        # logger.warning(f"{s}: {self.x} {self.y}")
+        pass
 
 CurrentNodePos = NodePos(0, 0)

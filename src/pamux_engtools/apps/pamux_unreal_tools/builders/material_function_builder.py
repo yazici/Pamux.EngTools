@@ -6,7 +6,13 @@ from pamux_unreal_tools.base.material_function.material_function_builder_base im
 class MaterialFunctionBuilder(MaterialFunctionBuilderBase):
     materialFunctionFactory = MaterialFunctionFactory()
 
-    def __init__(self, container_path: str, dependencies_class, inputs_class, outputs_class = MaterialFunctionOutputs.Result) -> None:
+    def __init__(
+            self,
+            container_path: str,
+            dependencies_class,
+            inputs_class,
+            outputs_class = MaterialFunctionOutputs.Result) -> None:
+
         super().__init__(
             MaterialFunctionBuilder.materialFunctionFactory,
             container_path,
@@ -15,6 +21,19 @@ class MaterialFunctionBuilder(MaterialFunctionBuilderBase):
             outputs_class)
 
 class MaterialLayerFunctionBuilder(MaterialFunctionBuilder):
-    def __init__(self, container_path: str, dependencies_class, inputs_class, outputs_class = MaterialFunctionOutputs.ResultAndHeight) -> None:
-        super().__init__(container_path, dependencies_class, inputs_class, outputs_class)
+    def __init__(self,
+                 layer_name: str,
+                 MF_LandscapeBaseMaterial,
+                 dependencies_class,
+                 inputs_class,
+                 outputs_class = MaterialFunctionOutputs.ResultAndHeight) -> None:
+
+        super().__init__(
+            f"/Game/Materials/Pamux/Landscape/Functions/Layers/MLF_{layer_name}",
+            dependencies_class,
+            inputs_class,
+            outputs_class)
+
+        self.layer_name = layer_name
+        self.MF_LandscapeBaseMaterial = MF_LandscapeBaseMaterial
 

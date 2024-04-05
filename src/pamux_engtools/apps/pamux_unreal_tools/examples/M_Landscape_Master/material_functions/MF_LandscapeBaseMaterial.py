@@ -1,18 +1,7 @@
 import unreal
-from pathlib import Path
-import sys
 
-# sys.path.append(str(Path(__file__).parent.parent.parent.parent.parent.resolve()))
-
-# from importlib import * 
-
-# reloads = []
-# for  k, v in sys.modules.items():
-#     if k.startswith("pamux_unreal_tools"):
-#         reloads.append(v)
-
-# for module in reloads:
-#     reload(module)
+import logging
+logger = logging.getLogger(__name__)
 
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.utils.types import *
@@ -20,7 +9,7 @@ from pamux_unreal_tools.base.material_expression.material_expression_container_b
 
 from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MF_TextureCellBombing_Landscape import MF_TextureCellBombing_Landscape
 
-from pamux_unreal_tools.builders.material_function_builder import MaterialLayerFunctionBuilder
+from pamux_unreal_tools.builders.material_function_builder import MaterialFunctionBuilder
 from pamux_unreal_tools.utils.node_pos import NodePos, CurrentNodePos
 from pamux_unreal_tools.base.material_function.material_function_outputs_base import MaterialFunctionOutputs
 
@@ -69,32 +58,32 @@ class MF_LandscapeBaseMaterial:
         def __init__(self, builder: MaterialExpressionContainerBuilderBase):
             CurrentNodePos.x = 0
 
-            self.albedo                     = builder.build_FunctionInput("Albedo",                         0,      TTextureObject_Color(),                 True,   True)
-            self.colorOverlay               = builder.build_FunctionInput("ColorOverlay",                   1,      Vec3f(1.0, 1.0, 1.0),                   True,   True)
-            self.colorOverlayIntensity      = builder.build_FunctionInput("ColorOverlayIntensity",          2,      1.0,                                    True,   True)
-            self.contrast                   = builder.build_FunctionInput("Contrast",                       3,      0.0,                                    True,   True)
-            self.contrastVariation          = builder.build_FunctionInput("ContrastVariation",              4,      1.0,                                    True,   True)
-            self.roughness                  = builder.build_FunctionInput("Roughness",                      5,      TTextureObject_Color(),                 True,   True)
-            self.roughnessIntensity         = builder.build_FunctionInput("RoughnessIntensity",             6,      1.0,                                    True,   True)
-            self.normal                     = builder.build_FunctionInput("Normal",                         7,      TTextureObject_Normal(),                True,   True)
-            self.normalIntensity            = builder.build_FunctionInput("NormalIntensity",                8,      0.0,                                    True,   True)
-            self.displacement               = builder.build_FunctionInput("Displacement",                   9,      TTextureObject_Color(),                 True,   True)
-            self.uvParams                   = builder.build_FunctionInput("UVParams",                       10,     Vec4f(1.0, 1.0, 0.5, 0.5),              True,   True)
-            self.rotation                   = builder.build_FunctionInput("Rotation",                       11,     0.0,                                    True,   True)
-            self.doTextureBomb              = builder.build_FunctionInput("DoTextureBomb",                  12,     True,                                   True,   True)
-            self.bombDoRotationVariation    = builder.build_FunctionInput("BombDoRotationVariation",        13,     False,                                  True,   True)
-            self.bombCellScale              = builder.build_FunctionInput("BombCellScale",                  14,     1.0,                                    True,   True)
-            self.bombPatternScale           = builder.build_FunctionInput("BombPatternScale",               15,     1.0,                                    True,   True)
-            self.bombRandomOffset           = builder.build_FunctionInput("BombRandomOffset",               16,     0.0,                                    True,   True)
-            self.bombRotationVariation      = builder.build_FunctionInput("BombRotationVariation",          17,     0.0,                                    True,   True)
-            self.opacityStrength            = builder.build_FunctionInput("OpacityStrength",                18,     1.0,                                    True,   True)
-            self.opacityAdd                 = builder.build_FunctionInput("OpacityAdd",                     19,     0.0,                                    True,   True)
-            self.opacityContrast            = builder.build_FunctionInput("OpacityContrast",                20,     1.0,                                    True,   True)
+            self.albedo                     = builder.build_FunctionInput("Albedo",                         0,      TTextureObject_Color(),    True,   True)
+            self.colorOverlay               = builder.build_FunctionInput("ColorOverlay",                   1,      Vec3f(1.0, 1.0, 1.0),      True,   True)
+            self.colorOverlayIntensity      = builder.build_FunctionInput("ColorOverlayIntensity",          2,      1.0,                       True,   True)
+            self.contrast                   = builder.build_FunctionInput("Contrast",                       3,      0.0,                       True,   True)
+            self.contrastVariation          = builder.build_FunctionInput("ContrastVariation",              4,      1.0,                       True,   True)
+            self.roughness                  = builder.build_FunctionInput("Roughness",                      5,      TTextureObject_Color(),    True,   True)
+            self.roughnessIntensity         = builder.build_FunctionInput("RoughnessIntensity",             6,      1.0,                       True,   True)
+            self.normal                     = builder.build_FunctionInput("Normal",                         7,      TTextureObject_Normal(),   True,   True)
+            self.normalIntensity            = builder.build_FunctionInput("NormalIntensity",                8,      0.0,                       True,   True)
+            self.displacement               = builder.build_FunctionInput("Displacement",                   9,      TTextureObject_Color(),    True,   True)
+            self.uvParams                   = builder.build_FunctionInput("UVParams",                       10,     Vec4f(1.0, 1.0, 0.5, 0.5), True,   True)
+            self.rotation                   = builder.build_FunctionInput("Rotation",                       11,     0.0,                       True,   True)
+            self.doTextureBomb              = builder.build_FunctionInput("DoTextureBomb",                  12,     True,                      True,   True)
+            self.doRotationVariation        = builder.build_FunctionInput("DoRotationVariation",            13,     False,                     True,   True)
+            self.bombCellScale              = builder.build_FunctionInput("BombCellScale",                  14,     1.0,                       True,   True)
+            self.bombPatternScale           = builder.build_FunctionInput("BombPatternScale",               15,     1.0,                       True,   True)
+            self.bombRandomOffset           = builder.build_FunctionInput("BombRandomOffset",               16,     0.0,                       True,   True)
+            self.bombRotationVariation      = builder.build_FunctionInput("BombRotationVariation",          17,     0.0,                       True,   True)
+            self.opacityStrength            = builder.build_FunctionInput("OpacityStrength",                18,     1.0,                       True,   True)
+            self.opacityAdd                 = builder.build_FunctionInput("OpacityAdd",                     19,     0.0,                       True,   True)
+            self.opacityContrast            = builder.build_FunctionInput("OpacityContrast",                20,     1.0,                       True,   True)
 
-    class Builder(MaterialLayerFunctionBuilder):
+    class Builder(MaterialFunctionBuilder):
         def __init__(self):
             super().__init__(
-                "/Game/Materials/Pamux/Landscape/Functions/Layers/MF_LandscapeBaseMaterial",
+                "/Game/Materials/Pamux/Landscape/Functions/MF_LandscapeBaseMaterial",
                 MF_LandscapeBaseMaterial.Dependencies,
                 MF_LandscapeBaseMaterial.Inputs,
                 MaterialFunctionOutputs.ResultAndHeight)
@@ -157,11 +146,11 @@ class MF_LandscapeBaseMaterial:
         #     # textureCellBombing_LandscapeResult = MaterialFunctions.textureCellBombing_Landscape(
         #     #     texture,
         #     #     rotatedUVs,
-        #     #     commonParams.Bomb.DoCellScale,
-        #     #     commonParams.Bomb.PatternScale,
-        #     #     commonParams.Bomb.DoRotationVariation,
-        #     #     commonParams.Bomb.RandomOffset, # Variation??
-        #     #     commonParams.Bomb.RotationVariation,
+        #     #     commonParams.cellScale,
+        #     #     commonParams.patternScale,
+        #     #     commonParams.doRotationVariation,
+        #     #     commonParams.bombRandomOffset, # Variation??
+        #     #     commonParams.bombRotationVariation,
         #     #     isNormalMap)
             
         #     textureSample = TextureSample(uvs = rotatedUVs, tex = texture)
@@ -215,6 +204,7 @@ class MF_LandscapeBaseMaterial:
             call.Result.rt = NamedRerouteDeclaration(f"rtMF_TextureCellBombing_Landscape_{map_name}", call.Result)
 
         def build(self):
+            return
             CurrentNodePos.y += NodePos.DeltaY
             CurrentNodePos.y -= NodePos.DeltaY
             CurrentNodePos.x += NodePos.DeltaX/4*3

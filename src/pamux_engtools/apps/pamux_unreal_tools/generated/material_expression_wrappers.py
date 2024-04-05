@@ -1,5 +1,8 @@
 # This file is generated. Please do NOT modify.
 import unreal
+import logging
+logger = logging.getLogger(__name__)
+
 from pamux_unreal_tools.impl.material_expression_impl import MaterialExpressionImpl
 from pamux_unreal_tools.impl.material_expression_editor_property_impl import MaterialExpressionEditorPropertyImpl
 from pamux_unreal_tools.impl.in_socket_impl import InSocketImpl

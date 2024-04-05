@@ -19,3 +19,6 @@ class InSocket(Socket):
 class OutSocket(Socket):
     def __init__(self, material_expression: MaterialExpressionBaseBase, name: str, type):
         super().__init__(material_expression, name, type, True)
+
+    def add_rt(self, container_name:str = None, socket_name:str = None):
+        raise Exception("add_rt must be implemented")

@@ -20,7 +20,7 @@ def ILandscapeBaseMaterial(
         uvParams: Vec4f = Vec4f(1.0, 1.0, 0.5, 0.5),
         rotation: float = 0.0,
         doTextureBomb: bool = True,
-        bombDoRotationVariation: bool = False,
+        doRotationVariation: bool = False,
         bombCellScale: float = 1.0,
         bombPatternScale: float = 1.0,
         bombRandomOffset: float = 0.0,

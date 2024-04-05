@@ -6,6 +6,8 @@
 
 import re
 import shlex
+import logging
+logger = logging.getLogger(__name__)
 
 filePath = "C:/src/Pamux.EngTools/Data/UnrealMaterials/m_ground_grass.clipboard"
 
@@ -146,8 +148,8 @@ class Object:
 
     def dump(self):
         if self.Class == "/Script/Engine.MaterialExpressionLinearInterpolate":
-            print(self.Name)
-            print(self.Class)
+            logger.warning(self.Name)
+            logger.warning(self.Class)
         for child in self.children:
             child.dump()
 

@@ -36,7 +36,7 @@ def setup_properties(pamux_wrapper_class_name, doc):
 
         col = doc_line.find(":")
         if col == -1:
-            print(doc_line)
+            #print(doc_line)
             continue
 
         left = doc_line[0:col].strip().strip("-").strip().strip("`")
@@ -44,7 +44,7 @@ def setup_properties(pamux_wrapper_class_name, doc):
 
         col = left.find("`")
         if col == -1:
-            print(doc_line)
+            #print(doc_line)
             continue
 
         name = left[0:col]
@@ -54,7 +54,8 @@ def setup_properties(pamux_wrapper_class_name, doc):
             is_rw = True
             notes = notes.replace("[Read-Write]", "")
         else:
-            print(notes)
+            #print(notes)
+            pass
 
         # if name != "material_expression_editor_x" and name != "material_expression_editor_y":
         result.append(PropertyInfo(name, type, notes))

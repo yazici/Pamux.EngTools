@@ -1,5 +1,7 @@
 import os
 import shutil
+import logging
+logger = logging.getLogger(__name__)
 
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.utils.types import *
@@ -15,6 +17,14 @@ from pamux_unreal_tools.base.material_function.material_function_factory_base im
 from pamux_unreal_tools.base.material_expression.material_expression_container_factory_base import MaterialExpressionContainerFactoryBase
 
 class MaterialExpressionContainerBuilderBase:
+    container_path: str
+    container_name: str
+    material_function_factory: MaterialFunctionFactoryBase
+    container_factory: MaterialExpressionContainerFactoryBase
+    dependencies_class: type
+    inputs_class: type
+    outputs_class: type
+
     def __init__(self,
                  material_function_factory: MaterialFunctionFactoryBase,
                  container_factory: MaterialExpressionContainerFactoryBase,
@@ -27,12 +37,16 @@ class MaterialExpressionContainerBuilderBase:
         self.container_factory = container_factory
 
         self.container_path = container_path
+        self.container_name = container_path[container_path.rindex("/")+1:]
+        self.container_name = self.container_name[self.container_name.index("_")+1:]
         self.dependencies_class = dependencies_class
         self.inputs_class = inputs_class
         self.outputs_class = outputs_class
 
         self.unitW = unreal.Vector4f()
         self.unitW.set_editor_property("w", 1.0)
+
+        logger.warning(f"self.container_path: {self.container_path}")
 
     def load_MF(self, function_path: str, virtual_inputs: SocketNames, virtual_outputs: SocketNames) -> MaterialFunctionBase:
         return self.material_function_factory.load(self, function_path, virtual_inputs, virtual_outputs)
@@ -168,8 +182,10 @@ class MaterialExpressionContainerBuilderBase:
         raise Exception(f"Unsupported preview type calling build_FunctionInput with input_name: {input_name}")
 
     def __build_FunctionInput_impl(self, input_name: str, input_type: str, sort_priority: int, preview, use_preview_value_as_default: bool) -> FunctionInput:
-        result = FunctionInputFactory.create(input_name, input_type, preview)
-        result.add_rt()
+        result: FunctionInput = FunctionInputFactory.create(input_name, input_type, preview)
+        
+        result.add_rt(input_name)
+
         result.sort_priority.set(sort_priority)
 
         result.preview_value.set(self.unitW)
@@ -230,6 +246,3 @@ class MaterialExpressionContainerBuilderBase:
             return "zAxis"
         _name = name.replace(" ", "")
         return _name[0].lower() + _name[1:]
-
-    def __create_interface_dependencies_object(self):
-        print(self.interface)

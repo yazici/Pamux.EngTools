@@ -1,4 +1,6 @@
 import unreal
+import logging
+logger = logging.getLogger(__name__)
 
 from pamux_unreal_tools.base.material_expression.material_expression_editor_property_base import MaterialExpressionEditorPropertyBase
 from pamux_unreal_tools.base.material_expression.material_expression_sockets_base import InSocket, OutSocket
@@ -32,5 +34,5 @@ class MaterialExpressionBase(MaterialExpressionBaseBase):
     def rt(self):
         return self.output.rt
 
-    def add_rt(self):
-        return self.output.add_rt()
+    def add_rt(self, container_name:str = None, socket_name:str = None):
+        return self.output.add_rt(container_name, socket_name)

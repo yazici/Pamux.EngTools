@@ -1,17 +1,5 @@
-from pathlib import Path
-import sys
-
-# sys.path.append(str(Path(__file__).parent.parent.parent.parent.parent.resolve()))
-
-# from importlib import * 
-
-# reloads = []
-# for  k, v in sys.modules.items():
-#     if k.startswith("pamux_unreal_tools"):
-#         reloads.append(v)
-
-# for module in reloads:
-#     reload(module)
+import logging
+logger = logging.getLogger(__name__)
 
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 from pamux_unreal_tools.utils.types import *
@@ -46,7 +34,6 @@ class MF_TextureCellBombing_Landscape:
             self.randomRotationVariation    = builder.build_FunctionInput("RandomRotationVariation",    7, 1.0,                             True, True)
             self.isNormalMap                = builder.build_FunctionInput("IsNormalMap",                8, False,                           True, True)
 
-    # [ "Texture", "UVs", "CellScale", "PatternScale", "DoRotationVariation", "RandomOffsetVariation", "RandomRotationVariation", "IsNormalMap" ], [ "Result" ]
     class Builder(MaterialFunctionBuilder):
         def __init__(self):
             super().__init__(
@@ -96,12 +83,12 @@ class MF_TextureCellBombing_Landscape:
 
             worldPosition = Add(patternScaledUVs3Vector, offsetVariation)
 
-            rotateAboutWorldAxis_cheap_result1 = self.dependencies.rotateAboutWorldAxis_cheap.call()
-            rotateAboutWorldAxis_cheap_result1.rotationAmount.comesFrom(rotationVariation)
-            rotateAboutWorldAxis_cheap_result1.pivotPoint.comesFrom(pivotPoint1)
-            rotateAboutWorldAxis_cheap_result1.worldPosition.comesFrom(worldPosition)
+            call_result = self.dependencies.rotateAboutWorldAxis_cheap.call()
+            call_result.inputs.rotationAmount.comesFrom(rotationVariation)
+            call_result.inputs.pivotPoint.comesFrom(pivotPoint1)
+            call_result.inputs.worldPosition.comesFrom(worldPosition)
 
-            switch = StaticSwitch(Add(rotateAboutWorldAxis_cheap_result1.zAxis, worldPosition), worldPosition, self.inputs.doRotationVariation)
+            switch = StaticSwitch(Add(call_result.outputs.zAxis, worldPosition), worldPosition, self.inputs.doRotationVariation)
 
             randomRotateRG = ComponentMask(switch, "RG")
 
@@ -115,12 +102,12 @@ class MF_TextureCellBombing_Landscape:
             rotatedInputTexture.sampler_source.set(unreal.SamplerSourceMode.SSM_WRAP_WORLD_GROUP_SETTINGS)
             rotatedInputTexture.sampler_type.set(unreal.MaterialSamplerType.SAMPLERTYPE_COLOR)
 
-            rotateAboutWorldAxis_cheap_result2 = self.dependencies.rotateAboutWorldAxis_cheap.call()
-            rotateAboutWorldAxis_cheap_result2.rotationAmount.comesFrom(negativeRotationVariation)
-            rotateAboutWorldAxis_cheap_result2.pivotPoint.comesFrom(pivotPoint2)
-            rotateAboutWorldAxis_cheap_result2.worldPosition.comesFrom(rotatedInputTexture)
+            call_result = self.dependencies.rotateAboutWorldAxis_cheap.call()
+            call_result.inputs.rotationAmount.comesFrom(negativeRotationVariation)
+            call_result.inputs.pivotPoint.comesFrom(pivotPoint2)
+            call_result.inputs.worldPosition.comesFrom(rotatedInputTexture)
 
-            normalRotation = Add(rotateAboutWorldAxis_cheap_result2.zAxis, rotatedInputTexture)
+            normalRotation = Add(call_result.outputs.zAxis, rotatedInputTexture)
 
             switch1 = StaticSwitch(normalRotation, rotatedInputTexture, self.inputs.isNormalMap)
             switch2 = StaticSwitch(switch1, rotatedInputTexture, self.inputs.doRotationVariation)

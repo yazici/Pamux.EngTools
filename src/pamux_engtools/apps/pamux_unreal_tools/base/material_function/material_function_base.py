@@ -10,6 +10,14 @@ from pamux_unreal_tools.base.material_expression.material_expression_container_b
 from pamux_unreal_tools.impl.in_socket_impl import InSocketImpl
 from pamux_unreal_tools.impl.out_socket_impl import OutSocketImpl
 class MaterialFunctionBase(MaterialExpressionContainerBase):
+    class Inputs:
+        def __init__(self):
+             pass
+
+    class Outputs:
+        def __init__(self):
+             pass
+             
     def __init__(self, unrealAsset: unreal.MaterialFunction):
         super().__init__(unrealAsset,
                          MEL.create_material_expression_in_function,
@@ -23,23 +31,31 @@ class MaterialFunctionBase(MaterialExpressionContainerBase):
         result = MaterialFunctionCall()
         result.material_function.set(self.unrealAsset)
 
-        for name in self.virtual_inputs:
-            print("VI: " + name)
-            inSocket = InSocketImpl(result, name, 'StructProperty')
-            exec(f"result.{self.builder.get_field_name(name)} = inSocket", locals())
+        result.inputs = MaterialFunctionBase.Inputs()
+        result.outputs = MaterialFunctionBase.Outputs()
 
-        if self.builder is not None:
-            for name, member in inspect.getmembers(self.builder.outputs):
-                print("BOX: " + str(member) + "  " + str(type(member)))
-                if isinstance(member, FunctionOutput):
-                    print("BO: " + str(member))
-                    outSocket = OutSocketImpl(result, name, 'StructProperty')
-                    exec(f"result.{self.builder.get_field_name(name)} = outSocket", locals())
+        for name in self.virtual_inputs:
+            inSocket = InSocketImpl(result, name, 'StructProperty')
+            exec(f"result.inputs.{self.builder.get_field_name(name)} = inSocket", locals())
 
         for name in self.virtual_outputs:
-            print(f"result.{self.builder.get_field_name(name)} = outSocket")
             outSocket = OutSocketImpl(result, name, 'StructProperty')
-            exec(f"result.{self.builder.get_field_name(name)} = outSocket", locals())
+            exec(f"result.outputs.{self.builder.get_field_name(name)} = outSocket", locals())
+
+        self.inputs = None
+        self.outputs = None
+        if self.builder is not None:
+            self.inputs = self.builder.inputs
+            for name, member in inspect.getmembers(self.inputs):
+                if isinstance(member, FunctionInput):
+                    inSocket = InSocketImpl(result, name, 'StructProperty')
+                    exec(f"result.inputs.{self.builder.get_field_name(name)} = inSocket", locals())
+
+            self.outputs = self.builder.outputs
+            for name, member in inspect.getmembers(self.outputs):
+                if isinstance(member, FunctionOutput):
+                    outSocket = OutSocketImpl(result, name, 'StructProperty')
+                    exec(f"result.outputs.{self.builder.get_field_name(name)} = outSocket", locals())
 
         self.call_result = result
         return result

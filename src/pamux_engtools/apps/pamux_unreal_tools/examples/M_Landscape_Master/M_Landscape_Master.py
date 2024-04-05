@@ -51,6 +51,14 @@ class M_Landscape_Master:
 
             self.MF_TextureCellBombing_Landscape = MF_TextureCellBombing_Landscape.Builder().get()
 
+            self.MF_Wetness = MF_Wetness.Builder().get()
+            self.MF_Puddles = MF_Puddles.Builder().get()
+            self.MF_BlendTwoMaterialsViaHighOpacityMap = MF_BlendTwoMaterialsViaHighOpacityMap.Builder().get()
+            self.MF_GlancingAngleSpecCorrection = MF_GlancingAngleSpecCorrection.Builder().get()
+
+            self.MF_FoliageMask = MF_FoliageMask.Builder().get()
+
+
             self.MF_LandscapeBaseMaterial = MF_LandscapeBaseMaterial.Builder().get()
 
             self.MLF_Layers = {}
@@ -60,13 +68,7 @@ class M_Landscape_Master:
                 else:
                     self.MLF_Layers[layer_name] = MLF_LayerX.Builder(layer_name, self.MF_LandscapeBaseMaterial).get()
 
-            self.MF_Wetness = MF_Wetness.Builder().get()
-            self.MF_Puddles = MF_Puddles.Builder().get()
-            self.MF_BlendTwoMaterialsViaHighOpacityMap = MF_BlendTwoMaterialsViaHighOpacityMap.Builder().get()
-            self.MF_GlancingAngleSpecCorrection = MF_GlancingAngleSpecCorrection.Builder().get()
-
-            self.MF_FoliageMask = MF_FoliageMask.Builder().get()
-
+            
     class Builder(MaterialBuilder):
         def __init__(self, asset_path: str):
             super().__init__(

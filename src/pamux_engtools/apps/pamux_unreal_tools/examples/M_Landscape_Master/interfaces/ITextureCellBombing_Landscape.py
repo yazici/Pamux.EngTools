@@ -1,5 +1,6 @@
 import unreal
 from pamux_unreal_tools.utils.interface_types import *
+from pamux_unreal_tools.utils.types import *
 
 @material_function_interface("{asset_path_root}/Functions/MF_TextureCellBombing_Landscape")
 def ITextureCellBombing_Landscape(

@@ -1,3 +1,4 @@
+import inspect
 import unreal
 
 MEL = unreal.MaterialEditingLibrary
@@ -23,10 +24,20 @@ class MaterialFunctionBase(MaterialExpressionContainerBase):
         result.material_function.set(self.unrealAsset)
 
         for name in self.virtual_inputs:
+            print("VI: " + name)
             inSocket = InSocketImpl(result, name, 'StructProperty')
             exec(f"result.{self.builder.get_field_name(name)} = inSocket", locals())
 
+        if self.builder is not None:
+            for name, member in inspect.getmembers(self.builder.outputs):
+                print("BOX: " + str(member) + "  " + str(type(member)))
+                if isinstance(member, FunctionOutput):
+                    print("BO: " + str(member))
+                    outSocket = OutSocketImpl(result, name, 'StructProperty')
+                    exec(f"result.{self.builder.get_field_name(name)} = outSocket", locals())
+
         for name in self.virtual_outputs:
+            print(f"result.{self.builder.get_field_name(name)} = outSocket")
             outSocket = OutSocketImpl(result, name, 'StructProperty')
             exec(f"result.{self.builder.get_field_name(name)} = outSocket", locals())
 

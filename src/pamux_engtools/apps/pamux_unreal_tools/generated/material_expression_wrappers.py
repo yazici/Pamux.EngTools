@@ -268,13 +268,15 @@ class CloudSampleAttribute(MaterialExpressionImpl):
         super().__init__(unreal.MaterialExpressionCloudSampleAttribute, node_pos)
 
 class CollectionParameter(MaterialExpressionImpl):
-    def __init__(self, node_pos: NodePos = None) -> None:
+    def __init__(self, parameter_name = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionCollectionParameter, node_pos)
 
         self.collection = MaterialExpressionEditorPropertyImpl(self, 'collection', 'MaterialParameterCollection')
         self.parameter_name = MaterialExpressionEditorPropertyImpl(self, 'parameter_name', 'Name')
 
         self.parameterId = InSocketImpl(self, 'ParameterId', 'StructProperty')
+        if parameter_name is not None:
+            self.parameter_name.set(parameter_name)
 
 class Comment(MaterialExpressionImpl):
     def __init__(self, node_pos: NodePos = None) -> None:
@@ -647,7 +649,7 @@ class FontSample(MaterialExpressionImpl):
         self.font_texture_page = MaterialExpressionEditorPropertyImpl(self, 'font_texture_page', 'int32')
 
 class FontSampleParameter(MaterialExpressionImpl):
-    def __init__(self, node_pos: NodePos = None) -> None:
+    def __init__(self, parameter_name = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionFontSampleParameter, node_pos)
 
         self.font = MaterialExpressionEditorPropertyImpl(self, 'font', 'Font')
@@ -657,6 +659,8 @@ class FontSampleParameter(MaterialExpressionImpl):
         self.sort_priority = MaterialExpressionEditorPropertyImpl(self, 'sort_priority', 'int32')
 
         self.expressionGUID = InSocketImpl(self, 'ExpressionGUID', 'StructProperty')
+        if parameter_name is not None:
+            self.parameter_name.set(parameter_name)
 
 class ForLoop(MaterialExpressionImpl):
     def __init__(self, node_pos: NodePos = None) -> None:
@@ -1363,7 +1367,7 @@ class Panner(MaterialExpressionImpl):
         self.speed = InSocketImpl(self, 'Speed', 'StructProperty')
 
 class Parameter(MaterialExpressionImpl):
-    def __init__(self, node_pos: NodePos = None) -> None:
+    def __init__(self, parameter_name = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionParameter, node_pos)
 
         self.group = MaterialExpressionEditorPropertyImpl(self, 'group', 'Name')
@@ -1371,6 +1375,8 @@ class Parameter(MaterialExpressionImpl):
         self.sort_priority = MaterialExpressionEditorPropertyImpl(self, 'sort_priority', 'int32')
 
         self.expressionGUID = InSocketImpl(self, 'ExpressionGUID', 'StructProperty')
+        if parameter_name is not None:
+            self.parameter_name.set(parameter_name)
 
 class ParticleColor(MaterialExpressionImpl):
     def __init__(self, node_pos: NodePos = None) -> None:
@@ -1629,7 +1635,7 @@ class RuntimeVirtualTextureSample(MaterialExpressionImpl):
         self.mipValue = InSocketImpl(self, 'MipValue', 'StructProperty')
 
 class RuntimeVirtualTextureSampleParameter(MaterialExpressionImpl):
-    def __init__(self, node_pos: NodePos = None) -> None:
+    def __init__(self, parameter_name = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionRuntimeVirtualTextureSampleParameter, node_pos)
 
         self.adaptive = MaterialExpressionEditorPropertyImpl(self, 'adaptive', 'bool')
@@ -1647,6 +1653,8 @@ class RuntimeVirtualTextureSampleParameter(MaterialExpressionImpl):
         self.coordinates = InSocketImpl(self, 'Coordinates', 'StructProperty')
         self.worldPosition = InSocketImpl(self, 'WorldPosition', 'StructProperty')
         self.mipValue = InSocketImpl(self, 'MipValue', 'StructProperty')
+        if parameter_name is not None:
+            self.parameter_name.set(parameter_name)
 
 class SamplePhysicsIntegerField(MaterialExpressionImpl):
     def __init__(self, node_pos: NodePos = None) -> None:
@@ -1900,7 +1908,7 @@ class SparseVolumeTextureObject(MaterialExpressionImpl):
         self.sparse_volume_texture = MaterialExpressionEditorPropertyImpl(self, 'sparse_volume_texture', 'SparseVolumeTexture')
 
 class SparseVolumeTextureObjectParameter(MaterialExpressionImpl):
-    def __init__(self, node_pos: NodePos = None) -> None:
+    def __init__(self, parameter_name = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionSparseVolumeTextureObjectParameter, node_pos)
 
         self.group = MaterialExpressionEditorPropertyImpl(self, 'group', 'Name')
@@ -1908,6 +1916,8 @@ class SparseVolumeTextureObjectParameter(MaterialExpressionImpl):
         self.sampler_source = MaterialExpressionEditorPropertyImpl(self, 'sampler_source', 'SamplerSourceMode')
         self.sort_priority = MaterialExpressionEditorPropertyImpl(self, 'sort_priority', 'int32')
         self.sparse_volume_texture = MaterialExpressionEditorPropertyImpl(self, 'sparse_volume_texture', 'SparseVolumeTexture')
+        if parameter_name is not None:
+            self.parameter_name.set(parameter_name)
 
 class SparseVolumeTextureSample(MaterialExpressionImpl):
     def __init__(self, node_pos: NodePos = None) -> None:
@@ -1917,7 +1927,7 @@ class SparseVolumeTextureSample(MaterialExpressionImpl):
         self.sparse_volume_texture = MaterialExpressionEditorPropertyImpl(self, 'sparse_volume_texture', 'SparseVolumeTexture')
 
 class SparseVolumeTextureSampleParameter(MaterialExpressionImpl):
-    def __init__(self, node_pos: NodePos = None) -> None:
+    def __init__(self, parameter_name = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionSparseVolumeTextureSampleParameter, node_pos)
 
         self.group = MaterialExpressionEditorPropertyImpl(self, 'group', 'Name')
@@ -1925,6 +1935,8 @@ class SparseVolumeTextureSampleParameter(MaterialExpressionImpl):
         self.sampler_source = MaterialExpressionEditorPropertyImpl(self, 'sampler_source', 'SamplerSourceMode')
         self.sort_priority = MaterialExpressionEditorPropertyImpl(self, 'sort_priority', 'int32')
         self.sparse_volume_texture = MaterialExpressionEditorPropertyImpl(self, 'sparse_volume_texture', 'SparseVolumeTexture')
+        if parameter_name is not None:
+            self.parameter_name.set(parameter_name)
 
 class SpeedTree(MaterialExpressionImpl):
     def __init__(self, node_pos: NodePos = None) -> None:
@@ -2010,7 +2022,7 @@ class StaticBoolParameter(MaterialExpressionImpl):
             self.default_value.set(default_value)
 
 class StaticComponentMaskParameter(MaterialExpressionImpl):
-    def __init__(self, node_pos: NodePos = None) -> None:
+    def __init__(self, parameter_name = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionStaticComponentMaskParameter, node_pos)
 
         self.default_a = MaterialExpressionEditorPropertyImpl(self, 'default_a', 'bool')
@@ -2022,6 +2034,8 @@ class StaticComponentMaskParameter(MaterialExpressionImpl):
         self.sort_priority = MaterialExpressionEditorPropertyImpl(self, 'sort_priority', 'int32')
 
         self.expressionGUID = InSocketImpl(self, 'ExpressionGUID', 'StructProperty')
+        if parameter_name is not None:
+            self.parameter_name.set(parameter_name)
 
 class StaticSwitch(MaterialExpressionImpl):
     def __init__(self, true = None, false = None, value = None, node_pos: NodePos = None) -> None:
@@ -2256,7 +2270,7 @@ class TextureObject(MaterialExpressionImpl):
             self.texture.set(texture)
 
 class TextureObjectParameter(MaterialExpressionImpl):
-    def __init__(self, node_pos: NodePos = None) -> None:
+    def __init__(self, parameter_name = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionTextureObjectParameter, node_pos)
 
         self.automatic_view_mip_bias = MaterialExpressionEditorPropertyImpl(self, 'automatic_view_mip_bias', 'bool')
@@ -2274,6 +2288,8 @@ class TextureObjectParameter(MaterialExpressionImpl):
 
         self.expressionGUID = InSocketImpl(self, 'ExpressionGUID', 'StructProperty')
         self.coordinates = InSocketImpl(self, 'Coordinates', 'StructProperty')
+        if parameter_name is not None:
+            self.parameter_name.set(parameter_name)
 
 class TextureProperty(MaterialExpressionImpl):
     def __init__(self, node_pos: NodePos = None) -> None:
@@ -2308,7 +2324,7 @@ class TextureSample(MaterialExpressionImpl):
         self.RGBA = OutSocketImpl(self, 'RGBA', 'StructProperty')
 
 class TextureSampleParameter(MaterialExpressionImpl):
-    def __init__(self, node_pos: NodePos = None) -> None:
+    def __init__(self, parameter_name = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionTextureSampleParameter, node_pos)
 
         self.automatic_view_mip_bias = MaterialExpressionEditorPropertyImpl(self, 'automatic_view_mip_bias', 'bool')
@@ -2326,6 +2342,8 @@ class TextureSampleParameter(MaterialExpressionImpl):
 
         self.expressionGUID = InSocketImpl(self, 'ExpressionGUID', 'StructProperty')
         self.coordinates = InSocketImpl(self, 'Coordinates', 'StructProperty')
+        if parameter_name is not None:
+            self.parameter_name.set(parameter_name)
 
 class TextureSampleParameter2D(MaterialExpressionImpl):
     def __init__(self, node_pos: NodePos = None) -> None:

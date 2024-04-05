@@ -17,6 +17,7 @@ import sys
 #     reload(module)
 
 from pamux_unreal_tools.generated.material_expression_wrappers import *
+from pamux_unreal_tools.utils.types import *
 
 from pamux_unreal_tools.builders.material_function_builder import MaterialFunctionBuilder
 from pamux_unreal_tools.base.material_function.material_function_outputs_base import MaterialFunctionOutputs
@@ -38,31 +39,30 @@ class MF_BlendTwoMaterialsViaHighOpacityMap:
     class Inputs:
         def __init__(self, builder: MaterialExpressionContainerBuilderBase) -> None:
             # No Preview
-            self.alpha      = builder.build_FunctionInput("Alpha",      2, 0.0, False)
-            self.materialA  = builder.build_FunctionInput("MaterialA",  0, unreal.FunctionInputType.FUNCTION_INPUT_MATERIAL_ATTRIBUTES, False)
-            self.materialB  = builder.build_FunctionInput("MaterialB",  1, unreal.FunctionInputType.FUNCTION_INPUT_MATERIAL_ATTRIBUTES, False)
+            self.alpha      = builder.build_FunctionInput("Alpha",      2, 0.0,                     False, False)
+            self.materialA  = builder.build_FunctionInput("MaterialA",  0, TMaterialAttributes(),   False, False)
+            self.materialB  = builder.build_FunctionInput("MaterialB",  1, TMaterialAttributes(),   False, False)
 
     class Builder(MaterialFunctionBuilder):
         def __init__(self) -> None:
             super().__init__(
-                MaterialFunctionFactory(),
                 "/Game/Materials/Pamux/Landscape/Functions/MF_BlendTwoMaterialsViaHighOpacityMap",
                 MF_BlendTwoMaterialsViaHighOpacityMap.Dependencies,
                 MF_BlendTwoMaterialsViaHighOpacityMap.Inputs,
                 MaterialFunctionOutputs.Result)
 
         def build(self):
-            breakMaterialAttributesA = BreakMaterialAttributes(self.inputs.materialA.rt)
-            breakMaterialAttributesB = BreakMaterialAttributes(self.inputs.materialB.rt)
+            breakMaterialAttributesA = BreakMaterialAttributes(self.inputs.materialA)
+            breakMaterialAttributesB = BreakMaterialAttributes(self.inputs.materialB)
 
             # Transistion is misspelled in the built in function
             lerp = self.dependencies.heightLerpWithTwoHeightMaps.call()
-            lerp.transistionPhase.comesFrom(self.inputs.alpha.rt)
+            lerp.transistionPhase.comesFrom(self.inputs.alpha)
             lerp.heightTexture1.comesFrom(breakMaterialAttributesA.opacity)
             lerp.heightTexture2.comesFrom(breakMaterialAttributesB.opacity)
 
-            self.blendMaterialAttributes = BlendMaterialAttributes(self.inputs.materialA.rt, self.inputs.materialB.rt, lerp.alpha)
+            self.blendMaterialAttributes = BlendMaterialAttributes(self.inputs.materialA, self.inputs.materialB, lerp.alpha)
 
-            self.blendMaterialAttributes.output.connectToFunctionOutput(self.outputs.Result)
+            self.blendMaterialAttributes.connectTo(self.outputs.result)
 
 # MF_BlendTwoMaterialsViaHighOpacityMap.Builder().get()

@@ -10,13 +10,12 @@ from pamux_unreal_tools.factories.material_expression_factories import FunctionI
 
 from pamux_unreal_tools.utils.build_stack import BuildStack
 from pamux_unreal_tools.utils.node_pos import NodePos, CurrentNodePos
-from pamux_unreal_tools.utils.texture_sample_set import TextureSampleSet
+from pamux_unreal_tools.utils.texture_sample_set import TTextureSampleSet, TextureSampleSet
 from pamux_unreal_tools.base.material_function.material_function_factory_base import MaterialFunctionFactoryBase
 from pamux_unreal_tools.base.material_expression.material_expression_container_factory_base import MaterialExpressionContainerFactoryBase
 
 class MaterialExpressionContainerBuilderBase:
     def __init__(self,
-                 # interface,
                  material_function_factory: MaterialFunctionFactoryBase,
                  container_factory: MaterialExpressionContainerFactoryBase,
                  container_path: str,
@@ -41,34 +40,131 @@ class MaterialExpressionContainerBuilderBase:
     def build(self):
         pass
 
-    def build_FunctionInput(self, input_name: str, sort_priority: int, preview, use_preview_value_as_default: bool = True) -> FunctionInput:
+    def build_FunctionInput(self, input_name: str, sort_priority: int, preview, use_preview_input: bool, use_preview_value_as_default: bool) -> FunctionInput:
         if isinstance(preview, float):
-            return self.__build_FunctionInput_impl(input_name, unreal.FunctionInputType.FUNCTION_INPUT_SCALAR, sort_priority, Constant(preview), use_preview_value_as_default)
+            if use_preview_input:
+                preview = Constant(preview)
+            else:
+                preview = None
+
+            return self.__build_FunctionInput_impl(
+                input_name,
+                unreal.FunctionInputType.FUNCTION_INPUT_SCALAR,
+                sort_priority,
+                preview,
+                use_preview_value_as_default)
 
         if isinstance(preview, bool):
-            return self.__build_FunctionInput_impl(input_name, unreal.FunctionInputType.FUNCTION_INPUT_STATIC_BOOL, sort_priority, StaticBool(preview), use_preview_value_as_default)
+            if use_preview_input:
+                preview = StaticBool(preview)
+            else:
+                preview = None
+
+            return self.__build_FunctionInput_impl(
+                input_name,
+                unreal.FunctionInputType.FUNCTION_INPUT_STATIC_BOOL,
+                sort_priority,
+                preview,
+                use_preview_value_as_default)
 
         if isinstance(preview, VecFBase):
-            return self.__build_FunctionInput_impl(input_name, preview.functionInputType, sort_priority, preview.linearColor, use_preview_value_as_default)
-        
-        if isinstance(preview, TextureObject):
-            return self.__build_FunctionInput_impl(input_name, unreal.FunctionInputType.FUNCTION_INPUT_TEXTURE2D, sort_priority, preview, use_preview_value_as_default)
-        
-        if isinstance(preview, TextureCoordinate):
-            return self.__build_FunctionInput_impl(input_name, unreal.FunctionInputType.FUNCTION_INPUT_VECTOR2, sort_priority, preview, use_preview_value_as_default)
-        
-        if isinstance(preview, MakeMaterialAttributes):
-            return self.__build_FunctionInput_impl(input_name, unreal.FunctionInputType.FUNCTION_INPUT_MATERIAL_ATTRIBUTES, sort_priority, preview, use_preview_value_as_default)
-        
-        if isinstance(preview, TextureSampleSet):
-            makeMaterialAttributes = MakeMaterialAttributes()
-            makeMaterialAttributes.baseColor.comesFrom(preview.baseColor.RGB)
-            makeMaterialAttributes.roughness.comesFrom(preview.roughness.RGB)
-            makeMaterialAttributes.opacity.comesFrom(preview.opacity.RGB)
-            makeMaterialAttributes.normal.comesFrom(preview.normal.RGB)
+            if preview is None:
+                functionInputType = None
+            else:
+                functionInputType = preview.functionInputType
 
-            return self.__build_FunctionInput_impl(input_name, unreal.FunctionInputType.FUNCTION_INPUT_MATERIAL_ATTRIBUTES, sort_priority, makeMaterialAttributes, use_preview_value_as_default)
+            if use_preview_input:
+                preview = preview.linearColor
+            else:
+                preview = None
+
+            return self.__build_FunctionInput_impl(
+                input_name,
+                functionInputType,
+                sort_priority,
+                preview,
+                use_preview_value_as_default)
         
+        if isinstance(preview, TTextureObject_Color):
+            if use_preview_input:
+                preview = TextureObject()
+            else:
+                preview = None
+
+            return self.__build_FunctionInput_impl(
+                input_name,
+                unreal.FunctionInputType.FUNCTION_INPUT_TEXTURE2D,
+                sort_priority,
+                preview,
+                use_preview_value_as_default)
+
+        if isinstance(preview, TTextureObject_Normal):
+            if use_preview_input:
+                preview = TextureObject(unreal.MaterialSamplerType.SAMPLERTYPE_NORMAL)
+            else:
+                preview = None
+
+            return self.__build_FunctionInput_impl(
+                input_name,
+                unreal.FunctionInputType.FUNCTION_INPUT_TEXTURE2D,
+                sort_priority,
+                preview,
+                use_preview_value_as_default)
+
+        if isinstance(preview, TTextureCoordinate):
+            if use_preview_input:
+                preview = TextureCoordinate(preview.x, preview.y)
+            else:
+                preview = None
+
+            return self.__build_FunctionInput_impl(
+                input_name,
+                unreal.FunctionInputType.FUNCTION_INPUT_VECTOR2,
+                sort_priority,
+                preview,
+                use_preview_value_as_default)
+
+        if isinstance(preview, MakeMaterialAttributes):
+            if not use_preview_input:
+                preview = None
+
+            return self.__build_FunctionInput_impl(
+                input_name,
+                unreal.FunctionInputType.FUNCTION_INPUT_MATERIAL_ATTRIBUTES,
+                sort_priority,
+                preview,
+                use_preview_value_as_default)
+
+        if isinstance(preview, TTextureSampleSet):
+            if use_preview_input:
+                preview = TextureSampleSet(preview)
+                makeMaterialAttributes = MakeMaterialAttributes()
+                makeMaterialAttributes.baseColor.comesFrom(preview.baseColor.RGB)
+                makeMaterialAttributes.roughness.comesFrom(preview.roughness.RGB)
+                makeMaterialAttributes.opacity.comesFrom(preview.opacity.RGB)
+                makeMaterialAttributes.normal.comesFrom(preview.normal.RGB)
+                preview = makeMaterialAttributes
+            else:
+                preview = None
+
+            return self.__build_FunctionInput_impl(
+                input_name,
+                unreal.FunctionInputType.FUNCTION_INPUT_MATERIAL_ATTRIBUTES,
+                sort_priority,
+                preview,
+                use_preview_value_as_default)
+        
+        if isinstance(preview, TMaterialAttributes):
+            if not use_preview_input:
+                preview = None
+
+            return self.__build_FunctionInput_impl(
+                input_name,
+                unreal.FunctionInputType.FUNCTION_INPUT_MATERIAL_ATTRIBUTES,
+                sort_priority,
+                preview,
+                use_preview_value_as_default)
+
         raise Exception(f"Unsupported preview type calling build_FunctionInput with input_name: {input_name}")
 
     def __build_FunctionInput_impl(self, input_name: str, input_type: str, sort_priority: int, preview, use_preview_value_as_default: bool) -> FunctionInput:
@@ -96,6 +192,7 @@ class MaterialExpressionContainerBuilderBase:
                 shutil.rmtree(folder)
             
         result = self.__loadAndCleanOrCreate(virtual_inputs, virtual_outputs)
+        result.builder = self
 
         self.dependencies = self.dependencies_class(self)
 
@@ -111,6 +208,7 @@ class MaterialExpressionContainerBuilderBase:
         result.save()
 
         BuildStack.pop()
+
         return result
 
     def makeFunctionOutput(self, name, sort_priority) -> FunctionOutput:

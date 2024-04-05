@@ -14,6 +14,7 @@ import sys
 #     reload(module)
 
 from pamux_unreal_tools.generated.material_expression_wrappers import *
+from pamux_unreal_tools.utils.types import *
 
 from pamux_unreal_tools.builders.material_function_builder import MaterialFunctionBuilder
 from pamux_unreal_tools.base.material_expression.material_expression_container_builder_base import MaterialExpressionContainerBuilderBase
@@ -35,15 +36,15 @@ class MF_TextureCellBombing_Landscape:
 
     class Inputs:
         def __init__(self, builder: MaterialExpressionContainerBuilderBase):
-            self.texture                    = builder.build_FunctionInput("Texture",                    0, TextureObject(unreal.MaterialSamplerType.SAMPLERTYPE_COLOR, None), False)
-            self.UVs                        = builder.build_FunctionInput("UVs",                        1, TextureCoordinate(1.0, 1.0))
+            self.texture                    = builder.build_FunctionInput("Texture",                    0, TTextureObject_Color(),          True, False)
+            self.UVs                        = builder.build_FunctionInput("UVs",                        1, TTextureCoordinate(1.0, 1.0),    True, True)
 
-            self.cellScale                  = builder.build_FunctionInput("CellScale",                  3, 2.0)
-            self.patternScale               = builder.build_FunctionInput("PatternScale",               4, 10.0)
-            self.doRotationVariation        = builder.build_FunctionInput("DoRotationVariation",        5, False)
-            self.randomOffsetVariation      = builder.build_FunctionInput("RandomOffsetVariation",      6, 1.0)
-            self.randomRotationVariation    = builder.build_FunctionInput("RandomRotationVariation",    7, 1.0)
-            self.isNormalMap                = builder.build_FunctionInput("IsNormalMap",                8, False)
+            self.cellScale                  = builder.build_FunctionInput("CellScale",                  3, 2.0,                             True, True)
+            self.patternScale               = builder.build_FunctionInput("PatternScale",               4, 10.0,                            True, True)
+            self.doRotationVariation        = builder.build_FunctionInput("DoRotationVariation",        5, False,                           True, True)
+            self.randomOffsetVariation      = builder.build_FunctionInput("RandomOffsetVariation",      6, 1.0,                             True, True)
+            self.randomRotationVariation    = builder.build_FunctionInput("RandomRotationVariation",    7, 1.0,                             True, True)
+            self.isNormalMap                = builder.build_FunctionInput("IsNormalMap",                8, False,                           True, True)
 
     # [ "Texture", "UVs", "CellScale", "PatternScale", "DoRotationVariation", "RandomOffsetVariation", "RandomRotationVariation", "IsNormalMap" ], [ "Result" ]
     class Builder(MaterialFunctionBuilder):

@@ -3,6 +3,19 @@ import unreal
 SocketNames = list[str]
 
 
+class TMaterialAttributes:
+    pass
+
+class TTextureObject_Color:
+    pass
+
+class TTextureObject_Normal:
+    pass
+
+class TTextureCoordinate:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
 
 class VecFBase:
     def __init__(self):

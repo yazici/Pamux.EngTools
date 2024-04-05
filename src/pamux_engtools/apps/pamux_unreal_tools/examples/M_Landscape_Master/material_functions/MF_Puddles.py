@@ -15,6 +15,7 @@ import sys
 #     reload(module)
 
 from pamux_unreal_tools.generated.material_expression_wrappers import *
+from pamux_unreal_tools.utils.types import *
 
 from pamux_unreal_tools.base.material_function.material_function_outputs_base import MaterialFunctionOutputs
 from pamux_unreal_tools.base.material_expression.material_expression_container_builder_base import MaterialExpressionContainerBuilderBase
@@ -26,8 +27,8 @@ from pamux_unreal_tools.examples.M_Landscape_Master.interfaces.IPuddles import I
 
 class MF_Puddles:
     class Inputs:
-        def __init__(self, builder: MaterialExpressionContainerBuilderBase):
-            self.materialAttributes = builder.build_FunctionInput("MaterialAttributes", 0, self.textureSampleSet, False)
+        def __init__(self, builder: WetnessBuilder):
+            self.materialAttributes = builder.build_FunctionInput("MaterialAttributes", 0, builder.textureSampleSet, True, False)
 
             self.breakMaterialAttributes = BreakMaterialAttributes(self.materialAttributes)
             self.breakMaterialAttributes.baseColor.add_rt()

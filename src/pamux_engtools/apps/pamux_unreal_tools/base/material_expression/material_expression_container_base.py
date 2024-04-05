@@ -9,7 +9,13 @@ from pamux_unreal_tools.generated.material_expression_wrappers import NamedRerou
 
 class MaterialExpressionContainerBase:
     # unreal.Material | unreal.MaterialFunction
-    def __init__(self, unrealAsset, f_create_material_expression, f_delete_all_material_expression, f_layout_expression, should_recompile: bool = False) -> None:
+    def __init__(self,
+                 unrealAsset,
+                 f_create_material_expression,
+                 f_delete_all_material_expression,
+                 f_layout_expression,
+                 should_recompile: bool = False) -> None:
+        self.builder = None
         self.unrealAsset: unreal.Material | unreal.MaterialFunction = unrealAsset
         self.f_create_material_expression = f_create_material_expression
         self.f_delete_all_material_expression = f_delete_all_material_expression

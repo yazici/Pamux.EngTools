@@ -73,10 +73,7 @@ class TVectorParam(InterfaceTypeBase):
         self.z = z
         self.w = w
 
-class TTextureCoordinate(InterfaceTypeBase):
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
+
 
 class TTextureObject(InterfaceTypeBase):
     materialSamplerType: unreal.MaterialSamplerType

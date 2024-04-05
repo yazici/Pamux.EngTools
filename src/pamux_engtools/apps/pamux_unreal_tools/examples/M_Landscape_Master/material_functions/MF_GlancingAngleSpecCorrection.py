@@ -1,20 +1,4 @@
-import unreal
-from pathlib import Path
-import sys
-# import os
-# import shutil
-
-# sys.path.append(str(Path(__file__).parent.parent.parent.parent.parent.resolve()))
-
-# from importlib import * 
-
-# reloads = []
-# for  k, v in sys.modules.items():
-#     if k.startswith("pamux_unreal_tools"):
-#         reloads.append(v)
-
-# for module in reloads:
-#     reload(module)
+from pamux_unreal_tools.utils.types import *
 
 from pamux_unreal_tools.builders.material_function_builder import MaterialFunctionBuilder
 from pamux_unreal_tools.base.material_expression.material_expression_container_builder_base import MaterialExpressionContainerBuilderBase
@@ -28,7 +12,7 @@ from pamux_unreal_tools.factories.material_function_factory import MaterialFunct
 class MF_GlancingAngleSpecCorrection:
     class Inputs:
         def __init__(self, builder: MaterialExpressionContainerBuilderBase):
-            self.materialAttributes = builder.build_FunctionInput("In", 0,  unreal.FunctionInputType.FUNCTION_INPUT_MATERIAL_ATTRIBUTES, False)
+            self.materialAttributes = builder.build_FunctionInput("In", 0,  TMaterialAttributes(), False, False)
 
             self.pixelDepth = PixelDepth()
             self.pixelDepth.add_rt()
@@ -52,7 +36,6 @@ class MF_GlancingAngleSpecCorrection:
     class Builder(MaterialFunctionBuilder):
         def __init__(self):
             super().__init__(
-                MaterialFunctionFactory(),
                 "/Game/Materials/Pamux/Landscape/Functions/MF_GlancingAngleSpecCorrection",
                 MaterialFunctionDependenciesBase,
                 MF_GlancingAngleSpecCorrection.Inputs,
@@ -88,6 +71,6 @@ class MF_GlancingAngleSpecCorrection:
             makeMaterialAttributes = MakeMaterialAttributes()
             makeMaterialAttributes.specular.comesFrom(lerp)
 
-            self.outputs.Result.comesFrom(makeMaterialAttributes)
+            self.outputs.result.comesFrom(makeMaterialAttributes)
 
 #MF_GlancingAngleSpecCorrection.Builder().get()

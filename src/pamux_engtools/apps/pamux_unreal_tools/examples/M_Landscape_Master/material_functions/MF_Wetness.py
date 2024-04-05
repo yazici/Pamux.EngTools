@@ -1,33 +1,17 @@
-import unreal
-from pathlib import Path
-import sys
-
-# sys.path.append(str(Path(__file__).parent.parent.parent.parent.parent.resolve()))
-
-# from importlib import * 
-
-# reloads = []
-# for  k, v in sys.modules.items():
-#     if k.startswith("pamux_unreal_tools"):
-#         reloads.append(v)
-
-# for module in reloads:
-#     reload(module)
-
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 
 from pamux_unreal_tools.base.material_function.material_function_dependencies_base import MaterialFunctionDependenciesBase
 from pamux_unreal_tools.base.material_function.material_function_outputs_base import MaterialFunctionOutputs
-from pamux_unreal_tools.base.material_expression.material_expression_container_builder_base import MaterialExpressionContainerBuilderBase
 
 from pamux_unreal_tools.factories.material_expression_factories import MakeMaterialAttributesFactory
 from pamux_unreal_tools.builders.wetness_builder import WetnessBuilder
+
 from pamux_unreal_tools.examples.M_Landscape_Master.interfaces.IWetness import IWetness
 
 class MF_Wetness:
     class Inputs:
-        def __init__(self, builder: MaterialExpressionContainerBuilderBase):
-            self.materialAttributes = builder.build_FunctionInput("MaterialAttributes", 0, self.textureSampleSet, False)
+        def __init__(self, builder: WetnessBuilder):
+            self.materialAttributes = builder.build_FunctionInput("MaterialAttributes", 0, builder.textureSampleSet, True, False)
 
             self.wetnessSaturation = ScalarParameter("Wetness Saturation", -0.5)
             self.wetnessSaturation.add_rt()
@@ -38,7 +22,7 @@ class MF_Wetness:
             self.wetnessRoughness = ScalarParameter("Wetness Roughness", 0.3)
             self.wetnessRoughness.add_rt()
 
-            self.wetness = builder.build_FunctionInput("Wetness", 1, 1.0, False)
+            self.wetness = builder.build_FunctionInput("Wetness", 1, 1.0, True, False)
 
     class Builder(WetnessBuilder):
         def __init__(self):

@@ -61,7 +61,6 @@ class MLF_LayerX:
     class Builder(MaterialLayerFunctionBuilder):
         def __init__(self, layer_name: str, MF_LandscapeBaseMaterial: MaterialFunctionImpl):
             super().__init__(
-                ILayerX,
                 f"/Game/Materials/Pamux/Landscape/Functions/Layers/MLF_{layer_name}",
                 MaterialFunctionDependenciesBase,
                 MLF_LayerX.Inputs,
@@ -80,7 +79,7 @@ class MLF_LayerX:
             # MaterialFunctions.landscapeBaseMaterial(Params.Dirt)
 
             call_result.result.connectTo(self.outputs.result)
-            call_result.result.connectTo(self.outputs.height)
+            call_result.height.connectTo(self.outputs.height)
 
 
         # def MLF_Dirt():

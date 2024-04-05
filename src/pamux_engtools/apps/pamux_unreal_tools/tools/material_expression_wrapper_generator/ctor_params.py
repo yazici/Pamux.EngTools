@@ -86,11 +86,17 @@ class CTORParams:
 
 def setup_ctor_params(pamux_wrapper_class_name):
     result = CTORParams()
+    if pamux_wrapper_class_name.endswith("Parameter"):
+        if not pamux_wrapper_class_name in parameter_with_default_value_classes:
+            if not pamux_wrapper_class_name in parameter_without_default_value_classes:
+                print(pamux_wrapper_class_name)
 
     if pamux_wrapper_class_name in parameter_with_default_value_classes:
         result.append(PropertyParam("parameter_name"))
         result.append(PropertyParam("default_value"))
 
+    elif pamux_wrapper_class_name in parameter_without_default_value_classes:
+        result.append(PropertyParam("parameter_name"))
     elif pamux_wrapper_class_name in unary_op_classes:
         result.append(InputParam("input"))
 

@@ -27,15 +27,14 @@ class MF_FoliageMask:
     class Inputs:
         def __init__(self, builder: MaterialExpressionContainerBuilderBase):
             # No Preview
-            self.layerSample    = builder.build_FunctionInput("LayerSample",    0, 0.0, False) 
-            self.foliageMask    = builder.build_FunctionInput("FoliageMask",    1, 0.0, False)
-            self.threshold      = builder.build_FunctionInput("Threshold",      2, 0.0, False)
-            self.enabled        = builder.build_FunctionInput("Enabled",        3, True)
+            self.layerSample    = builder.build_FunctionInput("LayerSample",    0, 0.0,     False,  False) 
+            self.foliageMask    = builder.build_FunctionInput("FoliageMask",    1, 0.0,     False,  False)
+            self.threshold      = builder.build_FunctionInput("Threshold",      2, 0.0,     False,  False)
+            self.enabled        = builder.build_FunctionInput("Enabled",        3, True,    True,   True)
 
     class Builder(MaterialFunctionBuilder):
         def __init__(self):
             super().__init__(
-                MaterialFunctionFactory(),
                 "/Game/Materials/Pamux/Landscape/Functions/MF_FoliageMask",
                 MaterialFunctionDependenciesBase,
                 MF_FoliageMask.Inputs,
@@ -50,6 +49,6 @@ class MF_FoliageMask:
 
             switch = StaticSwitch(saturate, Constant(0.0), self.inputs.enabled.rt)
 
-            switch.output.connectTo(self.outputs.Result)
+            switch.output.connectTo(self.outputs.result)
 
 # MF_FoliageMask.Builder().get()

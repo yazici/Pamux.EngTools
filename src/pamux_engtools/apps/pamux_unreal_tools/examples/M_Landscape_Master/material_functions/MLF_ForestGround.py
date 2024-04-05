@@ -33,7 +33,6 @@ class MLF_ForestGround:
     class Builder(MaterialLayerFunctionBuilder):
         def __init__(self, MF_LandscapeBaseMaterial: MaterialFunctionImpl):
             super().__init__(
-                IForestGround,
                 "/Game/Materials/Pamux/Landscape/Functions/Layers/MLF_ForestGround",
                 MaterialFunctionDependenciesBase,
                 MLF_ForestGround.Inputs,

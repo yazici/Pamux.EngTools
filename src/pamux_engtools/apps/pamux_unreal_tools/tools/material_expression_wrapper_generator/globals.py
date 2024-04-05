@@ -14,6 +14,18 @@ output_only_classes = [
     "TextureObject"
 ]
 
+parameter_without_default_value_classes = [
+    "Parameter",
+    "TextureObjectParameter",
+    "TextureSampleParameter",
+    "SparseVolumeTextureObjectParameter",
+    "CollectionParameter",
+    "FontSampleParameter",
+    "RuntimeVirtualTextureSampleParameter",
+    "SparseVolumeTextureSampleParameter",
+    "StaticComponentMaskParameter"
+]
+
 parameter_with_default_value_classes = [
     "StaticBoolParameter",
     "ScalarParameter",

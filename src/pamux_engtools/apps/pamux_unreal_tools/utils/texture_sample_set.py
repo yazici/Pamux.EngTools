@@ -2,15 +2,16 @@ import unreal
 
 from pamux_unreal_tools.generated.material_expression_wrappers import *
 
-class TTextureSampleSet:
-    def __init__(self, baseColor, roughness, opacity, normal):
+class TMaterialTextures:
+    def __init__(self, baseColor = None, roughness = None, opacity = None, normal = None, displacement = None):
         self.baseColor = baseColor
         self.roughness = roughness
         self.opacity = opacity
         self.normal = normal
+        self.displacement = displacement
 
 class TextureSampleSet:
-    def __init__(self, tss: TTextureSampleSet):
+    def __init__(self, tss: TMaterialTextures):
         self.baseColor = TextureSample()
         self.baseColor.sampler_source.set(unreal.SamplerSourceMode.SSM_WRAP_WORLD_GROUP_SETTINGS)
         self.baseColor.sampler_type.set(unreal.MaterialSamplerType.SAMPLERTYPE_COLOR)

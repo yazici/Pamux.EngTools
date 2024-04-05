@@ -12,7 +12,7 @@ from pamux_unreal_tools.factories.material_expression_factories import FunctionI
 
 from pamux_unreal_tools.utils.build_stack import BuildStack
 from pamux_unreal_tools.utils.node_pos import NodePos, CurrentNodePos
-from pamux_unreal_tools.utils.texture_sample_set import TTextureSampleSet, TextureSampleSet
+from pamux_unreal_tools.utils.texture_sample_set import TMaterialTextures, TextureSampleSet
 from pamux_unreal_tools.base.material_function.material_function_factory_base import MaterialFunctionFactoryBase
 from pamux_unreal_tools.base.material_expression.material_expression_container_factory_base import MaterialExpressionContainerFactoryBase
 
@@ -45,8 +45,6 @@ class MaterialExpressionContainerBuilderBase:
 
         self.unitW = unreal.Vector4f()
         self.unitW.set_editor_property("w", 1.0)
-
-        logger.warning(f"self.container_path: {self.container_path}")
 
     def load_MF(self, function_path: str, virtual_inputs: SocketNames, virtual_outputs: SocketNames) -> MaterialFunctionBase:
         return self.material_function_factory.load(self, function_path, virtual_inputs, virtual_outputs)
@@ -149,7 +147,7 @@ class MaterialExpressionContainerBuilderBase:
                 preview,
                 use_preview_value_as_default)
 
-        if isinstance(preview, TTextureSampleSet):
+        if isinstance(preview, TMaterialTextures):
             if use_preview_input:
                 preview = TextureSampleSet(preview)
                 makeMaterialAttributes = MakeMaterialAttributes()

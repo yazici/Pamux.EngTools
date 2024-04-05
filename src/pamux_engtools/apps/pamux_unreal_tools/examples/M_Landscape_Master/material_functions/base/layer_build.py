@@ -6,7 +6,7 @@ from pamux_unreal_tools.base.material_expression.material_expression_container_b
 
 class LayerBuild:
     @staticmethod
-    def call_and_connect_LandscapeBaseMaterial(builder: MaterialExpressionContainerBuilderBase, connectOpacity: bool):
+    def call_and_connect_LandscapeBaseMaterial(builder: MaterialExpressionContainerBuilderBase):
         appendVector = AppendVector(builder.inputs.uvParams, builder.inputs.uvParams.a)
         appendVector.add_rt()
 
@@ -31,12 +31,6 @@ class LayerBuild:
         builder.inputs.bombRandomOffset.connectTo(call.inputs.bombRandomOffset)
         builder.inputs.bombRotationVariation.connectTo(call.inputs.bombRotationVariation)
 
-        if connectOpacity:
-            builder.inputs.opacityStrength.connectTo(call.inputs.opacityStrength)
-            builder.inputs.opacityAdd.connectTo(call.inputs.opacityAdd)
-            builder.inputs.opacityContrast.connectTo(call.inputs.opacityContrast)
-
-        call.outputs.result.connectTo(builder.outputs.result)
         call.outputs.height.connectTo(builder.outputs.height)
 
         return call

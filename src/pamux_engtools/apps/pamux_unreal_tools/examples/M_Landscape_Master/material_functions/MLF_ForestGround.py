@@ -12,26 +12,66 @@ from pamux_unreal_tools.examples.M_Landscape_Master.interfaces.IForestGround imp
 from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MLF_LayerX import MLF_LayerX
 from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.base.layer_inputs import LayerInputs
 from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.base.layer_build import LayerBuild
+from pamux_unreal_tools.utils.texture_sample_set import TMaterialTextures
 
 
 class MLF_ForestGround:
-    class Inputs:
+    class Dependencies:
         def __init__(self, builder: MaterialExpressionContainerBuilderBase):
-            # /Script/Engine.Texture2D'/Game/Megascans/Surfaces/ForestGround/T_ForestGround_RF.T_ForestGround_RF'
+           
+            
+            self.fuzzyShading = builder.load_MF("/Engine/Functions/Engine_MaterialFunctions01/Shading/FuzzyShading.FuzzyShading",
+                                               [ "BaseColor", "Normal", "CoreDarkness", "Power", "EdgeBrightness" ],
+                                               [ "Result" ])
+            
             pass
+
+    class Inputs(LayerInputs):
+        def __init__(self, builder: MaterialExpressionContainerBuilderBase):
+            super().__init__(builder, "RF")
+            self.fuzzCoreDarkness = ScalarParameter(f"Forest_FuzzCoreDarkness", 0.0)
+            self.fuzzPower = ScalarParameter(f"Forest_FuzzPower", 1.0)
+            self.fuzzEdgeBrightness = ScalarParameter(f"Forest_FuzzBrightness", 1.0)
 
     class Builder(MaterialLayerFunctionBuilder):
         def __init__(self, MF_LandscapeBaseMaterial: MaterialFunctionImpl):
             super().__init__(
                 "ForestGround",
                 MF_LandscapeBaseMaterial,
-                MaterialFunctionDependenciesBase,
-                LayerInputs,
+                MLF_ForestGround.Dependencies,
+                MLF_ForestGround.Inputs,
                 MaterialFunctionOutputs.ResultAndHeight)
             pass
 
         def build(self):
-            call_result = LayerBuild.call_and_connect_LandscapeBaseMaterial(self, True)
+            call = LayerBuild.call_and_connect_LandscapeBaseMaterial(self)
+            self.inputs.opacityStrength.connectTo(call.inputs.opacityStrength)
+            self.inputs.opacityAdd.connectTo(call.inputs.opacityAdd)
+            self.inputs.opacityContrast.connectTo(call.inputs.opacityContrast)
+
+            breakMaterialAttributes = BreakMaterialAttributes(call.outputs.result)
+            call.outputs.result.connectTo(breakMaterialAttributes)
+
+            fuzzShading =  self.dependencies.fuzzyShading.call()
+
+            fuzzShading.inputs.baseColor.comesFrom(breakMaterialAttributes.baseColor)
+            fuzzShading.inputs.normal.comesFrom(breakMaterialAttributes.normal)
+            fuzzShading.inputs.coreDarkness.comesFrom(self.inputs.fuzzCoreDarkness)
+            fuzzShading.inputs.power.comesFrom(self.inputs.fuzzPower)
+            fuzzShading.inputs.edgeBrightness.comesFrom(self.inputs.fuzzEdgeBrightness)
+
+            roughnessB = ComponentMask(breakMaterialAttributes.roughness, "B")
+            lerp = LinearInterpolate(breakMaterialAttributes.baseColor, fuzzShading.outputs.result, roughnessB)
+
+
+            makeMaterialAttributes = MakeMaterialAttributes()
+            makeMaterialAttributes.baseColor.comesFrom(lerp.output)
+            makeMaterialAttributes.normal.comesFrom(breakMaterialAttributes.normal)
+            makeMaterialAttributes.specular.comesFrom(breakMaterialAttributes.specular)
+            makeMaterialAttributes.roughness.comesFrom(breakMaterialAttributes.roughness)
+
+
+            makeMaterialAttributes.output.connectTo(self.outputs.result)
 
             # roughness = ScalarParameter(material_function)
             # roughness.parameter_name.set("Roughness")

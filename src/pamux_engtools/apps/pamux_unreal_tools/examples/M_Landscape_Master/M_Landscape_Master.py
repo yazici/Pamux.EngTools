@@ -53,7 +53,7 @@ class M_Landscape_Master:
 
             self.MF_TextureCellBombing_Landscape = MF_TextureCellBombing_Landscape.Builder().get()
 
-            self.MF_LandscapeBaseMaterial = MF_LandscapeBaseMaterial.Builder().get()
+            self.MF_LandscapeBaseMaterial = MF_LandscapeBaseMaterial.Builder(self.MF_TextureCellBombing_Landscape).get()
 
             self.MF_Wetness = MF_Wetness.Builder().get()
             self.MF_Puddles = MF_Puddles.Builder().get()

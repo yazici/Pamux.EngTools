@@ -15,6 +15,9 @@ class MLF_ForestGround:
             self.fuzzyShading = builder.load_MF("/Engine/Functions/Engine_MaterialFunctions01/Shading/FuzzyShading.FuzzyShading",
                                                [ "BaseColor", "Normal", "CoreDarkness", "Power", "EdgeBrightness" ],
                                                [ "Result" ])
+            self.MF_LandscapeBaseMaterial    = builder.load_MF("/Game/Materials/Pamux/Landscape/Functions/MF_LandscapeBaseMaterial",
+                                                            ["Albedo", "ColorOverlay", "ColorOverlayIntensity", "Contrast", "ContrastVariation", "Roughness", "RoughnessIntensity", "NormalIntensity", "Normal", "Displacement", "Rotation", "DoTextureBomb", "DoRotationVariation", "BombCellScale", "BombPatternScale", "BombRandomOffset", "BombRotationVariation", "OpacityStrength", "OpacityAdd", "OpacityContrast"],
+                                                            ["Result", "Height"])
 
     class Inputs(LayerInputs):
         def __init__(self, builder: MaterialExpressionContainerBuilderBase):
@@ -24,16 +27,15 @@ class MLF_ForestGround:
             self.fuzzEdgeBrightness = ScalarParameter(f"Forest_FuzzBrightness", 1.0)
 
     class Builder(MaterialLayerFunctionBuilder):
-        def __init__(self, MF_LandscapeBaseMaterial: MaterialFunctionImpl):
+        def __init__(self):
             super().__init__(
                 "ForestGround",
-                MF_LandscapeBaseMaterial,
                 MLF_ForestGround.Dependencies,
                 MLF_ForestGround.Inputs,
                 MaterialFunctionOutputs.ResultAndHeight)
 
         def build(self):
-            call = LayerBuild.call_and_connect_LandscapeBaseMaterial(self)
+            call = LayerBuild.call_and_connect_LandscapeBaseMaterial(self, self.dependencies.MF_LandscapeBaseMaterial)
             self.inputs.opacityStrength.connectTo(call.inputs.opacityStrength)
             self.inputs.opacityAdd.connectTo(call.inputs.opacityAdd)
             self.inputs.opacityContrast.connectTo(call.inputs.opacityContrast)

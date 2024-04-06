@@ -9,20 +9,25 @@ from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.base.laye
 from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.base.layer_build import LayerBuild
 
 class MLF_LayerX:
+    class Dependencies:
+        def __init__(self, builder: MaterialExpressionContainerBuilderBase):
+            self.MF_LandscapeBaseMaterial = builder.load_MF("/Game/Materials/Pamux/Landscape/Functions/MF_LandscapeBaseMaterial",
+                                                            ["Albedo", "ColorOverlay", "ColorOverlayIntensity", "Contrast", "ContrastVariation", "Roughness", "RoughnessIntensity", "NormalIntensity", "Normal", "Displacement", "Rotation", "DoTextureBomb", "DoRotationVariation", "BombCellScale", "BombPatternScale", "BombRandomOffset", "BombRotationVariation"],
+                                                            ["Result", "Height"])
+
     class Inputs(LayerInputs):
         def __init__(self, builder: MaterialExpressionContainerBuilderBase):
             super().__init__(builder, "R")
 
     class Builder(MaterialLayerFunctionBuilder):
-        def __init__(self, layer_name: str, MF_LandscapeBaseMaterial):
+        def __init__(self, layer_name: str):
             super().__init__(
                 layer_name,
-                MF_LandscapeBaseMaterial,
-                MaterialFunctionDependenciesBase,
+                MLF_LayerX.Dependencies,
                 MLF_LayerX.Inputs,
                 MaterialFunctionOutputs.ResultAndHeight)
             pass
 
         def build(self):
-            call = LayerBuild.call_and_connect_LandscapeBaseMaterial(self)
+            call = LayerBuild.call_and_connect_LandscapeBaseMaterial(self, self.dependencies.MF_LandscapeBaseMaterial)
             call.outputs.result.connectTo(self.outputs.result)

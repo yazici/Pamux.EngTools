@@ -23,7 +23,6 @@ class MaterialFunctionBuilder(MaterialFunctionBuilderBase):
 class MaterialLayerFunctionBuilder(MaterialFunctionBuilder):
     def __init__(self,
                  layer_name: str,
-                 MF_LandscapeBaseMaterial,
                  dependencies_class,
                  inputs_class,
                  outputs_class = MaterialFunctionOutputs.ResultAndHeight) -> None:
@@ -35,5 +34,4 @@ class MaterialLayerFunctionBuilder(MaterialFunctionBuilder):
             outputs_class)
 
         self.layer_name = layer_name
-        self.MF_LandscapeBaseMaterial = MF_LandscapeBaseMaterial
 

@@ -174,4 +174,10 @@ def setup_ctor_params(pamux_wrapper_class_name):
     elif pamux_wrapper_class_name == "Transform":
         result.append(InputParam("input"))
 
+    elif pamux_wrapper_class_name == "Power":
+        result.append(InputParam("base"))
+        result.append(InputParam("exponent"))
+
+        
+
     return result

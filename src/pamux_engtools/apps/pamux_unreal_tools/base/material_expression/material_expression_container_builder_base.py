@@ -236,6 +236,8 @@ class MaterialExpressionContainerBuilderBase:
         return BuildStack.top()
     
     def get_field_name(self, name: str):
+        if name == "In":
+            return "_in"
         if name == "X-Axis":
             return "xAxis"
         if name == "Y-Axis":

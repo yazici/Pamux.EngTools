@@ -45,4 +45,5 @@ class LayerInputs:
         self.opacityContrast = ScalarParameter(f"{builder.layer_name}OpacityContrast", 1.0)
 
     def __load_texture(self, layer_name: str, texture_type: str) -> Any:
+        return None
         return unreal.load_asset(f"/Script/Engine.Texture2D'/Game/Megascans/Surfaces/{layer_name}/T_{layer_name}_{texture_type}.T_{layer_name}_{texture_type}'")

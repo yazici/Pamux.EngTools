@@ -53,7 +53,7 @@ class M_Landscape_Master:
 
             self.MF_TextureCellBombing_Landscape = MF_TextureCellBombing_Landscape.Builder().get()
 
-            self.MF_LandscapeBaseMaterial = MF_LandscapeBaseMaterial.Builder(self.MF_TextureCellBombing_Landscape).get()
+            self.MF_LandscapeBaseMaterial = MF_LandscapeBaseMaterial.Builder().get()
 
             self.MF_Wetness = MF_Wetness.Builder().get()
             self.MF_Puddles = MF_Puddles.Builder().get()
@@ -65,9 +65,9 @@ class M_Landscape_Master:
             self.MLF_Layers = {}
             for layer_name in Globals.layer_names:
                 if layer_name == "ForestGround":
-                    self.MLF_Layers[layer_name] = MLF_ForestGround.Builder(self.MF_LandscapeBaseMaterial).get()
+                    self.MLF_Layers[layer_name] = MLF_ForestGround.Builder().get()
                 else:
-                    self.MLF_Layers[layer_name] = MLF_LayerX.Builder(layer_name, self.MF_LandscapeBaseMaterial).get()
+                    self.MLF_Layers[layer_name] = MLF_LayerX.Builder(layer_name).get()
 
             
     class Builder(MaterialBuilder):

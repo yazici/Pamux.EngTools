@@ -51,6 +51,10 @@ class MF_LandscapeBaseMaterial:
                                                                       [ "UVs", "Rotation Center", "Rotation Angle" ],
                                                                       [ "Rotated Values" ])
 
+            self.MF_TextureCellBombing_Landscape    = builder.load_MF("/Game/Materials/Pamux/Landscape/Functions/MF_TextureCellBombing_Landscape",
+                                                                      ["Texture", "UVs", "CellScale", "PatternScale", "DoRotationVariation", "RandomOffsetVariation", "RandomRotationVariation", "IsNormalMap"],
+                                                                      ["Result"])
+
     class Inputs:
         def __init__(self, builder: MaterialExpressionContainerBuilderBase):
             self.albedo                     = builder.build_FunctionInput("Albedo",                         0,      TTextureObject_Color(),    True,   True)
@@ -76,16 +80,17 @@ class MF_LandscapeBaseMaterial:
             self.opacityContrast            = builder.build_FunctionInput("OpacityContrast",                20,     1.0,                       True,   True)
 
     class Builder(MaterialFunctionBuilder):
-        def __init__(self, MF_TextureCellBombing_Landscape: MaterialFunctionImpl):
+        def __init__(self):
             super().__init__(
                 "/Game/Materials/Pamux/Landscape/Functions/MF_LandscapeBaseMaterial",
                 MF_LandscapeBaseMaterial.Dependencies,
                 MF_LandscapeBaseMaterial.Inputs,
                 MaterialFunctionOutputs.ResultAndHeight)
-            self.MF_TextureCellBombing_Landscape = MF_TextureCellBombing_Landscape
+            
 
         def __build_cellBombing(self, map, uvParams):
-            call = self.MF_TextureCellBombing_Landscape.call()
+            call = self.dependencies.MF_TextureCellBombing_Landscape.call()
+            call.outputs.result.add_rt()
             call.inputs.texture.comesFrom(map)
             call.inputs.uVs.comesFrom(uvParams)
             call.inputs.cellScale.comesFrom(self.inputs.bombCellScale)
@@ -119,175 +124,90 @@ class MF_LandscapeBaseMaterial:
             return call
 
 
-        def build(self):
-                qualitySwitch = QualitySwitch()
-                qualitySwitch.add_rt()
-                qualitySwitch.default.comesFrom(self.inputs.doTextureBomb)
-                qualitySwitch.low.comesFrom(StaticBool(False))
+        def __build_switched(self, uvParams, cellBombed):
+            textureSample = TextureSample()
+            textureSample.RGB.add_rt()
+            textureSample.UVs.comesFrom(uvParams)
+            textureSample.tex.comesFrom(cellBombed)
+            textureSample.sampler_source.set(unreal.SamplerSourceMode.SSM_WRAP_WORLD_GROUP_SETTINGS)
+            textureSample.sampler_type.set(unreal.MaterialSamplerType.SAMPLERTYPE_COLOR)
+            textureSample.automatic_view_mip_bias.set(True)
 
-                uvParams = self.__build_uvParams()
-
-                self.__build_cellBombing(self.inputs.albedo, uvParams)
-                self.__build_cellBombing(self.inputs.roughness, uvParams)
-                self.__build_cellBombing(self.inputs.displacement, uvParams)
-                self.__build_cellBombing(self.inputs.normal, uvParams)
-
-                componentMask = ComponentMask()
-                componentMask.g.set(False)
-
-                makeMaterialAttributes = MakeMaterialAttributes()
-                
-                
-                makeMaterialAttributes.baseColor.comesFrom(qualitySwitch)
-
-                #multiply2 = Multiply()
-                #makeMaterialAttributes.roughness.comesFrom(multiply2)
-                
-                computedIntensity = AppendVector(self.inputs.normalIntensity, self.inputs.normalIntensity)
-                return
-                multiplyAddCall = self.dependencies.multiplyAdd.call()
-                multiplyAddCall.inputs.a.comesFrom(qualitySwitch)
-                multiplyAddCall.inputs.b.comesFrom(computedIntensity)
-
-                
-
-
-                # # makeMaterialAttributes.normal.comesFrom(multiplyAdd)
-
-                # self.add = Add()
-                # self.makeMaterialAttributes.opacity.comesFrom(self.add)
-                
-                breakMaterialAttributes = BreakMaterialAttributes(makeMaterialAttributes)
-
-                # call_CustomRotator.
-                # uvParamsBA, 
-                # commonParams.Rotation
-                # rotatedUVs = call_CustomRotator.output
-                # customRotator(multiply.output, )
-
-                # qualitySwitched = QualitySwitch(commonParams.DoTextureBomb, False)
-
-                # heightTexture = HeightTexture(qualitySwitched, commonParams, rotatedUVs)
-
-                # baseColor = self.baseColorPath(qualitySwitched, commonParams, rotatedUVs, heightTexture)
-                # roughness = self.roughnessPath(qualitySwitched, commonParams, rotatedUVs)        
-                # opacity = self.opacityPath(heightTexture, commonParams)
-                # normal = self.normalPath(qualitySwitched, commonParams, rotatedUVs)
-
-                # sma = MakeMaterialAttributes(baseColor, roughness, normal, opacity)
-                # gma = BreakMaterialAttributes(sma)
-
-                # gmaOpacityR = Mask(gma.Opacity, "R")
-
-                # return gma, gmaOpacityR
-
-                makeMaterialAttributes.connectTo(self.outputs.result)
-                componentMask.connectTo(self.outputs.height)
-
-                #             MEL.connect_material_expressions(
-                #     breakMaterialAttributes.unrealAsset,
-                #     breakMaterialAttributes.input.name,
-                #     self.Result.unrealAsset,
-                #     f"")
-
-                # MEL.connect_material_expressions(componentMask.unrealAsset, "", self.Height.unrealAsset, f"")
-
-                # MEL.connect_material_expressions(self.call_BreakOutFloat4Components.output.materialExpression.unrealAsset, "", self.uvParams.unrealAsset, "Low")
-
-            # def baseColorPath(self, qualitySwitched, commonParams, rotatedUVs, heightTexture):
-            #         switched = self.doStuffWithTexture(commonParams.Albedo, False, qualitySwitched, commonParams, rotatedUVs)
-
-            #         switchedAndMultipliedColorOverlay = Multiply(switched, commonParams.ColorOverlay)
-
-            #         
-            #         call_Blend_Overlay = self.blend_Overlay(self)
-            #         call_Blend_Overlay.base = switched
-            #         call_Blend_Overlay.blend = commonParams.ColorOverlay
-            #         # blendOverlay = Blend_Overlay(switched, commonParams.ColorOverlay)
-
-
-            #         qualitySwitched2 = QualitySwitch(call_Blend_Overlay.Result, switchedAndMultipliedColorOverlay)
-
-            #         lerpedColorOverlay = LinearInterpolate(switched, qualitySwitched2, commonParams.ColorOverlay.Intensity)
-
-            #         
-            #         call_CheapContrast_RGB = cheapContrast_RGB.call()
-            #         call_CheapContrast_RGB.In = lerpedColorOverlay
-            #         call_CheapContrast_RGB.Contrast = commonParams.Contrast
-            #         call_HeightLerp = heightLerp.call()
-            #         call_HeightLerp.A = lerpedColorOverlay
-            #         call_HeightLerp.B = call_CheapContrast_RGB.Result
-            #         call_HeightLerp.TransitionPhase = commonParams.Contrast.Variation
-            #         call_HeightLerp.HeightTexture = heightTexture
-
-            #         return QualitySwitch(heightLerp, lerpedColorOverlay)
-
-            # def roughnessPath(self, qualitySwitched, commonParams, rotatedUVs):
-            #     switched = self.doStuffWithTexture(commonParams.Roughness, False, qualitySwitched, commonParams, rotatedUVs)        
-
-            #     return Multiply(switched, commonParams.Roughness.Intensity)
-
-            # def normalPath(self, qualitySwitched, commonParams, rotatedUVs):
-                
-
-            #     switched = self.doStuffWithTexture(commonParams.Normal, True, qualitySwitched, commonParams, rotatedUVs)
-
-            #     computedIntensity = AppendVector(commonParams.Normal.Intensity, commonParams.Normal.Intensity)
-            #     constZero = 0
-            #     computedIntensity = AppendVector(computedIntensity, constZero)
-
-            #     call_multiplyAdd = multiplyAdd.call()
-            #     call_multiplyAdd.a.comesFrom(switched)
-            #     call_multiplyAdd.b.comesFrom(computedIntensity)
-
-            #     return call_multiplyAdd.Result
-            
-            # def heightTexture(self, qualitySwitched, commonParams, rotatedUVs):
-            #     return self.doStuffWithTexture(commonParams.Displacement, False, qualitySwitched, commonParams, rotatedUVs)
-                
-            # def doStuffWithTexture(self, texture, isNormalMap, qualitySwitched, commonParams, rotatedUVs):
-            #     MF_TextureCellBombing_Landscape = MF_TextureCellBombing_Landscape.Builder().get()
-            #     call_textureCellBombing_Landscape = MaterialFunctionCall(MF_TextureCellBombing_Landscape)
-
-            #     # textureCellBombing_LandscapeResult = MaterialFunctions.textureCellBombing_Landscape(
-            #     #     texture,
-            #     #     rotatedUVs,
-            #     #     commonParams.cellScale,
-            #     #     commonParams.patternScale,
-            #     #     commonParams.doRotationVariation,
-            #     #     commonParams.bombRandomOffset, # Variation??
-            #     #     commonParams.bombRotationVariation,
-            #     #     isNormalMap)
-                
-            #     textureSample = TextureSample(uvs = rotatedUVs, tex = texture)
-
-            #     return StaticSwitch(call_textureCellBombing_Landscape, textureSample, qualitySwitched)
-
-            # def opacityPath(self, heightTexture, commonParams):
-            #     # # commonParams.D.Intensity = 1
-                
-            #     # isNormalMap = True
-
-            #     # textureCellBombing_LandscapeResult = MaterialFunctions.textureCellBombing_Landscape(
-            #     #     commonParams.Displacement,
-            #     #     rotatedUVs,
-            #     #     commonParams.Bomb.DoCellScale,
-            #     #     commonParams.Bomb.PatternScale,
-            #     #     commonParams.Bomb.DoRotationVariation,
-            #     #     commonParams.Bomb.RandomOffset, # Variation??
-            #     #     commonParams.Bomb.RotationVariation,
-            #     #     isNormalMap)
-                
-            #     # textureSample = Nodes.TextureSample(uvs = rotatedUVs, tex = commonParams.Normal)
-
-            #     # switched = Nodes.switch(textureCellBombing_LandscapeResult, textureSample, qualitySwitched)
-
-            #     computedIntensity = Power(heightTexture, commonParams.Opacity.Contrast)
-            #     computedIntensity = Multiply(computedIntensity, commonParams.Opacity.Strength)
-            #     computedIntensity = Add(computedIntensity, commonParams.Opacity.Add)
-
-            #     return MultiplyAdd(heightTexture, computedIntensity)
-
-
-           
+            return StaticSwitch(
+                cellBombed.outputs.result,
+                textureSample.RGB,
+                self.inputs.doTextureBomb)
         
+        def __build_qualitySwitchAlbedo(self, switchedAlbedo):
+            call = self.dependencies.blend_Overlay.call()
+            call.inputs.base.comesFrom(switchedAlbedo)
+            call.inputs.blend.comesFrom(self.inputs.colorOverlay)
+
+            qualitySwitch = QualitySwitch()
+            qualitySwitch.add_rt()
+            qualitySwitch.default.comesFrom(call.outputs.result)
+            qualitySwitch.low.comesFrom(Multiply(switchedAlbedo, self.inputs.colorOverlay))
+
+            return qualitySwitch.output
+        
+        def __build_finalAlbedo(self, lerpedAlbedo, switchedDisplacement):
+            cheapContrast_RGB = self.dependencies.cheapContrast_RGB.call()
+            cheapContrast_RGB.inputs._in.comesFrom(lerpedAlbedo)
+            cheapContrast_RGB.inputs.contrast.comesFrom(self.inputs.contrast)
+
+            heightLerp = self.dependencies.heightLerp.call()
+            heightLerp.inputs.a.comesFrom(lerpedAlbedo)
+            heightLerp.inputs.b.comesFrom(cheapContrast_RGB)
+            heightLerp.inputs.transitionPhase.comesFrom(self.inputs.contrastVariation)
+            heightLerp.inputs.heightTexture.comesFrom(switchedDisplacement)
+
+            qualitySwitch = QualitySwitch()
+            qualitySwitch.add_rt()
+            qualitySwitch.default.comesFrom(heightLerp.outputs.result)
+            qualitySwitch.low.comesFrom(lerpedAlbedo)
+
+            return qualitySwitch
+
+        def build(self):
+            qualitySwitch = QualitySwitch()
+            qualitySwitch.add_rt()
+            qualitySwitch.default.comesFrom(self.inputs.doTextureBomb)
+            qualitySwitch.low.comesFrom(StaticBool(False))
+
+            uvParams = self.__build_uvParams()
+
+            albedo = self.__build_cellBombing(self.inputs.albedo, uvParams)
+            switchedAlbedo = self.__build_switched(uvParams, albedo)
+            qualitySwitchedAlbedo = self.__build_qualitySwitchAlbedo(switchedAlbedo)
+            lerpedAlbedo = LinearInterpolate(switchedAlbedo, qualitySwitchedAlbedo, self.inputs.colorOverlayIntensity)
+
+            roughness = self.__build_cellBombing(self.inputs.roughness, uvParams)
+            switchedRoughness = self.__build_switched(uvParams, roughness)
+            finalRoughness = Multiply(switchedRoughness, self.inputs.roughnessIntensity)
+
+            displacement = self.__build_cellBombing(self.inputs.displacement, uvParams)
+            switchedDisplacement = self.__build_switched(uvParams, displacement)
+            finalDisplacement = Add(Multiply(Power(switchedDisplacement, self.inputs.opacityContrast), self.inputs.opacityStrength), self.inputs.opacityAdd)
+
+            normal = self.__build_cellBombing(self.inputs.normal, uvParams)
+            switchedNormal = self.__build_switched(uvParams, normal)
+            
+            call = self.dependencies.multiplyAdd.call()
+            call.inputs.base.comesFrom(switchedNormal)
+            call.inputs.add.comesFrom(AppendVector(AppendVector(self.inputs.normalIntensity, self.inputs.normalIntensity), Constant(0.0)))
+            finalNormal = call.outputs.result
+
+            finalAlbedo = self.__build_finalAlbedo(lerpedAlbedo, switchedDisplacement)
+
+            makeMaterialAttributes = MakeMaterialAttributes()
+            makeMaterialAttributes.baseColor.comesFrom(finalAlbedo)
+            makeMaterialAttributes.roughness.comesFrom(finalRoughness)
+            makeMaterialAttributes.normal.comesFrom(finalNormal)
+            makeMaterialAttributes.opacity.comesFrom(finalDisplacement)
+
+            breakMaterialAttributes = BreakMaterialAttributes(makeMaterialAttributes)
+
+            componentMask = ComponentMask(breakMaterialAttributes.opacity, "R")
+
+            makeMaterialAttributes.connectTo(self.outputs.result)
+            componentMask.connectTo(self.outputs.height)

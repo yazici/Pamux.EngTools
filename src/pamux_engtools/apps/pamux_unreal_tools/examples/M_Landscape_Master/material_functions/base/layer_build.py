@@ -6,11 +6,11 @@ from pamux_unreal_tools.base.material_expression.material_expression_container_b
 
 class LayerBuild:
     @staticmethod
-    def call_and_connect_LandscapeBaseMaterial(builder: MaterialExpressionContainerBuilderBase):
+    def call_and_connect_LandscapeBaseMaterial(builder: MaterialExpressionContainerBuilderBase, MF_LandscapeBaseMaterial):
         appendVector = AppendVector(builder.inputs.uvParams, builder.inputs.uvParams.a)
         appendVector.add_rt()
 
-        call = builder.MF_LandscapeBaseMaterial.call()
+        call = builder.dependencies.MF_LandscapeBaseMaterial.call()
 
         builder.inputs.albedo.connectTo(call.inputs.albedo)
         builder.inputs.colorOverlay.connectTo(call.inputs.colorOverlay)

@@ -1529,13 +1529,17 @@ class PixelNormalWS(MaterialExpressionImpl):
         super().__init__(unreal.MaterialExpressionPixelNormalWS, node_pos)
 
 class Power(MaterialExpressionImpl):
-    def __init__(self, node_pos: NodePos = None) -> None:
+    def __init__(self, base = None, exponent = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionPower, node_pos)
 
         self.const_exponent = MaterialExpressionEditorPropertyImpl(self, 'const_exponent', 'float')
 
         self.base = InSocketImpl(self, 'Base', 'StructProperty')
         self.exponent = InSocketImpl(self, 'Exponent', 'StructProperty')
+        if base is not None:
+            self.base.comesFrom(base)
+        if exponent is not None:
+            self.exponent.comesFrom(exponent)
 
 class PreSkinnedLocalBounds(MaterialExpressionImpl):
     def __init__(self, node_pos: NodePos = None) -> None:

@@ -49,8 +49,7 @@ binary_op_classes_with_const = [
 unary_op_classes = [
     "Saturate",
     "OneMinus",
-    "Floor",
-    "BreakMaterialAttributes"
+    "Floor"
 ]
 
 
@@ -97,4 +96,57 @@ skip_these_classes= [
     "MaterialExpressionRamp4"
 ]
 
-# skip_these_classes = []
+class MaterialAttributeFields:
+    __items = [
+        '#   MaterialAttributes',
+        'BaseColor',
+        'Metallic',
+        'Specular',
+        'Roughness',
+        'Anisotropy',
+        'EmissiveColor',
+        'Opacity',
+        'OpacityMask',
+        'Normal',
+        'Tangent',
+        'WorldPositionOffset',
+        '#   WorldDisplacement',
+        '#   TessellationMultiplier',
+        'SubsurfaceColor',
+        'ClearCoat',
+        'ClearCoatRoughness',
+        'AmbientOcclusion',
+        'Refraction',
+        '#   CustomizedUVs',
+        'PixelDepthOffset',
+        'ShadingModel',
+        '#   Displacement'
+    ]
+    
+    @staticmethod
+    def for_each(func, lowerCaseStart = False, enable = [], customUVSeparator = None):
+        for item in MaterialAttributeFields.__items:
+            item = item.strip()
+            is_sharp = item.startswith("#")
+            if is_sharp:
+                item = item.strip("#").strip()
+
+            if lowerCaseStart:
+                final_item  = item[0].lower() + item[1:]
+            else:
+                final_item = item
+
+            if not is_sharp:
+                func(final_item)
+                continue
+
+            if item == 'CustomizedUVs':
+                if customUVSeparator is not None:
+                    final_item = final_item[0:-1]
+                    for i in range(0, 8):
+                        func(f"{final_item}{customUVSeparator}{i}")
+                    continue
+
+
+            if item in enable:
+                func(final_item)

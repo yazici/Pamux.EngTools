@@ -15,7 +15,7 @@ for  k, v in sys.modules.items():
     if k.startswith("pamux_unreal_tools") and "generated" not in k:
         reloads.append(v)
 
-for module in reloads:
+for module in reloads: 
     reload(module)
 
 from pamux_unreal_tools.tools.py_code_generator.main import *
@@ -90,75 +90,4 @@ def generate_pamux_wrapper_classes():
 
     pyGen.write(generated_py_out_filepath)
 
-# print(material_expressions_dump_data)
 generate_pamux_wrapper_classes()
-
-
-        # type(unreal.MaterialExpressionAdd()).mro()
-        # type(unreal.MaterialExpressionAntialiasedTextureMask()).mro()
-        # unreal.MaterialExpressionAntialiasedTextureMask.mro()
-
-        # if "MaterialExpression" in class_name:
-        #unrealClass = UnrealClass.from_class_name(class_name)
-        # unrealClass.dump()
-        # material_expressions.append(unrealClass)
-
-        #UnrealClass.from_unreal_module_class(class_name)
-
-
-
-# c = getattr(unreal, "MaterialExpressionAdd")
-# print (c)
-# ['__class__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', 
-    # '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__ne__', '__new__', '__reduce__', 
-            # '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '_post_init',
-            #  '_wrapper_meta_data', 'acquire_editor_element_handle', 'call_method', 'cast', 
-            # 'get_class', 'get_default_object', 'get_editor_property', 'get_fname', 
-            # 'get_full_name', 'get_interpolated_pcg_landscape_layer_weights', 'get_name',
-            #  'get_outer', 'get_outermost', 'get_package', 
-# 'get_path_name', 'get_typed_outer', 'get_world', 'is_package_external', 'material_expression_editor_x', 'material_expression_editor_y', 'modify', 'rename', 'set_editor_properties', 'set_editor_property', 'static_class']
-# o = c()
-# print (o)
-# <Object '/Engine/Transient.MaterialExpressionAdd_0' (0x000006F8FA505B40) Class 'MaterialExpressionAdd'>
-
-
-
- # inspect.getmro(cls)
-    # addClass = unreal.MaterialExpressionAdd
-    # addObject = unreal.MaterialExpressionAdd()
-    # print(dir(addClass))
-    # print(dir(addObject))
-    # inspect.getmembers(addObject)
-    # inspect.getmembers(addObject, predicate=inspect.ismethod)
-    # members = inspect.getmembers(addObject, predicate=lambda x: not (inspect.ismethod(x) or inspect.isclass(x)))
-
-# def pred(x):
-#     if inspect.ismethod(x):
-#         return False
-#     # if inspect.ismethodwrapper(x):
-#     #     return False
-#     if inspect.isbuiltin(x):
-#         return False
-#     if inspect.isclass(x):
-#         return False
-#     if isinstance(x,  types.MethodWrapperType):
-#         return False   
-
-    
-#     print(x)
-#     return True
-    # inspect.getmembers(unreal.MaterialExpressionAntialiasedTextureMask(), predicate=pred)
-
-
-    # 
-
-
-#MaterialEditLibrary.connect_material_expressions
-#MaterialEditLibrary.connect_material_property
-#MEL.get_inputs_for_material_expression(self.material, n)
-#MEL.get_input_node_output_name_for_material_expression
-
-# from_expression (MaterialExpression) – Expression to make connection from
-# from_output_name (str) – Name of output of FromExpression to make connection from. Leave empty to use first output.
-# to_expression (MaterialExpression) – Expression to make connection to
-# to_input_name (str) – Name of input of ToExpression to make connection to. Leave empty to use first input.

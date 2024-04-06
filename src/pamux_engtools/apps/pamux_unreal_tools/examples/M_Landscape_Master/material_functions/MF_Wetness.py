@@ -57,5 +57,3 @@ class MF_Wetness:
 
             blend = BlendMaterialAttributes(self.inputs.materialAttributes, makeMaterialAttributes.output, saturate2)
             blend.connectTo(self.outputs.result)
-
-#MF_Wetness.Builder().get()

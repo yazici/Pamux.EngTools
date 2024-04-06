@@ -31,7 +31,6 @@ class MLF_ForestGround:
                 MLF_ForestGround.Dependencies,
                 MLF_ForestGround.Inputs,
                 MaterialFunctionOutputs.ResultAndHeight)
-            pass
 
         def build(self):
             call = LayerBuild.call_and_connect_LandscapeBaseMaterial(self)

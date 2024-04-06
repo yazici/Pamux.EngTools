@@ -22,6 +22,16 @@ class InputParam(MethodParam):
         pyGen.append_line(f"self.{self.name}.comesFrom({self.name})")
         pyGen.end_if()
 
+class ShouldAddRTParams(MethodParam):
+    def __init__(self):
+        super().__init__("shouldAddRTParams", "bool", "False")
+
+    def append_assignment_lines(self, pyGen: PyCodeGenerator):
+        pyGen.begin_if(f"shouldAddRTParams")
+        func = lambda item: pyGen.append_line(f"self.{item}.add_rt()")
+        MaterialAttributeFields.for_each(func, True,  ["Displacement"], "")
+        pyGen.end_if()
+
 class RerouteInputParam(MethodParam):
     def __init__(self, name: str, type: str = None, default_value: str = "None"):
         super().__init__(name, type, default_value)
@@ -99,9 +109,16 @@ def setup_ctor_params(pamux_wrapper_class_name):
         result.append(PropertyParam("parameter_name"))
     elif pamux_wrapper_class_name in unary_op_classes:
         result.append(InputParam("input"))
+    elif  pamux_wrapper_class_name == "BreakMaterialAttributes":
+        result.append(InputParam("input"))
+        result.append(ShouldAddRTParams())
 
     elif pamux_wrapper_class_name == "StaticBool":
         result.append(PropertyParam('value'))
+
+    elif pamux_wrapper_class_name == "Desaturation":
+        result.append(InputParam('input'))
+        result.append(InputParam('fraction'))
 
     elif pamux_wrapper_class_name == "ComponentMask":
         result.append(InputParam("input"))

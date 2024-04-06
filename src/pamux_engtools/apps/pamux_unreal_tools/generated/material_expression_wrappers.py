@@ -1,8 +1,5 @@
 # This file is generated. Please do NOT modify.
 import unreal
-import logging
-logger = logging.getLogger(__name__)
-
 from pamux_unreal_tools.impl.material_expression_impl import MaterialExpressionImpl
 from pamux_unreal_tools.impl.material_expression_editor_property_impl import MaterialExpressionEditorPropertyImpl
 from pamux_unreal_tools.impl.in_socket_impl import InSocketImpl
@@ -172,7 +169,7 @@ class BlendMaterialAttributes(MaterialExpressionImpl):
                 self.alpha.comesFrom(alpha)
 
 class BreakMaterialAttributes(MaterialExpressionImpl):
-    def __init__(self, input = None, node_pos: NodePos = None) -> None:
+    def __init__(self, input = None, shouldAddRTParams: bool = False, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionBreakMaterialAttributes, node_pos)
 
         self.materialAttributes = InSocketImpl(self, 'MaterialAttributes', 'StructProperty')
@@ -206,6 +203,34 @@ class BreakMaterialAttributes(MaterialExpressionImpl):
         self.displacement = OutSocketImpl(self, 'Displacement', 'StructProperty')
         if input is not None:
             self.input.comesFrom(input)
+        if shouldAddRTParams:
+            self.baseColor.add_rt()
+            self.metallic.add_rt()
+            self.specular.add_rt()
+            self.roughness.add_rt()
+            self.anisotropy.add_rt()
+            self.emissiveColor.add_rt()
+            self.opacity.add_rt()
+            self.opacityMask.add_rt()
+            self.normal.add_rt()
+            self.tangent.add_rt()
+            self.worldPositionOffset.add_rt()
+            self.subsurfaceColor.add_rt()
+            self.clearCoat.add_rt()
+            self.clearCoatRoughness.add_rt()
+            self.ambientOcclusion.add_rt()
+            self.refraction.add_rt()
+            self.customizedUV0.add_rt()
+            self.customizedUV1.add_rt()
+            self.customizedUV2.add_rt()
+            self.customizedUV3.add_rt()
+            self.customizedUV4.add_rt()
+            self.customizedUV5.add_rt()
+            self.customizedUV6.add_rt()
+            self.customizedUV7.add_rt()
+            self.pixelDepthOffset.add_rt()
+            self.shadingModel.add_rt()
+            self.displacement.add_rt()
 
 class BumpOffset(MaterialExpressionImpl):
     def __init__(self, node_pos: NodePos = None) -> None:
@@ -505,12 +530,16 @@ class DeriveNormalZ(MaterialExpressionImpl):
         self.inXY = InSocketImpl(self, 'InXY', 'StructProperty')
 
 class Desaturation(MaterialExpressionImpl):
-    def __init__(self, node_pos: NodePos = None) -> None:
+    def __init__(self, input = None, fraction = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionDesaturation, node_pos)
 
         self.luminance_factors = MaterialExpressionEditorPropertyImpl(self, 'luminance_factors', 'LinearColor')
 
         self.fraction = InSocketImpl(self, 'Fraction', 'StructProperty')
+        if input is not None:
+            self.input.comesFrom(input)
+        if fraction is not None:
+            self.fraction.comesFrom(fraction)
 
 class Distance(MaterialExpressionImpl):
     def __init__(self, node_pos: NodePos = None) -> None:
@@ -1786,7 +1815,14 @@ class SetMaterialAttributes(MaterialExpressionImpl):
         self.clearCoatRoughness = InSocketImpl(self, 'ClearCoatRoughness', 'StructProperty')
         self.ambientOcclusion = InSocketImpl(self, 'AmbientOcclusion', 'StructProperty')
         self.refraction = InSocketImpl(self, 'Refraction', 'StructProperty')
-        self.customizedUVs = InSocketImpl(self, 'CustomizedUVs', 'StructProperty')
+        self.customizedUV0 = InSocketImpl(self, 'CustomizedUV0', 'StructProperty')
+        self.customizedUV1 = InSocketImpl(self, 'CustomizedUV1', 'StructProperty')
+        self.customizedUV2 = InSocketImpl(self, 'CustomizedUV2', 'StructProperty')
+        self.customizedUV3 = InSocketImpl(self, 'CustomizedUV3', 'StructProperty')
+        self.customizedUV4 = InSocketImpl(self, 'CustomizedUV4', 'StructProperty')
+        self.customizedUV5 = InSocketImpl(self, 'CustomizedUV5', 'StructProperty')
+        self.customizedUV6 = InSocketImpl(self, 'CustomizedUV6', 'StructProperty')
+        self.customizedUV7 = InSocketImpl(self, 'CustomizedUV7', 'StructProperty')
         self.pixelDepthOffset = InSocketImpl(self, 'PixelDepthOffset', 'StructProperty')
         self.shadingModel = InSocketImpl(self, 'ShadingModel', 'StructProperty')
 

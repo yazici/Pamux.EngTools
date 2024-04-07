@@ -8,7 +8,7 @@ class LayerBuild:
     @staticmethod
     def call_and_connect_LandscapeBaseMaterial(builder: MaterialExpressionContainerBuilderBase):
         appendVector = AppendVector(builder.inputs.uvParams, builder.inputs.uvParams.a)
-        appendVector.output.add_rt()
+        appendVector.add_rt()
 
         call = builder.dependencies.MF_LandscapeBaseMaterial.call()
 
@@ -22,7 +22,9 @@ class LayerBuild:
         builder.inputs.normalIntensity.connectTo(call.inputs.normalIntensity)
         builder.inputs.normal.connectTo(call.inputs.normal)
         builder.inputs.displacement.connectTo(call.inputs.displacement)
-        builder.inputs.uvParams.connectTo(appendVector.output.rt)
+        
+        appendVector.connectTo(call.inputs.uVParams)
+
         builder.inputs.rotation.connectTo(call.inputs.rotation)
         builder.inputs.doTextureBomb.connectTo(call.inputs.doTextureBomb)
         builder.inputs.doRotationVariation.connectTo(call.inputs.doRotationVariation)

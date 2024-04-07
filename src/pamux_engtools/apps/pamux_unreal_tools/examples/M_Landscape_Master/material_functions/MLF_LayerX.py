@@ -7,13 +7,19 @@ from pamux_unreal_tools.base.material_expression.material_expression_container_b
 from pamux_unreal_tools.examples.M_Landscape_Master.interfaces.ILayerX import ILayerX
 from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.base.layer_inputs import LayerInputs
 from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.base.layer_build import LayerBuild
+from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MF_LandscapeBaseMaterial import MF_LandscapeBaseMaterial
 
 class MLF_LayerX:
+    @staticmethod
+    def load_MF(builder, layer_name):
+        return  builder.load_MF(f"/Game/Materials/Pamux/Landscape/Functions/Layers/MLF_{layer_name}",
+                                LayerInputs.get(layer_name),
+                                ["Result", "Height"])
+
+
     class Dependencies:
         def __init__(self, builder: MaterialExpressionContainerBuilderBase):
-            self.MF_LandscapeBaseMaterial = builder.load_MF("/Game/Materials/Pamux/Landscape/Functions/MF_LandscapeBaseMaterial",
-                                                            ["Albedo", "ColorOverlay", "ColorOverlayIntensity", "Contrast", "ContrastVariation", "Roughness", "RoughnessIntensity", "NormalIntensity", "Normal", "Displacement", "Rotation", "DoTextureBomb", "DoRotationVariation", "BombCellScale", "BombPatternScale", "BombRandomOffset", "BombRotationVariation"],
-                                                            ["Result", "Height"])
+            self.MF_LandscapeBaseMaterial = MF_LandscapeBaseMaterial.load_MF(builder)
 
     class Inputs(LayerInputs):
         def __init__(self, builder: MaterialExpressionContainerBuilderBase):

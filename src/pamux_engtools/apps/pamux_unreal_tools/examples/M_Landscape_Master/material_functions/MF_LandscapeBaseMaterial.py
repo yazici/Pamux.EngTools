@@ -23,12 +23,13 @@ from pamux_unreal_tools.interfaces.ICustomRotator import ICustomRotator
 from pamux_unreal_tools.examples.M_Landscape_Master.interfaces.ILandscapeBaseMaterial import ILandscapeBaseMaterial
 from pamux_unreal_tools.examples.M_Landscape_Master.interfaces.ITextureCellBombing_Landscape import ITextureCellBombing_Landscape
 from pamux_unreal_tools.impl.material_function_impl import MaterialFunctionImpl
+from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.base.layer_inputs import LayerInputs
 
 class MF_LandscapeBaseMaterial:
     @staticmethod
     def load_MF(builder):
         return  builder.load_MF("/Game/Materials/Pamux/Landscape/Functions/MF_LandscapeBaseMaterial",
-                                ["Albedo", "ColorOverlay", "ColorOverlayIntensity", "Contrast", "ContrastVariation", "Roughness", "RoughnessIntensity", "NormalIntensity", "Normal", "Displacement", "Rotation", "DoTextureBomb", "DoRotationVariation", "BombCellScale", "BombPatternScale", "BombRandomOffset", "BombRotationVariation", "OpacityStrength", "OpacityAdd", "OpacityContrast"],
+                                LayerInputs.get(),
                                 ["Result", "Height"])
 
     class Dependencies:

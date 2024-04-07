@@ -36,37 +36,35 @@ from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MLF_Layer
 from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MLF_ForestGround import MLF_ForestGround
 from pamux_unreal_tools.base.material_function.material_function_base import MaterialFunctionBase
 
+from pamux_unreal_tools.utils.asset_cache import AssetCache
+
         
 # https://github.com/SomeRanDev/Haxe-UnrealEngine5/blob/d17e0b1f9d8973ed0641484148c55d552ba69dff/Externs/generated_5_0_3/MaterialExpressionLinearInterpolate.hx#L4
 class M_Landscape_Master:
-
     class Inputs:
         def __init__(self, builder: MaterialExpressionContainerBuilderBase) -> None:
             self.wetness = LandscapeLayerWeight("Wetness", 0.0)
             self.wetness.add_rt()
 
             self.landscapeRVT = RuntimeVirtualTextureSampleParameter("LandscapeRVT")
-            self.landscapeRVT.virtual_texture.set(unreal.load_asset("/Script/Engine.RuntimeVirtualTexture'/Game/Materials/Landscape/RVT/RVT_Landscape_01.RVT_Landscape_01'"))
+            self.landscapeRVT.virtual_texture.set(AssetCache.get("LandscapeRVT"))
 
     class Outputs:
         def __init__(self, builder: MaterialExpressionContainerBuilderBase) -> None:
             pass
              
     class Dependencies:
-        def __init__(self, builder: MaterialExpressionContainerBuilderBase) -> None:
-            self.SCurve = builder.load_SCurve()
+        def __regen(self):
+            # self.MF_TextureCellBombing_Landscape = MF_TextureCellBombing_Landscape.Builder().get()
 
-            self.MF_TextureCellBombing_Landscape = MF_TextureCellBombing_Landscape.load_MF(builder)
+            # self.MF_LandscapeBaseMaterial = MF_LandscapeBaseMaterial.Builder().get()
 
-            #self.MF_LandscapeBaseMaterial = MF_LandscapeBaseMaterial.load_MF(builder)
-            self.MF_LandscapeBaseMaterial = MF_LandscapeBaseMaterial.Builder().get() # load_MF(builder)
+            # self.MF_Wetness = MF_Wetness.Builder().get()
+            # self.MF_Puddles = MF_Puddles.Builder().get()
+            # self.MF_BlendTwoMaterialsViaHighOpacityMap = MF_BlendTwoMaterialsViaHighOpacityMap.Builder().get()
+            # self.MF_GlancingAngleSpecCorrection = MF_GlancingAngleSpecCorrection.Builder().get()
 
-            self.MF_Wetness = MF_Wetness.load_MF(builder)
-            self.MF_Puddles = MF_Puddles.load_MF(builder)
-            self.MF_BlendTwoMaterialsViaHighOpacityMap = MF_BlendTwoMaterialsViaHighOpacityMap.load_MF(builder)
-            self.MF_GlancingAngleSpecCorrection = MF_GlancingAngleSpecCorrection.load_MF(builder)
-
-            self.MF_FoliageMask = MF_FoliageMask.Builder().get() # load_MF(builder)
+            # self.MF_FoliageMask = MF_FoliageMask.Builder().get()
 
             self.MLF_Layers = {}
             for layer_name in Globals.layer_names:
@@ -74,6 +72,29 @@ class M_Landscape_Master:
                     self.MLF_Layers[layer_name] = MLF_ForestGround.Builder().get()
                 else:
                     self.MLF_Layers[layer_name] = MLF_LayerX.Builder(layer_name).get()
+
+        def __init__(self, builder: MaterialExpressionContainerBuilderBase) -> None:
+            self.__regen()
+            self.SCurve = builder.load_SCurve()
+            
+
+            self.MF_TextureCellBombing_Landscape = MF_TextureCellBombing_Landscape.load_MF(builder)
+
+            self.MF_LandscapeBaseMaterial = MF_LandscapeBaseMaterial.load_MF(builder)
+
+            self.MF_Wetness = MF_Wetness.load_MF(builder)
+            self.MF_Puddles = MF_Puddles.load_MF(builder)
+            self.MF_BlendTwoMaterialsViaHighOpacityMap = MF_BlendTwoMaterialsViaHighOpacityMap.load_MF(builder)
+            self.MF_GlancingAngleSpecCorrection = MF_GlancingAngleSpecCorrection.load_MF(builder)
+
+            self.MF_FoliageMask = MF_FoliageMask.load_MF(builder)
+
+            self.MLF_Layers = {}
+            for layer_name in Globals.layer_names:
+                if layer_name == "ForestGround":
+                    self.MLF_Layers[layer_name] = MLF_ForestGround.load_MF(builder)
+                else:
+                    self.MLF_Layers[layer_name] = MLF_LayerX.load_MF(builder, layer_name)
 
             
     class Builder(MaterialBuilder):
@@ -198,4 +219,14 @@ class M_Landscape_Master:
             self.__buildLandscapeGrassOutputAndMaskingPath(blendCall)
 
 if __name__=="__main__":
+    AssetCache.set("DefaultTexture", "/Engine/EngineResources/DefaultTexture")
+    AssetCache.set("DefaultNormal", "/Engine/EngineMaterials/DefaultNormal")
+    AssetCache.set("BombingTexture", "/Game/Materials/Functions/TextureCellBombing/T_Voronoi_Perturbed_4k")
+    # AssetCache.set("LandscapeRVT", "/Script/Engine.RuntimeVirtualTexture'/Game/Materials/Landscape/RVT/RVT_Landscape_01.RVT_Landscape_01'")
+    AssetCache.set("LandscapeRVT", "/Game/Materials/Landscape/RVT/RVT_Landscape_01")
+    AssetCache.set("GrassyLayer_A", "/Game/Materials/Landscape/Textures/GrassyLayer/T_GrassyLayer_A")
+    AssetCache.set("GrassyLayer_R", "/Game/Materials/Landscape/Textures/GrassyLayer/T_GrassyLayer_R")
+    AssetCache.set("GrassyLayer_D", "/Game/Materials/Landscape/Textures/GrassyLayer/T_GrassyLayer_D")
+    AssetCache.set("GrassyLayer_N", "/Game/Materials/Landscape/Textures/GrassyLayer/T_GrassyLayer_N")
+    
     M_Landscape_Master.Builder("/Game/Materials/Pamux/M_Landscape_Master").get()

@@ -12,11 +12,16 @@ from pamux_unreal_tools.factories.material_expression_factories import MakeMater
 from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MF_LandscapeBaseMaterial import MF_LandscapeBaseMaterial
 
 class MLF_ForestGround:
+    @staticmethod
+    def load_MF(builder):
+        return  builder.load_MF("/Game/Materials/Pamux/Landscape/Functions/Layers/MLF_ForestGround",
+                                LayerInputs.get("ForestGround"),
+                                ["Result", "Height"])
+    
     class Dependencies:
         def __init__(self, builder: MaterialExpressionContainerBuilderBase):
-            self.fuzzyShading = builder.load_MF("/Engine/Functions/Engine_MaterialFunctions01/Shading/FuzzyShading.FuzzyShading",
-                                               [ "BaseColor", "Normal", "CoreDarkness", "Power", "EdgeBrightness" ],
-                                               [ "Result" ])
+            self.fuzzyShading = builder.load_FuzzyShading()
+
             self.MF_LandscapeBaseMaterial    = MF_LandscapeBaseMaterial.load_MF(builder)
 
     class Inputs(LayerInputs):

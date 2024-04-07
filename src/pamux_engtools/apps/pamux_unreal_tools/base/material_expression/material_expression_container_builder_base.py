@@ -15,6 +15,7 @@ from pamux_unreal_tools.utils.node_pos import NodePos, CurrentNodePos
 from pamux_unreal_tools.utils.texture_sample_set import TMaterialTextures, TextureSampleSet
 from pamux_unreal_tools.base.material_function.material_function_factory_base import MaterialFunctionFactoryBase
 from pamux_unreal_tools.base.material_expression.material_expression_container_factory_base import MaterialExpressionContainerFactoryBase
+from pamux_unreal_tools.utils.asset_cache import AssetCache
 
 class MaterialExpressionContainerBuilderBase:
     container_path: str
@@ -24,10 +25,6 @@ class MaterialExpressionContainerBuilderBase:
     dependencies_class: type
     inputs_class: type
     outputs_class: type
-
-    DefaultTexture_Color = unreal.load_asset("/Engine/EngineResources/DefaultTexture")
-    DefaultTexture_Normal = unreal.load_asset("/Engine/EngineMaterials/DefaultNormal")
-
 
     def __init__(self,
                  material_function_factory: MaterialFunctionFactoryBase,
@@ -88,6 +85,15 @@ class MaterialExpressionContainerBuilderBase:
                             [ "UVs", "Rotation Center", "Rotation Angle" ],
                             [ "Rotated Values" ])
 
+    def load_FuzzyShading(self):
+        return self.load_MF("/Engine/Functions/Engine_MaterialFunctions01/Shading/FuzzyShading",
+                            [ "BaseColor", "Normal", "CoreDarkness", "Power", "EdgeBrightness" ],
+                            [ "Result" ])
+    
+    def load_RotateAboutWorldAxis_cheap(self):
+        return self.load_MF("/Engine/Functions/Engine_MaterialFunctions02/WorldPositionOffset/RotateAboutWorldAxis_cheap",
+                            [ "Rotation Amount", "PivotPoint", "WorldPosition" ],
+                            [ "X-Axis", "Y-Axis", "Z-Axis" ])
 
     def build(self):
         pass
@@ -139,7 +145,7 @@ class MaterialExpressionContainerBuilderBase:
         
         if isinstance(preview, TTextureObject_Color):
             if use_preview_input:
-                preview = TextureObject(unreal.MaterialSamplerType.SAMPLERTYPE_COLOR, MaterialExpressionContainerBuilderBase.DefaultTexture_Color)
+                preview = TextureObject(unreal.MaterialSamplerType.SAMPLERTYPE_COLOR, AssetCache.get("DefaultTexture"))
             else:
                 preview = None
 
@@ -152,7 +158,7 @@ class MaterialExpressionContainerBuilderBase:
 
         if isinstance(preview, TTextureObject_Normal):
             if use_preview_input:
-                preview = TextureObject(unreal.MaterialSamplerType.SAMPLERTYPE_NORMAL, MaterialExpressionContainerBuilderBase.DefaultTexture_Normal)
+                preview = TextureObject(unreal.MaterialSamplerType.SAMPLERTYPE_NORMAL, AssetCache.get("DefaultNormal"))
             else:
                 preview = None
 

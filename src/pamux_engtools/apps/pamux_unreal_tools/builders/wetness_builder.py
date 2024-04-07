@@ -10,8 +10,4 @@ class WetnessBuilder(MaterialFunctionBuilder):
     def __init__(self, container_path: str, dependencies_class, inputs_class, outputs_class = MaterialFunctionOutputs.Result):
         super().__init__(container_path, dependencies_class, inputs_class, outputs_class)
 
-        self.textureSampleSet = TMaterialTextures(
-            "/Game/Materials/Landscape/Textures/GrassyLayer/T_GrassyLayer_A",
-            "/Game/Materials/Landscape/Textures/GrassyLayer/T_GrassyLayer_R",
-            "/Game/Materials/Landscape/Textures/GrassyLayer/T_GrassyLayer_D",
-            "/Game/Materials/Landscape/Textures/GrassyLayer/T_GrassyLayer_N")
+        self.textureSampleSet = TMaterialTextures("GrassyLayer_A", "GrassyLayer_R", "GrassyLayer_D", "GrassyLayer_N")

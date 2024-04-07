@@ -32,6 +32,18 @@ class ShouldAddRTParams(MethodParam):
         MaterialAttributeFields.for_each(func, True,  ["Displacement"], "")
         pyGen.end_if()
 
+class MakeMaterialAttributesParam(MethodParam):
+    def __init__(self):
+        super().__init__("materialAttributes", "BreakMaterialAttributes", "None")
+
+    def append_assignment_lines(self, pyGen: PyCodeGenerator):
+        pyGen.append_blank_line()
+        pyGen.append_line(f"if {self.name} is not None:")
+        pyGen.indent()
+        func = lambda item: pyGen.append_line(f"self.{item}.comesFrom(materialAttributes.{item})")
+        MaterialAttributeFields.for_each(func, True,  ["Displacement"], None)
+        pyGen.unindent()
+
 class RerouteInputParam(MethodParam):
     def __init__(self, name: str, type: str = None, default_value: str = "None"):
         super().__init__(name, type, default_value)
@@ -44,7 +56,7 @@ class RerouteInputParam(MethodParam):
 
 class InputParamWithConstProperty(MethodParam):
     def __init__(self, name: str):
-        super().__init__(name)
+        super().__init__(name, None, "None")
 
     def append_assignment_lines(self, pyGen: PyCodeGenerator):
         pyGen.begin_if(f"{self.name} is not None")
@@ -102,69 +114,71 @@ def setup_ctor_params(pamux_wrapper_class_name):
     #             print(pamux_wrapper_class_name)
 
     if pamux_wrapper_class_name in parameter_with_default_value_classes:
-        result.append(PropertyParam("parameter_name"))
-        result.append(PropertyParam("default_value"))
+        result.append(PropertyParam("parameter_name", None, "None"))
+        result.append(PropertyParam("default_value", None, "None"))
 
     elif pamux_wrapper_class_name in parameter_without_default_value_classes:
-        result.append(PropertyParam("parameter_name"))
+        result.append(PropertyParam("parameter_name", None, "None"))
+
     elif pamux_wrapper_class_name in unary_op_classes:
-        result.append(InputParam("input"))
+        result.append(InputParam("input", None, "None"))
+
     elif  pamux_wrapper_class_name == "BreakMaterialAttributes":
-        result.append(InputParam("input"))
+        result.append(InputParam("input", None, "None"))
         result.append(ShouldAddRTParams())
 
     elif pamux_wrapper_class_name == "StaticBool":
-        result.append(PropertyParam('value'))
+        result.append(PropertyParam('value', None, "None"))
 
     elif pamux_wrapper_class_name == "Desaturation":
-        result.append(InputParam('input'))
-        result.append(InputParam('fraction'))
+        result.append(InputParam('input', None, "None"))
+        result.append(InputParam('fraction', None, "None"))
 
     elif pamux_wrapper_class_name == "ComponentMask":
-        result.append(InputParam("input"))
+        result.append(InputParam("input", None, "None"))
         result.append(RGBAMaskParam())
 
     elif pamux_wrapper_class_name == "StaticSwitch":
-        result.append(InputParam('true'))
-        result.append(InputParam('false'))
-        result.append(InputParam('value'))
+        result.append(InputParam('true', None, "None"))
+        result.append(InputParam('false', None, "None"))
+        result.append(InputParam('value', None, "None"))
 
     elif pamux_wrapper_class_name == "TextureCoordinate":
-        result.append(PropertyParam('u_tiling'))
-        result.append(PropertyParam('v_tiling'))
+        result.append(PropertyParam('u_tiling', None, "None"))
+        result.append(PropertyParam('v_tiling', None, "None"))
 
     elif pamux_wrapper_class_name in binary_op_classes:
-        result.append(InputParam("a"))
-        result.append(InputParam("b"))
+        result.append(InputParam("a", None, "None"))
+        result.append(InputParam("b", None, "None"))
 
     elif pamux_wrapper_class_name in binary_op_classes_with_const:
         result.append(InputParamWithConstProperty("a"))
         result.append(InputParamWithConstProperty("b"))
 
     elif pamux_wrapper_class_name == "Constant":
-        result.append(PropertyParam("r"))
+        result.append(PropertyParam("r", None, "None"))
 
     elif pamux_wrapper_class_name == "Constant2Vector":
-        result.append(PropertyParam("constant"))
+        result.append(PropertyParam("constant", None, "None"))
 
     elif pamux_wrapper_class_name == "Constant3Vector":
-        result.append(PropertyParam("constant"))
+        result.append(PropertyParam("constant", None, "None"))
 
     elif pamux_wrapper_class_name == "Constant4Vector":
-        result.append(PropertyParam("constant"))
+        result.append(PropertyParam("constant", None, "None"))
 
     elif pamux_wrapper_class_name == "TextureObject":
-        result.append(PropertyParam("sampler_type"))
-        result.append(PropertyParam("texture"))
+        result.append(PropertyParam("sampler_type", None, "None"))
+        result.append(PropertyParam("texture", None, "None"))
 
     elif pamux_wrapper_class_name == "NamedRerouteDeclaration":
-        result.append(PropertyParam("name"))
+        result.append(PropertyParam("name", None, "None"))
         result.append(RerouteInputParam("input", None, "None"))
         #result.append(PropertyParam("variableGuid"))
-        result.append(PropertyParam("nodeColor", None))
+        result.append(PropertyParam("nodeColor", None, "None"))
 
     elif pamux_wrapper_class_name == "NamedRerouteUsage":
-        result.append(PropertyParam("declarationGuid"))
+        result.append(PropertyParam("declarationGuid", None, "None"))
 
     elif pamux_wrapper_class_name == "LinearInterpolate" or pamux_wrapper_class_name == "BlendMaterialAttributes":
         result.append(InputParamWithConstProperty("a"))
@@ -172,12 +186,22 @@ def setup_ctor_params(pamux_wrapper_class_name):
         result.append(InputParamWithConstProperty("alpha"))
 
     elif pamux_wrapper_class_name == "Transform":
-        result.append(InputParam("input"))
+        result.append(InputParam("input", None, "None"))
 
     elif pamux_wrapper_class_name == "Power":
-        result.append(InputParam("base"))
-        result.append(InputParam("exponent"))
+        result.append(InputParam("base", None, "None"))
+        result.append(InputParam("exponent", None, "None"))
 
-        
+    elif pamux_wrapper_class_name == "LandscapeLayerWeight":
+        result.append(PropertyParam("parameter_name", None, "None"))
+        result.append(PropertyParam("preview_weight", "float", "None"))
+
+    elif pamux_wrapper_class_name == "RuntimeVirtualTextureSampleParameter":
+        result.append(PropertyParam("parameter_name", None, "None"))
+
+    elif pamux_wrapper_class_name == "MakeMaterialAttributes":
+        result.append(MakeMaterialAttributesParam())
+
+
 
     return result

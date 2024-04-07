@@ -73,19 +73,19 @@ class MF_LandscapeBaseMaterial:
                 MF_LandscapeBaseMaterial.Dependencies,
                 MF_LandscapeBaseMaterial.Inputs,
                 MaterialFunctionOutputs.ResultAndHeight)
-            
 
-        def __build_cellBombing(self, map, uvParams):
+        def __call_cellBombing(self, textureMap, uvParams):
             call = self.dependencies.MF_TextureCellBombing_Landscape.call()
+
             call.outputs.result.add_rt()
-            call.inputs.texture.comesFrom(map)
+            call.inputs.texture.comesFrom(textureMap)
             call.inputs.uVs.comesFrom(uvParams)
             call.inputs.cellScale.comesFrom(self.inputs.bombCellScale)
             call.inputs.patternScale.comesFrom(self.inputs.bombPatternScale)
             call.inputs.doRotationVariation.comesFrom(self.inputs.doRotationVariation)
             call.inputs.randomOffsetVariation.comesFrom(self.inputs.bombRandomOffset)
             call.inputs.randomRotationVariation.comesFrom(self.inputs.bombRotationVariation)
-            if map == self.inputs.normal:
+            if textureMap == self.inputs.normal:
                 call.inputs.isNormalMap.comesFrom(StaticBool(True))
             return call
 
@@ -163,33 +163,32 @@ class MF_LandscapeBaseMaterial:
 
             uvParams = self.__build_uvParams()
 
-            albedo = self.__build_cellBombing(self.inputs.albedo, uvParams)
+            albedo = self.__call_cellBombing(self.inputs.albedo, uvParams)
             switchedAlbedo = self.__build_switched(uvParams, albedo)
             qualitySwitchedAlbedo = self.__build_qualitySwitchAlbedo(switchedAlbedo)
             lerpedAlbedo = LinearInterpolate(switchedAlbedo, qualitySwitchedAlbedo, self.inputs.colorOverlayIntensity)
 
-            roughness = self.__build_cellBombing(self.inputs.roughness, uvParams)
+            roughness = self.__call_cellBombing(self.inputs.roughness, uvParams)
             switchedRoughness = self.__build_switched(uvParams, roughness)
             finalRoughness = Multiply(switchedRoughness, self.inputs.roughnessIntensity)
 
-            displacement = self.__build_cellBombing(self.inputs.displacement, uvParams)
+            displacement = self.__call_cellBombing(self.inputs.displacement, uvParams)
             switchedDisplacement = self.__build_switched(uvParams, displacement)
             finalDisplacement = Add(Multiply(Power(switchedDisplacement, self.inputs.opacityContrast), self.inputs.opacityStrength), self.inputs.opacityAdd)
 
-            normal = self.__build_cellBombing(self.inputs.normal, uvParams)
+            normal = self.__call_cellBombing(self.inputs.normal, uvParams)
             switchedNormal = self.__build_switched(uvParams, normal)
             
-            call = self.dependencies.multiplyAdd.call()
-            call.inputs.base.comesFrom(switchedNormal)
-            call.inputs.add.comesFrom(AppendVector(AppendVector(self.inputs.normalIntensity, self.inputs.normalIntensity), Constant(0.0)))
-            finalNormal = call.outputs.result
+            finalNormal = self.dependencies.multiplyAdd.call()
+            finalNormal.inputs.base.comesFrom(switchedNormal)
+            finalNormal.inputs.add.comesFrom(AppendVector(AppendVector(self.inputs.normalIntensity, self.inputs.normalIntensity), Constant(0.0)))
 
             finalAlbedo = self.__build_finalAlbedo(lerpedAlbedo, switchedDisplacement)
 
             makeMaterialAttributes = MakeMaterialAttributes()
             makeMaterialAttributes.baseColor.comesFrom(finalAlbedo)
             makeMaterialAttributes.roughness.comesFrom(finalRoughness)
-            makeMaterialAttributes.normal.comesFrom(finalNormal)
+            makeMaterialAttributes.normal.comesFrom(finalNormal.outputs.result)
             makeMaterialAttributes.opacity.comesFrom(finalDisplacement)
 
             breakMaterialAttributes = BreakMaterialAttributes(makeMaterialAttributes)

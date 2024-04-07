@@ -18,7 +18,7 @@ class MF_GlancingAngleSpecCorrection:
                                 ["Result"])
     class Inputs:
         def __init__(self, builder: MaterialExpressionContainerBuilderBase):
-            self.materialAttributes = builder.build_FunctionInput("In", 0,  TMaterialAttributes(), False, False)
+            self.materialAttributes = builder.build_FunctionInput("MaterialAttributes", 0,  TMaterialAttributes(), False, False)
 
             self.pixelDepth = PixelDepth()
             self.pixelDepth.add_rt()

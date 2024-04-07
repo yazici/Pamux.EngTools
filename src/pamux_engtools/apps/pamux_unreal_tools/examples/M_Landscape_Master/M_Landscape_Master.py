@@ -30,16 +30,23 @@ from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MF_BlendT
 from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MF_GlancingAngleSpecCorrection import MF_GlancingAngleSpecCorrection
 from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MF_TextureCellBombing_Landscape import MF_TextureCellBombing_Landscape
 from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MF_FoliageMask import MF_FoliageMask
+from pamux_unreal_tools.factories.material_expression_factories import MakeMaterialAttributesFactory
 
 from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MLF_LayerX import MLF_LayerX
 from pamux_unreal_tools.examples.M_Landscape_Master.material_functions.MLF_ForestGround import MLF_ForestGround
+from pamux_unreal_tools.base.material_function.material_function_base import MaterialFunctionBase
 
+        
 # https://github.com/SomeRanDev/Haxe-UnrealEngine5/blob/d17e0b1f9d8973ed0641484148c55d552ba69dff/Externs/generated_5_0_3/MaterialExpressionLinearInterpolate.hx#L4
 class M_Landscape_Master:
 
     class Inputs:
         def __init__(self, builder: MaterialExpressionContainerBuilderBase) -> None:
-            pass
+            self.wetness = LandscapeLayerWeight("Wetness", 0.0)
+            self.wetness.add_rt()
+
+            self.landscapeRVT = RuntimeVirtualTextureSampleParameter("LandscapeRVT")
+            self.landscapeRVT.virtual_texture.set(unreal.load_asset("/Script/Engine.RuntimeVirtualTexture'/Game/Materials/Landscape/RVT/RVT_Landscape_01.RVT_Landscape_01'"))
 
     class Outputs:
         def __init__(self, builder: MaterialExpressionContainerBuilderBase) -> None:
@@ -49,9 +56,10 @@ class M_Landscape_Master:
         def __init__(self, builder: MaterialExpressionContainerBuilderBase) -> None:
             self.SCurve = builder.load_SCurve()
 
-            self.MF_TextureCellBombing_Landscape = MF_TextureCellBombing_Landscape.Builder().get().load_MF(builder)
+            self.MF_TextureCellBombing_Landscape = MF_TextureCellBombing_Landscape.load_MF(builder)
 
-            self.MF_LandscapeBaseMaterial = MF_LandscapeBaseMaterial.load_MF(builder)
+            #self.MF_LandscapeBaseMaterial = MF_LandscapeBaseMaterial.load_MF(builder)
+            self.MF_LandscapeBaseMaterial = MF_LandscapeBaseMaterial.Builder().get() # load_MF(builder)
 
             self.MF_Wetness = MF_Wetness.load_MF(builder)
             self.MF_Puddles = MF_Puddles.load_MF(builder)
@@ -76,77 +84,79 @@ class M_Landscape_Master:
                 M_Landscape_Master.Inputs,
                 M_Landscape_Master.Outputs)
 
-        # def __buildMainPath(self, MF_BlendTwoMaterialsViaHighOpacityMap_Output):
-        #     makeMaterialAttributes = MakeMaterialAttributes(self.material)
-        #     makeMaterialAttributes.input.comesFrom(self.params.LandscapeRVT)
+        def __buildMainPath(self, blendCall):
+            makeMaterialAttributes = MakeMaterialAttributes()
+            makeMaterialAttributes.input.comesFrom(self.inputs.landscapeRVT)
 
-        #     virtualTextureFeatureSwitch = VirtualTextureFeatureSwitch(self.material)
-        #     virtualTextureFeatureSwitch.in1.comesFrom(MF_BlendTwoMaterialsViaHighOpacityMap_Output)
-        #     virtualTextureFeatureSwitch.in2.comesFrom(makeMaterialAttributes)
+            virtualTextureFeatureSwitch = VirtualTextureFeatureSwitch()
+            virtualTextureFeatureSwitch.no.comesFrom(blendCall)
+            virtualTextureFeatureSwitch.yes.comesFrom(makeMaterialAttributes)
 
-        #     self.MF_GlancingAngleSpecCorrection.call()
-        #     self.MF_GlancingAngleSpecCorrection.call_result.in1.comesFrom(virtualTextureFeatureSwitch.output)
+            glancingAngleSpecCorrectionCall = self.dependencies.MF_GlancingAngleSpecCorrection.call()
+            glancingAngleSpecCorrectionCall.inputs.materialAttributes.comesFrom(virtualTextureFeatureSwitch.output)
 
-        #     qualitySwitch = QualitySwitch(self.material)
-        #     qualitySwitch.in1.comesFrom(call_MF_GlancingAngleSpecCorrection.output)
-        #     qualitySwitch.in2.comesFrom(virtualTextureFeatureSwitch.output)
+            qualitySwitch = QualitySwitch()
+            qualitySwitch.default.comesFrom(glancingAngleSpecCorrectionCall.outputs.result)
+            qualitySwitch.low.comesFrom(virtualTextureFeatureSwitch)
 
-        #     makeMaterialAttributes = MakeMaterialAttributes(self.material)
-        #     makeMaterialAttributes.in1.comesFrom(qualitySwitch.output)
-        #     makeMaterialAttributes.in2.comesFrom(self.params.LandscapeVisibilityMask)
+            breakMaterialAttributes = BreakMaterialAttributes()
+            breakMaterialAttributes.materialAttributes.comesFrom(qualitySwitch)
 
-        # def __rvtSpecular(self, baseColor):
-        #     sCurve = MaterialFunctionFactory().load("SCurve", "/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment", True)
-        #     call_SCurve = sCurve.call()
-        #     call_SCurve.In.comesFrom(baseColor)
-        #     call_SCurve.Power.comesFrom(Params.specularContrast)
+            result = MakeMaterialAttributesFactory.create(breakMaterialAttributes)
+            #result.opacityMask.comesFrom(self.params.LandscapeVisibilityMask)
 
-        #     # SCurve(In: Vector3, Power:Scalar)
+            return result
 
+        def __rvtSpecular(self, baseColor):
+            sCurveCall = self.dependencies.SCurve.call()
+            # sCurveCall._in.comesFrom(baseColor)
+            # sCurveCall.power.comesFrom(Params.specularContrast)
 
-        #     desaturation = Desaturation(self.material)
-        #     desaturation.input.comesFrom(sCurve.Result)
+            desaturation = Desaturation()
+            desaturation.input.comesFrom(sCurveCall.outputs.result)
 
-        #     multiply = Multiply(self.material)
-        #     multiply.a.comesFrom(desaturation.output)
-        #     multiply.b.comesFrom(Params.specular)
+            multiply = Multiply()
+            multiply.a.comesFrom(desaturation.output)
+            # multiply.b.comesFrom(Params.specular)
 
-        #     lerp = LinearInterpolate(self.material)
-        #     lerp.const_a.set(0.0)
-        #     lerp.b.comesFrom(Params.specularMax)
-        #     lerp.alpha.comesFrom(multiply.output)
+            lerp = LinearInterpolate()
+            lerp.const_a.set(0.0)
+            # lerp.b.comesFrom(Params.specularMax)
+            lerp.alpha.comesFrom(multiply.output)
 
-        #     return lerp.output
+            return lerp.output
 
-        # def __rvtOutput(self, baseColor, rvtSpecular, roughness, normal, worldHeight):
-        #      return
+        def __rvtOutput(self, baseColor, rvtSpecular, roughness, normal, worldHeight):
+             return
         
-        # def __buildRVTOutputPath(self, MF_BlendTwoMaterialsViaHighOpacityMap_Output):
-        #     breakMaterialAttributes = BreakMaterialAttributes(self.material)
-        #     breakMaterialAttributes.input.comesFrom(MF_BlendTwoMaterialsViaHighOpacityMap_Output)
+        def __buildRVTOutputPath(self, blendCall):
+            breakMaterialAttributes = BreakMaterialAttributes()
+            breakMaterialAttributes.input.comesFrom(blendCall)
 
-        #     rvtSpecular = self.__rvtSpecular(breakMaterialAttributes.baseColor)
+            rvtSpecular = self.__rvtSpecular(breakMaterialAttributes.baseColor)
 
-        #     return self.__rvtOutput(
-        #          breakMaterialAttributes.baseColor, 
-        #          rvtSpecular,
-        #          breakMaterialAttributes.roughness, 
-        #          breakMaterialAttributes.normal, 
-        #          WorldPosition(self.material).z) # AbsoluteWorldPosition?
+            return self.__rvtOutput(
+                 breakMaterialAttributes.baseColor, 
+                 rvtSpecular,
+                 breakMaterialAttributes.roughness, 
+                 breakMaterialAttributes.normal, None)
+                 ##WorldPosition().z) # AbsoluteWorldPosition?
 
-        # def __buildLandscapeGrassOutputAndMaskingPath(self, MF_BlendTwoMaterialsViaHighOpacityMap_Output):
-        #         #landscapeGrassOutput = Blocks.landscapeGrassOutputAndMasking(Params.foliageMask, Globals.LayersForGrass)
-        #         pass
+        def __buildLandscapeGrassOutputAndMaskingPath(self, blendCall):
+                #landscapeGrassOutput = Blocks.landscapeGrassOutputAndMasking(Params.foliageMask, Globals.LayersForGrass)
+                pass
 
         def __blendLandscapeLayers(self):
-            landscapeLayerBlend = LandscapeLayerBlend(self.material)
+            landscapeLayerBlend = LandscapeLayerBlend()
 
             layers = unreal.Array(unreal.LayerBlendInput)
-            
+
+            landscapeLayerBlend.inputs = MaterialFunctionBase.Inputs()
+            landscapeLayerBlend.inputs.layers = {}
 
             for layer_name in Globals.layer_names:
                 layer = unreal.LayerBlendInput()
-                
+
                 layer.set_editor_property("blend_type", unreal.LandscapeLayerBlendType.LB_HEIGHT_BLEND)
                 layer.set_editor_property("layer_name", layer_name)
                 layer.set_editor_property("preview_weight", 0.0)
@@ -155,51 +165,37 @@ class M_Landscape_Master:
             landscapeLayerBlend.layers.set(layers)
 
             for layer_name in Globals.layer_names:
-                call_MLF_LayerX = self.MLF_Layers[layer_name].call()
+                call = self.dependencies.MLF_Layers[layer_name].call()
 
-                MEL.connect_material_expressions(call_MLF_LayerX.unrealAsset, "Result", landscapeLayerBlend.unrealAsset, f"Layer {layer_name}")
-                MEL.connect_material_expressions(call_MLF_LayerX.unrealAsset, "Height", landscapeLayerBlend.unrealAsset, f"Height {layer_name}")
+                call.outputs.result.connectTo(InSocketImpl(landscapeLayerBlend, f"Layer {layer_name}", 'StructProperty'))
+                call.outputs.height.connectTo(InSocketImpl(landscapeLayerBlend, f"Height {layer_name}", 'StructProperty'))
 
-            return landscapeLayerBlend.output
+            landscapeLayerBlend.add_rt()
+            return landscapeLayerBlend
 
         def build(self):
-            return
-            # blendedLandscapeLayers = self.__blendLandscapeLayers()
+            landscapeLayerBlend = self.__blendLandscapeLayers()
 
-            # call_MF_Wetness = self.MF_Wetness.call()
-            # call_MF_Wetness.input.comesFrom(blendedLandscapeLayers)
+            wetnessCall = self.dependencies.MF_Wetness.call()
+            wetnessCall.outputs.result.add_rt()
+            wetnessCall.inputs.materialAttributes.comesFrom(landscapeLayerBlend)
+            wetnessCall.inputs.wetness.comesFrom(self.inputs.wetness)
 
-            # return call_MF_Wetness.output
+            puddlesCall = self.dependencies.MF_Puddles.call()
+            puddlesCall.outputs.result.add_rt()
+            puddlesCall.inputs.materialAttributes.comesFrom(wetnessCall.outputs.result)
 
-            # call_MF_Puddles = self.MF_Puddles.call()
-            # call_MF_Puddles.input.comesFrom(call_MF_Wetness.output)
+            saturatedWetmess = Saturate(Divide(Subtract(self.inputs.wetness, 0.5), 0.5))
 
-            # subtractHalf = Subtract(self.material)
-            # subtractHalf.a.comesFrom(self.params.Wetness.output)
-            # subtractHalf.constB = 0.5
+            blendCall = self.dependencies.MF_BlendTwoMaterialsViaHighOpacityMap.call()
 
-            # divideHalf = Divide(self.material)
-            # divideHalf.a.comesFrom(subtractHalf.output)
-            # divideHalf.constB = 0.5
+            blendCall.inputs.materialA.comesFrom(wetnessCall.outputs.result)
+            blendCall.inputs.materialB.comesFrom(puddlesCall.outputs.result)
+            blendCall.inputs.alpha.comesFrom(saturatedWetmess)
 
-            # saturatedWetmess = Saturate(self.material)
-            # saturatedWetmess.input.comesFrom(divideHalf.output)
-
-            # # saturatedWetmess = Chain(self.material, Saturate(Divide(Subtract(self.params.Wetness.output, 0.5), 0.5))
-
-            # call_MF_BlendTwoMaterialsViaHighOpacityMap = self.MF_BlendTwoMaterialsViaHighOpacityMap(self)
-            # call_MF_BlendTwoMaterialsViaHighOpacityMap.in1.comesFrom(call_MF_Wetness.output)
-            # call_MF_BlendTwoMaterialsViaHighOpacityMap.in2.comesFrom(call_MF_Puddles.output)
-            # call_MF_BlendTwoMaterialsViaHighOpacityMap.in3.comesFrom(saturatedWetmess.output)
-
-            # self.__buildMainPath(call_MF_BlendTwoMaterialsViaHighOpacityMap.output)
-            # self.__buildRVTOutputPath(call_MF_BlendTwoMaterialsViaHighOpacityMap.output)
-            # self.__buildLandscapeGrassOutputAndMaskingPath(call_MF_BlendTwoMaterialsViaHighOpacityMap.output)
-
-#
-#call_SCurve = sCurve.call()
-#call_SCurve.In.comesFrom(baseColor)
-#call_SCurve.Power.comesFrom(Params.specularContrast)
+            self.__buildMainPath(blendCall)
+            self.__buildRVTOutputPath(blendCall)
+            self.__buildLandscapeGrassOutputAndMaskingPath(blendCall)
 
 if __name__=="__main__":
     M_Landscape_Master.Builder("/Game/Materials/Pamux/M_Landscape_Master").get()

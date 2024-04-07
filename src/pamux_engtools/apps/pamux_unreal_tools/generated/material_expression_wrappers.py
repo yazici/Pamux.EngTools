@@ -21,7 +21,7 @@ class ActorPositionWS(MaterialExpressionImpl):
         self.origin_type = MaterialExpressionEditorPropertyImpl(self, 'origin_type', 'PositionOrigin')
 
 class Add(MaterialExpressionImpl):
-    def __init__(self, a, b, node_pos: NodePos = None) -> None:
+    def __init__(self, a = None, b = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionAdd, node_pos)
 
         self.const_a = MaterialExpressionEditorPropertyImpl(self, 'const_a', 'float')
@@ -143,7 +143,7 @@ class BlackBody(MaterialExpressionImpl):
         self.temp = InSocketImpl(self, 'Temp', 'StructProperty')
 
 class BlendMaterialAttributes(MaterialExpressionImpl):
-    def __init__(self, a, b, alpha, node_pos: NodePos = None) -> None:
+    def __init__(self, a = None, b = None, alpha = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionBlendMaterialAttributes, node_pos)
 
         self.pixel_attribute_blend_type = MaterialExpressionEditorPropertyImpl(self, 'pixel_attribute_blend_type', 'MaterialAttributeBlend')
@@ -581,7 +581,7 @@ class DistanceToNearestSurface(MaterialExpressionImpl):
         self.position = InSocketImpl(self, 'Position', 'StructProperty')
 
 class Divide(MaterialExpressionImpl):
-    def __init__(self, a, b, node_pos: NodePos = None) -> None:
+    def __init__(self, a = None, b = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionDivide, node_pos)
 
         self.const_a = MaterialExpressionEditorPropertyImpl(self, 'const_a', 'float')
@@ -885,12 +885,16 @@ class LandscapeLayerSwitch(MaterialExpressionImpl):
         self.preview_used = MaterialExpressionEditorPropertyImpl(self, 'preview_used', 'bool')
 
 class LandscapeLayerWeight(MaterialExpressionImpl):
-    def __init__(self, node_pos: NodePos = None) -> None:
+    def __init__(self, parameter_name = None, preview_weight: float = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionLandscapeLayerWeight, node_pos)
 
         self.const_base = MaterialExpressionEditorPropertyImpl(self, 'const_base', 'Vector')
         self.parameter_name = MaterialExpressionEditorPropertyImpl(self, 'parameter_name', 'Name')
         self.preview_weight = MaterialExpressionEditorPropertyImpl(self, 'preview_weight', 'float')
+        if parameter_name is not None:
+            self.parameter_name.set(parameter_name)
+        if preview_weight is not None:
+            self.preview_weight.set(preview_weight)
 
 class LandscapePhysicalMaterialOutput(MaterialExpressionImpl):
     def __init__(self, node_pos: NodePos = None) -> None:
@@ -929,7 +933,7 @@ class LightmassReplace(MaterialExpressionImpl):
         self.lightmass = InSocketImpl(self, 'Lightmass', 'StructProperty')
 
 class LinearInterpolate(MaterialExpressionImpl):
-    def __init__(self, a, b, alpha, node_pos: NodePos = None) -> None:
+    def __init__(self, a = None, b = None, alpha = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionLinearInterpolate, node_pos)
 
         self.const_a = MaterialExpressionEditorPropertyImpl(self, 'const_a', 'float')
@@ -972,7 +976,7 @@ class Logarithm2(MaterialExpressionImpl):
         self.x = InSocketImpl(self, 'X', 'StructProperty')
 
 class MakeMaterialAttributes(MaterialExpressionImpl):
-    def __init__(self, node_pos: NodePos = None) -> None:
+    def __init__(self, materialAttributes: BreakMaterialAttributes = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionMakeMaterialAttributes, node_pos)
 
         self.baseColor = InSocketImpl(self, 'BaseColor', 'StructProperty')
@@ -1002,6 +1006,27 @@ class MakeMaterialAttributes(MaterialExpressionImpl):
         self.pixelDepthOffset = InSocketImpl(self, 'PixelDepthOffset', 'StructProperty')
         self.shadingModel = InSocketImpl(self, 'ShadingModel', 'StructProperty')
         self.displacement = InSocketImpl(self, 'Displacement', 'StructProperty')
+
+        if materialAttributes is not None:
+            self.baseColor.comesFrom(materialAttributes.baseColor)
+            self.metallic.comesFrom(materialAttributes.metallic)
+            self.specular.comesFrom(materialAttributes.specular)
+            self.roughness.comesFrom(materialAttributes.roughness)
+            self.anisotropy.comesFrom(materialAttributes.anisotropy)
+            self.emissiveColor.comesFrom(materialAttributes.emissiveColor)
+            self.opacity.comesFrom(materialAttributes.opacity)
+            self.opacityMask.comesFrom(materialAttributes.opacityMask)
+            self.normal.comesFrom(materialAttributes.normal)
+            self.tangent.comesFrom(materialAttributes.tangent)
+            self.worldPositionOffset.comesFrom(materialAttributes.worldPositionOffset)
+            self.subsurfaceColor.comesFrom(materialAttributes.subsurfaceColor)
+            self.clearCoat.comesFrom(materialAttributes.clearCoat)
+            self.clearCoatRoughness.comesFrom(materialAttributes.clearCoatRoughness)
+            self.ambientOcclusion.comesFrom(materialAttributes.ambientOcclusion)
+            self.refraction.comesFrom(materialAttributes.refraction)
+            self.pixelDepthOffset.comesFrom(materialAttributes.pixelDepthOffset)
+            self.shadingModel.comesFrom(materialAttributes.shadingModel)
+            self.displacement.comesFrom(materialAttributes.displacement)
 
 class MapARPassthroughCameraUV(MaterialExpressionImpl):
     def __init__(self, node_pos: NodePos = None) -> None:
@@ -1241,7 +1266,7 @@ class MaterialXUnpremult(MaterialExpressionImpl):
         super().__init__(unreal.MaterialExpressionMaterialXUnpremult, node_pos)
 
 class Max(MaterialExpressionImpl):
-    def __init__(self, a, b, node_pos: NodePos = None) -> None:
+    def __init__(self, a = None, b = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionMax, node_pos)
 
         self.const_a = MaterialExpressionEditorPropertyImpl(self, 'const_a', 'float')
@@ -1261,7 +1286,7 @@ class Max(MaterialExpressionImpl):
                 self.b.comesFrom(b)
 
 class Min(MaterialExpressionImpl):
-    def __init__(self, a, b, node_pos: NodePos = None) -> None:
+    def __init__(self, a = None, b = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionMin, node_pos)
 
         self.const_a = MaterialExpressionEditorPropertyImpl(self, 'const_a', 'float')
@@ -1281,7 +1306,7 @@ class Min(MaterialExpressionImpl):
                 self.b.comesFrom(b)
 
 class Multiply(MaterialExpressionImpl):
-    def __init__(self, a, b, node_pos: NodePos = None) -> None:
+    def __init__(self, a = None, b = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionMultiply, node_pos)
 
         self.const_a = MaterialExpressionEditorPropertyImpl(self, 'const_a', 'float')
@@ -2229,7 +2254,7 @@ class SubsurfaceMediumMaterialOutput(MaterialExpressionImpl):
         super().__init__(unreal.MaterialExpressionSubsurfaceMediumMaterialOutput, node_pos)
 
 class Subtract(MaterialExpressionImpl):
-    def __init__(self, a, b, node_pos: NodePos = None) -> None:
+    def __init__(self, a = None, b = None, node_pos: NodePos = None) -> None:
         super().__init__(unreal.MaterialExpressionSubtract, node_pos)
 
         self.const_a = MaterialExpressionEditorPropertyImpl(self, 'const_a', 'float')

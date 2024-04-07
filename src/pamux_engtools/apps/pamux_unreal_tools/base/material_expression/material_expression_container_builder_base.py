@@ -25,8 +25,8 @@ class MaterialExpressionContainerBuilderBase:
     inputs_class: type
     outputs_class: type
 
-    DefaultTexture_Color = unreal.load_asset("/Script/Engine.Texture2D'/Engine/EngineResources/DefaultTexture.DefaultTexture")
-    DefaultTexture_Normal = unreal.load_asset("/Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultNormal.DefaultNormal")
+    DefaultTexture_Color = unreal.load_asset("/Engine/EngineResources/DefaultTexture")
+    DefaultTexture_Normal = unreal.load_asset("/Engine/EngineMaterials/DefaultNormal")
 
 
     def __init__(self,

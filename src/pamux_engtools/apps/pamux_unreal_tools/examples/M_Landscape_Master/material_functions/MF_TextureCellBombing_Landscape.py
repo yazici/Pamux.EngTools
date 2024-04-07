@@ -13,11 +13,13 @@ from pamux_unreal_tools.interfaces.IRotateAboutWorldAxis_cheap import IRotateAbo
 from pamux_unreal_tools.examples.M_Landscape_Master.interfaces.ITextureCellBombing_Landscape import ITextureCellBombing_Landscape
 from pamux_unreal_tools.factories.material_function_factory import MaterialFunctionFactory
 
-
 class MF_TextureCellBombing_Landscape:
+    AssetPath = "/Game/Materials/Pamux/Landscape/Functions/MF_TextureCellBombing_Landscape"
+    BombingTexture = unreal.load_asset("/Script/Engine.Texture2D'/Game/Materials/Functions/TextureCellBombing/T_Voronoi_Perturbed_4k.T_Voronoi_Perturbed_4k'")
+
     @staticmethod
     def load_MF(builder):
-        return builder.load_MF("/Game/Materials/Pamux/Landscape/Functions/MF_TextureCellBombing_Landscape",
+        return builder.load_MF(MF_TextureCellBombing_Landscape.AssetPath,
             ["Texture", "UVs", "CellScale", "PatternScale", "DoRotationVariation", "RandomOffsetVariation", "RandomRotationVariation", "IsNormalMap"],
             ["Result"])
 
@@ -43,7 +45,7 @@ class MF_TextureCellBombing_Landscape:
     class Builder(MaterialFunctionBuilder):
         def __init__(self):
             super().__init__(
-                "/Game/Materials/Pamux/Landscape/Functions/MF_TextureCellBombing_Landscape",
+                MF_TextureCellBombing_Landscape.AssetPath,
                 MF_TextureCellBombing_Landscape.Dependencies,
                 MF_TextureCellBombing_Landscape.Inputs,
                 MaterialFunctionOutputs.Result)
@@ -80,7 +82,7 @@ class MF_TextureCellBombing_Landscape:
             cellScaledInputTexture.sampler_type.set(unreal.MaterialSamplerType.SAMPLERTYPE_LINEAR_COLOR)
             cellScaledInputTexture.automatic_view_mip_bias.set(True)
             cellScaledInputTexture.const_mip_value.set(-1)
-            # cellScaledInputTexture.texture.set(unreal.load_asset("/Game/Materials/Functions/TextureCellBombing/T_Voronoi_Perturbed_4k.T_Voronoi_Perturbed_4k"))
+            cellScaledInputTexture.texture.set(MF_TextureCellBombing_Landscape.BombingTexture)
 
             offsetVariation = Multiply(self.inputs.randomOffsetVariation, cellScaledInputTexture.RGB)
             rotationVariation = Multiply(cellScaledInputTexture.r, self.inputs.randomRotationVariation)
@@ -122,5 +124,3 @@ class MF_TextureCellBombing_Landscape:
 
             lerp = LinearInterpolate(patternScaledInputTexture.RGB, switch2, cellScaledInputTexture.a)
             lerp.connectTo(self.outputs.result)
-
-# MF_TextureCellBombing_Landscape.Builder().get()

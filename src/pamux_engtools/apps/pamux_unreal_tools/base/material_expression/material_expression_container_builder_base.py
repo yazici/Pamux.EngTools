@@ -25,6 +25,7 @@ class MaterialExpressionContainerBuilderBase:
     dependencies_class: type
     inputs_class: type
     outputs_class: type
+    container: type
 
     def __init__(self,
                  material_function_factory: MaterialFunctionFactoryBase,
@@ -49,7 +50,7 @@ class MaterialExpressionContainerBuilderBase:
 
     def load_MF(self, function_path: str, virtual_inputs: SocketNames, virtual_outputs: SocketNames) -> MaterialFunctionBase:
         return self.material_function_factory.load(self, function_path, virtual_inputs, virtual_outputs)
-    
+
     def load_SCurve(self):
         return self.load_MF("/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment/SCurve",
                             [ "In", "Power" ],
@@ -252,6 +253,7 @@ class MaterialExpressionContainerBuilderBase:
 
     def get(self, virtual_inputs: SocketNames = [], virtual_outputs: SocketNames = []):
         result = self.__loadAndCleanOrCreate(virtual_inputs, virtual_outputs)
+        self.container = result
         result.builder = self
 
         self.dependencies = self.dependencies_class(self)

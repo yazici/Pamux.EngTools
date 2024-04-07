@@ -19,7 +19,6 @@ class InSocketImpl(InSocket):
         raise Exception("Don't know how to call comesFrom for type: " + str(param))
 
     def __comesFrom_OutSocket(self, sourceOutSocket: OutSocket) -> bool:
-        print("JAHSKJLDHKAJSHD")
         if hasattr(sourceOutSocket, "rt") and sourceOutSocket.rt is not None:
             return self.comesFrom(sourceOutSocket.rt)
 

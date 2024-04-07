@@ -49,9 +49,32 @@ class M_Landscape_Master:
             self.landscapeRVT = RuntimeVirtualTextureSampleParameter("LandscapeRVT")
             self.landscapeRVT.virtual_texture.set(AssetCache.get("LandscapeRVT"))
 
+            self.landscapeVisibilityMask = LandscapeVisibilityMask()
+
+            self.specularContrast = ScalarParameter("SpecularContrast", 0.15)
+            self.specular = ScalarParameter("Specular", 0.9)
+            self.specularMax = ScalarParameter("SpecularMax", 0.5)
+
+            self.foliageMask = LandscapeLayerWeight("FoliageMask", 0.0)
+
+            for layer_name in Globals.grass_layer_names:
+                lc_layer_name = layer_name[0].lower() + layer_name[1:]
+
+                p = LandscapeLayerWeight(layer_name, 0.0)
+                exec(f"self.{lc_layer_name} = p", locals())
+
+                p = ScalarParameter(f'{layer_name}FoliageThreshold', 0.0)
+                exec(f"self.{lc_layer_name}FoliageThreshold = p", locals())
+
+                p = StaticBoolParameter(f'{layer_name}FoliageEnabled', True)
+                exec(f"self.{lc_layer_name}FoliageEnabled = p", locals())
+
     class Outputs:
         def __init__(self, builder: MaterialExpressionContainerBuilderBase) -> None:
-            pass
+            self.grass_types = LandscapeGrassOutput()
+            self.runtime_virtual_texture_output = RuntimeVirtualTextureOutput()
+            # MaterialLayerOutput
+            # MaterialExpressionEditorPropertyImpl(self, 'grass_types', 'Array[GrassInput]')
              
     class Dependencies:
         def __regen(self):
@@ -66,12 +89,13 @@ class M_Landscape_Master:
 
             # self.MF_FoliageMask = MF_FoliageMask.Builder().get()
 
-            self.MLF_Layers = {}
-            for layer_name in Globals.layer_names:
-                if layer_name == "ForestGround":
-                    self.MLF_Layers[layer_name] = MLF_ForestGround.Builder().get()
-                else:
-                    self.MLF_Layers[layer_name] = MLF_LayerX.Builder(layer_name).get()
+            # self.MLF_Layers = {}
+            # for layer_name in Globals.layer_names:
+            #     if layer_name == "ForestGround":
+            #         self.MLF_Layers[layer_name] = MLF_ForestGround.Builder().get()
+            #     else:
+            #         self.MLF_Layers[layer_name] = MLF_LayerX.Builder(layer_name).get()
+            pass
 
         def __init__(self, builder: MaterialExpressionContainerBuilderBase) -> None:
             self.__regen()
@@ -124,48 +148,54 @@ class M_Landscape_Master:
             breakMaterialAttributes.materialAttributes.comesFrom(qualitySwitch)
 
             result = MakeMaterialAttributesFactory.create(breakMaterialAttributes)
-            #result.opacityMask.comesFrom(self.params.LandscapeVisibilityMask)
+            result.opacityMask.comesFrom(self.inputs.landscapeVisibilityMask)
 
-            return result
+            # self.container.unrealAsset.set_editor_property('use_material_attributes', True)
+
+            # MEL.connect_material_property(result.unrealAsset, "", self.container.unrealAsset, "MaterialAttributes")
 
         def __rvtSpecular(self, baseColor):
             sCurveCall = self.dependencies.SCurve.call()
-            # sCurveCall._in.comesFrom(baseColor)
-            # sCurveCall.power.comesFrom(Params.specularContrast)
+            sCurveCall.inputs._in.comesFrom(baseColor)
+            sCurveCall.inputs.power.comesFrom(self.inputs.specularContrast)
 
-            desaturation = Desaturation()
-            desaturation.input.comesFrom(sCurveCall.outputs.result)
+            desaturation = Desaturation(sCurveCall.outputs.result)
 
-            multiply = Multiply()
-            multiply.a.comesFrom(desaturation.output)
-            # multiply.b.comesFrom(Params.specular)
+            multiply = Multiply(desaturation, self.inputs.specular)
 
-            lerp = LinearInterpolate()
-            lerp.const_a.set(0.0)
-            # lerp.b.comesFrom(Params.specularMax)
-            lerp.alpha.comesFrom(multiply.output)
+            return LinearInterpolate(0.0, self.inputs.specularMax, multiply)
 
-            return lerp.output
-
-        def __rvtOutput(self, baseColor, rvtSpecular, roughness, normal, worldHeight):
+        #TODO
+        def __rvtOutput(self, baseColor, rvtSpecular, roughness, normal, worldHeight): 
              return
         
         def __buildRVTOutputPath(self, blendCall):
             breakMaterialAttributes = BreakMaterialAttributes()
             breakMaterialAttributes.input.comesFrom(blendCall)
+            breakMaterialAttributes.baseColor.add_rt()
 
             rvtSpecular = self.__rvtSpecular(breakMaterialAttributes.baseColor)
+            rvtSpecular.add_rt()
 
             return self.__rvtOutput(
                  breakMaterialAttributes.baseColor, 
                  rvtSpecular,
                  breakMaterialAttributes.roughness, 
                  breakMaterialAttributes.normal, None)
-                 ##WorldPosition().z) # AbsoluteWorldPosition?
+                 ##WorldPosition().z) # AbsoluteWorldPosition? #TODO
 
         def __buildLandscapeGrassOutputAndMaskingPath(self, blendCall):
-                #landscapeGrassOutput = Blocks.landscapeGrassOutputAndMasking(Params.foliageMask, Globals.LayersForGrass)
-                pass
+                for layer_name in Globals.grass_layer_names:
+                    lc_layer_name = layer_name[0].lower() + layer_name[1:]
+
+                    call = self.dependencies.MF_FoliageMask.call()
+                    call.outputs.result.add_rt()
+
+                    call.inputs.layerSample.comesFrom(eval(f"self.inputs.{lc_layer_name}", locals()))
+                    call.inputs.foliageMask.comesFrom(self.inputs.foliageMask)
+                    call.inputs.threshold.comesFrom(eval(f"self.{lc_layer_name}FoliageThreshold", locals()))
+                    call.inputs.enabled.comesFrom(eval(f"self.{lc_layer_name}FoliageEnabled", locals()))
+                    # TODO grassoutput
 
         def __blendLandscapeLayers(self):
             landscapeLayerBlend = LandscapeLayerBlend()
@@ -194,35 +224,48 @@ class M_Landscape_Master:
             landscapeLayerBlend.add_rt()
             return landscapeLayerBlend
 
-        def build(self):
-            landscapeLayerBlend = self.__blendLandscapeLayers()
-
+        def __build_Wetness(self, landscapeLayerBlend):
             wetnessCall = self.dependencies.MF_Wetness.call()
             wetnessCall.outputs.result.add_rt()
             wetnessCall.inputs.materialAttributes.comesFrom(landscapeLayerBlend)
             wetnessCall.inputs.wetness.comesFrom(self.inputs.wetness)
-
+            return wetnessCall
+        
+        def __build_Puddles(self, wetnessCall):
             puddlesCall = self.dependencies.MF_Puddles.call()
             puddlesCall.outputs.result.add_rt()
             puddlesCall.inputs.materialAttributes.comesFrom(wetnessCall.outputs.result)
 
+            return puddlesCall
+        
+        def __blendViaHeightOpacity(self, wetnessCall, puddlesCall):
             saturatedWetmess = Saturate(Divide(Subtract(self.inputs.wetness, 0.5), 0.5))
-
             blendCall = self.dependencies.MF_BlendTwoMaterialsViaHighOpacityMap.call()
 
             blendCall.inputs.materialA.comesFrom(wetnessCall.outputs.result)
             blendCall.inputs.materialB.comesFrom(puddlesCall.outputs.result)
             blendCall.inputs.alpha.comesFrom(saturatedWetmess)
+            return blendCall
+
+        def build(self):
+            landscapeLayerBlend = self.__blendLandscapeLayers()
+
+            wetnessCall = self.__build_Wetness(landscapeLayerBlend)
+            puddlesCall = self.__build_Puddles(wetnessCall)
+
+            blendCall = self.__blendViaHeightOpacity(wetnessCall, puddlesCall)
+
 
             self.__buildMainPath(blendCall)
             self.__buildRVTOutputPath(blendCall)
             self.__buildLandscapeGrassOutputAndMaskingPath(blendCall)
 
+            
+
 if __name__=="__main__":
     AssetCache.set("DefaultTexture", "/Engine/EngineResources/DefaultTexture")
     AssetCache.set("DefaultNormal", "/Engine/EngineMaterials/DefaultNormal")
     AssetCache.set("BombingTexture", "/Game/Materials/Functions/TextureCellBombing/T_Voronoi_Perturbed_4k")
-    # AssetCache.set("LandscapeRVT", "/Script/Engine.RuntimeVirtualTexture'/Game/Materials/Landscape/RVT/RVT_Landscape_01.RVT_Landscape_01'")
     AssetCache.set("LandscapeRVT", "/Game/Materials/Landscape/RVT/RVT_Landscape_01")
     AssetCache.set("GrassyLayer_A", "/Game/Materials/Landscape/Textures/GrassyLayer/T_GrassyLayer_A")
     AssetCache.set("GrassyLayer_R", "/Game/Materials/Landscape/Textures/GrassyLayer/T_GrassyLayer_R")

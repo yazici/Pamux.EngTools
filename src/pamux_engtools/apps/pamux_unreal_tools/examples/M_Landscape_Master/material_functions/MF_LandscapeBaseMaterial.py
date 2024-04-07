@@ -33,29 +33,12 @@ class MF_LandscapeBaseMaterial:
 
     class Dependencies:
         def __init__(self, builder: MaterialExpressionContainerBuilderBase) -> None:
-            self.blend_Overlay                      = builder.load_MF("/Engine/Functions/Engine_MaterialFunctions03/Blends/Blend_Overlay",
-                                                                      [ "Base", "Blend" ],
-                                                                      [ "Result" ])
-
-            self.cheapContrast_RGB                  = builder.load_MF("/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment/CheapContrast_RGB",
-                                                                      [ "In", "Contrast" ],
-                                                                      [ "Result" ])
-
-            self.heightLerp                         = builder.load_MF("/Engine/Functions/Engine_MaterialFunctions02/Texturing/HeightLerp",
-                                                                      [ "A", "B", "Transition Phase", "Height Texture", "Contrast" ],
-                                                                      [ "Results", "Alpha", "Lerp Alpha No Contrast" ])
-
-            self.multiplyAdd                        = builder.load_MF("/Engine/Functions/Engine_MaterialFunctions02/Math/MultiplyAdd",
-                                                                      [ "Base", "Add" ],
-                                                                      [ "Result" ])
-
-            self.breakOutFloat4Components           = builder.load_MF("/Engine/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat4Components",
-                                                                      [ "Float4" ],
-                                                                      [ "R", "G", "B", "A" ])
-
-            self.customRotator                      = builder.load_MF("/Engine/Functions/Engine_MaterialFunctions02/Texturing/CustomRotator",
-                                                                      [ "UVs", "Rotation Center", "Rotation Angle" ],
-                                                                      [ "Rotated Values" ])
+            self.blend_Overlay                      = builder.load_Blend_Overlay()
+            self.cheapContrast_RGB                  = builder.load_CheapContrast_RGB()
+            self.heightLerp                         = builder.load_HeightLerp()
+            self.multiplyAdd                        = builder.load_MultiplyAdd()
+            self.breakOutFloat4Components           = builder.load_BreakOutFloat4Components()
+            self.customRotator                      = builder.load_CustomRotator()
 
             self.MF_TextureCellBombing_Landscape    = MF_TextureCellBombing_Landscape.load_MF(builder)
 

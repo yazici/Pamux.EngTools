@@ -47,9 +47,7 @@ class M_Landscape_Master:
              
     class Dependencies:
         def __init__(self, builder: MaterialExpressionContainerBuilderBase) -> None:
-            self.SCurve = builder.load_MF("/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment/SCurve",
-                                          [ "In", "Power" ],
-                                          [ "Result" ])
+            self.SCurve = builder.load_SCurve()
 
             self.MF_TextureCellBombing_Landscape = MF_TextureCellBombing_Landscape.Builder().get().load_MF(builder)
 

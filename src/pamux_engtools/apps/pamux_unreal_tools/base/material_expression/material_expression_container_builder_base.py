@@ -52,6 +52,42 @@ class MaterialExpressionContainerBuilderBase:
 
     def load_MF(self, function_path: str, virtual_inputs: SocketNames, virtual_outputs: SocketNames) -> MaterialFunctionBase:
         return self.material_function_factory.load(self, function_path, virtual_inputs, virtual_outputs)
+    
+    def load_SCurve(self):
+        return self.load_MF("/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment/SCurve",
+                            [ "In", "Power" ],
+                            [ "Result" ])
+    
+    def load_Blend_Overlay(self):
+        return self.load_MF("/Engine/Functions/Engine_MaterialFunctions03/Blends/Blend_Overlay",
+                            [ "Base", "Blend" ],
+                            [ "Result" ])
+
+    def load_CheapContrast_RGB(self):
+        return self.load_MF("/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment/CheapContrast_RGB",
+                            [ "In", "Contrast" ],
+                            [ "Result" ])
+
+    def load_HeightLerp(self):
+        return self.load_MF("/Engine/Functions/Engine_MaterialFunctions02/Texturing/HeightLerp",
+                            [ "A", "B", "Transition Phase", "Height Texture", "Contrast" ],
+                            [ "Results", "Alpha", "Lerp Alpha No Contrast" ])
+
+    def load_MultiplyAdd(self):
+        return self.load_MF("/Engine/Functions/Engine_MaterialFunctions02/Math/MultiplyAdd",
+                            [ "Base", "Add" ],
+                            [ "Result" ])
+
+    def load_BreakOutFloat4Components(self):
+        return self.load_MF("/Engine/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat4Components",
+                            [ "Float4" ],
+                            [ "R", "G", "B", "A" ])
+
+    def load_CustomRotator(self):
+        return self.load_MF("/Engine/Functions/Engine_MaterialFunctions02/Texturing/CustomRotator",
+                            [ "UVs", "Rotation Center", "Rotation Angle" ],
+                            [ "Rotated Values" ])
+
 
     def build(self):
         pass

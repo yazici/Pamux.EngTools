@@ -51,16 +51,16 @@ class M_Landscape_Master:
                                           [ "In", "Power" ],
                                           [ "Result" ])
 
-            self.MF_TextureCellBombing_Landscape = MF_TextureCellBombing_Landscape.Builder().get()
+            self.MF_TextureCellBombing_Landscape = MF_TextureCellBombing_Landscape.Builder().get().load_MF(builder)
 
-            self.MF_LandscapeBaseMaterial = MF_LandscapeBaseMaterial.Builder().get()
+            self.MF_LandscapeBaseMaterial = MF_LandscapeBaseMaterial.load_MF(builder)
 
-            self.MF_Wetness = MF_Wetness.Builder().get()
-            self.MF_Puddles = MF_Puddles.Builder().get()
-            self.MF_BlendTwoMaterialsViaHighOpacityMap = MF_BlendTwoMaterialsViaHighOpacityMap.Builder().get()
-            self.MF_GlancingAngleSpecCorrection = MF_GlancingAngleSpecCorrection.Builder().get()
+            self.MF_Wetness = MF_Wetness.load_MF(builder)
+            self.MF_Puddles = MF_Puddles.load_MF(builder)
+            self.MF_BlendTwoMaterialsViaHighOpacityMap = MF_BlendTwoMaterialsViaHighOpacityMap.load_MF(builder)
+            self.MF_GlancingAngleSpecCorrection = MF_GlancingAngleSpecCorrection.load_MF(builder)
 
-            self.MF_FoliageMask = MF_FoliageMask.Builder().get()
+            self.MF_FoliageMask = MF_FoliageMask.Builder().get() # load_MF(builder)
 
             self.MLF_Layers = {}
             for layer_name in Globals.layer_names:
@@ -204,4 +204,4 @@ class M_Landscape_Master:
 #call_SCurve.Power.comesFrom(Params.specularContrast)
 
 if __name__=="__main__":
-    M_Landscape_Master.Builder("/Game/Materials/Pamux/M_Landscape_Master").get(purge=True)
+    M_Landscape_Master.Builder("/Game/Materials/Pamux/M_Landscape_Master").get()

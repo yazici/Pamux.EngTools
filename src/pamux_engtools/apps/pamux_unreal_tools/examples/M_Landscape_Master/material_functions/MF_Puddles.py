@@ -26,6 +26,11 @@ from pamux_unreal_tools.builders.wetness_builder import WetnessBuilder
 from pamux_unreal_tools.examples.M_Landscape_Master.interfaces.IPuddles import IPuddles
 
 class MF_Puddles:
+    @staticmethod
+    def load_MF(builder):
+        return  builder.load_MF("/Game/Materials/Pamux/Landscape/Functions/MF_Puddles",
+                                ["MaterialAttributes", "Puddle Color", "Puddle Height", "Puddle Slope", "Puddle Depth", "Puddle Roughness"],
+                                ["Result", "PuddleMask"])
     class Inputs:
         def __init__(self, builder: WetnessBuilder):
             self.materialAttributes = builder.build_FunctionInput("MaterialAttributes", 0, builder.textureSampleSet, True, False)

@@ -29,5 +29,5 @@ class MLF_LayerX:
             pass
 
         def build(self):
-            call = LayerBuild.call_and_connect_LandscapeBaseMaterial(self, self.dependencies.MF_LandscapeBaseMaterial)
+            call = LayerBuild.call_and_connect_LandscapeBaseMaterial(self)
             call.outputs.result.connectTo(self.outputs.result)

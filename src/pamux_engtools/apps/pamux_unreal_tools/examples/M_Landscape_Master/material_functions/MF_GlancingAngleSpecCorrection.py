@@ -8,8 +8,14 @@ from pamux_unreal_tools.base.material_function.material_function_dependencies_ba
 from pamux_unreal_tools.base.material_function.material_function_outputs_base import MaterialFunctionOutputs
 from pamux_unreal_tools.examples.M_Landscape_Master.interfaces.IGlancingAngleSpecCorrection import IGlancingAngleSpecCorrection
 from pamux_unreal_tools.factories.material_function_factory import MaterialFunctionFactory
+from pamux_unreal_tools.factories.material_expression_factories import MakeMaterialAttributesFactory
 
 class MF_GlancingAngleSpecCorrection:
+    @staticmethod
+    def load_MF(builder):
+        return  builder.load_MF("/Game/Materials/Pamux/Landscape/Functions/MF_GlancingAngleSpecCorrection",
+                                ["MaterialAttributes", "EdgeSpecularFalloffPower", "EdgeSpecularCorrectionStartDistance", "EdgeSpecularCorrectionFadeDistance", "EdgeSpecularCorrection", "SpecLerp"],
+                                ["Result"])
     class Inputs:
         def __init__(self, builder: MaterialExpressionContainerBuilderBase):
             self.materialAttributes = builder.build_FunctionInput("In", 0,  TMaterialAttributes(), False, False)
@@ -67,8 +73,7 @@ class MF_GlancingAngleSpecCorrection:
 
             lerp = LinearInterpolate(breakMaterialAttributes.specular.rt, multiply2, multiply1)
 
-            # self.inputs.materialAttributes
-            makeMaterialAttributes = MakeMaterialAttributes()
+            makeMaterialAttributes = MakeMaterialAttributesFactory.create(breakMaterialAttributes)
             makeMaterialAttributes.specular.comesFrom(lerp)
 
             self.outputs.result.comesFrom(makeMaterialAttributes)

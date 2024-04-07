@@ -9,6 +9,11 @@ from pamux_unreal_tools.builders.wetness_builder import WetnessBuilder
 from pamux_unreal_tools.examples.M_Landscape_Master.interfaces.IWetness import IWetness
 
 class MF_Wetness:
+    @staticmethod
+    def load_MF(builder):
+        return  builder.load_MF("/Game/Materials/Pamux/Landscape/Functions/MF_Wetness",
+                                ["MaterialAttributes", "Wetness Saturation", "Wetness Darken", "Wetness Roughness", "Wetness"],
+                                ["Result"])
     class Inputs:
         def __init__(self, builder: WetnessBuilder):
             self.materialAttributes = builder.build_FunctionInput("MaterialAttributes", 0, builder.textureSampleSet, True, False)

@@ -24,6 +24,13 @@ from pamux_unreal_tools.examples.M_Landscape_Master.interfaces.IFoliageMask impo
 from pamux_unreal_tools.factories.material_function_factory import MaterialFunctionFactory
 
 class MF_FoliageMask:
+    @staticmethod
+    def load_MF(builder):
+        return  builder.load_MF("/Game/Materials/Pamux/Landscape/Functions/MF_FoliageMask",
+                                ["LayerSample", "FoliageMask", "Threshold", "Enabled"],
+                                ["Result"])
+
+
     class Inputs:
         def __init__(self, builder: MaterialExpressionContainerBuilderBase):
             # No Preview

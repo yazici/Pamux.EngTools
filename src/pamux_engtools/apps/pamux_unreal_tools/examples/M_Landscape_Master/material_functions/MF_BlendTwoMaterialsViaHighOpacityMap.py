@@ -29,6 +29,12 @@ from pamux_unreal_tools.examples.M_Landscape_Master.interfaces.IBlendTwoMaterial
 from pamux_unreal_tools.factories.material_function_factory import MaterialFunctionFactory
 
 class MF_BlendTwoMaterialsViaHighOpacityMap:
+    @staticmethod
+    def load_MF(builder):
+        return builder.load_MF("/Game/Materials/Pamux/Landscape/Functions/MF_BlendTwoMaterialsViaHighOpacityMap",
+            ["Alpha", "MaterialA", "MaterialB"],
+            ["Result"])
+
     class Dependencies:
         def __init__(self, builder: MaterialExpressionContainerBuilderBase) -> None:
              self.heightLerpWithTwoHeightMaps = builder.load_MF(

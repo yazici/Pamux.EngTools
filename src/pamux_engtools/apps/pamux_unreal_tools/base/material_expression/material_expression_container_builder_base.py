@@ -25,6 +25,10 @@ class MaterialExpressionContainerBuilderBase:
     inputs_class: type
     outputs_class: type
 
+    DefaultTexture_Color = unreal.load_asset("/Script/Engine.Texture2D'/Engine/EngineResources/DefaultTexture.DefaultTexture")
+    DefaultTexture_Normal = unreal.load_asset("/Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultNormal.DefaultNormal")
+
+
     def __init__(self,
                  material_function_factory: MaterialFunctionFactoryBase,
                  container_factory: MaterialExpressionContainerFactoryBase,
@@ -99,7 +103,7 @@ class MaterialExpressionContainerBuilderBase:
         
         if isinstance(preview, TTextureObject_Color):
             if use_preview_input:
-                preview = TextureObject()
+                preview = TextureObject(unreal.MaterialSamplerType.SAMPLERTYPE_COLOR, MaterialExpressionContainerBuilderBase.DefaultTexture_Color)
             else:
                 preview = None
 
@@ -112,7 +116,7 @@ class MaterialExpressionContainerBuilderBase:
 
         if isinstance(preview, TTextureObject_Normal):
             if use_preview_input:
-                preview = TextureObject(unreal.MaterialSamplerType.SAMPLERTYPE_NORMAL)
+                preview = TextureObject(unreal.MaterialSamplerType.SAMPLERTYPE_NORMAL, MaterialExpressionContainerBuilderBase.DefaultTexture_Normal)
             else:
                 preview = None
 
@@ -198,14 +202,35 @@ class MaterialExpressionContainerBuilderBase:
         result = self.container_factory.loadAndCleanOrCreate(self, self.container_path, virtual_inputs, virtual_outputs)
         BuildStack.push(result)
         return result
+    
+    def __load(self, virtual_inputs: SocketNames, virtual_outputs: SocketNames):
+        result = self.container_factory.load(self, self.container_path, virtual_inputs, virtual_outputs)
+        BuildStack.push(result)
+        return result
 
-    def get(self, virtual_inputs: SocketNames = [], virtual_outputs: SocketNames = [], purge = False):
-        if purge:
-            folder = "C:/src/Unreal Projects/PamuxSurvival/Content/Materials/Pamux"
-            if os.path.isdir(folder):
-                shutil.rmtree(folder)
-            
+    def get(self, virtual_inputs: SocketNames = [], virtual_outputs: SocketNames = []):
         result = self.__loadAndCleanOrCreate(virtual_inputs, virtual_outputs)
+        result.builder = self
+
+        self.dependencies = self.dependencies_class(self)
+
+        CurrentNodePos.goto_inputs()
+        self.inputs = self.inputs_class(self)
+
+        CurrentNodePos.goto_outputs()
+        self.outputs = self.outputs_class(self)
+
+        CurrentNodePos.goto_process()
+        self.build()
+
+        result.save()
+
+        BuildStack.pop()
+
+        return result
+    
+    def load(self, virtual_inputs: SocketNames = [], virtual_outputs: SocketNames = []):
+        result = self.__load(virtual_inputs, virtual_outputs)
         result.builder = self
 
         self.dependencies = self.dependencies_class(self)

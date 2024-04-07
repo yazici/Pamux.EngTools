@@ -25,6 +25,12 @@ from pamux_unreal_tools.examples.M_Landscape_Master.interfaces.ITextureCellBombi
 from pamux_unreal_tools.impl.material_function_impl import MaterialFunctionImpl
 
 class MF_LandscapeBaseMaterial:
+    @staticmethod
+    def load_MF(builder):
+        return  builder.load_MF("/Game/Materials/Pamux/Landscape/Functions/MF_LandscapeBaseMaterial",
+                                ["Albedo", "ColorOverlay", "ColorOverlayIntensity", "Contrast", "ContrastVariation", "Roughness", "RoughnessIntensity", "NormalIntensity", "Normal", "Displacement", "Rotation", "DoTextureBomb", "DoRotationVariation", "BombCellScale", "BombPatternScale", "BombRandomOffset", "BombRotationVariation", "OpacityStrength", "OpacityAdd", "OpacityContrast"],
+                                ["Result", "Height"])
+
     class Dependencies:
         def __init__(self, builder: MaterialExpressionContainerBuilderBase) -> None:
             self.blend_Overlay                      = builder.load_MF("/Engine/Functions/Engine_MaterialFunctions03/Blends/Blend_Overlay",
@@ -51,9 +57,7 @@ class MF_LandscapeBaseMaterial:
                                                                       [ "UVs", "Rotation Center", "Rotation Angle" ],
                                                                       [ "Rotated Values" ])
 
-            self.MF_TextureCellBombing_Landscape    = builder.load_MF("/Game/Materials/Pamux/Landscape/Functions/MF_TextureCellBombing_Landscape",
-                                                                      ["Texture", "UVs", "CellScale", "PatternScale", "DoRotationVariation", "RandomOffsetVariation", "RandomRotationVariation", "IsNormalMap"],
-                                                                      ["Result"])
+            self.MF_TextureCellBombing_Landscape    = MF_TextureCellBombing_Landscape.load_MF(builder)
 
     class Inputs:
         def __init__(self, builder: MaterialExpressionContainerBuilderBase):
@@ -163,7 +167,7 @@ class MF_LandscapeBaseMaterial:
 
             qualitySwitch = QualitySwitch()
             qualitySwitch.add_rt()
-            qualitySwitch.default.comesFrom(heightLerp.outputs.result)
+            qualitySwitch.default.comesFrom(heightLerp.outputs.results)
             qualitySwitch.low.comesFrom(lerpedAlbedo)
 
             return qualitySwitch

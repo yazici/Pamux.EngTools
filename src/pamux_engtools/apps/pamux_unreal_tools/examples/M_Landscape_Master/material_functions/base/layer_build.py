@@ -6,9 +6,9 @@ from pamux_unreal_tools.base.material_expression.material_expression_container_b
 
 class LayerBuild:
     @staticmethod
-    def call_and_connect_LandscapeBaseMaterial(builder: MaterialExpressionContainerBuilderBase, MF_LandscapeBaseMaterial):
+    def call_and_connect_LandscapeBaseMaterial(builder: MaterialExpressionContainerBuilderBase):
         appendVector = AppendVector(builder.inputs.uvParams, builder.inputs.uvParams.a)
-        appendVector.add_rt()
+        appendVector.output.add_rt()
 
         call = builder.dependencies.MF_LandscapeBaseMaterial.call()
 

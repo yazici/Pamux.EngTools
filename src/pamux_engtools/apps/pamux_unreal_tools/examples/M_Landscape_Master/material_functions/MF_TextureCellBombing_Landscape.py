@@ -15,6 +15,12 @@ from pamux_unreal_tools.factories.material_function_factory import MaterialFunct
 
 
 class MF_TextureCellBombing_Landscape:
+    @staticmethod
+    def load_MF(builder):
+        return builder.load_MF("/Game/Materials/Pamux/Landscape/Functions/MF_TextureCellBombing_Landscape",
+            ["Texture", "UVs", "CellScale", "PatternScale", "DoRotationVariation", "RandomOffsetVariation", "RandomRotationVariation", "IsNormalMap"],
+            ["Result"])
+
     class Dependencies:
         def __init__(self, builder: MaterialExpressionContainerBuilderBase) -> None:
             self.rotateAboutWorldAxis_cheap = builder.load_MF(
@@ -72,7 +78,9 @@ class MF_TextureCellBombing_Landscape:
             cellScaledInputTexture.UVs.comesFrom(cellScaledUVs3VectorRG)
             cellScaledInputTexture.sampler_source.set(unreal.SamplerSourceMode.SSM_WRAP_WORLD_GROUP_SETTINGS)
             cellScaledInputTexture.sampler_type.set(unreal.MaterialSamplerType.SAMPLERTYPE_LINEAR_COLOR)
-            cellScaledInputTexture.texture.set(unreal.load_asset("/Script/Engine.Texture2D'/Game/Materials/Functions/TextureCellBombing/T_Voronoi_Perturbed_4k.T_Voronoi_Perturbed_4k'"))
+            cellScaledInputTexture.automatic_view_mip_bias.set(True)
+            cellScaledInputTexture.const_mip_value.set(-1)
+            # cellScaledInputTexture.texture.set(unreal.load_asset("/Game/Materials/Functions/TextureCellBombing/T_Voronoi_Perturbed_4k.T_Voronoi_Perturbed_4k"))
 
             offsetVariation = Multiply(self.inputs.randomOffsetVariation, cellScaledInputTexture.RGB)
             rotationVariation = Multiply(cellScaledInputTexture.r, self.inputs.randomRotationVariation)

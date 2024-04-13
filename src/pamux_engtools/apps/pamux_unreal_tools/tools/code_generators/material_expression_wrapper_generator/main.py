@@ -6,9 +6,8 @@ import inspect
 import types
 from pathlib import Path
 from importlib import * 
-# from abc import ABC, abstractmethod
-# print(str(Path(__file__).parent.parent.parent.parent.resolve()))
-sys.path.append(str(Path(__file__).parent.parent.parent.parent.resolve()))
+
+sys.path.append(str(Path(__file__).parent.parent.parent.parent.parent.resolve()))
 
 reloads = []
 for  k, v in sys.modules.items():
@@ -18,7 +17,7 @@ for  k, v in sys.modules.items():
 for module in reloads: 
     reload(module)
 
-from pamux_engtools.apps.pamux_unreal_tools.tools.code_generators.py_code_generator import *
+from pamux_unreal_tools.tools.code_generators.py_code_generator import *
 
 from pamux_unreal_tools.tools.code_generators.material_expression_wrapper_generator.ctor_params import *
 from pamux_unreal_tools.tools.code_generators.material_expression_wrapper_generator.globals import *
@@ -48,7 +47,8 @@ def generate_pamux_wrapper_class(codeGen: PyCodeGenerator, c: unreal.MaterialExp
     codeGen.begin_class(pamux_wrapper_class_name, base_class_name)
     
     # codeGen.append_blank_line()
-    codeGen.begin_ctor(ctor_params.declaration_code)
+    
+    codeGen.begin_ctor(pamux_wrapper_class_name, ctor_params.declaration_code)
     codeGen.append_line(f"super().__init__(unreal.MaterialExpression{pamux_wrapper_class_name}, node_pos)")
 
     properties.to_py("MaterialExpressionEditorPropertyImpl", codeGen)

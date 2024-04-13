@@ -23,8 +23,8 @@ import inspect
 from pamux_unreal_tools.examples.M_Landscape_Master.interfaces.IBlendTwoMaterialsViaHighOpacityMap import IBlendTwoMaterialsViaHighOpacityMap
 from pamux_unreal_tools.examples.M_Landscape_Master.interfaces.IForestGround import IForestGround
 
-from pamux_engtools.apps.pamux_unreal_tools.tools.code_generators.py_code_generator import *
-from pamux_engtools.apps.pamux_unreal_tools.tools.code_generators.base.method_params import *
+from pamux_unreal_tools.tools.code_generators.py_code_generator import *
+from pamux_unreal_tools.tools.code_generators.base.method_params import *
 from pamux_unreal_tools.utils.types import *
 
 import functools
@@ -117,7 +117,7 @@ class InterfaceImplementer:
 
     def begin_class(self, class_name):
         self.codeGen.begin_class(class_name, None)
-        self.codeGen.begin_ctor(["builder: ContainerBuilderBase"])
+        self.codeGen.begin_ctor(class_name, ["builder: ContainerBuilderBase"])
 
     def end_class(self):
         self.codeGen.end_ctor()

@@ -1,5 +1,5 @@
-from pamux_engtools.apps.pamux_unreal_tools.tools.code_generators.py_code_generator import *
-from pamux_engtools.apps.pamux_unreal_tools.tools.code_generators.base.method_params import *
+from pamux_unreal_tools.tools.code_generators.base.code_generator_base import *
+from pamux_unreal_tools.tools.code_generators.base.method_params import *
 
 from pamux_unreal_tools.tools.code_generators.material_expression_wrapper_generator.globals import *
 
@@ -7,7 +7,7 @@ class PropertyParam(MethodParam):
     def __init__(self, name: str, type: str = None, default_value: str = "None"):
         super().__init__(name, type, default_value)
 
-    def append_assignment_lines(self, codeGen: PyCodeGenerator):
+    def append_assignment_lines(self, codeGen: CodeGeneratorBase):
         codeGen.append_line(f"if {self.name} is not None:")
         codeGen.indent()
         codeGen.append_line(f"self.{self.name}.set({self.name})")
@@ -17,7 +17,7 @@ class InputParam(MethodParam):
     def __init__(self, name: str, type: str = None, default_value: str = "None"):
         super().__init__(name, type, default_value)
 
-    def append_assignment_lines(self, codeGen: PyCodeGenerator):
+    def append_assignment_lines(self, codeGen: CodeGeneratorBase):
         codeGen.begin_if(f"{self.name} is not None")
         codeGen.append_line(f"self.{self.name}.comesFrom({self.name})")
         codeGen.end_if()
@@ -26,7 +26,7 @@ class ShouldAddRTParams(MethodParam):
     def __init__(self):
         super().__init__("shouldAddRTParams", "bool", "False")
 
-    def append_assignment_lines(self, codeGen: PyCodeGenerator):
+    def append_assignment_lines(self, codeGen: CodeGeneratorBase):
         codeGen.begin_if(f"shouldAddRTParams")
         func = lambda item: codeGen.append_line(f"self.{item}.add_rt()")
         MaterialAttributeFields.for_each(func, True,  ["Displacement"], "")
@@ -36,7 +36,7 @@ class MakeMaterialAttributesParam(MethodParam):
     def __init__(self):
         super().__init__("materialAttributes", "BreakMaterialAttributes", "None")
 
-    def append_assignment_lines(self, codeGen: PyCodeGenerator):
+    def append_assignment_lines(self, codeGen: CodeGeneratorBase):
         codeGen.append_blank_line()
         codeGen.append_line(f"if {self.name} is not None:")
         codeGen.indent()
@@ -48,7 +48,7 @@ class RerouteInputParam(MethodParam):
     def __init__(self, name: str, type: str = None, default_value: str = "None"):
         super().__init__(name, type, default_value)
 
-    def append_assignment_lines(self, codeGen: PyCodeGenerator):
+    def append_assignment_lines(self, codeGen: CodeGeneratorBase):
         codeGen.begin_if(f"{self.name} is not None")
         codeGen.append_line(f"self.{self.name}.comesFrom({self.name})")
         codeGen.append_line(f"{self.name}.rt = self")
@@ -58,7 +58,7 @@ class InputParamWithConstProperty(MethodParam):
     def __init__(self, name: str):
         super().__init__(name, None, "None")
 
-    def append_assignment_lines(self, codeGen: PyCodeGenerator):
+    def append_assignment_lines(self, codeGen: CodeGeneratorBase):
         codeGen.begin_if(f"{self.name} is not None")
         codeGen.begin_if(f"isinstance({self.name}, float)")
         codeGen.append_line(f"self.const_{self.name}.set({self.name})")
@@ -71,7 +71,7 @@ class RGBAMaskParam(MethodParam):
     def __init__(self):
         super().__init__("rgbaMask", "str", "None")
 
-    def append_assignment_lines(self, codeGen: PyCodeGenerator):
+    def append_assignment_lines(self, codeGen: CodeGeneratorBase):
         codeGen.begin_if(f"{self.name} is not None")
         codeGen.append_line(f"__mask = {self.name}.lower()")
         codeGen.append_line(f"self.r.set('r' in __mask)")
@@ -101,7 +101,7 @@ class CTORParams:
         codes.append("node_pos: NodePos = None")
         return codes
                          
-    def append_assignment_lines(self, codeGen: PyCodeGenerator):
+    def append_assignment_lines(self, codeGen: CodeGeneratorBase):
         for param in self.params:
             param.append_assignment_lines(codeGen)
 

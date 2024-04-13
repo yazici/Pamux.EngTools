@@ -45,9 +45,9 @@ class MF_BlendTwoMaterialsViaHighOpacityMap:
     class Inputs:
         def __init__(self, builder: MaterialExpressionContainerBuilderBase) -> None:
             # No Preview
-            self.alpha      = builder.build_FunctionInput("Alpha",      2, 0.0,                     False, False)
             self.materialA  = builder.build_FunctionInput("MaterialA",  0, TMaterialAttributes(),   False, False)
             self.materialB  = builder.build_FunctionInput("MaterialB",  1, TMaterialAttributes(),   False, False)
+            self.alpha      = builder.build_FunctionInput("Alpha",      2, 0.0,                     False, False)
 
     class Builder(MaterialFunctionBuilder):
         def __init__(self) -> None:

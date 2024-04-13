@@ -57,7 +57,7 @@ def generate_pamux_wrapper_class(codeGen: CodeGeneratorBase, c: unreal.MaterialE
     
     # codeGen.append_blank_line()
     
-    codeGen.begin_ctor(pamux_wrapper_class_name, ctor_params.declaration_code(codeGen))
+    codeGen.begin_ctor(pamux_wrapper_class_name, ctor_params)
     codeGen.append_base_ctor_call(base_class_name, f"unreal.MaterialExpression{pamux_wrapper_class_name}, node_pos")
 
     properties.to_py("MaterialExpressionEditorPropertyImpl", codeGen)

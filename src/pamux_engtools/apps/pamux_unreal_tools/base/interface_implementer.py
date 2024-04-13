@@ -117,7 +117,11 @@ class InterfaceImplementer:
 
     def begin_class(self, class_name):
         self.codeGen.begin_class(class_name, None)
-        self.codeGen.begin_ctor(class_name, ["builder: ContainerBuilderBase"])
+        
+        mps = MethodParams()
+        mps.append(MethodParam("builder", "ContainerBuilderBase"))
+
+        self.codeGen.begin_ctor(class_name, mps)
 
     def end_class(self):
         self.codeGen.end_ctor()

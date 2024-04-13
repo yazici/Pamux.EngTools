@@ -26,18 +26,18 @@ class PyCodeGenerator(CodeGeneratorBase):
             self.append_line(f"class {class_name}({base_class_name}):")
         self.indent()
     
-    def begin_method(self, method_name, method_args = [], return_type = None) -> None:
+    def begin_method(self, method_name, parameters: MethodParams = NO_PARAMS, return_type = None) -> None:
         if return_type is None:
             return_type = "None"
-        self.append_line(f"def {method_name}({', '.join(method_args)}) -> {return_type}:")
+        self.append_line(f"def {method_name}({self.get_declaration_code(parameters)}) -> {return_type}:")
         self.indent()
 
-    def begin_static_method(self, method_name, method_args = [], return_type = None) -> None:
+    def begin_static_method(self, method_name, parameters: MethodParams = NO_PARAMS, return_type = None) -> None:
         self.append_line("@staticmethod")
-        self.begin_method(method_name, method_args, return_type)
+        self.begin_method(method_name, parameters, return_type)
 
-    def begin_ctor(self, class_name, ctor_args = []) -> None:
-        self.begin_method("__init__", ctor_args)
+    def begin_ctor(self, class_name, parameters: MethodParams = NO_PARAMS) -> None:
+        self.begin_method("__init__", parameters)
 
     def begin_if(self, condition) -> None:
         self.append_line(f"if {condition}:")
@@ -56,7 +56,7 @@ class PyCodeGenerator(CodeGeneratorBase):
     def append_pass(self):
         self.append_line("pass")
 
-    def get_parameter_code(self, mp: MethodParam) -> str:
+    def get_declaration_code(self, mp: MethodParam) -> str:
         result = mp.name
 
         if mp.type is not None:
@@ -74,6 +74,8 @@ class PyCodeGenerator(CodeGeneratorBase):
 
         return result
 
-
-    def append_base_ctor_call(self, codeGen, base_class_name, params):
-        codeGen.append_line(f"super().__init__({params})")
+    def get_initializer_code(self, mp: MethodParam) -> str:
+        return mp.name
+    
+    def append_base_ctor_call(self, base_class_name, params):
+        self.append_line(f"super().__init__({params})")

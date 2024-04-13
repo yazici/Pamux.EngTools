@@ -1,5 +1,5 @@
 from pamux_unreal_tools.tools.code_generators.base.code_generator_base import *
-from pamux_unreal_tools.tools.code_generators.base.method_params import MethodParam
+from pamux_unreal_tools.tools.code_generators.base.method_params import MethodParam, MethodParams
 
 from pamux_unreal_tools.tools.code_generators.material_expression_wrapper_generator.globals import *
 
@@ -85,31 +85,8 @@ class RGBAMaskParam(MethodParam):
         codeGen.append_line(f"self.a.set(False)")
         codeGen.end_if()
 
-class CTORParams:
-    def __init__(self) -> None:
-        self.params = list()
-
-    def append(self, param: MethodParam) -> None:
-        self.params.append(param)
-
-    def declaration_code(self, codeGen) -> str:
-        codes = [ ]
-        for param in codeGen.required_initial_parameters:
-            codes.append(param)
-        
-        for param in self.params:
-            codes.append(codeGen.get_parameter_code(param))
-
-        codes.append(codeGen.get_parameter_code(MethodParam("node_pos", "NodePos", "NULL")))
-        return codes
-                         
-    def append_assignment_lines(self, codeGen: CodeGeneratorBase):
-        for param in self.params:
-            param.append_assignment_lines(codeGen)
-
-
-def setup_ctor_params(pamux_wrapper_class_name):
-    result = CTORParams()
+def setup_ctor_params(pamux_wrapper_class_name) -> MethodParams:
+    result = MethodParams()
     # if pamux_wrapper_class_name.endswith("Parameter"):
     #     if not pamux_wrapper_class_name in parameter_with_default_value_classes:
     #         if not pamux_wrapper_class_name in parameter_without_default_value_classes:

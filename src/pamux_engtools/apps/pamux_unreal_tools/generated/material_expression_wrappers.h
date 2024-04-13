@@ -6,24 +6,24 @@
 #include <NodePos.h>
 
 class Abs: public MaterialExpressionImpl {
-    Abs(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    Abs() {
     }
 }
 
 class AbsorptionMediumMaterialOutput: public MaterialExpressionImpl {
-    AbsorptionMediumMaterialOutput(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    AbsorptionMediumMaterialOutput() {
     }
 }
 
 class ActorPositionWS: public MaterialExpressionImpl {
-    ActorPositionWS(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    ActorPositionWS() {
 
         self.origin_type = MaterialExpressionEditorPropertyImpl(self, 'origin_type', 'PositionOrigin')
     }
 }
 
 class Add: public MaterialExpressionImpl {
-    Add(None a = None, None b = None, NodePos node_pos = nullptr): base(None a = None, None b = None, NodePos node_pos = nullptr) {
+    Add(None a = None, None b = None)a, b {
 
         self.const_a = MaterialExpressionEditorPropertyImpl(self, 'const_a', 'float')
         self.const_b = MaterialExpressionEditorPropertyImpl(self, 'const_b', 'float')
@@ -48,7 +48,7 @@ class Add: public MaterialExpressionImpl {
 }
 
 class AntialiasedTextureMask: public MaterialExpressionImpl {
-    AntialiasedTextureMask(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    AntialiasedTextureMask() {
 
         self.automatic_view_mip_bias = MaterialExpressionEditorPropertyImpl(self, 'automatic_view_mip_bias', 'bool')
         self.channel = MaterialExpressionEditorPropertyImpl(self, 'channel', 'TextureColorChannel')
@@ -71,7 +71,7 @@ class AntialiasedTextureMask: public MaterialExpressionImpl {
 }
 
 class AppendVector: public MaterialExpressionImpl {
-    AppendVector(None a = None, None b = None, NodePos node_pos = nullptr): base(None a = None, None b = None, NodePos node_pos = nullptr) {
+    AppendVector(None a = None, None b = None)a, b {
 
         self.a = InSocketImpl(self, 'A', 'StructProperty')
         self.b = InSocketImpl(self, 'B', 'StructProperty')
@@ -85,32 +85,32 @@ class AppendVector: public MaterialExpressionImpl {
 }
 
 class Arccosine: public MaterialExpressionImpl {
-    Arccosine(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    Arccosine() {
     }
 }
 
 class ArccosineFast: public MaterialExpressionImpl {
-    ArccosineFast(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    ArccosineFast() {
     }
 }
 
 class Arcsine: public MaterialExpressionImpl {
-    Arcsine(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    Arcsine() {
     }
 }
 
 class ArcsineFast: public MaterialExpressionImpl {
-    ArcsineFast(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    ArcsineFast() {
     }
 }
 
 class Arctangent: public MaterialExpressionImpl {
-    Arctangent(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    Arctangent() {
     }
 }
 
 class Arctangent2: public MaterialExpressionImpl {
-    Arctangent2(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    Arctangent2() {
 
         self.y = InSocketImpl(self, 'Y', 'StructProperty')
         self.x = InSocketImpl(self, 'X', 'StructProperty')
@@ -118,7 +118,7 @@ class Arctangent2: public MaterialExpressionImpl {
 }
 
 class Arctangent2Fast: public MaterialExpressionImpl {
-    Arctangent2Fast(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    Arctangent2Fast() {
 
         self.y = InSocketImpl(self, 'Y', 'StructProperty')
         self.x = InSocketImpl(self, 'X', 'StructProperty')
@@ -126,34 +126,34 @@ class Arctangent2Fast: public MaterialExpressionImpl {
 }
 
 class ArctangentFast: public MaterialExpressionImpl {
-    ArctangentFast(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    ArctangentFast() {
     }
 }
 
 class AtmosphericFogColor: public MaterialExpressionImpl {
-    AtmosphericFogColor(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    AtmosphericFogColor() {
 
         self.worldPosition = InSocketImpl(self, 'WorldPosition', 'StructProperty')
     }
 }
 
 class AtmosphericLightColor: public MaterialExpressionImpl {
-    AtmosphericLightColor(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    AtmosphericLightColor() {
     }
 }
 
 class AtmosphericLightVector: public MaterialExpressionImpl {
-    AtmosphericLightVector(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    AtmosphericLightVector() {
     }
 }
 
 class BentNormalCustomOutput: public MaterialExpressionImpl {
-    BentNormalCustomOutput(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    BentNormalCustomOutput() {
     }
 }
 
 class BinaryOp: public MaterialExpressionImpl {
-    BinaryOp(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    BinaryOp() {
 
         self.const_a = MaterialExpressionEditorPropertyImpl(self, 'const_a', 'float')
         self.const_b = MaterialExpressionEditorPropertyImpl(self, 'const_b', 'float')
@@ -161,14 +161,14 @@ class BinaryOp: public MaterialExpressionImpl {
 }
 
 class BlackBody: public MaterialExpressionImpl {
-    BlackBody(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    BlackBody() {
 
         self.temp = InSocketImpl(self, 'Temp', 'StructProperty')
     }
 }
 
 class BlendMaterialAttributes: public MaterialExpressionImpl {
-    BlendMaterialAttributes(None a = None, None b = None, None alpha = None, NodePos node_pos = nullptr): base(None a = None, None b = None, None alpha = None, NodePos node_pos = nullptr) {
+    BlendMaterialAttributes(None a = None, None b = None, None alpha = None)a, b, alpha {
 
         self.pixel_attribute_blend_type = MaterialExpressionEditorPropertyImpl(self, 'pixel_attribute_blend_type', 'MaterialAttributeBlend')
         self.vertex_attribute_blend_type = MaterialExpressionEditorPropertyImpl(self, 'vertex_attribute_blend_type', 'MaterialAttributeBlend')
@@ -201,7 +201,7 @@ class BlendMaterialAttributes: public MaterialExpressionImpl {
 }
 
 class BreakMaterialAttributes: public MaterialExpressionImpl {
-    BreakMaterialAttributes(None input = None, bool shouldAddRTParams = False, NodePos node_pos = nullptr): base(None input = None, bool shouldAddRTParams = False, NodePos node_pos = nullptr) {
+    BreakMaterialAttributes(None input = None, bool shouldAddRTParams = False)input, shouldAddRTParams {
 
         self.materialAttributes = InSocketImpl(self, 'MaterialAttributes', 'StructProperty')
 
@@ -268,7 +268,7 @@ class BreakMaterialAttributes: public MaterialExpressionImpl {
 }
 
 class BumpOffset: public MaterialExpressionImpl {
-    BumpOffset(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    BumpOffset() {
 
         self.const_coordinate = MaterialExpressionEditorPropertyImpl(self, 'const_coordinate', 'uint32')
         self.height_ratio = MaterialExpressionEditorPropertyImpl(self, 'height_ratio', 'float')
@@ -281,22 +281,22 @@ class BumpOffset: public MaterialExpressionImpl {
 }
 
 class CameraPositionWS: public MaterialExpressionImpl {
-    CameraPositionWS(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    CameraPositionWS() {
     }
 }
 
 class CameraVectorWS: public MaterialExpressionImpl {
-    CameraVectorWS(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    CameraVectorWS() {
     }
 }
 
 class Ceil: public MaterialExpressionImpl {
-    Ceil(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    Ceil() {
     }
 }
 
 class ChannelMaskParameter: public MaterialExpressionImpl {
-    ChannelMaskParameter(None parameter_name = None, None default_value = None, NodePos node_pos = nullptr): base(None parameter_name = None, None default_value = None, NodePos node_pos = nullptr) {
+    ChannelMaskParameter(None parameter_name = None, None default_value = None)parameter_name, default_value {
 
         self.channel_names = MaterialExpressionEditorPropertyImpl(self, 'channel_names', 'ParameterChannelNames')
         self.default_value = MaterialExpressionEditorPropertyImpl(self, 'default_value', 'LinearColor')
@@ -317,7 +317,7 @@ class ChannelMaskParameter: public MaterialExpressionImpl {
 }
 
 class Clamp: public MaterialExpressionImpl {
-    Clamp(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    Clamp() {
 
         self.clamp_mode = MaterialExpressionEditorPropertyImpl(self, 'clamp_mode', 'ClampMode')
         self.max_default = MaterialExpressionEditorPropertyImpl(self, 'max_default', 'float')
@@ -329,17 +329,17 @@ class Clamp: public MaterialExpressionImpl {
 }
 
 class ClearCoatNormalCustomOutput: public MaterialExpressionImpl {
-    ClearCoatNormalCustomOutput(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    ClearCoatNormalCustomOutput() {
     }
 }
 
 class CloudSampleAttribute: public MaterialExpressionImpl {
-    CloudSampleAttribute(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    CloudSampleAttribute() {
     }
 }
 
 class CollectionParameter: public MaterialExpressionImpl {
-    CollectionParameter(None parameter_name = None, NodePos node_pos = nullptr): base(None parameter_name = None, NodePos node_pos = nullptr) {
+    CollectionParameter(None parameter_name = None)parameter_name {
 
         self.collection = MaterialExpressionEditorPropertyImpl(self, 'collection', 'MaterialParameterCollection')
         self.parameter_name = MaterialExpressionEditorPropertyImpl(self, 'parameter_name', 'Name')
@@ -351,7 +351,7 @@ class CollectionParameter: public MaterialExpressionImpl {
 }
 
 class Comment: public MaterialExpressionImpl {
-    Comment(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    Comment() {
 
         self.color_comment_bubble = MaterialExpressionEditorPropertyImpl(self, 'color_comment_bubble', 'bool')
         self.comment_bubble_visible_in_details_panel = MaterialExpressionEditorPropertyImpl(self, 'comment_bubble_visible_in_details_panel', 'bool')
@@ -365,7 +365,7 @@ class Comment: public MaterialExpressionImpl {
 }
 
 class ComponentMask: public MaterialExpressionImpl {
-    ComponentMask(None input = None, str rgbaMask = None, NodePos node_pos = nullptr): base(None input = None, str rgbaMask = None, NodePos node_pos = nullptr) {
+    ComponentMask(None input = None, str rgbaMask = None)input, rgbaMask {
 
         self.a = MaterialExpressionEditorPropertyImpl(self, 'a', 'bool')
         self.b = MaterialExpressionEditorPropertyImpl(self, 'b', 'bool')
@@ -390,14 +390,14 @@ class ComponentMask: public MaterialExpressionImpl {
 }
 
 class Composite: public MaterialExpressionImpl {
-    Composite(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    Composite() {
 
         self.subgraph_name = MaterialExpressionEditorPropertyImpl(self, 'subgraph_name', 'str')
     }
 }
 
 class Constant: public MaterialExpressionImpl {
-    Constant(None r = None, NodePos node_pos = nullptr): base(None r = None, NodePos node_pos = nullptr) {
+    Constant(None r = None)r {
 
         self.r = MaterialExpressionEditorPropertyImpl(self, 'r', 'float')
         if r is not None:
@@ -406,7 +406,7 @@ class Constant: public MaterialExpressionImpl {
 }
 
 class Constant2Vector: public MaterialExpressionImpl {
-    Constant2Vector(None constant = None, NodePos node_pos = nullptr): base(None constant = None, NodePos node_pos = nullptr) {
+    Constant2Vector(None constant = None)constant {
 
         self.g = MaterialExpressionEditorPropertyImpl(self, 'g', 'float')
         self.r = MaterialExpressionEditorPropertyImpl(self, 'r', 'float')
@@ -419,7 +419,7 @@ class Constant2Vector: public MaterialExpressionImpl {
 }
 
 class Constant3Vector: public MaterialExpressionImpl {
-    Constant3Vector(None constant = None, NodePos node_pos = nullptr): base(None constant = None, NodePos node_pos = nullptr) {
+    Constant3Vector(None constant = None)constant {
 
         self.constant = MaterialExpressionEditorPropertyImpl(self, 'constant', 'LinearColor')
 
@@ -432,7 +432,7 @@ class Constant3Vector: public MaterialExpressionImpl {
 }
 
 class Constant4Vector: public MaterialExpressionImpl {
-    Constant4Vector(None constant = None, NodePos node_pos = nullptr): base(None constant = None, NodePos node_pos = nullptr) {
+    Constant4Vector(None constant = None)constant {
 
         self.constant = MaterialExpressionEditorPropertyImpl(self, 'constant', 'LinearColor')
 
@@ -446,7 +446,7 @@ class Constant4Vector: public MaterialExpressionImpl {
 }
 
 class ConstantBiasScale: public MaterialExpressionImpl {
-    ConstantBiasScale(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    ConstantBiasScale() {
 
         self.bias = MaterialExpressionEditorPropertyImpl(self, 'bias', 'float')
         self.scale = MaterialExpressionEditorPropertyImpl(self, 'scale', 'float')
@@ -454,21 +454,21 @@ class ConstantBiasScale: public MaterialExpressionImpl {
 }
 
 class ConstantDouble: public MaterialExpressionImpl {
-    ConstantDouble(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    ConstantDouble() {
 
         self.value = MaterialExpressionEditorPropertyImpl(self, 'value', 'double')
     }
 }
 
 class Cosine: public MaterialExpressionImpl {
-    Cosine(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    Cosine() {
 
         self.period = MaterialExpressionEditorPropertyImpl(self, 'period', 'float')
     }
 }
 
 class CrossProduct: public MaterialExpressionImpl {
-    CrossProduct(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    CrossProduct() {
 
         self.a = InSocketImpl(self, 'A', 'StructProperty')
         self.b = InSocketImpl(self, 'B', 'StructProperty')
@@ -476,7 +476,7 @@ class CrossProduct: public MaterialExpressionImpl {
 }
 
 class CurveAtlasRowParameter: public MaterialExpressionImpl {
-    CurveAtlasRowParameter(None parameter_name = None, None default_value = None, NodePos node_pos = nullptr): base(None parameter_name = None, None default_value = None, NodePos node_pos = nullptr) {
+    CurveAtlasRowParameter(None parameter_name = None, None default_value = None)parameter_name, default_value {
 
         self.atlas = MaterialExpressionEditorPropertyImpl(self, 'atlas', 'CurveLinearColorAtlas')
         self.curve = MaterialExpressionEditorPropertyImpl(self, 'curve', 'CurveLinearColor')
@@ -499,7 +499,7 @@ class CurveAtlasRowParameter: public MaterialExpressionImpl {
 }
 
 class Custom: public MaterialExpressionImpl {
-    Custom(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    Custom() {
 
         self.additional_defines = MaterialExpressionEditorPropertyImpl(self, 'additional_defines', 'Array[CustomDefine]')
         self.additional_outputs = MaterialExpressionEditorPropertyImpl(self, 'additional_outputs', 'Array[CustomOutput]')
@@ -512,55 +512,55 @@ class Custom: public MaterialExpressionImpl {
 }
 
 class CustomOutput: public MaterialExpressionImpl {
-    CustomOutput(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    CustomOutput() {
     }
 }
 
 class DBufferTexture: public MaterialExpressionImpl {
-    DBufferTexture(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    DBufferTexture() {
 
         self.d_buffer_texture_id = MaterialExpressionEditorPropertyImpl(self, 'd_buffer_texture_id', 'DBufferTextureId')
     }
 }
 
 class DDX: public MaterialExpressionImpl {
-    DDX(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    DDX() {
 
         self.value = InSocketImpl(self, 'Value', 'StructProperty')
     }
 }
 
 class DDY: public MaterialExpressionImpl {
-    DDY(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    DDY() {
 
         self.value = InSocketImpl(self, 'Value', 'StructProperty')
     }
 }
 
 class DataDrivenShaderPlatformInfoSwitch: public MaterialExpressionImpl {
-    DataDrivenShaderPlatformInfoSwitch(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    DataDrivenShaderPlatformInfoSwitch() {
 
         self.ddspi_property_names = MaterialExpressionEditorPropertyImpl(self, 'ddspi_property_names', 'Array[DataDrivenShaderPlatformInfoInput]')
     }
 }
 
 class DecalColor: public MaterialExpressionImpl {
-    DecalColor(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    DecalColor() {
     }
 }
 
 class DecalDerivative: public MaterialExpressionImpl {
-    DecalDerivative(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    DecalDerivative() {
     }
 }
 
 class DecalLifetimeOpacity: public MaterialExpressionImpl {
-    DecalLifetimeOpacity(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    DecalLifetimeOpacity() {
     }
 }
 
 class DecalMipmapLevel: public MaterialExpressionImpl {
-    DecalMipmapLevel(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    DecalMipmapLevel() {
 
         self.const_height = MaterialExpressionEditorPropertyImpl(self, 'const_height', 'float')
         self.const_width = MaterialExpressionEditorPropertyImpl(self, 'const_width', 'float')
@@ -570,12 +570,12 @@ class DecalMipmapLevel: public MaterialExpressionImpl {
 }
 
 class DeltaTime: public MaterialExpressionImpl {
-    DeltaTime(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    DeltaTime() {
     }
 }
 
 class DepthFade: public MaterialExpressionImpl {
-    DepthFade(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    DepthFade() {
 
         self.fade_distance_default = MaterialExpressionEditorPropertyImpl(self, 'fade_distance_default', 'float')
         self.opacity_default = MaterialExpressionEditorPropertyImpl(self, 'opacity_default', 'float')
@@ -586,7 +586,7 @@ class DepthFade: public MaterialExpressionImpl {
 }
 
 class DepthOfFieldFunction: public MaterialExpressionImpl {
-    DepthOfFieldFunction(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    DepthOfFieldFunction() {
 
         self.function_value = MaterialExpressionEditorPropertyImpl(self, 'function_value', 'DepthOfFieldFunctionValue')
 
@@ -595,14 +595,14 @@ class DepthOfFieldFunction: public MaterialExpressionImpl {
 }
 
 class DeriveNormalZ: public MaterialExpressionImpl {
-    DeriveNormalZ(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    DeriveNormalZ() {
 
         self.inXY = InSocketImpl(self, 'InXY', 'StructProperty')
     }
 }
 
 class Desaturation: public MaterialExpressionImpl {
-    Desaturation(None input = None, None fraction = None, NodePos node_pos = nullptr): base(None input = None, None fraction = None, NodePos node_pos = nullptr) {
+    Desaturation(None input = None, None fraction = None)input, fraction {
 
         self.luminance_factors = MaterialExpressionEditorPropertyImpl(self, 'luminance_factors', 'LinearColor')
 
@@ -617,7 +617,7 @@ class Desaturation: public MaterialExpressionImpl {
 }
 
 class Distance: public MaterialExpressionImpl {
-    Distance(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    Distance() {
 
         self.a = InSocketImpl(self, 'A', 'StructProperty')
         self.b = InSocketImpl(self, 'B', 'StructProperty')
@@ -625,12 +625,12 @@ class Distance: public MaterialExpressionImpl {
 }
 
 class DistanceCullFade: public MaterialExpressionImpl {
-    DistanceCullFade(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    DistanceCullFade() {
     }
 }
 
 class DistanceFieldApproxAO: public MaterialExpressionImpl {
-    DistanceFieldApproxAO(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    DistanceFieldApproxAO() {
 
         self.base_distance_default = MaterialExpressionEditorPropertyImpl(self, 'base_distance_default', 'float')
         self.num_steps = MaterialExpressionEditorPropertyImpl(self, 'num_steps', 'uint32')
@@ -640,14 +640,14 @@ class DistanceFieldApproxAO: public MaterialExpressionImpl {
 }
 
 class DistanceFieldGradient: public MaterialExpressionImpl {
-    DistanceFieldGradient(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    DistanceFieldGradient() {
 
         self.position = InSocketImpl(self, 'Position', 'StructProperty')
     }
 }
 
 class DistanceFieldsRenderingSwitch: public MaterialExpressionImpl {
-    DistanceFieldsRenderingSwitch(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    DistanceFieldsRenderingSwitch() {
 
         self.no = InSocketImpl(self, 'No', 'StructProperty')
         self.yes = InSocketImpl(self, 'Yes', 'StructProperty')
@@ -655,14 +655,14 @@ class DistanceFieldsRenderingSwitch: public MaterialExpressionImpl {
 }
 
 class DistanceToNearestSurface: public MaterialExpressionImpl {
-    DistanceToNearestSurface(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    DistanceToNearestSurface() {
 
         self.position = InSocketImpl(self, 'Position', 'StructProperty')
     }
 }
 
 class Divide: public MaterialExpressionImpl {
-    Divide(None a = None, None b = None, NodePos node_pos = nullptr): base(None a = None, None b = None, NodePos node_pos = nullptr) {
+    Divide(None a = None, None b = None)a, b {
 
         self.const_a = MaterialExpressionEditorPropertyImpl(self, 'const_a', 'float')
         self.const_b = MaterialExpressionEditorPropertyImpl(self, 'const_b', 'float')
@@ -687,7 +687,7 @@ class Divide: public MaterialExpressionImpl {
 }
 
 class DotProduct: public MaterialExpressionImpl {
-    DotProduct(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    DotProduct() {
 
         self.a = InSocketImpl(self, 'A', 'StructProperty')
         self.b = InSocketImpl(self, 'B', 'StructProperty')
@@ -695,7 +695,7 @@ class DotProduct: public MaterialExpressionImpl {
 }
 
 class DoubleVectorParameter: public MaterialExpressionImpl {
-    DoubleVectorParameter(None parameter_name = None, None default_value = None, NodePos node_pos = nullptr): base(None parameter_name = None, None default_value = None, NodePos node_pos = nullptr) {
+    DoubleVectorParameter(None parameter_name = None, None default_value = None)parameter_name, default_value {
 
         self.default_value = MaterialExpressionEditorPropertyImpl(self, 'default_value', 'Vector4d')
         self.group = MaterialExpressionEditorPropertyImpl(self, 'group', 'Name')
@@ -709,7 +709,7 @@ class DoubleVectorParameter: public MaterialExpressionImpl {
 }
 
 class DynamicParameter: public MaterialExpressionImpl {
-    DynamicParameter(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    DynamicParameter() {
 
         self.default_value = MaterialExpressionEditorPropertyImpl(self, 'default_value', 'LinearColor')
         self.param_names = MaterialExpressionEditorPropertyImpl(self, 'param_names', 'Array[str]')
@@ -720,44 +720,44 @@ class DynamicParameter: public MaterialExpressionImpl {
 }
 
 class ExecBegin: public MaterialExpressionImpl {
-    ExecBegin(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    ExecBegin() {
     }
 }
 
 class ExecEnd: public MaterialExpressionImpl {
-    ExecEnd(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    ExecEnd() {
     }
 }
 
 class Exponential: public MaterialExpressionImpl {
-    Exponential(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    Exponential() {
     }
 }
 
 class Exponential2: public MaterialExpressionImpl {
-    Exponential2(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    Exponential2() {
     }
 }
 
 class EyeAdaptation: public MaterialExpressionImpl {
-    EyeAdaptation(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    EyeAdaptation() {
     }
 }
 
 class EyeAdaptationInverse: public MaterialExpressionImpl {
-    EyeAdaptationInverse(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    EyeAdaptationInverse() {
     }
 }
 
 class FeatureLevelSwitch: public MaterialExpressionImpl {
-    FeatureLevelSwitch(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    FeatureLevelSwitch() {
 
         self.default = InSocketImpl(self, 'Default', 'StructProperty')
     }
 }
 
 class Floor: public MaterialExpressionImpl {
-    Floor(None input = None, NodePos node_pos = nullptr): base(None input = None, NodePos node_pos = nullptr) {
+    Floor(None input = None)input {
         if (input is not None( {
             self.input.comesFrom(input)
         }
@@ -765,7 +765,7 @@ class Floor: public MaterialExpressionImpl {
 }
 
 class Fmod: public MaterialExpressionImpl {
-    Fmod(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    Fmod() {
 
         self.a = InSocketImpl(self, 'A', 'StructProperty')
         self.b = InSocketImpl(self, 'B', 'StructProperty')
@@ -773,7 +773,7 @@ class Fmod: public MaterialExpressionImpl {
 }
 
 class FontSample: public MaterialExpressionImpl {
-    FontSample(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    FontSample() {
 
         self.font = MaterialExpressionEditorPropertyImpl(self, 'font', 'Font')
         self.font_texture_page = MaterialExpressionEditorPropertyImpl(self, 'font_texture_page', 'int32')
@@ -781,7 +781,7 @@ class FontSample: public MaterialExpressionImpl {
 }
 
 class FontSampleParameter: public MaterialExpressionImpl {
-    FontSampleParameter(None parameter_name = None, NodePos node_pos = nullptr): base(None parameter_name = None, NodePos node_pos = nullptr) {
+    FontSampleParameter(None parameter_name = None)parameter_name {
 
         self.font = MaterialExpressionEditorPropertyImpl(self, 'font', 'Font')
         self.font_texture_page = MaterialExpressionEditorPropertyImpl(self, 'font_texture_page', 'int32')
@@ -796,17 +796,17 @@ class FontSampleParameter: public MaterialExpressionImpl {
 }
 
 class ForLoop: public MaterialExpressionImpl {
-    ForLoop(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    ForLoop() {
     }
 }
 
 class Frac: public MaterialExpressionImpl {
-    Frac(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    Frac() {
     }
 }
 
 class Fresnel: public MaterialExpressionImpl {
-    Fresnel(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    Fresnel() {
 
         self.base_reflect_fraction = MaterialExpressionEditorPropertyImpl(self, 'base_reflect_fraction', 'float')
         self.exponent = MaterialExpressionEditorPropertyImpl(self, 'exponent', 'float')
@@ -818,7 +818,7 @@ class Fresnel: public MaterialExpressionImpl {
 }
 
 class FunctionInput: public MaterialExpressionImpl {
-    FunctionInput(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    FunctionInput() {
 
         self.description = MaterialExpressionEditorPropertyImpl(self, 'description', 'str')
         self.input_name = MaterialExpressionEditorPropertyImpl(self, 'input_name', 'Name')
@@ -834,7 +834,7 @@ class FunctionInput: public MaterialExpressionImpl {
 }
 
 class FunctionOutput: public MaterialExpressionImpl {
-    FunctionOutput(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    FunctionOutput() {
 
         self.description = MaterialExpressionEditorPropertyImpl(self, 'description', 'str')
         self.output_name = MaterialExpressionEditorPropertyImpl(self, 'output_name', 'Name')
@@ -846,7 +846,7 @@ class FunctionOutput: public MaterialExpressionImpl {
 }
 
 class GIReplace: public MaterialExpressionImpl {
-    GIReplace(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    GIReplace() {
 
         self.default = InSocketImpl(self, 'Default', 'StructProperty')
         self.staticIndirect = InSocketImpl(self, 'StaticIndirect', 'StructProperty')
@@ -855,19 +855,19 @@ class GIReplace: public MaterialExpressionImpl {
 }
 
 class GenericConstant: public MaterialExpressionImpl {
-    GenericConstant(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    GenericConstant() {
     }
 }
 
 class GetLocal: public MaterialExpressionImpl {
-    GetLocal(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    GetLocal() {
 
         self.local_name = MaterialExpressionEditorPropertyImpl(self, 'local_name', 'Name')
     }
 }
 
 class GetMaterialAttributes: public MaterialExpressionImpl {
-    GetMaterialAttributes(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    GetMaterialAttributes() {
 
         self.attribute_get_types = MaterialExpressionEditorPropertyImpl(self, 'attribute_get_types', 'Array[Guid]')
 
@@ -899,14 +899,14 @@ class GetMaterialAttributes: public MaterialExpressionImpl {
 }
 
 class HairAttributes: public MaterialExpressionImpl {
-    HairAttributes(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    HairAttributes() {
 
         self.use_tangent_space = MaterialExpressionEditorPropertyImpl(self, 'use_tangent_space', 'bool')
     }
 }
 
 class HairColor: public MaterialExpressionImpl {
-    HairColor(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    HairColor() {
 
         self.melanin = InSocketImpl(self, 'Melanin', 'StructProperty')
         self.redness = InSocketImpl(self, 'Redness', 'StructProperty')
@@ -915,7 +915,7 @@ class HairColor: public MaterialExpressionImpl {
 }
 
 class HeightfieldMinMaxTexture: public MaterialExpressionImpl {
-    HeightfieldMinMaxTexture(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    HeightfieldMinMaxTexture() {
 
         self.min_max_texture = MaterialExpressionEditorPropertyImpl(self, 'min_max_texture', 'HeightfieldMinMaxTexture')
         self.sampler_type = MaterialExpressionEditorPropertyImpl(self, 'sampler_type', 'MaterialSamplerType')
@@ -923,12 +923,12 @@ class HeightfieldMinMaxTexture: public MaterialExpressionImpl {
 }
 
 class HsvToRgb: public MaterialExpressionImpl {
-    HsvToRgb(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    HsvToRgb() {
     }
 }
 
 class If: public MaterialExpressionImpl {
-    If(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    If() {
 
         self.const_b = MaterialExpressionEditorPropertyImpl(self, 'const_b', 'float')
         self.equals_threshold = MaterialExpressionEditorPropertyImpl(self, 'equals_threshold', 'float')
@@ -942,12 +942,12 @@ class If: public MaterialExpressionImpl {
 }
 
 class IfThenElse: public MaterialExpressionImpl {
-    IfThenElse(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    IfThenElse() {
     }
 }
 
 class InverseLinearInterpolate: public MaterialExpressionImpl {
-    InverseLinearInterpolate(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    InverseLinearInterpolate() {
 
         self.clamp_result = MaterialExpressionEditorPropertyImpl(self, 'clamp_result', 'bool')
         self.const_a = MaterialExpressionEditorPropertyImpl(self, 'const_a', 'float')
@@ -961,26 +961,26 @@ class InverseLinearInterpolate: public MaterialExpressionImpl {
 }
 
 class IsOrthographic: public MaterialExpressionImpl {
-    IsOrthographic(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    IsOrthographic() {
     }
 }
 
 class LandscapeGrassOutput: public MaterialExpressionImpl {
-    LandscapeGrassOutput(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    LandscapeGrassOutput() {
 
         self.grass_types = MaterialExpressionEditorPropertyImpl(self, 'grass_types', 'Array[GrassInput]')
     }
 }
 
 class LandscapeLayerBlend: public MaterialExpressionImpl {
-    LandscapeLayerBlend(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    LandscapeLayerBlend() {
 
         self.layers = MaterialExpressionEditorPropertyImpl(self, 'layers', 'Array[LayerBlendInput]')
     }
 }
 
 class LandscapeLayerCoords: public MaterialExpressionImpl {
-    LandscapeLayerCoords(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    LandscapeLayerCoords() {
 
         self.custom_uv_type = MaterialExpressionEditorPropertyImpl(self, 'custom_uv_type', 'LandscapeCustomizedCoordType')
         self.mapping_pan_u = MaterialExpressionEditorPropertyImpl(self, 'mapping_pan_u', 'float')
@@ -992,7 +992,7 @@ class LandscapeLayerCoords: public MaterialExpressionImpl {
 }
 
 class LandscapeLayerSample: public MaterialExpressionImpl {
-    LandscapeLayerSample(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    LandscapeLayerSample() {
 
         self.parameter_name = MaterialExpressionEditorPropertyImpl(self, 'parameter_name', 'Name')
         self.preview_weight = MaterialExpressionEditorPropertyImpl(self, 'preview_weight', 'float')
@@ -1000,7 +1000,7 @@ class LandscapeLayerSample: public MaterialExpressionImpl {
 }
 
 class LandscapeLayerSwitch: public MaterialExpressionImpl {
-    LandscapeLayerSwitch(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    LandscapeLayerSwitch() {
 
         self.parameter_name = MaterialExpressionEditorPropertyImpl(self, 'parameter_name', 'Name')
         self.preview_used = MaterialExpressionEditorPropertyImpl(self, 'preview_used', 'bool')
@@ -1008,7 +1008,7 @@ class LandscapeLayerSwitch: public MaterialExpressionImpl {
 }
 
 class LandscapeLayerWeight: public MaterialExpressionImpl {
-    LandscapeLayerWeight(None parameter_name = None, float preview_weight = None, NodePos node_pos = nullptr): base(None parameter_name = None, float preview_weight = None, NodePos node_pos = nullptr) {
+    LandscapeLayerWeight(None parameter_name = None, float preview_weight = None)parameter_name, preview_weight {
 
         self.const_base = MaterialExpressionEditorPropertyImpl(self, 'const_base', 'Vector')
         self.parameter_name = MaterialExpressionEditorPropertyImpl(self, 'parameter_name', 'Name')
@@ -1021,24 +1021,24 @@ class LandscapeLayerWeight: public MaterialExpressionImpl {
 }
 
 class LandscapePhysicalMaterialOutput: public MaterialExpressionImpl {
-    LandscapePhysicalMaterialOutput(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    LandscapePhysicalMaterialOutput() {
 
         self.inputs = MaterialExpressionEditorPropertyImpl(self, 'inputs', 'Array[PhysicalMaterialInput]')
     }
 }
 
 class LandscapeVisibilityMask: public MaterialExpressionImpl {
-    LandscapeVisibilityMask(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    LandscapeVisibilityMask() {
     }
 }
 
 class Length: public MaterialExpressionImpl {
-    Length(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    Length() {
     }
 }
 
 class Less: public MaterialExpressionImpl {
-    Less(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    Less() {
 
         self.const_a = MaterialExpressionEditorPropertyImpl(self, 'const_a', 'float')
         self.const_b = MaterialExpressionEditorPropertyImpl(self, 'const_b', 'float')
@@ -1046,17 +1046,17 @@ class Less: public MaterialExpressionImpl {
 }
 
 class LightVector: public MaterialExpressionImpl {
-    LightVector(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    LightVector() {
     }
 }
 
 class LightmapUVs: public MaterialExpressionImpl {
-    LightmapUVs(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    LightmapUVs() {
     }
 }
 
 class LightmassReplace: public MaterialExpressionImpl {
-    LightmassReplace(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    LightmassReplace() {
 
         self.realtime = InSocketImpl(self, 'Realtime', 'StructProperty')
         self.lightmass = InSocketImpl(self, 'Lightmass', 'StructProperty')
@@ -1064,7 +1064,7 @@ class LightmassReplace: public MaterialExpressionImpl {
 }
 
 class LinearInterpolate: public MaterialExpressionImpl {
-    LinearInterpolate(None a = None, None b = None, None alpha = None, NodePos node_pos = nullptr): base(None a = None, None b = None, None alpha = None, NodePos node_pos = nullptr) {
+    LinearInterpolate(None a = None, None b = None, None alpha = None)a, b, alpha {
 
         self.const_a = MaterialExpressionEditorPropertyImpl(self, 'const_a', 'float')
         self.const_alpha = MaterialExpressionEditorPropertyImpl(self, 'const_alpha', 'float')
@@ -1098,26 +1098,26 @@ class LinearInterpolate: public MaterialExpressionImpl {
 }
 
 class Logarithm: public MaterialExpressionImpl {
-    Logarithm(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    Logarithm() {
     }
 }
 
 class Logarithm10: public MaterialExpressionImpl {
-    Logarithm10(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    Logarithm10() {
 
         self.x = InSocketImpl(self, 'X', 'StructProperty')
     }
 }
 
 class Logarithm2: public MaterialExpressionImpl {
-    Logarithm2(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    Logarithm2() {
 
         self.x = InSocketImpl(self, 'X', 'StructProperty')
     }
 }
 
 class MakeMaterialAttributes: public MaterialExpressionImpl {
-    MakeMaterialAttributes(BreakMaterialAttributes materialAttributes = None, NodePos node_pos = nullptr): base(BreakMaterialAttributes materialAttributes = None, NodePos node_pos = nullptr) {
+    MakeMaterialAttributes(BreakMaterialAttributes materialAttributes = None)materialAttributes {
 
         self.baseColor = InSocketImpl(self, 'BaseColor', 'StructProperty')
         self.metallic = InSocketImpl(self, 'Metallic', 'StructProperty')
@@ -1171,14 +1171,14 @@ class MakeMaterialAttributes: public MaterialExpressionImpl {
 }
 
 class MapARPassthroughCameraUV: public MaterialExpressionImpl {
-    MapARPassthroughCameraUV(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    MapARPassthroughCameraUV() {
 
         self.coordinates = InSocketImpl(self, 'Coordinates', 'StructProperty')
     }
 }
 
 class MaterialAttributeLayers: public MaterialExpressionImpl {
-    MaterialAttributeLayers(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    MaterialAttributeLayers() {
 
         self.default_layers = MaterialExpressionEditorPropertyImpl(self, 'default_layers', 'MaterialLayersFunctions')
 
@@ -1188,7 +1188,7 @@ class MaterialAttributeLayers: public MaterialExpressionImpl {
 }
 
 class MaterialFunctionCall: public MaterialExpressionImpl {
-    MaterialFunctionCall(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    MaterialFunctionCall() {
 
         self.material_function = MaterialExpressionEditorPropertyImpl(self, 'material_function', 'MaterialFunctionInterface')
 
@@ -1197,7 +1197,7 @@ class MaterialFunctionCall: public MaterialExpressionImpl {
 }
 
 class MaterialLayerOutput: public MaterialExpressionImpl {
-    MaterialLayerOutput(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    MaterialLayerOutput() {
 
         self.description = MaterialExpressionEditorPropertyImpl(self, 'description', 'str')
         self.output_name = MaterialExpressionEditorPropertyImpl(self, 'output_name', 'Name')
@@ -1209,7 +1209,7 @@ class MaterialLayerOutput: public MaterialExpressionImpl {
 }
 
 class MaterialProxyReplace: public MaterialExpressionImpl {
-    MaterialProxyReplace(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    MaterialProxyReplace() {
 
         self.realtime = InSocketImpl(self, 'Realtime', 'StructProperty')
         self.materialProxy = InSocketImpl(self, 'MaterialProxy', 'StructProperty')
@@ -1217,45 +1217,45 @@ class MaterialProxyReplace: public MaterialExpressionImpl {
 }
 
 class MaterialXAppend3Vector: public MaterialExpressionImpl {
-    MaterialXAppend3Vector(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    MaterialXAppend3Vector() {
     }
 }
 
 class MaterialXAppend4Vector: public MaterialExpressionImpl {
-    MaterialXAppend4Vector(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    MaterialXAppend4Vector() {
     }
 }
 
 class MaterialXBurn: public MaterialExpressionImpl {
-    MaterialXBurn(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    MaterialXBurn() {
 
         self.const_alpha = MaterialExpressionEditorPropertyImpl(self, 'const_alpha', 'float')
     }
 }
 
 class MaterialXDifference: public MaterialExpressionImpl {
-    MaterialXDifference(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    MaterialXDifference() {
 
         self.const_alpha = MaterialExpressionEditorPropertyImpl(self, 'const_alpha', 'float')
     }
 }
 
 class MaterialXDisjointOver: public MaterialExpressionImpl {
-    MaterialXDisjointOver(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    MaterialXDisjointOver() {
 
         self.const_alpha = MaterialExpressionEditorPropertyImpl(self, 'const_alpha', 'float')
     }
 }
 
 class MaterialXDodge: public MaterialExpressionImpl {
-    MaterialXDodge(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    MaterialXDodge() {
 
         self.const_alpha = MaterialExpressionEditorPropertyImpl(self, 'const_alpha', 'float')
     }
 }
 
 class MaterialXFractal3D: public MaterialExpressionImpl {
-    MaterialXFractal3D(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    MaterialXFractal3D() {
 
         self.const_amplitude = MaterialExpressionEditorPropertyImpl(self, 'const_amplitude', 'float')
         self.const_diminish = MaterialExpressionEditorPropertyImpl(self, 'const_diminish', 'float')
@@ -1270,14 +1270,14 @@ class MaterialXFractal3D: public MaterialExpressionImpl {
 }
 
 class MaterialXIn: public MaterialExpressionImpl {
-    MaterialXIn(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    MaterialXIn() {
 
         self.const_alpha = MaterialExpressionEditorPropertyImpl(self, 'const_alpha', 'float')
     }
 }
 
 class MaterialXLuminance: public MaterialExpressionImpl {
-    MaterialXLuminance(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    MaterialXLuminance() {
 
         self.luminance_factors = MaterialExpressionEditorPropertyImpl(self, 'luminance_factors', 'LinearColor')
         self.luminance_mode = MaterialExpressionEditorPropertyImpl(self, 'luminance_mode', 'MaterialXLuminanceMode')
@@ -1285,49 +1285,49 @@ class MaterialXLuminance: public MaterialExpressionImpl {
 }
 
 class MaterialXMask: public MaterialExpressionImpl {
-    MaterialXMask(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    MaterialXMask() {
 
         self.const_alpha = MaterialExpressionEditorPropertyImpl(self, 'const_alpha', 'float')
     }
 }
 
 class MaterialXMatte: public MaterialExpressionImpl {
-    MaterialXMatte(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    MaterialXMatte() {
 
         self.const_alpha = MaterialExpressionEditorPropertyImpl(self, 'const_alpha', 'float')
     }
 }
 
 class MaterialXMinus: public MaterialExpressionImpl {
-    MaterialXMinus(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    MaterialXMinus() {
 
         self.const_alpha = MaterialExpressionEditorPropertyImpl(self, 'const_alpha', 'float')
     }
 }
 
 class MaterialXOut: public MaterialExpressionImpl {
-    MaterialXOut(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    MaterialXOut() {
 
         self.const_alpha = MaterialExpressionEditorPropertyImpl(self, 'const_alpha', 'float')
     }
 }
 
 class MaterialXOver: public MaterialExpressionImpl {
-    MaterialXOver(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    MaterialXOver() {
 
         self.const_alpha = MaterialExpressionEditorPropertyImpl(self, 'const_alpha', 'float')
     }
 }
 
 class MaterialXOverlay: public MaterialExpressionImpl {
-    MaterialXOverlay(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    MaterialXOverlay() {
 
         self.const_alpha = MaterialExpressionEditorPropertyImpl(self, 'const_alpha', 'float')
     }
 }
 
 class MaterialXPlace2D: public MaterialExpressionImpl {
-    MaterialXPlace2D(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    MaterialXPlace2D() {
 
         self.const_coordinate = MaterialExpressionEditorPropertyImpl(self, 'const_coordinate', 'uint8')
         self.const_rotation_angle = MaterialExpressionEditorPropertyImpl(self, 'const_rotation_angle', 'float')
@@ -1335,40 +1335,40 @@ class MaterialXPlace2D: public MaterialExpressionImpl {
 }
 
 class MaterialXPlus: public MaterialExpressionImpl {
-    MaterialXPlus(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    MaterialXPlus() {
 
         self.const_alpha = MaterialExpressionEditorPropertyImpl(self, 'const_alpha', 'float')
     }
 }
 
 class MaterialXPremult: public MaterialExpressionImpl {
-    MaterialXPremult(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    MaterialXPremult() {
     }
 }
 
 class MaterialXRamp4: public MaterialExpressionImpl {
-    MaterialXRamp4(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    MaterialXRamp4() {
 
         self.const_coordinate = MaterialExpressionEditorPropertyImpl(self, 'const_coordinate', 'uint8')
     }
 }
 
 class MaterialXRampLeftRight: public MaterialExpressionImpl {
-    MaterialXRampLeftRight(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    MaterialXRampLeftRight() {
 
         self.const_coordinate = MaterialExpressionEditorPropertyImpl(self, 'const_coordinate', 'uint8')
     }
 }
 
 class MaterialXRampTopBottom: public MaterialExpressionImpl {
-    MaterialXRampTopBottom(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    MaterialXRampTopBottom() {
 
         self.const_coordinate = MaterialExpressionEditorPropertyImpl(self, 'const_coordinate', 'uint8')
     }
 }
 
 class MaterialXRemap: public MaterialExpressionImpl {
-    MaterialXRemap(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    MaterialXRemap() {
 
         self.input_high_default = MaterialExpressionEditorPropertyImpl(self, 'input_high_default', 'float')
         self.input_low_default = MaterialExpressionEditorPropertyImpl(self, 'input_low_default', 'float')
@@ -1378,21 +1378,21 @@ class MaterialXRemap: public MaterialExpressionImpl {
 }
 
 class MaterialXRotate2D: public MaterialExpressionImpl {
-    MaterialXRotate2D(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    MaterialXRotate2D() {
 
         self.const_rotation_angle = MaterialExpressionEditorPropertyImpl(self, 'const_rotation_angle', 'float')
     }
 }
 
 class MaterialXScreen: public MaterialExpressionImpl {
-    MaterialXScreen(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    MaterialXScreen() {
 
         self.const_alpha = MaterialExpressionEditorPropertyImpl(self, 'const_alpha', 'float')
     }
 }
 
 class MaterialXSplitLeftRight: public MaterialExpressionImpl {
-    MaterialXSplitLeftRight(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    MaterialXSplitLeftRight() {
 
         self.const_center = MaterialExpressionEditorPropertyImpl(self, 'const_center', 'float')
         self.const_coordinate = MaterialExpressionEditorPropertyImpl(self, 'const_coordinate', 'uint8')
@@ -1400,7 +1400,7 @@ class MaterialXSplitLeftRight: public MaterialExpressionImpl {
 }
 
 class MaterialXSplitTopBottom: public MaterialExpressionImpl {
-    MaterialXSplitTopBottom(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    MaterialXSplitTopBottom() {
 
         self.const_center = MaterialExpressionEditorPropertyImpl(self, 'const_center', 'float')
         self.const_coordinate = MaterialExpressionEditorPropertyImpl(self, 'const_coordinate', 'uint8')
@@ -1408,14 +1408,14 @@ class MaterialXSplitTopBottom: public MaterialExpressionImpl {
 }
 
 class MaterialXSwizzle: public MaterialExpressionImpl {
-    MaterialXSwizzle(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    MaterialXSwizzle() {
 
         self.channels = MaterialExpressionEditorPropertyImpl(self, 'channels', 'str')
     }
 }
 
 class MaterialXTextureSampleParameterBlur: public MaterialExpressionImpl {
-    MaterialXTextureSampleParameterBlur(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    MaterialXTextureSampleParameterBlur() {
 
         self.automatic_view_mip_bias = MaterialExpressionEditorPropertyImpl(self, 'automatic_view_mip_bias', 'bool')
         self.channel_names = MaterialExpressionEditorPropertyImpl(self, 'channel_names', 'ParameterChannelNames')
@@ -1437,12 +1437,12 @@ class MaterialXTextureSampleParameterBlur: public MaterialExpressionImpl {
 }
 
 class MaterialXUnpremult: public MaterialExpressionImpl {
-    MaterialXUnpremult(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    MaterialXUnpremult() {
     }
 }
 
 class Max: public MaterialExpressionImpl {
-    Max(None a = None, None b = None, NodePos node_pos = nullptr): base(None a = None, None b = None, NodePos node_pos = nullptr) {
+    Max(None a = None, None b = None)a, b {
 
         self.const_a = MaterialExpressionEditorPropertyImpl(self, 'const_a', 'float')
         self.const_b = MaterialExpressionEditorPropertyImpl(self, 'const_b', 'float')
@@ -1467,7 +1467,7 @@ class Max: public MaterialExpressionImpl {
 }
 
 class Min: public MaterialExpressionImpl {
-    Min(None a = None, None b = None, NodePos node_pos = nullptr): base(None a = None, None b = None, NodePos node_pos = nullptr) {
+    Min(None a = None, None b = None)a, b {
 
         self.const_a = MaterialExpressionEditorPropertyImpl(self, 'const_a', 'float')
         self.const_b = MaterialExpressionEditorPropertyImpl(self, 'const_b', 'float')
@@ -1492,7 +1492,7 @@ class Min: public MaterialExpressionImpl {
 }
 
 class Multiply: public MaterialExpressionImpl {
-    Multiply(None a = None, None b = None, NodePos node_pos = nullptr): base(None a = None, None b = None, NodePos node_pos = nullptr) {
+    Multiply(None a = None, None b = None)a, b {
 
         self.const_a = MaterialExpressionEditorPropertyImpl(self, 'const_a', 'float')
         self.const_b = MaterialExpressionEditorPropertyImpl(self, 'const_b', 'float')
@@ -1517,12 +1517,12 @@ class Multiply: public MaterialExpressionImpl {
 }
 
 class NamedRerouteBase: public MaterialExpressionImpl {
-    NamedRerouteBase(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    NamedRerouteBase() {
     }
 }
 
 class NamedRerouteDeclaration: public MaterialExpressionImpl {
-    NamedRerouteDeclaration(None name = None, None input = None, None nodeColor = None, NodePos node_pos = nullptr): base(None name = None, None input = None, None nodeColor = None, NodePos node_pos = nullptr) {
+    NamedRerouteDeclaration(None name = None, None input = None, None nodeColor = None)name, input, nodeColor {
 
         self.name = MaterialExpressionEditorPropertyImpl(self, 'name', 'Name')
         self.nodeNolor = MaterialExpressionEditorPropertyImpl(self, 'nodeNolor', 'LinearColor')
@@ -1541,7 +1541,7 @@ class NamedRerouteDeclaration: public MaterialExpressionImpl {
 }
 
 class NamedRerouteUsage: public MaterialExpressionImpl {
-    NamedRerouteUsage(None declarationGuid = None, NodePos node_pos = nullptr): base(None declarationGuid = None, NodePos node_pos = nullptr) {
+    NamedRerouteUsage(None declarationGuid = None)declarationGuid {
 
         self.declarationGuid = MaterialExpressionEditorPropertyImpl(self, 'declarationGuid', 'Guid')
         if declarationGuid is not None:
@@ -1550,12 +1550,12 @@ class NamedRerouteUsage: public MaterialExpressionImpl {
 }
 
 class NaniteReplace: public MaterialExpressionImpl {
-    NaniteReplace(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    NaniteReplace() {
     }
 }
 
 class Noise: public MaterialExpressionImpl {
-    Noise(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    Noise() {
 
         self.level_scale = MaterialExpressionEditorPropertyImpl(self, 'level_scale', 'float')
         self.levels = MaterialExpressionEditorPropertyImpl(self, 'levels', 'int32')
@@ -1574,41 +1574,41 @@ class Noise: public MaterialExpressionImpl {
 }
 
 class Normalize: public MaterialExpressionImpl {
-    Normalize(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    Normalize() {
 
         self.vectorInput = InSocketImpl(self, 'VectorInput', 'StructProperty')
     }
 }
 
 class ObjectBounds: public MaterialExpressionImpl {
-    ObjectBounds(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    ObjectBounds() {
     }
 }
 
 class ObjectLocalBounds: public MaterialExpressionImpl {
-    ObjectLocalBounds(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    ObjectLocalBounds() {
     }
 }
 
 class ObjectOrientation: public MaterialExpressionImpl {
-    ObjectOrientation(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    ObjectOrientation() {
     }
 }
 
 class ObjectPositionWS: public MaterialExpressionImpl {
-    ObjectPositionWS(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    ObjectPositionWS() {
 
         self.origin_type = MaterialExpressionEditorPropertyImpl(self, 'origin_type', 'PositionOrigin')
     }
 }
 
 class ObjectRadius: public MaterialExpressionImpl {
-    ObjectRadius(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    ObjectRadius() {
     }
 }
 
 class OneMinus: public MaterialExpressionImpl {
-    OneMinus(None input = None, NodePos node_pos = nullptr): base(None input = None, NodePos node_pos = nullptr) {
+    OneMinus(None input = None)input {
         if (input is not None( {
             self.input.comesFrom(input)
         }
@@ -1616,7 +1616,7 @@ class OneMinus: public MaterialExpressionImpl {
 }
 
 class Panner: public MaterialExpressionImpl {
-    Panner(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    Panner() {
 
         self.const_coordinate = MaterialExpressionEditorPropertyImpl(self, 'const_coordinate', 'uint32')
         self.fractional_part = MaterialExpressionEditorPropertyImpl(self, 'fractional_part', 'bool')
@@ -1630,7 +1630,7 @@ class Panner: public MaterialExpressionImpl {
 }
 
 class Parameter: public MaterialExpressionImpl {
-    Parameter(None parameter_name = None, NodePos node_pos = nullptr): base(None parameter_name = None, NodePos node_pos = nullptr) {
+    Parameter(None parameter_name = None)parameter_name {
 
         self.group = MaterialExpressionEditorPropertyImpl(self, 'group', 'Name')
         self.parameter_name = MaterialExpressionEditorPropertyImpl(self, 'parameter_name', 'Name')
@@ -1643,64 +1643,64 @@ class Parameter: public MaterialExpressionImpl {
 }
 
 class ParticleColor: public MaterialExpressionImpl {
-    ParticleColor(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    ParticleColor() {
     }
 }
 
 class ParticleDirection: public MaterialExpressionImpl {
-    ParticleDirection(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    ParticleDirection() {
     }
 }
 
 class ParticleMacroUV: public MaterialExpressionImpl {
-    ParticleMacroUV(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    ParticleMacroUV() {
     }
 }
 
 class ParticleMotionBlurFade: public MaterialExpressionImpl {
-    ParticleMotionBlurFade(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    ParticleMotionBlurFade() {
     }
 }
 
 class ParticlePositionWS: public MaterialExpressionImpl {
-    ParticlePositionWS(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    ParticlePositionWS() {
 
         self.origin_type = MaterialExpressionEditorPropertyImpl(self, 'origin_type', 'PositionOrigin')
     }
 }
 
 class ParticleRadius: public MaterialExpressionImpl {
-    ParticleRadius(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    ParticleRadius() {
     }
 }
 
 class ParticleRandom: public MaterialExpressionImpl {
-    ParticleRandom(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    ParticleRandom() {
     }
 }
 
 class ParticleRelativeTime: public MaterialExpressionImpl {
-    ParticleRelativeTime(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    ParticleRelativeTime() {
     }
 }
 
 class ParticleSize: public MaterialExpressionImpl {
-    ParticleSize(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    ParticleSize() {
     }
 }
 
 class ParticleSpeed: public MaterialExpressionImpl {
-    ParticleSpeed(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    ParticleSpeed() {
     }
 }
 
 class ParticleSpriteRotation: public MaterialExpressionImpl {
-    ParticleSpriteRotation(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    ParticleSpriteRotation() {
     }
 }
 
 class ParticleSubUV: public MaterialExpressionImpl {
-    ParticleSubUV(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    ParticleSubUV() {
 
         self.automatic_view_mip_bias = MaterialExpressionEditorPropertyImpl(self, 'automatic_view_mip_bias', 'bool')
         self.blend = MaterialExpressionEditorPropertyImpl(self, 'blend', 'bool')
@@ -1717,29 +1717,29 @@ class ParticleSubUV: public MaterialExpressionImpl {
 }
 
 class ParticleSubUVProperties: public MaterialExpressionImpl {
-    ParticleSubUVProperties(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    ParticleSubUVProperties() {
     }
 }
 
 class PathTracingBufferTexture: public MaterialExpressionImpl {
-    PathTracingBufferTexture(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    PathTracingBufferTexture() {
 
         self.path_tracing_buffer_texture_id = MaterialExpressionEditorPropertyImpl(self, 'path_tracing_buffer_texture_id', 'PathTracingBufferTextureId')
     }
 }
 
 class PathTracingQualitySwitch: public MaterialExpressionImpl {
-    PathTracingQualitySwitch(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    PathTracingQualitySwitch() {
     }
 }
 
 class PathTracingRayTypeSwitch: public MaterialExpressionImpl {
-    PathTracingRayTypeSwitch(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    PathTracingRayTypeSwitch() {
     }
 }
 
 class PerInstanceCustomData: public MaterialExpressionImpl {
-    PerInstanceCustomData(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    PerInstanceCustomData() {
 
         self.const_default_value = MaterialExpressionEditorPropertyImpl(self, 'const_default_value', 'float')
         self.data_index = MaterialExpressionEditorPropertyImpl(self, 'data_index', 'uint32')
@@ -1749,7 +1749,7 @@ class PerInstanceCustomData: public MaterialExpressionImpl {
 }
 
 class PerInstanceCustomData3Vector: public MaterialExpressionImpl {
-    PerInstanceCustomData3Vector(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    PerInstanceCustomData3Vector() {
 
         self.const_default_value = MaterialExpressionEditorPropertyImpl(self, 'const_default_value', 'LinearColor')
         self.data_index = MaterialExpressionEditorPropertyImpl(self, 'data_index', 'uint32')
@@ -1757,34 +1757,34 @@ class PerInstanceCustomData3Vector: public MaterialExpressionImpl {
 }
 
 class PerInstanceFadeAmount: public MaterialExpressionImpl {
-    PerInstanceFadeAmount(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    PerInstanceFadeAmount() {
     }
 }
 
 class PerInstanceRandom: public MaterialExpressionImpl {
-    PerInstanceRandom(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    PerInstanceRandom() {
     }
 }
 
 class PinBase: public MaterialExpressionImpl {
-    PinBase(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    PinBase() {
 
         self.reroute_pins = MaterialExpressionEditorPropertyImpl(self, 'reroute_pins', 'Array[CompositeReroute]')
     }
 }
 
 class PixelDepth: public MaterialExpressionImpl {
-    PixelDepth(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    PixelDepth() {
     }
 }
 
 class PixelNormalWS: public MaterialExpressionImpl {
-    PixelNormalWS(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    PixelNormalWS() {
     }
 }
 
 class Power: public MaterialExpressionImpl {
-    Power(None base = None, None exponent = None, NodePos node_pos = nullptr): base(None base = None, None exponent = None, NodePos node_pos = nullptr) {
+    Power(None base = None, None exponent = None)base, exponent {
 
         self.const_exponent = MaterialExpressionEditorPropertyImpl(self, 'const_exponent', 'float')
 
@@ -1800,27 +1800,27 @@ class Power: public MaterialExpressionImpl {
 }
 
 class PreSkinnedLocalBounds: public MaterialExpressionImpl {
-    PreSkinnedLocalBounds(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    PreSkinnedLocalBounds() {
     }
 }
 
 class PreSkinnedNormal: public MaterialExpressionImpl {
-    PreSkinnedNormal(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    PreSkinnedNormal() {
     }
 }
 
 class PreSkinnedPosition: public MaterialExpressionImpl {
-    PreSkinnedPosition(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    PreSkinnedPosition() {
     }
 }
 
 class PrecomputedAOMask: public MaterialExpressionImpl {
-    PrecomputedAOMask(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    PrecomputedAOMask() {
     }
 }
 
 class PreviousFrameSwitch: public MaterialExpressionImpl {
-    PreviousFrameSwitch(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    PreviousFrameSwitch() {
 
         self.currentFrame = InSocketImpl(self, 'CurrentFrame', 'StructProperty')
         self.previousFrame = InSocketImpl(self, 'PreviousFrame', 'StructProperty')
@@ -1828,7 +1828,7 @@ class PreviousFrameSwitch: public MaterialExpressionImpl {
 }
 
 class QualitySwitch: public MaterialExpressionImpl {
-    QualitySwitch(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    QualitySwitch() {
 
         self.default = InSocketImpl(self, 'Default', 'StructProperty')
         self.low = InSocketImpl(self, 'Low', 'StructProperty')
@@ -1839,7 +1839,7 @@ class QualitySwitch: public MaterialExpressionImpl {
 }
 
 class RayTracingQualitySwitch: public MaterialExpressionImpl {
-    RayTracingQualitySwitch(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    RayTracingQualitySwitch() {
 
         self.normal = InSocketImpl(self, 'Normal', 'StructProperty')
         self.rayTraced = InSocketImpl(self, 'RayTraced', 'StructProperty')
@@ -1847,7 +1847,7 @@ class RayTracingQualitySwitch: public MaterialExpressionImpl {
 }
 
 class ReflectionCapturePassSwitch: public MaterialExpressionImpl {
-    ReflectionCapturePassSwitch(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    ReflectionCapturePassSwitch() {
 
         self.default = InSocketImpl(self, 'Default', 'StructProperty')
         self.reflection = InSocketImpl(self, 'Reflection', 'StructProperty')
@@ -1855,7 +1855,7 @@ class ReflectionCapturePassSwitch: public MaterialExpressionImpl {
 }
 
 class ReflectionVectorWS: public MaterialExpressionImpl {
-    ReflectionVectorWS(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    ReflectionVectorWS() {
 
         self.normalize_custom_world_normal = MaterialExpressionEditorPropertyImpl(self, 'normalize_custom_world_normal', 'bool')
 
@@ -1864,22 +1864,22 @@ class ReflectionVectorWS: public MaterialExpressionImpl {
 }
 
 class Reroute: public MaterialExpressionImpl {
-    Reroute(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    Reroute() {
     }
 }
 
 class RerouteBase: public MaterialExpressionImpl {
-    RerouteBase(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    RerouteBase() {
     }
 }
 
 class RgbToHsv: public MaterialExpressionImpl {
-    RgbToHsv(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    RgbToHsv() {
     }
 }
 
 class RotateAboutAxis: public MaterialExpressionImpl {
-    RotateAboutAxis(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    RotateAboutAxis() {
 
         self.period = MaterialExpressionEditorPropertyImpl(self, 'period', 'float')
 
@@ -1891,7 +1891,7 @@ class RotateAboutAxis: public MaterialExpressionImpl {
 }
 
 class Rotator: public MaterialExpressionImpl {
-    Rotator(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    Rotator() {
 
         self.center_x = MaterialExpressionEditorPropertyImpl(self, 'center_x', 'float')
         self.center_y = MaterialExpressionEditorPropertyImpl(self, 'center_y', 'float')
@@ -1904,12 +1904,12 @@ class Rotator: public MaterialExpressionImpl {
 }
 
 class Round: public MaterialExpressionImpl {
-    Round(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    Round() {
     }
 }
 
 class RuntimeVirtualTextureOutput: public MaterialExpressionImpl {
-    RuntimeVirtualTextureOutput(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    RuntimeVirtualTextureOutput() {
 
         self.baseColor = InSocketImpl(self, 'BaseColor', 'StructProperty')
         self.specular = InSocketImpl(self, 'Specular', 'StructProperty')
@@ -1922,7 +1922,7 @@ class RuntimeVirtualTextureOutput: public MaterialExpressionImpl {
 }
 
 class RuntimeVirtualTextureReplace: public MaterialExpressionImpl {
-    RuntimeVirtualTextureReplace(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    RuntimeVirtualTextureReplace() {
 
         self.default = InSocketImpl(self, 'Default', 'StructProperty')
         self.virtualTextureOutput = InSocketImpl(self, 'VirtualTextureOutput', 'StructProperty')
@@ -1930,7 +1930,7 @@ class RuntimeVirtualTextureReplace: public MaterialExpressionImpl {
 }
 
 class RuntimeVirtualTextureSample: public MaterialExpressionImpl {
-    RuntimeVirtualTextureSample(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    RuntimeVirtualTextureSample() {
 
         self.adaptive = MaterialExpressionEditorPropertyImpl(self, 'adaptive', 'bool')
         self.enable_feedback = MaterialExpressionEditorPropertyImpl(self, 'enable_feedback', 'bool')
@@ -1947,7 +1947,7 @@ class RuntimeVirtualTextureSample: public MaterialExpressionImpl {
 }
 
 class RuntimeVirtualTextureSampleParameter: public MaterialExpressionImpl {
-    RuntimeVirtualTextureSampleParameter(None parameter_name = None, NodePos node_pos = nullptr): base(None parameter_name = None, NodePos node_pos = nullptr) {
+    RuntimeVirtualTextureSampleParameter(None parameter_name = None)parameter_name {
 
         self.adaptive = MaterialExpressionEditorPropertyImpl(self, 'adaptive', 'bool')
         self.enable_feedback = MaterialExpressionEditorPropertyImpl(self, 'enable_feedback', 'bool')
@@ -1970,7 +1970,7 @@ class RuntimeVirtualTextureSampleParameter: public MaterialExpressionImpl {
 }
 
 class SamplePhysicsIntegerField: public MaterialExpressionImpl {
-    SamplePhysicsIntegerField(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    SamplePhysicsIntegerField() {
 
         self.field_target = MaterialExpressionEditorPropertyImpl(self, 'field_target', 'FieldIntegerType')
 
@@ -1979,7 +1979,7 @@ class SamplePhysicsIntegerField: public MaterialExpressionImpl {
 }
 
 class SamplePhysicsScalarField: public MaterialExpressionImpl {
-    SamplePhysicsScalarField(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    SamplePhysicsScalarField() {
 
         self.field_target = MaterialExpressionEditorPropertyImpl(self, 'field_target', 'FieldScalarType')
 
@@ -1988,7 +1988,7 @@ class SamplePhysicsScalarField: public MaterialExpressionImpl {
 }
 
 class SamplePhysicsVectorField: public MaterialExpressionImpl {
-    SamplePhysicsVectorField(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    SamplePhysicsVectorField() {
 
         self.field_target = MaterialExpressionEditorPropertyImpl(self, 'field_target', 'FieldVectorType')
 
@@ -1997,7 +1997,7 @@ class SamplePhysicsVectorField: public MaterialExpressionImpl {
 }
 
 class Saturate: public MaterialExpressionImpl {
-    Saturate(None input = None, NodePos node_pos = nullptr): base(None input = None, NodePos node_pos = nullptr) {
+    Saturate(None input = None)input {
         if (input is not None( {
             self.input.comesFrom(input)
         }
@@ -2005,7 +2005,7 @@ class Saturate: public MaterialExpressionImpl {
 }
 
 class ScalarParameter: public MaterialExpressionImpl {
-    ScalarParameter(None parameter_name = None, None default_value = None, NodePos node_pos = nullptr): base(None parameter_name = None, None default_value = None, NodePos node_pos = nullptr) {
+    ScalarParameter(None parameter_name = None, None default_value = None)parameter_name, default_value {
 
         self.default_value = MaterialExpressionEditorPropertyImpl(self, 'default_value', 'float')
         self.group = MaterialExpressionEditorPropertyImpl(self, 'group', 'Name')
@@ -2025,7 +2025,7 @@ class ScalarParameter: public MaterialExpressionImpl {
 }
 
 class SceneColor: public MaterialExpressionImpl {
-    SceneColor(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    SceneColor() {
 
         self.const_input = MaterialExpressionEditorPropertyImpl(self, 'const_input', 'Vector2D')
         self.input_mode = MaterialExpressionEditorPropertyImpl(self, 'input_mode', 'MaterialSceneAttributeInputMode')
@@ -2036,7 +2036,7 @@ class SceneColor: public MaterialExpressionImpl {
 }
 
 class SceneDepth: public MaterialExpressionImpl {
-    SceneDepth(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    SceneDepth() {
 
         self.const_input = MaterialExpressionEditorPropertyImpl(self, 'const_input', 'Vector2D')
         self.input_mode = MaterialExpressionEditorPropertyImpl(self, 'input_mode', 'MaterialSceneAttributeInputMode')
@@ -2047,7 +2047,7 @@ class SceneDepth: public MaterialExpressionImpl {
 }
 
 class SceneDepthWithoutWater: public MaterialExpressionImpl {
-    SceneDepthWithoutWater(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    SceneDepthWithoutWater() {
 
         self.const_input = MaterialExpressionEditorPropertyImpl(self, 'const_input', 'Vector2D')
         self.fallback_depth = MaterialExpressionEditorPropertyImpl(self, 'fallback_depth', 'float')
@@ -2058,12 +2058,12 @@ class SceneDepthWithoutWater: public MaterialExpressionImpl {
 }
 
 class SceneTexelSize: public MaterialExpressionImpl {
-    SceneTexelSize(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    SceneTexelSize() {
     }
 }
 
 class SceneTexture: public MaterialExpressionImpl {
-    SceneTexture(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    SceneTexture() {
 
         self.filtered = MaterialExpressionEditorPropertyImpl(self, 'filtered', 'bool')
         self.scene_texture_id = MaterialExpressionEditorPropertyImpl(self, 'scene_texture_id', 'SceneTextureId')
@@ -2073,19 +2073,19 @@ class SceneTexture: public MaterialExpressionImpl {
 }
 
 class ScreenPosition: public MaterialExpressionImpl {
-    ScreenPosition(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    ScreenPosition() {
     }
 }
 
 class SetLocal: public MaterialExpressionImpl {
-    SetLocal(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    SetLocal() {
 
         self.local_name = MaterialExpressionEditorPropertyImpl(self, 'local_name', 'Name')
     }
 }
 
 class SetMaterialAttributes: public MaterialExpressionImpl {
-    SetMaterialAttributes(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    SetMaterialAttributes() {
 
         self.attribute_set_types = MaterialExpressionEditorPropertyImpl(self, 'attribute_set_types', 'Array[Guid]')
 
@@ -2122,7 +2122,7 @@ class SetMaterialAttributes: public MaterialExpressionImpl {
 }
 
 class ShaderStageSwitch: public MaterialExpressionImpl {
-    ShaderStageSwitch(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    ShaderStageSwitch() {
 
         self.pixelShader = InSocketImpl(self, 'PixelShader', 'StructProperty')
         self.vertexShader = InSocketImpl(self, 'VertexShader', 'StructProperty')
@@ -2130,14 +2130,14 @@ class ShaderStageSwitch: public MaterialExpressionImpl {
 }
 
 class ShadingModel: public MaterialExpressionImpl {
-    ShadingModel(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    ShadingModel() {
 
         self.shading_model = MaterialExpressionEditorPropertyImpl(self, 'shading_model', 'MaterialShadingModel')
     }
 }
 
 class ShadingPathSwitch: public MaterialExpressionImpl {
-    ShadingPathSwitch(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    ShadingPathSwitch() {
 
         self.default = InSocketImpl(self, 'Default', 'StructProperty')
         self.inputs = InSocketImpl(self, 'Inputs', 'StructProperty')
@@ -2145,7 +2145,7 @@ class ShadingPathSwitch: public MaterialExpressionImpl {
 }
 
 class ShadowReplace: public MaterialExpressionImpl {
-    ShadowReplace(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    ShadowReplace() {
 
         self.default = InSocketImpl(self, 'Default', 'StructProperty')
         self.shadow = InSocketImpl(self, 'Shadow', 'StructProperty')
@@ -2153,19 +2153,19 @@ class ShadowReplace: public MaterialExpressionImpl {
 }
 
 class Sign: public MaterialExpressionImpl {
-    Sign(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    Sign() {
     }
 }
 
 class Sine: public MaterialExpressionImpl {
-    Sine(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    Sine() {
 
         self.period = MaterialExpressionEditorPropertyImpl(self, 'period', 'float')
     }
 }
 
 class SingleLayerWaterMaterialOutput: public MaterialExpressionImpl {
-    SingleLayerWaterMaterialOutput(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    SingleLayerWaterMaterialOutput() {
 
         self.scatteringCoefficients = InSocketImpl(self, 'ScatteringCoefficients', 'StructProperty')
         self.absorptionCoefficients = InSocketImpl(self, 'AbsorptionCoefficients', 'StructProperty')
@@ -2175,33 +2175,33 @@ class SingleLayerWaterMaterialOutput: public MaterialExpressionImpl {
 }
 
 class SkyAtmosphereAerialPerspective: public MaterialExpressionImpl {
-    SkyAtmosphereAerialPerspective(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    SkyAtmosphereAerialPerspective() {
 
         self.worldPosition = InSocketImpl(self, 'WorldPosition', 'StructProperty')
     }
 }
 
 class SkyAtmosphereDistantLightScatteredLuminance: public MaterialExpressionImpl {
-    SkyAtmosphereDistantLightScatteredLuminance(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    SkyAtmosphereDistantLightScatteredLuminance() {
     }
 }
 
 class SkyAtmosphereLightDirection: public MaterialExpressionImpl {
-    SkyAtmosphereLightDirection(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    SkyAtmosphereLightDirection() {
 
         self.light_index = MaterialExpressionEditorPropertyImpl(self, 'light_index', 'int32')
     }
 }
 
 class SkyAtmosphereLightDiskLuminance: public MaterialExpressionImpl {
-    SkyAtmosphereLightDiskLuminance(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    SkyAtmosphereLightDiskLuminance() {
 
         self.light_index = MaterialExpressionEditorPropertyImpl(self, 'light_index', 'int32')
     }
 }
 
 class SkyAtmosphereLightIlluminance: public MaterialExpressionImpl {
-    SkyAtmosphereLightIlluminance(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    SkyAtmosphereLightIlluminance() {
 
         self.light_index = MaterialExpressionEditorPropertyImpl(self, 'light_index', 'int32')
 
@@ -2210,17 +2210,17 @@ class SkyAtmosphereLightIlluminance: public MaterialExpressionImpl {
 }
 
 class SkyAtmosphereViewLuminance: public MaterialExpressionImpl {
-    SkyAtmosphereViewLuminance(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    SkyAtmosphereViewLuminance() {
     }
 }
 
 class SkyLightEnvMapSample: public MaterialExpressionImpl {
-    SkyLightEnvMapSample(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    SkyLightEnvMapSample() {
     }
 }
 
 class SmoothStep: public MaterialExpressionImpl {
-    SmoothStep(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    SmoothStep() {
 
         self.const_max = MaterialExpressionEditorPropertyImpl(self, 'const_max', 'float')
         self.const_min = MaterialExpressionEditorPropertyImpl(self, 'const_min', 'float')
@@ -2233,7 +2233,7 @@ class SmoothStep: public MaterialExpressionImpl {
 }
 
 class Sobol: public MaterialExpressionImpl {
-    Sobol(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    Sobol() {
 
         self.const_index = MaterialExpressionEditorPropertyImpl(self, 'const_index', 'uint32')
         self.const_seed = MaterialExpressionEditorPropertyImpl(self, 'const_seed', 'Vector2D')
@@ -2246,21 +2246,21 @@ class Sobol: public MaterialExpressionImpl {
 }
 
 class SparseVolumeTextureBase: public MaterialExpressionImpl {
-    SparseVolumeTextureBase(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    SparseVolumeTextureBase() {
 
         self.sparse_volume_texture = MaterialExpressionEditorPropertyImpl(self, 'sparse_volume_texture', 'SparseVolumeTexture')
     }
 }
 
 class SparseVolumeTextureObject: public MaterialExpressionImpl {
-    SparseVolumeTextureObject(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    SparseVolumeTextureObject() {
 
         self.sparse_volume_texture = MaterialExpressionEditorPropertyImpl(self, 'sparse_volume_texture', 'SparseVolumeTexture')
     }
 }
 
 class SparseVolumeTextureObjectParameter: public MaterialExpressionImpl {
-    SparseVolumeTextureObjectParameter(None parameter_name = None, NodePos node_pos = nullptr): base(None parameter_name = None, NodePos node_pos = nullptr) {
+    SparseVolumeTextureObjectParameter(None parameter_name = None)parameter_name {
 
         self.group = MaterialExpressionEditorPropertyImpl(self, 'group', 'Name')
         self.parameter_name = MaterialExpressionEditorPropertyImpl(self, 'parameter_name', 'Name')
@@ -2273,7 +2273,7 @@ class SparseVolumeTextureObjectParameter: public MaterialExpressionImpl {
 }
 
 class SparseVolumeTextureSample: public MaterialExpressionImpl {
-    SparseVolumeTextureSample(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    SparseVolumeTextureSample() {
 
         self.sampler_source = MaterialExpressionEditorPropertyImpl(self, 'sampler_source', 'SamplerSourceMode')
         self.sparse_volume_texture = MaterialExpressionEditorPropertyImpl(self, 'sparse_volume_texture', 'SparseVolumeTexture')
@@ -2281,7 +2281,7 @@ class SparseVolumeTextureSample: public MaterialExpressionImpl {
 }
 
 class SparseVolumeTextureSampleParameter: public MaterialExpressionImpl {
-    SparseVolumeTextureSampleParameter(None parameter_name = None, NodePos node_pos = nullptr): base(None parameter_name = None, NodePos node_pos = nullptr) {
+    SparseVolumeTextureSampleParameter(None parameter_name = None)parameter_name {
 
         self.group = MaterialExpressionEditorPropertyImpl(self, 'group', 'Name')
         self.parameter_name = MaterialExpressionEditorPropertyImpl(self, 'parameter_name', 'Name')
@@ -2294,7 +2294,7 @@ class SparseVolumeTextureSampleParameter: public MaterialExpressionImpl {
 }
 
 class SpeedTree: public MaterialExpressionImpl {
-    SpeedTree(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    SpeedTree() {
 
         self.accurate_wind_velocities = MaterialExpressionEditorPropertyImpl(self, 'accurate_wind_velocities', 'bool')
         self.billboard_threshold = MaterialExpressionEditorPropertyImpl(self, 'billboard_threshold', 'float')
@@ -2310,7 +2310,7 @@ class SpeedTree: public MaterialExpressionImpl {
 }
 
 class SphereMask: public MaterialExpressionImpl {
-    SphereMask(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    SphereMask() {
 
         self.attenuation_radius = MaterialExpressionEditorPropertyImpl(self, 'attenuation_radius', 'float')
         self.hardness_percent = MaterialExpressionEditorPropertyImpl(self, 'hardness_percent', 'float')
@@ -2323,7 +2323,7 @@ class SphereMask: public MaterialExpressionImpl {
 }
 
 class SphericalParticleOpacity: public MaterialExpressionImpl {
-    SphericalParticleOpacity(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    SphericalParticleOpacity() {
 
         self.constant_density = MaterialExpressionEditorPropertyImpl(self, 'constant_density', 'float')
 
@@ -2332,7 +2332,7 @@ class SphericalParticleOpacity: public MaterialExpressionImpl {
 }
 
 class SpriteTextureSampler: public MaterialExpressionImpl {
-    SpriteTextureSampler(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    SpriteTextureSampler() {
 
         self.additional_slot_index = MaterialExpressionEditorPropertyImpl(self, 'additional_slot_index', 'int32')
         self.automatic_view_mip_bias = MaterialExpressionEditorPropertyImpl(self, 'automatic_view_mip_bias', 'bool')
@@ -2353,12 +2353,12 @@ class SpriteTextureSampler: public MaterialExpressionImpl {
 }
 
 class SquareRoot: public MaterialExpressionImpl {
-    SquareRoot(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    SquareRoot() {
     }
 }
 
 class StaticBool: public MaterialExpressionImpl {
-    StaticBool(None value = None, NodePos node_pos = nullptr): base(None value = None, NodePos node_pos = nullptr) {
+    StaticBool(None value = None)value {
 
         self.value = MaterialExpressionEditorPropertyImpl(self, 'Value', 'bool')
         if value is not None:
@@ -2367,7 +2367,7 @@ class StaticBool: public MaterialExpressionImpl {
 }
 
 class StaticBoolParameter: public MaterialExpressionImpl {
-    StaticBoolParameter(None parameter_name = None, None default_value = None, NodePos node_pos = nullptr): base(None parameter_name = None, None default_value = None, NodePos node_pos = nullptr) {
+    StaticBoolParameter(None parameter_name = None, None default_value = None)parameter_name, default_value {
 
         self.default_value = MaterialExpressionEditorPropertyImpl(self, 'default_value', 'bool')
         self.dynamic_branch = MaterialExpressionEditorPropertyImpl(self, 'dynamic_branch', 'bool')
@@ -2384,7 +2384,7 @@ class StaticBoolParameter: public MaterialExpressionImpl {
 }
 
 class StaticComponentMaskParameter: public MaterialExpressionImpl {
-    StaticComponentMaskParameter(None parameter_name = None, NodePos node_pos = nullptr): base(None parameter_name = None, NodePos node_pos = nullptr) {
+    StaticComponentMaskParameter(None parameter_name = None)parameter_name {
 
         self.default_a = MaterialExpressionEditorPropertyImpl(self, 'default_a', 'bool')
         self.default_b = MaterialExpressionEditorPropertyImpl(self, 'default_b', 'bool')
@@ -2401,7 +2401,7 @@ class StaticComponentMaskParameter: public MaterialExpressionImpl {
 }
 
 class StaticSwitch: public MaterialExpressionImpl {
-    StaticSwitch(None true = None, None false = None, None value = None, NodePos node_pos = nullptr): base(None true = None, None false = None, None value = None, NodePos node_pos = nullptr) {
+    StaticSwitch(None true = None, None false = None, None value = None)true, false, value {
 
         self.default_value = MaterialExpressionEditorPropertyImpl(self, 'default_value', 'bool')
 
@@ -2421,7 +2421,7 @@ class StaticSwitch: public MaterialExpressionImpl {
 }
 
 class StaticSwitchParameter: public MaterialExpressionImpl {
-    StaticSwitchParameter(None parameter_name = None, None default_value = None, NodePos node_pos = nullptr): base(None parameter_name = None, None default_value = None, NodePos node_pos = nullptr) {
+    StaticSwitchParameter(None parameter_name = None, None default_value = None)parameter_name, default_value {
 
         self.default_value = MaterialExpressionEditorPropertyImpl(self, 'default_value', 'bool')
         self.dynamic_branch = MaterialExpressionEditorPropertyImpl(self, 'dynamic_branch', 'bool')
@@ -2438,7 +2438,7 @@ class StaticSwitchParameter: public MaterialExpressionImpl {
 }
 
 class Step: public MaterialExpressionImpl {
-    Step(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    Step() {
 
         self.const_x = MaterialExpressionEditorPropertyImpl(self, 'const_x', 'float')
         self.const_y = MaterialExpressionEditorPropertyImpl(self, 'const_y', 'float')
@@ -2449,80 +2449,80 @@ class Step: public MaterialExpressionImpl {
 }
 
 class StrataAdd: public MaterialExpressionImpl {
-    StrataAdd(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    StrataAdd() {
 
         self.use_parameter_blending = MaterialExpressionEditorPropertyImpl(self, 'use_parameter_blending', 'bool')
     }
 }
 
 class StrataBSDF: public MaterialExpressionImpl {
-    StrataBSDF(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    StrataBSDF() {
     }
 }
 
 class StrataConvertToDecal: public MaterialExpressionImpl {
-    StrataConvertToDecal(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    StrataConvertToDecal() {
     }
 }
 
 class StrataEyeBSDF: public MaterialExpressionImpl {
-    StrataEyeBSDF(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    StrataEyeBSDF() {
 
         self.subsurface_profile = MaterialExpressionEditorPropertyImpl(self, 'subsurface_profile', 'SubsurfaceProfile')
     }
 }
 
 class StrataHairBSDF: public MaterialExpressionImpl {
-    StrataHairBSDF(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    StrataHairBSDF() {
     }
 }
 
 class StrataHazinessToSecondaryRoughness: public MaterialExpressionImpl {
-    StrataHazinessToSecondaryRoughness(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    StrataHazinessToSecondaryRoughness() {
     }
 }
 
 class StrataHorizontalMixing: public MaterialExpressionImpl {
-    StrataHorizontalMixing(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    StrataHorizontalMixing() {
 
         self.use_parameter_blending = MaterialExpressionEditorPropertyImpl(self, 'use_parameter_blending', 'bool')
     }
 }
 
 class StrataLegacyConversion: public MaterialExpressionImpl {
-    StrataLegacyConversion(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    StrataLegacyConversion() {
 
         self.subsurface_profile = MaterialExpressionEditorPropertyImpl(self, 'subsurface_profile', 'SubsurfaceProfile')
     }
 }
 
 class StrataLightFunction: public MaterialExpressionImpl {
-    StrataLightFunction(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    StrataLightFunction() {
     }
 }
 
 class StrataMetalnessToDiffuseAlbedoF0: public MaterialExpressionImpl {
-    StrataMetalnessToDiffuseAlbedoF0(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    StrataMetalnessToDiffuseAlbedoF0() {
     }
 }
 
 class StrataPostProcess: public MaterialExpressionImpl {
-    StrataPostProcess(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    StrataPostProcess() {
     }
 }
 
 class StrataSimpleClearCoatBSDF: public MaterialExpressionImpl {
-    StrataSimpleClearCoatBSDF(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    StrataSimpleClearCoatBSDF() {
     }
 }
 
 class StrataSingleLayerWaterBSDF: public MaterialExpressionImpl {
-    StrataSingleLayerWaterBSDF(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    StrataSingleLayerWaterBSDF() {
     }
 }
 
 class StrataSlabBSDF: public MaterialExpressionImpl {
-    StrataSlabBSDF(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    StrataSlabBSDF() {
 
         self.specular_profile = MaterialExpressionEditorPropertyImpl(self, 'specular_profile', 'SpecularProfile')
         self.subsurface_profile = MaterialExpressionEditorPropertyImpl(self, 'subsurface_profile', 'SubsurfaceProfile')
@@ -2531,54 +2531,54 @@ class StrataSlabBSDF: public MaterialExpressionImpl {
 }
 
 class StrataThinFilm: public MaterialExpressionImpl {
-    StrataThinFilm(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    StrataThinFilm() {
     }
 }
 
 class StrataTransmittanceToMFP: public MaterialExpressionImpl {
-    StrataTransmittanceToMFP(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    StrataTransmittanceToMFP() {
     }
 }
 
 class StrataUI: public MaterialExpressionImpl {
-    StrataUI(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    StrataUI() {
     }
 }
 
 class StrataUnlitBSDF: public MaterialExpressionImpl {
-    StrataUnlitBSDF(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    StrataUnlitBSDF() {
     }
 }
 
 class StrataUtilityBase: public MaterialExpressionImpl {
-    StrataUtilityBase(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    StrataUtilityBase() {
     }
 }
 
 class StrataVerticalLayering: public MaterialExpressionImpl {
-    StrataVerticalLayering(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    StrataVerticalLayering() {
 
         self.use_parameter_blending = MaterialExpressionEditorPropertyImpl(self, 'use_parameter_blending', 'bool')
     }
 }
 
 class StrataVolumetricFogCloudBSDF: public MaterialExpressionImpl {
-    StrataVolumetricFogCloudBSDF(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    StrataVolumetricFogCloudBSDF() {
     }
 }
 
 class StrataWeight: public MaterialExpressionImpl {
-    StrataWeight(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    StrataWeight() {
     }
 }
 
 class SubsurfaceMediumMaterialOutput: public MaterialExpressionImpl {
-    SubsurfaceMediumMaterialOutput(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    SubsurfaceMediumMaterialOutput() {
     }
 }
 
 class Subtract: public MaterialExpressionImpl {
-    Subtract(None a = None, None b = None, NodePos node_pos = nullptr): base(None a = None, None b = None, NodePos node_pos = nullptr) {
+    Subtract(None a = None, None b = None)a, b {
 
         self.const_a = MaterialExpressionEditorPropertyImpl(self, 'const_a', 'float')
         self.const_b = MaterialExpressionEditorPropertyImpl(self, 'const_b', 'float')
@@ -2603,7 +2603,7 @@ class Subtract: public MaterialExpressionImpl {
 }
 
 class Switch: public MaterialExpressionImpl {
-    Switch(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    Switch() {
 
         self.const_default = MaterialExpressionEditorPropertyImpl(self, 'const_default', 'float')
         self.const_switch_value = MaterialExpressionEditorPropertyImpl(self, 'const_switch_value', 'float')
@@ -2613,19 +2613,19 @@ class Switch: public MaterialExpressionImpl {
 }
 
 class Tangent: public MaterialExpressionImpl {
-    Tangent(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    Tangent() {
 
         self.period = MaterialExpressionEditorPropertyImpl(self, 'period', 'float')
     }
 }
 
 class TangentOutput: public MaterialExpressionImpl {
-    TangentOutput(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    TangentOutput() {
     }
 }
 
 class TemporalSobol: public MaterialExpressionImpl {
-    TemporalSobol(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    TemporalSobol() {
 
         self.const_index = MaterialExpressionEditorPropertyImpl(self, 'const_index', 'uint32')
         self.const_seed = MaterialExpressionEditorPropertyImpl(self, 'const_seed', 'Vector2D')
@@ -2637,7 +2637,7 @@ class TemporalSobol: public MaterialExpressionImpl {
 }
 
 class TextureBase: public MaterialExpressionImpl {
-    TextureBase(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    TextureBase() {
 
         self.is_default_meshpaint_texture = MaterialExpressionEditorPropertyImpl(self, 'is_default_meshpaint_texture', 'bool')
         self.sampler_type = MaterialExpressionEditorPropertyImpl(self, 'sampler_type', 'MaterialSamplerType')
@@ -2646,7 +2646,7 @@ class TextureBase: public MaterialExpressionImpl {
 }
 
 class TextureCoordinate: public MaterialExpressionImpl {
-    TextureCoordinate(None u_tiling = None, None v_tiling = None, NodePos node_pos = nullptr): base(None u_tiling = None, None v_tiling = None, NodePos node_pos = nullptr) {
+    TextureCoordinate(None u_tiling = None, None v_tiling = None)u_tiling, v_tiling {
 
         self.coordinate_index = MaterialExpressionEditorPropertyImpl(self, 'coordinate_index', 'int32')
         self.u_tiling = MaterialExpressionEditorPropertyImpl(self, 'u_tiling', 'float')
@@ -2661,7 +2661,7 @@ class TextureCoordinate: public MaterialExpressionImpl {
 }
 
 class TextureObject: public MaterialExpressionImpl {
-    TextureObject(None sampler_type = None, None texture = None, NodePos node_pos = nullptr): base(None sampler_type = None, None texture = None, NodePos node_pos = nullptr) {
+    TextureObject(None sampler_type = None, None texture = None)sampler_type, texture {
 
         self.is_default_meshpaint_texture = MaterialExpressionEditorPropertyImpl(self, 'is_default_meshpaint_texture', 'bool')
         self.sampler_type = MaterialExpressionEditorPropertyImpl(self, 'sampler_type', 'MaterialSamplerType')
@@ -2674,7 +2674,7 @@ class TextureObject: public MaterialExpressionImpl {
 }
 
 class TextureObjectParameter: public MaterialExpressionImpl {
-    TextureObjectParameter(None parameter_name = None, NodePos node_pos = nullptr): base(None parameter_name = None, NodePos node_pos = nullptr) {
+    TextureObjectParameter(None parameter_name = None)parameter_name {
 
         self.automatic_view_mip_bias = MaterialExpressionEditorPropertyImpl(self, 'automatic_view_mip_bias', 'bool')
         self.channel_names = MaterialExpressionEditorPropertyImpl(self, 'channel_names', 'ParameterChannelNames')
@@ -2697,7 +2697,7 @@ class TextureObjectParameter: public MaterialExpressionImpl {
 }
 
 class TextureProperty: public MaterialExpressionImpl {
-    TextureProperty(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    TextureProperty() {
 
         self.property_ = MaterialExpressionEditorPropertyImpl(self, 'property_', 'MaterialExposedTextureProperty')
 
@@ -2706,7 +2706,7 @@ class TextureProperty: public MaterialExpressionImpl {
 }
 
 class TextureSample: public MaterialExpressionImpl {
-    TextureSample(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    TextureSample() {
 
         self.automatic_view_mip_bias = MaterialExpressionEditorPropertyImpl(self, 'automatic_view_mip_bias', 'bool')
         self.const_coordinate = MaterialExpressionEditorPropertyImpl(self, 'const_coordinate', 'uint8')
@@ -2731,7 +2731,7 @@ class TextureSample: public MaterialExpressionImpl {
 }
 
 class TextureSampleParameter: public MaterialExpressionImpl {
-    TextureSampleParameter(None parameter_name = None, NodePos node_pos = nullptr): base(None parameter_name = None, NodePos node_pos = nullptr) {
+    TextureSampleParameter(None parameter_name = None)parameter_name {
 
         self.automatic_view_mip_bias = MaterialExpressionEditorPropertyImpl(self, 'automatic_view_mip_bias', 'bool')
         self.channel_names = MaterialExpressionEditorPropertyImpl(self, 'channel_names', 'ParameterChannelNames')
@@ -2754,7 +2754,7 @@ class TextureSampleParameter: public MaterialExpressionImpl {
 }
 
 class TextureSampleParameter2D: public MaterialExpressionImpl {
-    TextureSampleParameter2D(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    TextureSampleParameter2D() {
 
         self.automatic_view_mip_bias = MaterialExpressionEditorPropertyImpl(self, 'automatic_view_mip_bias', 'bool')
         self.channel_names = MaterialExpressionEditorPropertyImpl(self, 'channel_names', 'ParameterChannelNames')
@@ -2775,7 +2775,7 @@ class TextureSampleParameter2D: public MaterialExpressionImpl {
 }
 
 class TextureSampleParameter2DArray: public MaterialExpressionImpl {
-    TextureSampleParameter2DArray(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    TextureSampleParameter2DArray() {
 
         self.automatic_view_mip_bias = MaterialExpressionEditorPropertyImpl(self, 'automatic_view_mip_bias', 'bool')
         self.channel_names = MaterialExpressionEditorPropertyImpl(self, 'channel_names', 'ParameterChannelNames')
@@ -2796,7 +2796,7 @@ class TextureSampleParameter2DArray: public MaterialExpressionImpl {
 }
 
 class TextureSampleParameterCube: public MaterialExpressionImpl {
-    TextureSampleParameterCube(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    TextureSampleParameterCube() {
 
         self.automatic_view_mip_bias = MaterialExpressionEditorPropertyImpl(self, 'automatic_view_mip_bias', 'bool')
         self.channel_names = MaterialExpressionEditorPropertyImpl(self, 'channel_names', 'ParameterChannelNames')
@@ -2817,7 +2817,7 @@ class TextureSampleParameterCube: public MaterialExpressionImpl {
 }
 
 class TextureSampleParameterCubeArray: public MaterialExpressionImpl {
-    TextureSampleParameterCubeArray(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    TextureSampleParameterCubeArray() {
 
         self.automatic_view_mip_bias = MaterialExpressionEditorPropertyImpl(self, 'automatic_view_mip_bias', 'bool')
         self.channel_names = MaterialExpressionEditorPropertyImpl(self, 'channel_names', 'ParameterChannelNames')
@@ -2835,7 +2835,7 @@ class TextureSampleParameterCubeArray: public MaterialExpressionImpl {
 }
 
 class TextureSampleParameterSubUV: public MaterialExpressionImpl {
-    TextureSampleParameterSubUV(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    TextureSampleParameterSubUV() {
 
         self.automatic_view_mip_bias = MaterialExpressionEditorPropertyImpl(self, 'automatic_view_mip_bias', 'bool')
         self.blend = MaterialExpressionEditorPropertyImpl(self, 'blend', 'bool')
@@ -2857,7 +2857,7 @@ class TextureSampleParameterSubUV: public MaterialExpressionImpl {
 }
 
 class TextureSampleParameterVolume: public MaterialExpressionImpl {
-    TextureSampleParameterVolume(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    TextureSampleParameterVolume() {
 
         self.automatic_view_mip_bias = MaterialExpressionEditorPropertyImpl(self, 'automatic_view_mip_bias', 'bool')
         self.channel_names = MaterialExpressionEditorPropertyImpl(self, 'channel_names', 'ParameterChannelNames')
@@ -2878,14 +2878,14 @@ class TextureSampleParameterVolume: public MaterialExpressionImpl {
 }
 
 class ThinTranslucentMaterialOutput: public MaterialExpressionImpl {
-    ThinTranslucentMaterialOutput(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    ThinTranslucentMaterialOutput() {
 
         self.transmittanceColor = InSocketImpl(self, 'TransmittanceColor', 'StructProperty')
     }
 }
 
 class Time: public MaterialExpressionImpl {
-    Time(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    Time() {
 
         self.ignore_pause = MaterialExpressionEditorPropertyImpl(self, 'ignore_pause', 'bool')
         self.override_period = MaterialExpressionEditorPropertyImpl(self, 'override_period', 'bool')
@@ -2894,7 +2894,7 @@ class Time: public MaterialExpressionImpl {
 }
 
 class Transform: public MaterialExpressionImpl {
-    Transform(None input = None, NodePos node_pos = nullptr): base(None input = None, NodePos node_pos = nullptr) {
+    Transform(None input = None)input {
 
         self.transform_source_type = MaterialExpressionEditorPropertyImpl(self, 'transform_source_type', 'MaterialVectorCoordTransformSource')
         self.transform_type = MaterialExpressionEditorPropertyImpl(self, 'transform_type', 'MaterialVectorCoordTransform')
@@ -2905,7 +2905,7 @@ class Transform: public MaterialExpressionImpl {
 }
 
 class TransformPosition: public MaterialExpressionImpl {
-    TransformPosition(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    TransformPosition() {
 
         self.transform_source_type = MaterialExpressionEditorPropertyImpl(self, 'transform_source_type', 'MaterialPositionTransformSource')
         self.transform_type = MaterialExpressionEditorPropertyImpl(self, 'transform_type', 'MaterialPositionTransformSource')
@@ -2913,22 +2913,22 @@ class TransformPosition: public MaterialExpressionImpl {
 }
 
 class Truncate: public MaterialExpressionImpl {
-    Truncate(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    Truncate() {
     }
 }
 
 class TruncateLWC: public MaterialExpressionImpl {
-    TruncateLWC(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    TruncateLWC() {
     }
 }
 
 class TwoSidedSign: public MaterialExpressionImpl {
-    TwoSidedSign(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    TwoSidedSign() {
     }
 }
 
 class VectorNoise: public MaterialExpressionImpl {
-    VectorNoise(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    VectorNoise() {
 
         self.noise_function = MaterialExpressionEditorPropertyImpl(self, 'noise_function', 'VectorNoiseFunction')
         self.quality = MaterialExpressionEditorPropertyImpl(self, 'quality', 'int32')
@@ -2940,7 +2940,7 @@ class VectorNoise: public MaterialExpressionImpl {
 }
 
 class VectorParameter: public MaterialExpressionImpl {
-    VectorParameter(None parameter_name = None, None default_value = None, NodePos node_pos = nullptr): base(None parameter_name = None, None default_value = None, NodePos node_pos = nullptr) {
+    VectorParameter(None parameter_name = None, None default_value = None)parameter_name, default_value {
 
         self.channel_names = MaterialExpressionEditorPropertyImpl(self, 'channel_names', 'ParameterChannelNames')
         self.default_value = MaterialExpressionEditorPropertyImpl(self, 'default_value', 'LinearColor')
@@ -2965,39 +2965,39 @@ class VectorParameter: public MaterialExpressionImpl {
 }
 
 class VertexColor: public MaterialExpressionImpl {
-    VertexColor(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    VertexColor() {
     }
 }
 
 class VertexInterpolator: public MaterialExpressionImpl {
-    VertexInterpolator(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    VertexInterpolator() {
     }
 }
 
 class VertexNormalWS: public MaterialExpressionImpl {
-    VertexNormalWS(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    VertexNormalWS() {
     }
 }
 
 class VertexTangentWS: public MaterialExpressionImpl {
-    VertexTangentWS(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    VertexTangentWS() {
     }
 }
 
 class ViewProperty: public MaterialExpressionImpl {
-    ViewProperty(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    ViewProperty() {
 
         self.property_ = MaterialExpressionEditorPropertyImpl(self, 'property_', 'MaterialExposedViewProperty')
     }
 }
 
 class ViewSize: public MaterialExpressionImpl {
-    ViewSize(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    ViewSize() {
     }
 }
 
 class VirtualTextureFeatureSwitch: public MaterialExpressionImpl {
-    VirtualTextureFeatureSwitch(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    VirtualTextureFeatureSwitch() {
 
         self.no = InSocketImpl(self, 'No', 'StructProperty')
         self.yes = InSocketImpl(self, 'Yes', 'StructProperty')
@@ -3005,12 +3005,12 @@ class VirtualTextureFeatureSwitch: public MaterialExpressionImpl {
 }
 
 class VolumetricAdvancedMaterialInput: public MaterialExpressionImpl {
-    VolumetricAdvancedMaterialInput(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    VolumetricAdvancedMaterialInput() {
     }
 }
 
 class VolumetricAdvancedMaterialOutput: public MaterialExpressionImpl {
-    VolumetricAdvancedMaterialOutput(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    VolumetricAdvancedMaterialOutput() {
 
         self.clamp_multi_scattering_contribution = MaterialExpressionEditorPropertyImpl(self, 'clamp_multi_scattering_contribution', 'bool')
         self.const_multi_scattering_contribution = MaterialExpressionEditorPropertyImpl(self, 'const_multi_scattering_contribution', 'float')
@@ -3036,22 +3036,22 @@ class VolumetricAdvancedMaterialOutput: public MaterialExpressionImpl {
 }
 
 class VolumetricCloudEmptySpaceSkippingInput: public MaterialExpressionImpl {
-    VolumetricCloudEmptySpaceSkippingInput(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    VolumetricCloudEmptySpaceSkippingInput() {
     }
 }
 
 class VolumetricCloudEmptySpaceSkippingOutput: public MaterialExpressionImpl {
-    VolumetricCloudEmptySpaceSkippingOutput(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    VolumetricCloudEmptySpaceSkippingOutput() {
     }
 }
 
 class WhileLoop: public MaterialExpressionImpl {
-    WhileLoop(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    WhileLoop() {
     }
 }
 
 class WorldPosition: public MaterialExpressionImpl {
-    WorldPosition(NodePos node_pos = nullptr): base(NodePos node_pos = nullptr) {
+    WorldPosition() {
 
         self.world_position_shader_offset = MaterialExpressionEditorPropertyImpl(self, 'world_position_shader_offset', 'WorldPositionIncludedOffsets')
     }

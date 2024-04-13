@@ -23,28 +23,19 @@ class CppCodeGenerator(CodeGeneratorBase):
             self.append_line(f"class {class_name}: public {base_class_name}{self.block_opener}")
         self.indent()
     
-    def begin_method(self, method_name, method_args = [], return_type = None) -> None:
+    def begin_method(self, method_name, parameters: MethodParams = NO_PARAMS, return_type = None) -> None:
         if return_type is None:
             return_type = "void "
 
-        self.append_line(f"{return_type}{method_name}({', '.join(method_args)}){self.block_opener}")
+        self.append_line(f"{return_type}{method_name}({self.get_declaration_code(parameters)}){self.block_opener}")
         self.indent()
 
-    def begin_static_method(self, method_name, method_args = [], return_type = None) -> None:
-        self.append_line(f"static {return_type} {method_name}({', '.join(method_args)}){self.block_opener}")
+    def begin_static_method(self, method_name, parameters: MethodParams = NO_PARAMS, return_type = None) -> None:
+        self.append_line(f"static {return_type} {method_name}({', '.join(parameters)}){self.block_opener}")
         self.indent()
 
-    def get_initializers(self, class_name, ctor_args = []) -> None:
-        result = ": base("
-        
-        if len(ctor_args) != 0:
-            result += ', '.join(ctor_args)
-
-        result += ')'
-        return result
-    
-    def begin_ctor(self, class_name, ctor_args = []) -> None:
-        self.append_line(f"{class_name}({', '.join(ctor_args)}){self.get_initializers(class_name, ctor_args)}{self.block_opener}")
+    def begin_ctor(self, class_name, parameters: MethodParams = NO_PARAMS) -> None:
+        self.append_line(f"{class_name}({parameters.get_declaration_code(self)}){parameters.get_initializer_code(self, class_name)}{self.block_opener}")
         self.indent()
 
 
@@ -62,7 +53,7 @@ class CppCodeGenerator(CodeGeneratorBase):
         self.append_line(f"else{self.block_opener}")
         self.indent()
 
-    def get_parameter_code(self, mp: MethodParam) -> str:
+    def get_declaration_code(self, mp: MethodParam) -> str:
         result = f"{mp.type} {mp.name}"
 
         if mp.default_value is None:
@@ -76,6 +67,9 @@ class CppCodeGenerator(CodeGeneratorBase):
             result += mp.default_value
 
         return result
+    
+    def get_initializer_code(self, mp: MethodParam) -> str:
+        return mp.name
     
     # def append_base_ctor_call(self, base_class_name, params):
     #     codeGen.append_line(f"{base_class_name}({params})")

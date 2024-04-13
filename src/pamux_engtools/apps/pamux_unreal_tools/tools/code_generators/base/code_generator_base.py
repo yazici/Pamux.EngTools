@@ -76,3 +76,9 @@ class CodeGeneratorBase:
 
     def append_base_ctor_call(self, base_class_name, params):
         pass
+
+    def get_declaration_code(self, mp: MethodParam) -> str:
+        return ""
+
+    def get_initializer_code(self, class_name, parameters: MethodParams = NO_PARAMS) -> str:
+        return ""

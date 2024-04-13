@@ -85,6 +85,8 @@ def generate_pamux_wrapper_classes():
     codeGen.append_import_from("pamux_unreal_tools.impl.out_socket_impl", "OutSocketImpl")
     codeGen.append_import_from("pamux_unreal_tools.utils.node_pos", "NodePos")
 
+    codeGen.append_include("Materials/MaterialExpressionBreakMaterialAttributes.h")
+    
     codeGen.append_include("MaterialExpressionImpl.h")
     codeGen.append_include("MaterialExpressionEditorPropertyImpl.h")
     codeGen.append_include("InSocketImpl.h")

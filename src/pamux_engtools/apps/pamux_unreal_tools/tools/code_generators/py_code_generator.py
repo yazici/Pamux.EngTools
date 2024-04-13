@@ -12,6 +12,7 @@ class PyCodeGenerator(CodeGeneratorBase):
         self.inline_comment_marker = "# "
         self.required_initial_parameters = [ "self" ]
         self.selfref = "self."
+        self.ctor_method_name = "__init__"
 
     def append_import(self, package_name) -> None:
         self.append_line(f"import {package_name}")
@@ -25,19 +26,6 @@ class PyCodeGenerator(CodeGeneratorBase):
         else:
             self.append_line(f"class {class_name}({base_class_name}):")
         self.indent()
-    
-    def begin_method(self, method_name, parameters: MethodParams = NO_PARAMS, return_type = None) -> None:
-        if return_type is None:
-            return_type = "None"
-        self.append_line(f"def {method_name}({self.get_declaration_code(parameters)}) -> {return_type}:")
-        self.indent()
-
-    def begin_static_method(self, method_name, parameters: MethodParams = NO_PARAMS, return_type = None) -> None:
-        self.append_line("@staticmethod")
-        self.begin_method(method_name, parameters, return_type)
-
-    def begin_ctor(self, class_name, parameters: MethodParams = NO_PARAMS) -> None:
-        self.begin_method("__init__", parameters)
 
     def begin_if(self, condition) -> None:
         self.append_line(f"if {condition}:")
@@ -56,7 +44,7 @@ class PyCodeGenerator(CodeGeneratorBase):
     def append_pass(self):
         self.append_line("pass")
 
-    def get_declaration_code(self, mp: MethodParam) -> str:
+    def get_for_method_declaration(self, mp: MethodParam) -> str:
         result = mp.name
 
         if mp.type is not None:
@@ -79,3 +67,24 @@ class PyCodeGenerator(CodeGeneratorBase):
     
     def append_base_ctor_call(self, base_class_name, params):
         self.append_line(f"super().__init__({params})")
+
+#Below implementation
+
+    def begin_method_impl(self, isStatic: bool, method_name: str, parameters: MethodParams, return_type: str) -> None:
+        if return_type == "void":
+            return_type = "None"
+        elif return_type == "CTOR":
+            return_type = "None"
+        elif return_type == None:
+            return_type = ""
+        else:
+            return_type = return_type.strip()
+        
+        if return_type != "":
+            return_type = f" -> {return_type}"
+
+        if isStatic:
+            self.append_line("@staticmethod")
+
+        self.append_line(self.get_method_signature("def ", method_name, parameters, f"{return_type}{self.block_opener}"))
+        self.indent()

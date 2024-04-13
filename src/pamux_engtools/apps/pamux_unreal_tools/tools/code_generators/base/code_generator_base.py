@@ -13,7 +13,11 @@ class CodeGeneratorBase:
         self.condition_closer = None
 
         self.inline_comment_marker = "// "
+
         self.required_initial_parameters = [ ]
+        self.null_name = None
+        self.selfref = None
+        self.ctor_method_name = None
 
     def write(self, file_path) -> None:
         with open(file_path, "w+t") as py_file:
@@ -82,3 +86,23 @@ class CodeGeneratorBase:
 
     def get_initializer_code(self, class_name, parameters: MethodParams = NO_PARAMS) -> str:
         return ""
+    
+    def get_method_signature(self, before_method_name, method_name, parameters: MethodParams, after_param_list) -> str: 
+        return f"{before_method_name}{method_name}({parameters.get_list_for_method_declaration(self)}){after_param_list}"
+    
+    def begin_method(self, method_name: str, parameters: MethodParams = NO_PARAMS, return_type: str = None) -> None:
+        self.begin_method_impl(False, method_name, parameters, return_type)
+
+    def begin_static_method(self, method_name: str, parameters: MethodParams = NO_PARAMS, return_type: str = None) -> None:
+        self.begin_method_impl(True, method_name, parameters, return_type)
+
+    def begin_ctor(self, class_name, parameters: MethodParams = NO_PARAMS) -> None:
+        if self.ctor_method_name == "CLASS_NAME":
+            method_name = class_name
+        else:
+            method_name = self.ctor_method_name
+
+        self.begin_method(method_name, parameters, "CTOR")
+
+    def begin_method_impl(self, isStatic: bool, method_name: str, parameters: MethodParams, return_type: str) -> None:
+        pass

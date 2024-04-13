@@ -1,10 +1,9 @@
-from pamux_unreal_tools.tools.py_code_generator.method_params import *
+from pamux_engtools.apps.pamux_unreal_tools.tools.code_generators.base.method_params import *
+from pamux_engtools.apps.pamux_unreal_tools.tools.code_generators.base.code_generator_base import *
 
-class PyCodeGenerator:
+class PyCodeGenerator(CodeGeneratorBase):
     def __init__(self) -> None:
-        self.lines = []
-        self.indentation = 0
-        self.indentation_amount = 4
+        super().__init__()
 
     def write(self, file_path) -> None:
         with open(file_path, "w+t") as py_file:

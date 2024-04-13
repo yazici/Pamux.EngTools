@@ -1,5 +1,5 @@
-from pamux_unreal_tools.tools.material_expression_wrapper_generator.values import *
-from pamux_unreal_tools.tools.material_expression_wrapper_generator.globals import *
+from pamux_unreal_tools.tools.code_generators.material_expression_wrapper_generator.values import *
+from pamux_unreal_tools.tools.code_generators.material_expression_wrapper_generator.globals import *
 
 def setup_properties(pamux_wrapper_class_name, doc):
     result = Values()

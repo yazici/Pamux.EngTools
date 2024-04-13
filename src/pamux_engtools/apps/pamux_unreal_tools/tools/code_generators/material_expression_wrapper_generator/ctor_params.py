@@ -1,89 +1,89 @@
-from pamux_unreal_tools.tools.py_code_generator.main import *
-from pamux_unreal_tools.tools.py_code_generator.method_params import *
+from pamux_engtools.apps.pamux_unreal_tools.tools.code_generators.py_code_generator import *
+from pamux_engtools.apps.pamux_unreal_tools.tools.code_generators.base.method_params import *
 
-from pamux_unreal_tools.tools.material_expression_wrapper_generator.globals import *
+from pamux_unreal_tools.tools.code_generators.material_expression_wrapper_generator.globals import *
 
 class PropertyParam(MethodParam):
     def __init__(self, name: str, type: str = None, default_value: str = "None"):
         super().__init__(name, type, default_value)
 
-    def append_assignment_lines(self, pyGen: PyCodeGenerator):
-        pyGen.append_line(f"if {self.name} is not None:")
-        pyGen.indent()
-        pyGen.append_line(f"self.{self.name}.set({self.name})")
-        pyGen.unindent()
+    def append_assignment_lines(self, codeGen: PyCodeGenerator):
+        codeGen.append_line(f"if {self.name} is not None:")
+        codeGen.indent()
+        codeGen.append_line(f"self.{self.name}.set({self.name})")
+        codeGen.unindent()
 
 class InputParam(MethodParam):
     def __init__(self, name: str, type: str = None, default_value: str = "None"):
         super().__init__(name, type, default_value)
 
-    def append_assignment_lines(self, pyGen: PyCodeGenerator):
-        pyGen.begin_if(f"{self.name} is not None")
-        pyGen.append_line(f"self.{self.name}.comesFrom({self.name})")
-        pyGen.end_if()
+    def append_assignment_lines(self, codeGen: PyCodeGenerator):
+        codeGen.begin_if(f"{self.name} is not None")
+        codeGen.append_line(f"self.{self.name}.comesFrom({self.name})")
+        codeGen.end_if()
 
 class ShouldAddRTParams(MethodParam):
     def __init__(self):
         super().__init__("shouldAddRTParams", "bool", "False")
 
-    def append_assignment_lines(self, pyGen: PyCodeGenerator):
-        pyGen.begin_if(f"shouldAddRTParams")
-        func = lambda item: pyGen.append_line(f"self.{item}.add_rt()")
+    def append_assignment_lines(self, codeGen: PyCodeGenerator):
+        codeGen.begin_if(f"shouldAddRTParams")
+        func = lambda item: codeGen.append_line(f"self.{item}.add_rt()")
         MaterialAttributeFields.for_each(func, True,  ["Displacement"], "")
-        pyGen.end_if()
+        codeGen.end_if()
 
 class MakeMaterialAttributesParam(MethodParam):
     def __init__(self):
         super().__init__("materialAttributes", "BreakMaterialAttributes", "None")
 
-    def append_assignment_lines(self, pyGen: PyCodeGenerator):
-        pyGen.append_blank_line()
-        pyGen.append_line(f"if {self.name} is not None:")
-        pyGen.indent()
-        func = lambda item: pyGen.append_line(f"self.{item}.comesFrom(materialAttributes.{item})")
+    def append_assignment_lines(self, codeGen: PyCodeGenerator):
+        codeGen.append_blank_line()
+        codeGen.append_line(f"if {self.name} is not None:")
+        codeGen.indent()
+        func = lambda item: codeGen.append_line(f"self.{item}.comesFrom(materialAttributes.{item})")
         MaterialAttributeFields.for_each(func, True,  ["Displacement"], None)
-        pyGen.unindent()
+        codeGen.unindent()
 
 class RerouteInputParam(MethodParam):
     def __init__(self, name: str, type: str = None, default_value: str = "None"):
         super().__init__(name, type, default_value)
 
-    def append_assignment_lines(self, pyGen: PyCodeGenerator):
-        pyGen.begin_if(f"{self.name} is not None")
-        pyGen.append_line(f"self.{self.name}.comesFrom({self.name})")
-        pyGen.append_line(f"{self.name}.rt = self")
-        pyGen.end_if()
+    def append_assignment_lines(self, codeGen: PyCodeGenerator):
+        codeGen.begin_if(f"{self.name} is not None")
+        codeGen.append_line(f"self.{self.name}.comesFrom({self.name})")
+        codeGen.append_line(f"{self.name}.rt = self")
+        codeGen.end_if()
 
 class InputParamWithConstProperty(MethodParam):
     def __init__(self, name: str):
         super().__init__(name, None, "None")
 
-    def append_assignment_lines(self, pyGen: PyCodeGenerator):
-        pyGen.begin_if(f"{self.name} is not None")
-        pyGen.begin_if(f"isinstance({self.name}, float)")
-        pyGen.append_line(f"self.const_{self.name}.set({self.name})")
-        pyGen.begin_else()
-        pyGen.append_line(f"self.{self.name}.comesFrom({self.name})")
-        pyGen.end_if()
-        pyGen.end_if()
+    def append_assignment_lines(self, codeGen: PyCodeGenerator):
+        codeGen.begin_if(f"{self.name} is not None")
+        codeGen.begin_if(f"isinstance({self.name}, float)")
+        codeGen.append_line(f"self.const_{self.name}.set({self.name})")
+        codeGen.begin_else()
+        codeGen.append_line(f"self.{self.name}.comesFrom({self.name})")
+        codeGen.end_if()
+        codeGen.end_if()
         
 class RGBAMaskParam(MethodParam):
     def __init__(self):
         super().__init__("rgbaMask", "str", "None")
 
-    def append_assignment_lines(self, pyGen: PyCodeGenerator):
-        pyGen.begin_if(f"{self.name} is not None")
-        pyGen.append_line(f"__mask = {self.name}.lower()")
-        pyGen.append_line(f"self.r.set('r' in __mask)")
-        pyGen.append_line(f"self.g.set('g' in __mask)")
-        pyGen.append_line(f"self.b.set('b' in __mask)")
-        pyGen.append_line(f"self.a.set('a' in __mask)")
-        pyGen.begin_else()
-        pyGen.append_line(f"self.r.set(True)")
-        pyGen.append_line(f"self.g.set(True)")
-        pyGen.append_line(f"self.b.set(False)")
-        pyGen.append_line(f"self.a.set(False)")
-        pyGen.end_if()
+    def append_assignment_lines(self, codeGen: PyCodeGenerator):
+        codeGen.begin_if(f"{self.name} is not None")
+        codeGen.append_line(f"__mask = {self.name}.lower()")
+        codeGen.append_line(f"self.r.set('r' in __mask)")
+        codeGen.append_line(f"self.g.set('g' in __mask)")
+        codeGen.append_line(f"self.b.set('b' in __mask)")
+        codeGen.append_line(f"self.a.set('a' in __mask)")
+        codeGen.begin_else()
+        codeGen.append_line(f"self.r.set(True)")
+        codeGen.append_line(f"self.g.set(True)")
+        codeGen.append_line(f"self.b.set(False)")
+        codeGen.append_line(f"self.a.set(False)")
+        codeGen.end_if()
 
 class CTORParams:
     def __init__(self) -> None:
@@ -101,9 +101,9 @@ class CTORParams:
         codes.append("node_pos: NodePos = None")
         return codes
                          
-    def append_assignment_lines(self, pyGen: PyCodeGenerator):
+    def append_assignment_lines(self, codeGen: PyCodeGenerator):
         for param in self.params:
-            param.append_assignment_lines(pyGen)
+            param.append_assignment_lines(codeGen)
 
 
 def setup_ctor_params(pamux_wrapper_class_name):

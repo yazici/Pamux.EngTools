@@ -23,8 +23,8 @@ import inspect
 from pamux_unreal_tools.examples.M_Landscape_Master.interfaces.IBlendTwoMaterialsViaHighOpacityMap import IBlendTwoMaterialsViaHighOpacityMap
 from pamux_unreal_tools.examples.M_Landscape_Master.interfaces.IForestGround import IForestGround
 
-from pamux_unreal_tools.tools.py_code_generator.main import *
-from pamux_unreal_tools.tools.py_code_generator.method_params import *
+from pamux_engtools.apps.pamux_unreal_tools.tools.code_generators.py_code_generator import *
+from pamux_engtools.apps.pamux_unreal_tools.tools.code_generators.base.method_params import *
 from pamux_unreal_tools.utils.types import *
 
 import functools
@@ -116,24 +116,24 @@ class InterfaceImplementer:
         pass
 
     def begin_class(self, class_name):
-        self.pyGen.begin_class(class_name, None)
-        self.pyGen.begin_ctor(["builder: ContainerBuilderBase"])
+        self.codeGen.begin_class(class_name, None)
+        self.codeGen.begin_ctor(["builder: ContainerBuilderBase"])
 
     def end_class(self):
-        self.pyGen.end_ctor()
-        self.pyGen.end_class()
+        self.codeGen.end_ctor()
+        self.codeGen.end_class()
 
     
 
     def implement(self):
         self.parse_interface()
 
-        self.pyGen = PyCodeGenerator()
+        self.codeGen = PyCodeGenerator()
 
-        self.pyGen.append_import("unreal")
-        self.pyGen.append_blank_line()
-        self.pyGen.append_import_from("pamux_unreal_tools.base.container_builder_base", "ContainerBuilderBase")
-        self.pyGen.append_blank_line()
+        self.codeGen.append_import("unreal")
+        self.codeGen.append_blank_line()
+        self.codeGen.append_import_from("pamux_unreal_tools.base.container_builder_base", "ContainerBuilderBase")
+        self.codeGen.append_blank_line()
 
         node_container = Nodes(self.builder)
 
@@ -141,7 +141,7 @@ class InterfaceImplementer:
         self.implement_inputs_object(node_container)
         self.implement_outputs_object(node_container)
 
-        self.pyGen.print_code()
+        self.codeGen.print_code()
         # print(".")
         # print(self.asset_path)
         # print(self.parameter_name_prefix)

@@ -1,6 +1,6 @@
 import os
-from pamux_unreal_tools.tools.material_expression_wrapper_generator.globals import *
-from pamux_unreal_tools.tools.material_expression_wrapper_generator.values import *
+from pamux_unreal_tools.tools.code_generators.material_expression_wrapper_generator.globals import *
+from pamux_unreal_tools.tools.code_generators.material_expression_wrapper_generator.values import *
 
 class UnrealDump:
     def __init__(self, full_path):

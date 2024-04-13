@@ -1,4 +1,4 @@
-from pamux_unreal_tools.tools.material_expression_wrapper_generator.globals import *
+from pamux_unreal_tools.tools.code_generators.material_expression_wrapper_generator.globals import *
 
 class Value:
     def __init__(self, name, type, notes = ""):
@@ -63,7 +63,7 @@ class Values:
     def is_empty(self):
         return len(self.__items) == 0
 
-    def to_py(self, ctor, pyGen):
+    def to_py(self, ctor, codeGen):
         appended = False
         for item in self.__items:
             field_name = item.field_name(ctor)
@@ -79,6 +79,6 @@ class Values:
                     continue
 
             if not appended:
-                pyGen.append_blank_line()
+                codeGen.append_blank_line()
                 appended = True
-            pyGen.append_line(f"self.{field_name} = {ctor}(self, '{item.name}', '{item.type}')")
+            codeGen.append_line(f"self.{field_name} = {ctor}(self, '{item.name}', '{item.type}')")

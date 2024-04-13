@@ -1,5 +1,7 @@
 dump_folder = "C:/src/UNrealEngineClassDump/Class/Script"
 generated_py_out_filepath = "C:/src/Pamux.EngTools/src/pamux_engtools/apps/pamux_unreal_tools/generated/material_expression_wrappers.py"
+generated_h_out_filepath = "C:/src/Pamux.EngTools/src/pamux_engtools/apps/pamux_unreal_tools/generated/material_expression_wrappers.h"
+generated_cpp_out_filepath = "C:/src/Pamux.EngTools/src/pamux_engtools/apps/pamux_unreal_tools/generated/material_expression_wrappers.cpp"
 
 material_expressions_dump_data = {}
 

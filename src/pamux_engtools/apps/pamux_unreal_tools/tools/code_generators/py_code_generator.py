@@ -1,5 +1,6 @@
 from pamux_unreal_tools.tools.code_generators.base.method_params import *
 from pamux_unreal_tools.tools.code_generators.base.code_generator_base import *
+from pamux_unreal_tools.tools.code_generators.base.method_params import *
 
 class PyCodeGenerator(CodeGeneratorBase):
     def __init__(self) -> None:
@@ -8,6 +9,9 @@ class PyCodeGenerator(CodeGeneratorBase):
         self.block_closer = ""
         self.condition_opener = ""
         self.condition_closer = ""
+        self.inline_comment_marker = "# "
+        self.required_initial_parameters = [ "self" ]
+        self.selfref = "self."
 
     def append_import(self, package_name) -> None:
         self.append_line(f"import {package_name}")
@@ -49,20 +53,27 @@ class PyCodeGenerator(CodeGeneratorBase):
         self.append_line(f"else:")
         self.indent()
 
-    def end_if(self) -> None:
-        self.end_block()
-
-    def end_class(self) -> None:
-        self.end_block()
-
-    def end_method(self) -> None:
-        self.end_block()
-
-    def end_static_method(self) -> None:
-        self.end_block()
-
-    def end_ctor(self) -> None:
-        self.end_block()
-
     def append_pass(self):
         self.append_line("pass")
+
+    def get_parameter_code(self, mp: MethodParam) -> str:
+        result = mp.name
+
+        if mp.type is not None:
+            result += f": {mp.type}"
+
+        if mp.default_value is None:
+            return result
+
+        result += " = "
+
+        if mp.default_value == "NULL":
+            result += "None";
+        else:
+            result += mp.default_value
+
+        return result
+
+
+    def append_base_ctor_call(self, codeGen, base_class_name, params):
+        codeGen.append_line(f"super().__init__({params})")

@@ -1,3 +1,6 @@
+from pamux_unreal_tools.tools.code_generators.base.method_params import *
+
+
 class CodeGeneratorBase:
     def __init__(self) -> None:
         self.lines = []
@@ -9,9 +12,12 @@ class CodeGeneratorBase:
         self.condition_opener = None
         self.condition_closer = None
 
+        self.inline_comment_marker = "// "
+        self.required_initial_parameters = [ ]
+
     def write(self, file_path) -> None:
         with open(file_path, "w+t") as py_file:
-            py_file.write("# This file is generated. Please do NOT modify.")
+            py_file.write(self.inline_comment_marker + " This file is generated. Please do NOT modify.")
 
             for line in self.lines:
                 py_file.write(f"\n{line}")
@@ -38,6 +44,9 @@ class CodeGeneratorBase:
 
     def append_import(self, package_name) -> None:
         pass
+
+    def append_include(self, header_name) -> None:
+        pass
     
     def append_import_from(self, package_name, imports) -> None:
         pass
@@ -46,3 +55,24 @@ class CodeGeneratorBase:
         self.unindent()
         if self.block_closer != "":
             self.append_line(self.block_closer)
+
+    def end_if(self) -> None:
+        self.end_block()
+
+    def end_class(self) -> None:
+        self.end_block()
+
+    def end_method(self) -> None:
+        self.end_block()
+
+    def end_static_method(self) -> None:
+        self.end_block()
+
+    def end_ctor(self) -> None:
+        self.end_block()
+
+    def append_pass(self):
+        pass
+
+    def append_base_ctor_call(self, base_class_name, params):
+        pass

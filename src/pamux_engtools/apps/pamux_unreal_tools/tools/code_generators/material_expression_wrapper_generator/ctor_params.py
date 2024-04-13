@@ -1,5 +1,5 @@
 from pamux_unreal_tools.tools.code_generators.base.code_generator_base import *
-from pamux_unreal_tools.tools.code_generators.base.method_params import *
+from pamux_unreal_tools.tools.code_generators.base.method_params import MethodParam
 
 from pamux_unreal_tools.tools.code_generators.material_expression_wrapper_generator.globals import *
 
@@ -92,13 +92,15 @@ class CTORParams:
     def append(self, param: MethodParam) -> None:
         self.params.append(param)
 
-    @property
-    def declaration_code(self) -> str:
-        codes = [ "self" ]
+    def declaration_code(self, codeGen) -> str:
+        codes = [ ]
+        for param in codeGen.required_initial_parameters:
+            codes.append(param)
+        
         for param in self.params:
-            codes.append(param.code)
+            codes.append(codeGen.get_parameter_code(param))
 
-        codes.append("node_pos: NodePos = None")
+        codes.append(codeGen.get_parameter_code(MethodParam("node_pos", "NodePos", "NULL")))
         return codes
                          
     def append_assignment_lines(self, codeGen: CodeGeneratorBase):

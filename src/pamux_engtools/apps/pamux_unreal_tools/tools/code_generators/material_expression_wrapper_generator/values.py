@@ -23,6 +23,14 @@ class Value:
             return "input"
         elif ctor == "OutSocket":
             return "output"
+        
+    @property
+    def cpp_type(self):
+        if self.type == "str":
+            return "const char*"
+        if self.type == "int32":
+            return "int32_t"
+        return self.type
 
     @property
     def is_input(self):
@@ -62,6 +70,10 @@ class Values:
     @property
     def is_empty(self):
         return len(self.__items) == 0
+    
+    @property
+    def items(self):
+        return self.__items
 
     def to_py(self, ctor, codeGen):
         appended = False

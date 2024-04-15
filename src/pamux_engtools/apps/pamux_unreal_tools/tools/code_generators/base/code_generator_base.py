@@ -19,6 +19,10 @@ class CodeGeneratorBase:
         self.selfref = None
         self.ctor_method_name = None
 
+    def clear(self) -> None:
+        self.lines = []
+        self.indentation = 0
+
     def write(self, file_path) -> None:
         with open(file_path, "w+t") as py_file:
             py_file.write(self.inline_comment_marker + " This file is generated. Please do NOT modify.")

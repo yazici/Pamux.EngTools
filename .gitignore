@@ -26,3 +26,5 @@ project.lock.json
 /**/__pycache__
 
 /Content/Harvest
+src/pamux_engtools/apps/pamux_unreal_tools/generated/*.cpp
+src/pamux_engtools/apps/pamux_unreal_tools/generated/*.h

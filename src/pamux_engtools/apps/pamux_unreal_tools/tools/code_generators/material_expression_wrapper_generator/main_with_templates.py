@@ -32,8 +32,21 @@ codeGen = CppCodeGenerator()
 codeGen.declaration_filepath = generated_h_out_filepath
 codeGen.definition_filepath = generated_cpp_out_filepath
 
+headers = { 
+    "Less": "Materials/MaterialExpressionBinaryOp.h",
+    "HeightfieldMinMaxTexture": "HeightfieldMinMaxTextureMaterialExpression.h",
+    "ConstantDouble": "Materials/MaterialExpressionGenericConstant.h",
+    "CloudSampleAttribute": "Materials/MaterialExpressionCloudLayer.h",
+    "NamedRerouteBase": "Materials/MaterialExpressionNamedReroute.h",
+    "NamedRerouteDeclaration": "Materials/MaterialExpressionNamedReroute.h",
+    "NamedRerouteUsage": "Materials/MaterialExpressionNamedReroute.h"
+}
+
 def get_required_includes(pamux_wrapper_class_name: str) -> str:
-    result = f'#include "UMaterialExpression{pamux_wrapper_class_name}.h"'
+    if pamux_wrapper_class_name in headers.keys():        
+        result = f'#include "{headers[pamux_wrapper_class_name]}"'
+    else:
+        result = f'#include "Materials/MaterialExpression{pamux_wrapper_class_name}.h"'
     return result
 
 def get_expression_properties(pamux_wrapper_class_name: str, values) -> str:
@@ -141,7 +154,7 @@ def generate_pamux_wrapper_classes():
     # codeGen.append_include("OutSocketImpl.h")
     # codeGen.append_include("NodePos.h")
 
-    generated_files_root = "C:/src/Pamux.EngTools/src/pamux_engtools/apps/pamux_unreal_tools/generated"
+    
 
     h_template = ""
     cpp_template = ""
@@ -162,8 +175,16 @@ def generate_pamux_wrapper_classes():
         if unreal_class.__name__ in skip_these_classes:
             continue
 
+
+
+        # if unreal_class.__name__.startswith("MaterialExpressionSamplePhysics"):
+        #     print(unreal_class.__name__)
+
+        # if not os.path.isfile(f"C:/Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/Engine/Classes/Materials/{unreal_class.__name__}.h"):
+        #     print(unreal_class.__name__)
+            
         pamux_wrapper_class_name = unreal_class.__name__[len("MaterialExpression"):]
-        
+
         inputs = setup_input_sockets(pamux_wrapper_class_name)
         outputs = setup_output_sockets(pamux_wrapper_class_name)
         ctor_params = setup_ctor_params(pamux_wrapper_class_name)

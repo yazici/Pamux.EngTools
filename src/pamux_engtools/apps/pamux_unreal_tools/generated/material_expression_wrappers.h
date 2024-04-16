@@ -915,14 +915,6 @@ class HairColor: public MaterialExpressionImpl {
     }
 }
 
-class HeightfieldMinMaxTexture: public MaterialExpressionImpl {
-     HeightfieldMinMaxTexture() {
-
-        self.min_max_texture = MaterialExpressionEditorPropertyImpl(self, 'min_max_texture', 'HeightfieldMinMaxTexture')
-        self.sampler_type = MaterialExpressionEditorPropertyImpl(self, 'sampler_type', 'MaterialSamplerType')
-    }
-}
-
 class HsvToRgb: public MaterialExpressionImpl {
      HsvToRgb() {
     }
@@ -1214,16 +1206,6 @@ class MaterialProxyReplace: public MaterialExpressionImpl {
 
         self.realtime = InSocketImpl(self, 'Realtime', 'StructProperty')
         self.materialProxy = InSocketImpl(self, 'MaterialProxy', 'StructProperty')
-    }
-}
-
-class MaterialXAppend3Vector: public MaterialExpressionImpl {
-     MaterialXAppend3Vector() {
-    }
-}
-
-class MaterialXAppend4Vector: public MaterialExpressionImpl {
-     MaterialXAppend4Vector() {
     }
 }
 

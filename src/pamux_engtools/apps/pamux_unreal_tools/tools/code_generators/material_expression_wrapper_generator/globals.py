@@ -2,11 +2,18 @@ dump_folder = "C:/src/UNrealEngineClassDump/Class/Script"
 generated_files_root = "C:/src/Pamux.EngTools/src/pamux_engtools/apps/pamux_unreal_tools/generated"
 generated_py_out_filepath = "C:/src/Pamux.EngTools/src/pamux_engtools/apps/pamux_unreal_tools/generated/material_expression_wrappers.py"
 generated_h_out_filepath = "C:/src/Pamux.EngTools/src/pamux_engtools/apps/pamux_unreal_tools/generated/material_expression_wrappers.h"
+
 generated_cpp_out_filepath = "C:/src/Pamux.EngTools/src/pamux_engtools/apps/pamux_unreal_tools/generated/material_expression_wrappers.cpp"
 
 h_template_filepath = "C:/src/Pamux.EngTools/src/pamux_engtools/apps/pamux_unreal_tools/templates/class_template.h"
 cpp_template_filepath = "C:/src/Pamux.EngTools/src/pamux_engtools/apps/pamux_unreal_tools/templates/class_template.cpp"
 py_template_filepath = "C:/src/Pamux.EngTools/src/pamux_engtools/apps/pamux_unreal_tools/templates/class_template.py"
+
+generated_files_root = "C:/src/PamuxUnrealTools/Plugins/PamuxMaterialPlugin/Source/PamuxMaterialPlugin/Private/generated"
+generated_h_out_filepath = "C:/src/Pamux.EngTools/src/pamux_engtools/apps/pamux_unreal_tools/generated/material_expression_wrappers.h"
+h_template_filepath = "C:/src/Pamux.EngTools/src/pamux_engtools/apps/pamux_unreal_tools/templates/class_template2.h"
+cpp_template_filepath = "C:/src/Pamux.EngTools/src/pamux_engtools/apps/pamux_unreal_tools/templates/class_template2.cpp"
+
 
 material_expressions_dump_data = {}
 
@@ -65,6 +72,86 @@ unary_op_classes = [
 # See unreal.py
 # many are deprecated: 'MaterialExpressionDisjointOver' was renamed to 'MaterialExpressionMaterialXDisjointOver'.
 skip_these_classes= [    
+    "MaterialExpressionPerInstanceCustomData3Vector",
+    "MaterialExpressionSamplePhysicsIntegerField",
+    "MaterialExpressionSamplePhysicsScalarField",
+    "MaterialExpressionSamplePhysicsVectorField",
+
+    "MaterialExpressionSkyAtmosphereAerialPerspective",
+    "MaterialExpressionSkyAtmosphereDistantLightScatteredLuminance",
+    "MaterialExpressionCloudSampleAttribute",
+    "MaterialExpressionConstantDouble",
+    "MaterialExpressionLandscapeGrassOutput",
+    "MaterialExpressionLandscapeLayerBlend",
+    "MaterialExpressionLandscapeLayerCoords",
+    "MaterialExpressionLandscapeLayerSample",
+    "MaterialExpressionLandscapeLayerSwitch",
+    "MaterialExpressionLandscapeLayerWeight",
+    "MaterialExpressionLandscapePhysicalMaterialOutput",
+    "MaterialExpressionLandscapeVisibilityMask",
+    "MaterialExpressionLess",
+    "MaterialExpressionNamedRerouteBase",
+    "MaterialExpressionNamedRerouteDeclaration",
+    "MaterialExpressionNamedRerouteUsage",
+    "MaterialExpressionSkyAtmosphereLightDiskLuminance",
+    "MaterialExpressionSparseVolumeTextureObjectParameter",
+    "MaterialExpressionSparseVolumeTextureSampleParameter",
+    "MaterialExpressionSpriteTextureSampler",
+    "MaterialExpressionStrataAdd",
+    "MaterialExpressionStrataBSDF",
+    "MaterialExpressionStrataConvertToDecal",
+    "MaterialExpressionStrataEyeBSDF",
+    "MaterialExpressionStrataHairBSDF",
+    "MaterialExpressionStrataHazinessToSecondaryRoughness",
+    "MaterialExpressionStrataHorizontalMixing",
+    "MaterialExpressionStrataLegacyConversion",
+    "MaterialExpressionStrataLightFunction",
+    "MaterialExpressionStrataMetalnessToDiffuseAlbedoF0",
+    "MaterialExpressionStrataPostProcess",
+    "MaterialExpressionStrataSimpleClearCoatBSDF",
+    "MaterialExpressionStrataSingleLayerWaterBSDF",
+    "MaterialExpressionStrataSlabBSDF",
+    "MaterialExpressionStrataThinFilm",
+    "MaterialExpressionStrataTransmittanceToMFP",
+    "MaterialExpressionStrataUI",
+    "MaterialExpressionStrataUnlitBSDF",
+    "MaterialExpressionStrataUtilityBase",
+    "MaterialExpressionStrataVerticalLayering",
+    "MaterialExpressionStrataVolumetricFogCloudBSDF",
+    "MaterialExpressionStrataWeight",
+    "MaterialExpressionVolumetricCloudEmptySpaceSkippingInput",
+    "MaterialExpressionVolumetricCloudEmptySpaceSkippingOutput",
+
+    "MaterialExpressionMaterialXAppend3Vector",
+    "MaterialExpressionMaterialXAppend4Vector",
+    "MaterialExpressionMaterialXBurn",
+    "MaterialExpressionMaterialXDifference",
+    "MaterialExpressionMaterialXDisjointOver",
+    "MaterialExpressionMaterialXDodge",
+    "MaterialExpressionMaterialXFractal3D",
+    "MaterialExpressionMaterialXIn",
+    "MaterialExpressionMaterialXLuminance",
+    "MaterialExpressionMaterialXMask",
+    "MaterialExpressionMaterialXMatte",
+    "MaterialExpressionMaterialXMinus",
+    "MaterialExpressionMaterialXOut",
+    "MaterialExpressionMaterialXOver",
+    "MaterialExpressionMaterialXOverlay",
+    "MaterialExpressionMaterialXPlace2D",
+    "MaterialExpressionMaterialXPlus",
+    "MaterialExpressionMaterialXPremult",
+    "MaterialExpressionMaterialXRamp4",
+    "MaterialExpressionMaterialXRampLeftRight",
+    "MaterialExpressionMaterialXRampTopBottom",
+    "MaterialExpressionMaterialXRemap",
+    "MaterialExpressionMaterialXRotate2D",
+    "MaterialExpressionMaterialXScreen",
+    "MaterialExpressionMaterialXSplitLeftRight",
+    "MaterialExpressionMaterialXSplitTopBottom",
+    "MaterialExpressionMaterialXSwizzle",
+    "MaterialExpressionMaterialXTextureSampleParameterBlur",
+    "MaterialExpressionMaterialXUnpremult",
+
     "MaterialExpressionAppend3Vector",
     "MaterialExpressionAppend4Vector",
     "MaterialExpressionBurn",
@@ -100,7 +187,8 @@ skip_these_classes= [
     "MaterialExpressionMaterialXLength",
     "MaterialExpressionMaterialXLogarithm",
     "MaterialExpressionMaterialXRgbToHsv",
-    "MaterialExpressionRamp4"
+    "MaterialExpressionRamp4",
+    "MaterialExpressionHeightfieldMinMaxTexture"
 ]
 
 class MaterialAttributeFields:

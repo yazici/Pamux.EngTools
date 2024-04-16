@@ -2,6 +2,7 @@
 # https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-engine-material-expressions-reference
 import unreal
 import sys
+import json
 import inspect
 import types
 from pathlib import Path
@@ -104,6 +105,11 @@ def get_ctor_parameters(pamux_wrapper_class_name: str, values) -> str:
     result = ""
     return result
 
+class UnrealClass:
+    def __init__(self, name, doc):
+        self.name = name
+        self.doc = doc
+
 def generate_pamux_wrapper_class(codeGen: CodeGeneratorBase, c: unreal.MaterialExpression):
     pamux_wrapper_class_name = c.__name__[len("MaterialExpression"):]
 
@@ -164,18 +170,30 @@ def generate_pamux_wrapper_classes():
     with open(cpp_template_filepath, "rt") as f:
         cpp_template = f.readlines()
 
+    unreal_classes = []
+
     for class_name in dir(unreal):
         unreal_class = getattr(unreal, class_name)
         if not inspect.isclass(unreal_class):
             continue
+
+        c = {
+            "name": unreal_class.__name__, 
+            "doc": unreal_class.__doc__
+        }
+
+        unreal_classes.append(c)
+
         if not issubclass(unreal_class, unreal.MaterialExpression):
             continue
         if unreal_class == unreal.MaterialExpression:
             continue
+
+
         if unreal_class.__name__ in skip_these_classes:
             continue
 
-
+        
 
         # if unreal_class.__name__.startswith("MaterialExpressionSamplePhysics"):
         #     print(unreal_class.__name__)
@@ -217,5 +235,6 @@ def generate_pamux_wrapper_classes():
 
         with open(f"{generated_files_root}/{pamux_wrapper_class_name}.cpp", "wt") as f:
             f.writelines(cpp_code)
-
+    with open(unreal_classes_list, "wt") as f:
+            f.writelines(json.dumps(unreal_classes, indent=4, sort_keys=True))
 generate_pamux_wrapper_classes()

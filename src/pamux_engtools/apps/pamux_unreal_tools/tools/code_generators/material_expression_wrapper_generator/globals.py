@@ -14,6 +14,7 @@ generated_h_out_filepath = "C:/src/Pamux.EngTools/src/pamux_engtools/apps/pamux_
 h_template_filepath = "C:/src/Pamux.EngTools/src/pamux_engtools/apps/pamux_unreal_tools/templates/class_template2.h"
 cpp_template_filepath = "C:/src/Pamux.EngTools/src/pamux_engtools/apps/pamux_unreal_tools/templates/class_template2.cpp"
 
+unreal_classes_list = "C:/src/Pamux.EngTools/src/pamux_engtools/apps/pamux_unreal_tools/unreal_classes.json"
 
 material_expressions_dump_data = {}
 

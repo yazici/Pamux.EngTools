@@ -50,16 +50,17 @@ def __get_expression_members(member_type, pamux_wrapper_class_name: str, values)
         result += ' ' * 8 + member_type + " " + item.field_name(pamux_wrapper_class_name) + ";\n"
     return result
 
-def __get_initializers(pamux_wrapper_class_name: str, values) -> str:
+def __get_initializers(indent, pamux_wrapper_class_name: str, values) -> str:
     result = ""
     isFirst = True
     for item in values.items:
+        result += "\n" + " " * indent
         if isFirst:
             isFirst = False
-            result += "\n    : "
+            result += ":"
         else:
-            result += "\n    , "
-        result += f'{item.field_name(pamux_wrapper_class_name)}("{item.name}", ValueType::Float)'
+            result += ","
+        result += f' {item.field_name(pamux_wrapper_class_name)}("{item.name}", ValueType::Float)'
         #"{item.type}"
     return result
 
@@ -78,18 +79,18 @@ def get_expression_outputs(pamux_wrapper_class_name: str, values) -> str:
     return __get_expression_members("MXOutputSocket", pamux_wrapper_class_name, values)
 
 
-def get_properties_initializers(pamux_wrapper_class_name: str, values) -> str:
-    return __get_initializers(pamux_wrapper_class_name, values)
-def get_inputs_initializers(pamux_wrapper_class_name: str, values) -> str:
-    return __get_initializers(pamux_wrapper_class_name, values)
-def get_outputs_initializers(pamux_wrapper_class_name: str, values) -> str:
-    return __get_initializers(pamux_wrapper_class_name, values)
+def get_properties_initializers(indent, pamux_wrapper_class_name: str, values) -> str:
+    return __get_initializers(indent, pamux_wrapper_class_name, values)
+def get_inputs_initializers(indent, pamux_wrapper_class_name: str, values) -> str:
+    return __get_initializers(indent, pamux_wrapper_class_name, values)
+def get_outputs_initializers(indent, pamux_wrapper_class_name: str, values) -> str:
+    return __get_initializers(indent, pamux_wrapper_class_name, values)
 
 def get_base_class_ctor_parameter_values(pamux_wrapper_class_name: str, values) -> str:
     result = ""
     return result
 
-def get_main_initializers(pamux_wrapper_class_name: str, values) -> str:
+def get_main_initializers(indent, pamux_wrapper_class_name: str, values) -> str:
     result = ""
     return result
 
@@ -197,7 +198,7 @@ def generate_pamux_wrapper_classes():
         if unreal_class.name in skip_these_classes:
             continue
 
-        
+        create_cpp_file = False
 
         # if unreal_class.name.startswith("MaterialExpressionSamplePhysics"):
         #     print(unreal_class.name)
@@ -221,15 +222,21 @@ def generate_pamux_wrapper_classes():
             l = l.replace("__DECLARE_EXPRESSION_OUTPUTS__", get_expression_outputs(pamux_wrapper_class_name, outputs))
             l = l.replace("__CTOR_PARAMETERS__", get_ctor_parameters(pamux_wrapper_class_name, ctor_params))
             l = l.replace("__CLASS_NAME__", pamux_wrapper_class_name)
+            l = l.replace("__BASE_CLASS_CTOR_PARAMETERS_VALUES__", get_base_class_ctor_parameter_values(pamux_wrapper_class_name, ctor_params))
+            l = l.replace("__MAIN_INITIALIZERS__", get_main_initializers(12, pamux_wrapper_class_name, ctor_params))
+            l = l.replace("__PROPERTIES_INITIALIZERS__", get_properties_initializers(12, pamux_wrapper_class_name, properties))
+            l = l.replace("__INPUTS_INITIALIZERS__", get_inputs_initializers(12, pamux_wrapper_class_name, inputs))
+            l = l.replace("__OUTPUTS_INITIALIZERS__", get_outputs_initializers(12, pamux_wrapper_class_name, outputs))
             h_code += l
+
 
         cpp_code = ""
         for l in cpp_template:
             l = l.replace("__BASE_CLASS_CTOR_PARAMETERS_VALUES__", get_base_class_ctor_parameter_values(pamux_wrapper_class_name, ctor_params))
-            l = l.replace("__MAIN_INITIALIZERS__", get_main_initializers(pamux_wrapper_class_name, ctor_params))
-            l = l.replace("__PROPERTIES_INITIALIZERS__", get_properties_initializers(pamux_wrapper_class_name, properties))
-            l = l.replace("__INPUTS_INITIALIZERS__", get_inputs_initializers(pamux_wrapper_class_name, inputs))
-            l = l.replace("__OUTPUTS_INITIALIZERS__", get_outputs_initializers(pamux_wrapper_class_name, outputs))
+            l = l.replace("__MAIN_INITIALIZERS__", get_main_initializers(4, pamux_wrapper_class_name, ctor_params))
+            l = l.replace("__PROPERTIES_INITIALIZERS__", get_properties_initializers(4, pamux_wrapper_class_name, properties))
+            l = l.replace("__INPUTS_INITIALIZERS__", get_inputs_initializers(4, pamux_wrapper_class_name, inputs))
+            l = l.replace("__OUTPUTS_INITIALIZERS__", get_outputs_initializers(4, pamux_wrapper_class_name, outputs))
             l = l.replace("__CTOR_PARAMETERS__", get_ctor_parameters(pamux_wrapper_class_name, ctor_params))
             l = l.replace("__CLASS_NAME__", pamux_wrapper_class_name)
             cpp_code += l
@@ -237,8 +244,9 @@ def generate_pamux_wrapper_classes():
         with open(f"{generated_files_root}/{pamux_wrapper_class_name}.h", "wt") as f:
             f.writelines(h_code)
 
-        with open(f"{generated_files_root}/{pamux_wrapper_class_name}.cpp", "wt") as f:
-            f.writelines(cpp_code)
+        if create_cpp_file:
+            with open(f"{generated_files_root}/{pamux_wrapper_class_name}.cpp", "wt") as f:
+                f.writelines(cpp_code)
     # with open(unreal_classes_list, "wt") as f:
     #         f.writelines(json.dumps(unreal_classes, indent=4, sort_keys=True))
 generate_pamux_wrapper_classes()

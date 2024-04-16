@@ -15,6 +15,7 @@ h_template_filepath = "C:/src/Pamux.EngTools/src/pamux_engtools/apps/pamux_unrea
 cpp_template_filepath = "C:/src/Pamux.EngTools/src/pamux_engtools/apps/pamux_unreal_tools/templates/class_template2.cpp"
 
 unreal_classes_list = "C:/src/Pamux.EngTools/src/pamux_engtools/apps/pamux_unreal_tools/unreal_classes.json"
+unreal_material_expression_classes = "C:/src/Pamux.EngTools/src/pamux_engtools/apps/pamux_unreal_tools/unreal_material_expression_classes.json"
 
 material_expressions_dump_data = {}
 

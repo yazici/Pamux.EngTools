@@ -1,6 +1,6 @@
 # py "C:/src/Pamux.EngTools/src/pamux_engtools/apps/pamux_unreal_tools/tools/generate_material_expressions_wrappers.py"
 # https://dev.epicgames.com/documentation/en-us/unreal-engine/unreal-engine-material-expressions-reference
-import unreal
+#import unreal
 import sys
 import json
 import inspect
@@ -27,7 +27,7 @@ from pamux_unreal_tools.tools.code_generators.material_expression_wrapper_genera
 from pamux_unreal_tools.tools.code_generators.material_expression_wrapper_generator.inputs import *
 from pamux_unreal_tools.tools.code_generators.material_expression_wrapper_generator.outputs import *
 from pamux_unreal_tools.tools.code_generators.material_expression_wrapper_generator.properties import *
-from pamux_unreal_tools.tools.code_generators.material_expression_wrapper_generator import custom_base_classes
+#from pamux_unreal_tools.tools.code_generators.material_expression_wrapper_generator import custom_base_classes
 
 codeGen = CppCodeGenerator()
 codeGen.declaration_filepath = generated_h_out_filepath
@@ -110,14 +110,14 @@ class UnrealClass:
         self.name = name
         self.doc = doc
 
-def generate_pamux_wrapper_class(codeGen: CodeGeneratorBase, c: unreal.MaterialExpression):
+def generate_pamux_wrapper_class(codeGen: CodeGeneratorBase ): # , c: unreal.MaterialExpression
     pamux_wrapper_class_name = c.__name__[len("MaterialExpression"):]
 
     base_class_candidate_name = f"{pamux_wrapper_class_name}Base"
-    if hasattr(custom_base_classes, base_class_candidate_name):
-        base_class_name = base_class_candidate_name
-    else:
-        base_class_name = "MaterialExpressionParametrizedBase"
+    # if hasattr(custom_base_classes, base_class_candidate_name):
+    #     base_class_name = base_class_candidate_name
+    # else:
+    #     base_class_name = "MaterialExpressionParametrizedBase"
 
     #codeGen.append_blank_line()
     #codeGen.begin_class(pamux_wrapper_class_name, base_class_name)
@@ -139,6 +139,7 @@ def generate_pamux_wrapper_class(codeGen: CodeGeneratorBase, c: unreal.MaterialE
     #codeGen.end_ctor()
 
     #codeGen.end_class()
+
 
 def generate_pamux_wrapper_classes():
     read_dump_data()
@@ -172,41 +173,52 @@ def generate_pamux_wrapper_classes():
 
     unreal_classes = []
 
-    for class_name in dir(unreal):
-        unreal_class = getattr(unreal, class_name)
-        if not inspect.isclass(unreal_class):
-            continue
+    with open(unreal_material_expression_classes, "rt") as f:
+        parsed_json = json.load(f)
+    
 
-        c = {
-            "name": unreal_class.__name__, 
-            "doc": unreal_class.__doc__
-        }
+    # for class_name in dir(unreal):
+    for unreal_class in parsed_json: #dir(unreal):
+        #unreal_class = getattr(unreal, class_name)
+        #if not inspect.isclass(unreal_class):
+        #    continue
 
-        unreal_classes.append(c)
+        
 
-        if not issubclass(unreal_class, unreal.MaterialExpression):
-            continue
-        if unreal_class == unreal.MaterialExpression:
-            continue
+        #if not issubclass(unreal_class, unreal.MaterialExpression):
+        #    continue
+        #if unreal_class == unreal.MaterialExpression:
+        #    continue
 
+        #c = {
+        #    "name": unreal_class.__name__, 
+        #    "doc": unreal_class.__doc__
+        #}
 
-        if unreal_class.__name__ in skip_these_classes:
+        #unreal_classes.append(c)
+        #unreal_class.name = unreal_class.__name__
+        #unreal_class.doc = unreal_class.__doc__
+
+        #print(unreal_class)
+        unreal_class = UnrealClass(unreal_class["name"], unreal_class["doc"])
+
+        if unreal_class.name in skip_these_classes:
             continue
 
         
 
-        # if unreal_class.__name__.startswith("MaterialExpressionSamplePhysics"):
-        #     print(unreal_class.__name__)
+        # if unreal_class.name.startswith("MaterialExpressionSamplePhysics"):
+        #     print(unreal_class.name)
 
         # if not os.path.isfile(f"C:/Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/Engine/Classes/Materials/{unreal_class.__name__}.h"):
-        #     print(unreal_class.__name__)
+        #     print(unreal_class.name)
             
-        pamux_wrapper_class_name = unreal_class.__name__[len("MaterialExpression"):]
+        pamux_wrapper_class_name = unreal_class.name[len("MaterialExpression"):]
 
         inputs = setup_input_sockets(pamux_wrapper_class_name)
         outputs = setup_output_sockets(pamux_wrapper_class_name)
         ctor_params = setup_ctor_params(pamux_wrapper_class_name)
-        properties = setup_properties(pamux_wrapper_class_name, unreal_class.__doc__)
+        properties = setup_properties(pamux_wrapper_class_name, unreal_class.doc)
 
         h_code = ""
         for l in h_template:

@@ -18,11 +18,18 @@ class Value:
         if self.name != "":
             if self.name == "UVs" or self.name == "ID" or self.name.startswith("RGB"):
                 return self.name
+            
+            if self.name == "Default" or self.name == "True" or self.name == "False":
+                return "_" + self.name[0:1].lower() + self.name[1:]
+            
+
             return self.name[0:1].lower() + self.name[1:]
+        
         if ctor == "InSocket":
             return "input"
-        elif ctor == "OutSocket":
+        if ctor == "OutSocket":
             return "output"
+        return "X"
         
     @property
     def cpp_type(self):

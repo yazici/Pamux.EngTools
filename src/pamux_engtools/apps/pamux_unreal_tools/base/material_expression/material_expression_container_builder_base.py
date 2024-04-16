@@ -313,5 +313,7 @@ class MaterialExpressionContainerBuilderBase:
             return "yAxis"
         if name == "Z-Axis":
             return "zAxis"
+        if self.name == "default":
+                return "_default"
         _name = name.replace(" ", "")
         return _name[0].lower() + _name[1:]

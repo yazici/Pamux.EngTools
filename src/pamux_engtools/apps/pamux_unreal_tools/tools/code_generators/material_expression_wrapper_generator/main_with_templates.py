@@ -43,6 +43,26 @@ headers = {
     "NamedRerouteUsage": "Materials/MaterialExpressionNamedReroute.h"
 }
 
+
+def __get_expression_members(member_type, pamux_wrapper_class_name: str, values) -> str:
+    result = ""
+    for item in values.items:
+        result += ' ' * 8 + member_type + " " + item.field_name(pamux_wrapper_class_name) + ";\n"
+    return result
+
+def __get_initializers(pamux_wrapper_class_name: str, values) -> str:
+    result = ""
+    isFirst = True
+    for item in values.items:
+        if isFirst:
+            isFirst = False
+            result += "\n    : "
+        else:
+            result += "\n    , "
+        result += f'{item.field_name(pamux_wrapper_class_name)}("{item.name}", ValueType::Float)'
+        #"{item.type}"
+    return result
+
 def get_required_includes(pamux_wrapper_class_name: str) -> str:
     if pamux_wrapper_class_name in headers.keys():        
         result = f'#include "{headers[pamux_wrapper_class_name]}"'
@@ -51,47 +71,19 @@ def get_required_includes(pamux_wrapper_class_name: str) -> str:
     return result
 
 def get_expression_properties(pamux_wrapper_class_name: str, values) -> str:
+    return __get_expression_members("MXProperty", pamux_wrapper_class_name, values)
+def get_expression_inputs(pamux_wrapper_class_name: str, values) -> str:
+    return __get_expression_members("MXInputSocket", pamux_wrapper_class_name, values)
+def get_expression_outputs(pamux_wrapper_class_name: str, values) -> str:
+    return __get_expression_members("MXOutputSocket", pamux_wrapper_class_name, values)
 
-    result = ""
-    # values = [ 'EditorProperty threshold;' ]
-    for item in values.items:
-        result += ' ' * 8 + item.cpp_type + " " + item.field_name(pamux_wrapper_class_name) + ";\n"
-    return result
 
 def get_properties_initializers(pamux_wrapper_class_name: str, values) -> str:
-    result = ""
-    values = [ '\n    : threshold("threshold", "float")' ]
-    for v in values:
-        result += v
-    return result
-
-def get_expression_inputs(pamux_wrapper_class_name: str, values) -> str:
-    result = ""
-    values = [ 'InputSocket input;' ]
-    for v in values:
-        result += v
-    return result
-
+    return __get_initializers(pamux_wrapper_class_name, values)
 def get_inputs_initializers(pamux_wrapper_class_name: str, values) -> str:
-    result = ""
-    values = [ '\n    : input("UVs", "StructProperty")' ]
-    for v in values:
-        result += v
-    return result
-
-def get_expression_outputs(pamux_wrapper_class_name: str, values) -> str:
-    result = ""
-    values = [ 'OutputSocket output;' ]
-    for v in values:
-        result += v
-    return result
-
+    return __get_initializers(pamux_wrapper_class_name, values)
 def get_outputs_initializers(pamux_wrapper_class_name: str, values) -> str:
-    result = ""
-    values = [ '\n    : output("UVs", "StructProperty")' ]
-    for v in values:
-        result += v
-    return result
+    return __get_initializers(pamux_wrapper_class_name, values)
 
 def get_base_class_ctor_parameter_values(pamux_wrapper_class_name: str, values) -> str:
     result = ""
@@ -247,6 +239,7 @@ def generate_pamux_wrapper_classes():
 
         with open(f"{generated_files_root}/{pamux_wrapper_class_name}.cpp", "wt") as f:
             f.writelines(cpp_code)
-    with open(unreal_classes_list, "wt") as f:
-            f.writelines(json.dumps(unreal_classes, indent=4, sort_keys=True))
+    # with open(unreal_classes_list, "wt") as f:
+    #         f.writelines(json.dumps(unreal_classes, indent=4, sort_keys=True))
 generate_pamux_wrapper_classes()
+

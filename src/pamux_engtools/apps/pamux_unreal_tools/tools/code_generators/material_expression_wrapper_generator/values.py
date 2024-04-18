@@ -35,18 +35,25 @@ class Value:
     def traits_type(self):
         if self.type == "str":
             return "TString"
+        if self.type == "bool":
+            return "TStaticBool"
         if self.type == "float":
             return "TFloat"
         if self.type == "int32":
             return "TInt32"
+        if self.type == "LinearColor":
+            return "TLinearColor"
+        
         if self.type == "Name":
             return "TName"
         if self.type == "StructProperty":
-            return "TStructProperty"        
+            return None
         if self.type == "MaterialVectorCoordTransformSource":
             return "TMaterialVectorCoordTransformSource"
         if self.type == "MaterialVectorCoordTransform":
             return "TMaterialVectorCoordTransform"
+        if self.type == "MaterialAttributeBlend":
+            return "TMaterialAttributeBlend"
         
         if self.type == "Array[Guid]":
             return "TGuidArray"

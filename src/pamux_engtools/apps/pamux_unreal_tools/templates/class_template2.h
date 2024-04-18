@@ -39,9 +39,16 @@ using __CLASS_NAME__Base = MaterialExpressionWrapper<UMaterialExpression__CLASS_
 class __CLASS_NAME__ : public __CLASS_NAME__Base {
 public:
     __CLASS_NAME__(UMaterialFunction& uGraphAsset__CTOR_PARAMETERS__)
-        : __CLASS_NAME__Base(uGraphAsset__BASE_CLASS_CTOR_PARAMETERS_VALUES__)__MAIN_INITIALIZERS__ {
+        : __CLASS_NAME__Base(uGraphAsset__BASE_CLASS_CTOR_PARAMETERS_VALUES__)
+        , input(inputs.default_input)
+        , output(outputs.default_output)__MAIN_INITIALIZERS__ {
     }
     __CLASS_NAME__(UMaterial& uGraphAsset__CTOR_PARAMETERS__)
-        : __CLASS_NAME__Base(uGraphAsset__BASE_CLASS_CTOR_PARAMETERS_VALUES__)__MAIN_INITIALIZERS__ {
+        : __CLASS_NAME__Base(uGraphAsset__BASE_CLASS_CTOR_PARAMETERS_VALUES__)
+        , input(inputs.default_input)
+        , output(outputs.default_output)__MAIN_INITIALIZERS__ {
     }
+public:
+    MXInputSocket& input;
+    MXOutputSocket& output;
 };

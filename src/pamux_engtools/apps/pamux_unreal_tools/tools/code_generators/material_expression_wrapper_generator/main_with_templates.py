@@ -47,7 +47,10 @@ headers = {
 def __get_expression_members(member_type, pamux_wrapper_class_name: str, values) -> str:
     result = ""
     for item in values.items:
-        result += f"{' ' * 8}{member_type}<{item.traits_type}> " + item.field_name(pamux_wrapper_class_name) + ";\n"
+        if item.traits_type is None:
+            result += f"{' ' * 8}{member_type} " + item.field_name(pamux_wrapper_class_name) + ";\n"
+        else:
+            result += f"{' ' * 8}{member_type}<{item.traits_type}> " + item.field_name(pamux_wrapper_class_name) + ";\n"
     return result
 
 def __get_initializers(indent, pamux_wrapper_class_name: str, values) -> str:

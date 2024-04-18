@@ -32,6 +32,28 @@ class Value:
         return "X"
         
     @property
+    def traits_type(self):
+        if self.type == "str":
+            return "TString"
+        if self.type == "float":
+            return "TFloat"
+        if self.type == "int32":
+            return "TInt32"
+        if self.type == "Name":
+            return "TName"
+        if self.type == "StructProperty":
+            return "TStructProperty"        
+        if self.type == "MaterialVectorCoordTransformSource":
+            return "TMaterialVectorCoordTransformSource"
+        if self.type == "MaterialVectorCoordTransform":
+            return "TMaterialVectorCoordTransform"
+        
+        if self.type == "Array[Guid]":
+            return "TGuidArray"
+        
+        return self.type
+
+    @property
     def cpp_type(self):
         if self.type == "str":
             return "const char*"
@@ -58,6 +80,7 @@ class Value:
 class PropertyInfo(Value):
     def __init__(self, name, type, notes = ""):
         super().__init__(name, type, notes)
+
 
 class InputSocketInfo(Value):
     def __init__(self, name, type, notes = ""):

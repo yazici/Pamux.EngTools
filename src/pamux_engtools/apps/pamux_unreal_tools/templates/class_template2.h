@@ -6,7 +6,11 @@ __REQUIRED_INCLUDES__
 
 #include "abstracts/MaterialExpressionWrapper.h"
 
-namespace NS__CLASS_NAME__ {
+
+template<>
+struct traits<class __CLASS_NAME__> {
+	static inline FString Name = "__CLASS_NAME__";
+
     class Properties : public PropertiesBase {
     public:
         Properties()__PROPERTIES_INITIALIZERS__ {
@@ -33,18 +37,22 @@ __DECLARE_EXPRESSION_INPUTS__
     public:
 __DECLARE_EXPRESSION_OUTPUTS__
     };
-}
 
-using __CLASS_NAME__Base = MaterialExpressionWrapper<UMaterialExpression__CLASS_NAME__, NS__CLASS_NAME__::Properties, NS__CLASS_NAME__::Inputs, NS__CLASS_NAME__::Outputs>;
-class __CLASS_NAME__ : public __CLASS_NAME__Base {
+    using UMaterialExpression_t = UMaterialExpressionFunctionOutput;
+    using Properties_t = Properties;
+    using Inputs_t = Inputs;
+    using Outputs_t = Outputs;
+};
+
+class __CLASS_NAME__ : public MaterialExpressionWrapper<__CLASS_NAME__> {
 public:
     __CLASS_NAME__(UMaterialFunction& uGraphAsset__CTOR_PARAMETERS__)
-        : __CLASS_NAME__Base(uGraphAsset__BASE_CLASS_CTOR_PARAMETERS_VALUES__)
+        : MaterialExpressionWrapper<__CLASS_NAME__>(uGraphAsset__BASE_CLASS_CTOR_PARAMETERS_VALUES__)
         , input(inputs.default_input)
         , output(outputs.default_output)__MAIN_INITIALIZERS__ {
     }
     __CLASS_NAME__(UMaterial& uGraphAsset__CTOR_PARAMETERS__)
-        : __CLASS_NAME__Base(uGraphAsset__BASE_CLASS_CTOR_PARAMETERS_VALUES__)
+        : MaterialExpressionWrapper<__CLASS_NAME__>(uGraphAsset__BASE_CLASS_CTOR_PARAMETERS_VALUES__)
         , input(inputs.default_input)
         , output(outputs.default_output)__MAIN_INITIALIZERS__ {
     }

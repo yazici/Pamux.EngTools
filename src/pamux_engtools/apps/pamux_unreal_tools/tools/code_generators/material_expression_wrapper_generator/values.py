@@ -54,6 +54,8 @@ class Value:
             return "TMaterialVectorCoordTransform"
         if self.type == "MaterialAttributeBlend":
             return "TMaterialAttributeBlend"
+        if self.type == "MaterialFunctionInterface":
+            return "TMaterialFunctionInterface"
         
         if self.type == "Array[Guid]":
             return "TGuidArray"

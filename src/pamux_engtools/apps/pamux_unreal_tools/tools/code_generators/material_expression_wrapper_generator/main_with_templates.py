@@ -99,7 +99,48 @@ def get_main_initializers(indent, pamux_wrapper_class_name: str, values) -> str:
 
 def get_ctor_parameters(pamux_wrapper_class_name: str, values) -> str:
     result = ""
+    isFirst = True
+    for item in values.params:
+        if isFirst:
+            isFirst = False
+            result += ""
+        else:
+            result += ", "
+        result += f'{item.type} {item.parameter_name}'
     return result
+
+
+def get_ctor_code(pamux_wrapper_class_name: str, values) -> str:
+    result = ""
+    for item in values.params:
+        result += "\n" + " " * 8 + item.get_ctor_code()
+    return result
+
+def get_base_class_ctor_parameter_values(pamux_wrapper_class_name: str, values)-> str:
+    return ""
+
+def get_ctor_overload(pamux_wrapper_class_name: str, values) -> str:
+    return f"""    {pamux_wrapper_class_name}({get_ctor_parameters(pamux_wrapper_class_name, values)}) 
+        : MaterialExpressionWrapper<{pamux_wrapper_class_name}>({get_base_class_ctor_parameter_values(pamux_wrapper_class_name, values)})
+        , input(inputs.default_input)
+        , output(outputs.default_output){get_main_initializers(12, pamux_wrapper_class_name, values)} {{
+{get_ctor_code(pamux_wrapper_class_name, values)}
+    }}
+
+"""
+
+def get_all_ctors(pamux_wrapper_class_name: str, values) -> str:
+    result = get_ctor_overload(pamux_wrapper_class_name, MethodParams()) #  We always have a Default ctor
+    for overload_id in range(0, 100):
+        vals = MethodParams()
+        for v in values.params:
+            if overload_id == v.overload_id:
+                vals.append(v)
+        if vals.is_empty:
+            continue
+        result += get_ctor_overload(pamux_wrapper_class_name, vals)
+    return result
+
 
 class UnrealClass:
     def __init__(self, name, doc):
@@ -218,15 +259,17 @@ def generate_pamux_wrapper_classes():
 
         h_code = ""
         for l in h_template:
-            
             l = l.replace("__REQUIRED_INCLUDES__", get_required_includes(pamux_wrapper_class_name))
+
+            l = l.replace("__CLASS_NAME__", pamux_wrapper_class_name)
+            l = l.replace("__MAIN_INITIALIZERS__", get_main_initializers(12, pamux_wrapper_class_name, ctor_params))
+            
+            l = l.replace("__ALL_CTORS__\n", get_all_ctors(pamux_wrapper_class_name, ctor_params))
+
             l = l.replace("__DECLARE_EXPRESSION_PROPERTIES__", get_expression_properties(pamux_wrapper_class_name, properties))
             l = l.replace("__DECLARE_EXPRESSION_INPUTS__", get_expression_inputs(pamux_wrapper_class_name, inputs))
             l = l.replace("__DECLARE_EXPRESSION_OUTPUTS__", get_expression_outputs(pamux_wrapper_class_name, outputs))
-            l = l.replace("__CTOR_PARAMETERS__", get_ctor_parameters(pamux_wrapper_class_name, ctor_params))
-            l = l.replace("__CLASS_NAME__", pamux_wrapper_class_name)
-            l = l.replace("__BASE_CLASS_CTOR_PARAMETERS_VALUES__", get_base_class_ctor_parameter_values(pamux_wrapper_class_name, ctor_params))
-            l = l.replace("__MAIN_INITIALIZERS__", get_main_initializers(12, pamux_wrapper_class_name, ctor_params))
+
             l = l.replace("__PROPERTIES_INITIALIZERS__", get_properties_initializers(12, pamux_wrapper_class_name, properties))
             l = l.replace("__INPUTS_INITIALIZERS__", get_inputs_initializers(12, pamux_wrapper_class_name, inputs))
             l = l.replace("__OUTPUTS_INITIALIZERS__", get_outputs_initializers(12, pamux_wrapper_class_name, outputs))
@@ -235,13 +278,13 @@ def generate_pamux_wrapper_classes():
 
         cpp_code = ""
         for l in cpp_template:
-            l = l.replace("__BASE_CLASS_CTOR_PARAMETERS_VALUES__", get_base_class_ctor_parameter_values(pamux_wrapper_class_name, ctor_params))
+            l = l.replace("__CLASS_NAME__", pamux_wrapper_class_name)
             l = l.replace("__MAIN_INITIALIZERS__", get_main_initializers(4, pamux_wrapper_class_name, ctor_params))
+            l = l.replace("__ALL_CTORS__\n", get_all_ctors(pamux_wrapper_class_name, ctor_params))
+
             l = l.replace("__PROPERTIES_INITIALIZERS__", get_properties_initializers(4, pamux_wrapper_class_name, properties))
             l = l.replace("__INPUTS_INITIALIZERS__", get_inputs_initializers(4, pamux_wrapper_class_name, inputs))
             l = l.replace("__OUTPUTS_INITIALIZERS__", get_outputs_initializers(4, pamux_wrapper_class_name, outputs))
-            l = l.replace("__CTOR_PARAMETERS__", get_ctor_parameters(pamux_wrapper_class_name, ctor_params))
-            l = l.replace("__CLASS_NAME__", pamux_wrapper_class_name)
             cpp_code += l
 
         with open(f"{generated_files_root}/{pamux_wrapper_class_name}.h", "wt") as f:

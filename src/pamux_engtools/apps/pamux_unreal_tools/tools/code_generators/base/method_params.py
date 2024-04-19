@@ -1,13 +1,32 @@
 class MethodParam:
-    def __init__(self, name, type, default_value = None) -> None:
+    def __init__(self, overload_id, name, type, default_value = None) -> None:
+        self.overload_id = overload_id
         self.name = name
         self.type = type
         self.default_value = default_value
+
+    @property
+    def field_name(self):
+        if self.name in ["true", "false"]:
+            return "_" + self.name
+        return self.name
+
+    @property
+    def parameter_name(self):
+        return f"_{self.field_name}"
+
+    def get_ctor_code(self):
+        return ''
+
 
 
 class MethodParams:
     def __init__(self):
         self.params = []
+
+    @property
+    def is_empty(self):
+        return len(self.params) == 0
 
     def append(self, param):
         self.params.append(param)

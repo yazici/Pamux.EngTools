@@ -38,7 +38,7 @@ __DECLARE_EXPRESSION_INPUTS__
 __DECLARE_EXPRESSION_OUTPUTS__
     };
 
-    using UMaterialExpression_t = UMaterialExpressionFunctionOutput;
+    using UMaterialExpression_t = UMaterialExpression__CLASS_NAME__;
     using Properties_t = Properties;
     using Inputs_t = Inputs;
     using Outputs_t = Outputs;
@@ -46,16 +46,7 @@ __DECLARE_EXPRESSION_OUTPUTS__
 
 class __CLASS_NAME__ : public MaterialExpressionWrapper<__CLASS_NAME__> {
 public:
-    __CLASS_NAME__(UMaterialFunction& uGraphAsset__CTOR_PARAMETERS__)
-        : MaterialExpressionWrapper<__CLASS_NAME__>(uGraphAsset__BASE_CLASS_CTOR_PARAMETERS_VALUES__)
-        , input(inputs.default_input)
-        , output(outputs.default_output)__MAIN_INITIALIZERS__ {
-    }
-    __CLASS_NAME__(UMaterial& uGraphAsset__CTOR_PARAMETERS__)
-        : MaterialExpressionWrapper<__CLASS_NAME__>(uGraphAsset__BASE_CLASS_CTOR_PARAMETERS_VALUES__)
-        , input(inputs.default_input)
-        , output(outputs.default_output)__MAIN_INITIALIZERS__ {
-    }
+__ALL_CTORS__
 public:
     MXInputSocket& input;
     MXOutputSocket& output;

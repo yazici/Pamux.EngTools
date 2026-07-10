@@ -19,6 +19,10 @@ $global:EngTools_python_venv = "${global:EngTools_Root}\.venv"
 $global:EngTools_python_exe = "${global:EngTools_python_venv}\Scripts\python.exe"
 $global:EngTools_pip_exe = "${global:EngTools_python_venv}\Scripts\pip.exe"
 
+$global:Global_Python_Root = "C:\Users\baris\AppData\Local\Programs\Python\Python312"
+$global:Global_python_exe = "${global:Global_Python_Root}\python.exe"
+$global:Global_pip_exe = "${global:Global_Python_Root}\Scripts\pip.exe"
+
 $global:EngTools_QTApplications = "${global:EngTools_python_venv}\Lib\site-packages\qt6_applications"
 $global:EngTools_QT_designer_exe = "${global:EngTools_QTApplications}\Qt\bin\designer.exe"
 

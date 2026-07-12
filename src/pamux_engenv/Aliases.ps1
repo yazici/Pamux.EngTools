@@ -60,6 +60,8 @@ function build_all {
         }
     }
 }
+. "C:\src\Cappadocia\Scripts\build_aliases.ps1"
+function mycodex()    { codex -a never -s workspace-write -C C:\src\Cappadocia }
 
 # function run      { & ".\Binaries\Win64\Cappadocia.exe" }
 # function editor   { & "C:\Program Files\Epic Games\UE_5.8\Engine\Binaries\Win64\UnrealEditor.exe" ".\Cappadocia.uproject" }

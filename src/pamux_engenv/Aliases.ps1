@@ -418,4 +418,42 @@ function capp {
     & $EditorExe $ProjectFile
 }
 
+function Remove-AllFiles {
+    [CmdletBinding(SupportsShouldProcess)]
+    param (
+        [Parameter(Mandatory, Position = 0)]
+        [ValidateNotNullOrEmpty()]
+        [string]$Path
+    )
+
+    $ResolvedPath = Resolve-Path -LiteralPath $Path -ErrorAction Stop
+
+    if (-not (Test-Path -LiteralPath $ResolvedPath -PathType Container)) {
+        throw "Path is not a directory: $ResolvedPath"
+    }
+
+    Get-ChildItem `
+        -LiteralPath $ResolvedPath `
+        -File `
+        -Recurse `
+        -Force `
+        -ErrorAction Stop |
+    ForEach-Object {
+        if ($PSCmdlet.ShouldProcess($_.FullName, "Delete file")) {
+            Remove-Item -LiteralPath $_.FullName -Force -ErrorAction Stop
+        }
+    }
+}
+
+
+Remove-AllFiles C:\src\Cappadocia\Source\Cappadocia\Private\Blueprint
+Remove-AllFiles C:\src\Cappadocia\Source\Cappadocia\Private\Characters
+Remove-AllFiles C:\src\Cappadocia\Source\Cappadocia\Private\IslandGenerator
+Remove-AllFiles C:\src\Cappadocia\Source\Cappadocia\Private\UI
+
+Remove-AllFiles C:\src\Cappadocia\Source\Cappadocia\Public\Blueprint
+Remove-AllFiles C:\src\Cappadocia\Source\Cappadocia\Public\Characters
+Remove-AllFiles C:\src\Cappadocia\Source\Cappadocia\Public\IslandGenerator
+Remove-AllFiles C:\src\Cappadocia\Source\Cappadocia\Public\UI
+ 
 SetAliases

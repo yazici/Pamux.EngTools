@@ -176,7 +176,12 @@ function Export-Cropout {
 
     $LogDirectory = Split-Path $LogPath -Parent
     New-Item $LogDirectory -ItemType Directory -Force | Out-Null
-    Set-Content -Path $LogPath -Value "" -Encoding UTF8
+
+    [System.IO.File]::WriteAllText(
+        $LogPath,
+        "",
+        [System.Text.UTF8Encoding]::new($false)
+    )
 
     & {
         try {
@@ -305,7 +310,17 @@ function Export-Cropout {
             Write-Output "Export-Cropout finished: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
             Write-Output "Complete log: $LogPath"
         }
-    } *>&1 | Tee-Object -FilePath $LogPath -Append
+    } *>&1 | ForEach-Object {
+        $Line = $_ | Out-String
+        $Line = $Line.TrimEnd("`r", "`n")
+
+        Write-Host $Line
+        [System.IO.File]::AppendAllText(
+            $LogPath,
+            $Line + [Environment]::NewLine,
+            [System.Text.UTF8Encoding]::new($false)
+        )
+    }
 
     Write-Host ""
     Write-Host "Complete log: $LogPath"
@@ -347,6 +362,8 @@ function Invoke-CappadociaBuild {
     Assert-FileExists $ProjectFile
     Assert-FileExists $BuildBat
 
+    $Log = "C:\src\bblog.txt"
+
     Push-Location $ProjectRoot
 
     try {
@@ -355,7 +372,8 @@ function Invoke-CappadociaBuild {
             Win64 `
             Development `
             -Project="$ProjectFile" `
-            -WaitMutex
+            -WaitMutex 2>&1 |
+            Tee-Object -FilePath $Log
 
         if ($LASTEXITCODE -ne 0) {
             throw "Cappadocia build failed with exit code $LASTEXITCODE"
@@ -364,7 +382,11 @@ function Invoke-CappadociaBuild {
     finally {
         Pop-Location
     }
+
+    Write-Host ""
+    Write-Host "Build log: $Log"
 }
+
 
 function bb {
     Invoke-CappadociaBuild

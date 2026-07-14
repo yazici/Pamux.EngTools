@@ -1,27 +1,30 @@
 $($MyInvocation.MyCommand.Source)
 
-function Script:SetAliases()
-{
-    Set-Alias python ${global:Global_python_exe} -scope Global
-    Set-Alias pip ${global:Global_pip_exe} -scope Global
-    Set-Alias qtd ${global:EngTools_QT_designer_exe} -scope Global
+$ErrorActionPreference = "Stop"
 
-    # Set-Alias which where.exe
+$ProjectRoot = "C:\src\Cappadocia"
+$ProjectFile = Join-Path $ProjectRoot "Cappadocia.uproject"
+$EngineRoot = "C:\Program Files\Epic Games\UE_5.8"
+
+$BuildBat = Join-Path $EngineRoot "Engine\Build\BatchFiles\Build.bat"
+$UbtDll = Join-Path $EngineRoot "Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.dll"
+
+function Script:SetAliases {
+    Set-Alias python ${global:Global_python_exe} -Scope Global
+    Set-Alias pip ${global:Global_pip_exe} -Scope Global
+    Set-Alias qtd ${global:EngTools_QT_designer_exe} -Scope Global
 }
 
-
-function global:petui()
-{
+function global:petui {
     & ${global:EngTools_python_exe} ${global:EngTools_AppsRoot}\pamux_engtools_ui.py $args
 }
 
-function global:cland()
-{
+function global:cland {
     & ${global:EngTools_python_exe} ${global:EngTools_AppsRoot}\pamux_clipboard_landscape.py $args
 }
 
 function build_all {
-    cd C:\src\Cappadocia
+    Push-Location $ProjectRoot
 
     $previousTbbSetting = $env:TBB_MALLOC_DISABLE_REPLACEMENT
 
@@ -52,46 +55,59 @@ function build_all {
     }
     finally {
         if ($null -eq $previousTbbSetting) {
-            Remove-Item Env:TBB_MALLOC_DISABLE_REPLACEMENT `
-                -ErrorAction SilentlyContinue
+            Remove-Item Env:TBB_MALLOC_DISABLE_REPLACEMENT -ErrorAction SilentlyContinue
         }
         else {
             $env:TBB_MALLOC_DISABLE_REPLACEMENT = $previousTbbSetting
         }
+
+        Pop-Location
     }
 }
-# . "C:\src\Cappadocia\Scripts\build_aliases.ps1"
-function mycodex()    { codex -a never -s workspace-write -C C:\src\Cappadocia }
 
-# function run      { & ".\Binaries\Win64\Cappadocia.exe" }
-# function editor   { & "C:\Program Files\Epic Games\UE_5.8\Engine\Binaries\Win64\UnrealEditor.exe" ".\Cappadocia.uproject" }
-# function clean    { Remove-Item Binaries,Intermediate,Saved -Recurse -Force -ErrorAction SilentlyContinue }
-# function rebuild  { clean; build_all }
-# function gitgraph { git log --oneline --graph --decorate --all }
+function mycodex {
+    codex -a never -s workspace-write -C $ProjectRoot
+}
 
-SetAliases
+function Assert-FileExists {
+    param(
+        [Parameter(Mandatory)]
+        [string]$Path
+    )
 
-function Export-Cropout {
+    if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) {
+        throw "Required file was not found: $Path"
+    }
+}
+
+function Export-Cropout-BP {
     $PluginSource = "C:\src\UnrealTools\BlueprintIrExporter"
     $PluginPackage = "C:\src\UnrealTools\Build\BlueprintIrExporter"
-    $DeployedPlugin = "C:\src\CropoutSampleProject 5.8\Plugins\BlueprintIrExporter"
-    $CropoutProject = "C:\src\CropoutSampleProject 5.8\CropoutSampleProject.uproject"
+    $CropoutRoot = "C:\src\CropoutSampleProject 5.8"
+    $DeployedPlugin = Join-Path $CropoutRoot "Plugins\BlueprintIrExporter"
+    $CropoutProject = Join-Path $CropoutRoot "CropoutSampleProject.uproject"
     $ExportOutput = "C:\src\UnrealTools\BlueprintExports"
     $TargetSourceRoot = "C:\src\Cappadocia\Source"
 
-    $CommandletSource = Join-Path `
-        $PluginSource `
-        "Source\BlueprintIrExporter\Private\BlueprintIrExportCommandlet.cpp"
+    $RunUat = Join-Path $EngineRoot "Engine\Build\BatchFiles\RunUAT.bat"
+    $EditorCmd = Join-Path $EngineRoot "Engine\Binaries\Win64\UnrealEditor-Cmd.exe"
+    $PluginFile = Join-Path $PluginSource "BlueprintIrExporter.uplugin"
+    $CropoutPlugins = Join-Path $CropoutRoot "Plugins"
 
-    Remove-Item `
-        $PluginPackage `
-        -Recurse `
-        -Force `
-        -ErrorAction SilentlyContinue
+    foreach ($requiredFile in @($RunUat, $EditorCmd, $PluginFile, $CropoutProject)) {
+        Assert-FileExists $requiredFile
+    }
 
-    & "C:\Program Files\Epic Games\UE_5.8\Engine\Build\BatchFiles\RunUAT.bat" `
+    New-Item $CropoutPlugins -ItemType Directory -Force | Out-Null
+
+    Remove-Item $PluginPackage -Recurse -Force -ErrorAction SilentlyContinue
+
+    Write-Host ""
+    Write-Host "Building BlueprintIrExporter..."
+
+    & $RunUat `
         BuildPlugin `
-        -Plugin="$PluginSource\BlueprintIrExporter.uplugin" `
+        -Plugin="$PluginFile" `
         -Package="$PluginPackage" `
         -TargetPlatforms=Win64
 
@@ -99,19 +115,21 @@ function Export-Cropout {
         throw "BlueprintIrExporter build failed with exit code $LASTEXITCODE."
     }
 
-    Remove-Item `
-        $DeployedPlugin `
-        -Recurse `
-        -Force `
-        -ErrorAction SilentlyContinue
+    Remove-Item $DeployedPlugin -Recurse -Force -ErrorAction SilentlyContinue
 
     Copy-Item `
         $PluginPackage `
-        "C:\src\CropoutSampleProject 5.8\Plugins" `
+        $DeployedPlugin `
         -Recurse `
         -Force
 
-    & "C:\Program Files\Epic Games\UE_5.8\Engine\Binaries\Win64\UnrealEditor-Cmd.exe" `
+    Remove-Item $ExportOutput -Recurse -Force -ErrorAction SilentlyContinue
+    New-Item $ExportOutput -ItemType Directory -Force | Out-Null
+
+    Write-Host ""
+    Write-Host "Exporting Cropout Blueprint IR..."
+
+    & $EditorCmd `
         $CropoutProject `
         -run=BlueprintIrExport `
         -root="/Game;/Cropout" `
@@ -122,7 +140,8 @@ function Export-Cropout {
         -unattended `
         -nop4 `
         -nosplash `
-        -nullrhi
+        -nullrhi `
+        -log
 
     if ($LASTEXITCODE -ne 0) {
         throw "Blueprint export failed with exit code $LASTEXITCODE."
@@ -135,25 +154,84 @@ function Export-Cropout {
     Write-Host "Implementations: $TargetSourceRoot\Cappadocia\Private"
 }
 
+function Export-Cropout {
+    $PluginSource = "C:\src\UnrealTools\UnrealIrExporter"
+    $PluginPackage = "C:\src\UnrealTools\Build\UnrealIrExporter"
+    $CropoutRoot = "C:\src\CropoutSampleProject 5.8"
+    $DeployedPlugin = Join-Path $CropoutRoot "Plugins\UnrealIrExporter"
+    $CropoutProject = Join-Path $CropoutRoot "CropoutSampleProject.uproject"
+    $ExportOutput = "C:\src\UnrealTools\UnrealIrExports"
+    $TargetSourceRoot = "C:\src\Cappadocia\Source"
 
-$ErrorActionPreference = "Stop"
+    $RunUat = Join-Path $EngineRoot "Engine\Build\BatchFiles\RunUAT.bat"
+    $EditorCmd = Join-Path $EngineRoot "Engine\Binaries\Win64\UnrealEditor-Cmd.exe"
+    $PluginFile = Join-Path $PluginSource "UnrealIrExporter.uplugin"
+    $CropoutPlugins = Join-Path $CropoutRoot "Plugins"
+    $OldDeployedPlugin = Join-Path $CropoutPlugins "BlueprintIrExporter"
 
-$ProjectRoot = "C:\src\Cappadocia"
-$ProjectFile = Join-Path $ProjectRoot "Cappadocia.uproject"
-$EngineRoot = "C:\Program Files\Epic Games\UE_5.8"
-
-$BuildBat = Join-Path $EngineRoot "Engine\Build\BatchFiles\Build.bat"
-$UbtDll = Join-Path $EngineRoot "Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.dll"
-
-function Assert-FileExists {
-    param(
-        [Parameter(Mandatory)]
-        [string]$Path
-    )
-
-    if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) {
-        throw "Required file was not found: $Path"
+    foreach ($requiredFile in @($RunUat, $EditorCmd, $PluginFile, $CropoutProject)) {
+        Assert-FileExists $requiredFile
     }
+
+    New-Item $CropoutPlugins -ItemType Directory -Force | Out-Null
+
+    Remove-Item $PluginPackage -Recurse -Force -ErrorAction SilentlyContinue
+
+    Write-Host ""
+    Write-Host "Building UnrealIrExporter..."
+
+    & $RunUat `
+        BuildPlugin `
+        -Plugin="$PluginFile" `
+        -Package="$PluginPackage" `
+        -TargetPlatforms=Win64 `
+        -NoUBA
+
+    if ($LASTEXITCODE -ne 0) {
+        throw "UnrealIrExporter build failed with exit code $LASTEXITCODE."
+    }
+
+    Remove-Item $DeployedPlugin -Recurse -Force -ErrorAction SilentlyContinue
+    Remove-Item $OldDeployedPlugin -Recurse -Force -ErrorAction SilentlyContinue
+
+    Write-Host ""
+    Write-Host "Deploying UnrealIrExporter..."
+
+    Copy-Item `
+        $PluginPackage `
+        $DeployedPlugin `
+        -Recurse `
+        -Force
+
+    Remove-Item $ExportOutput -Recurse -Force -ErrorAction SilentlyContinue
+    New-Item $ExportOutput -ItemType Directory -Force | Out-Null
+
+    Write-Host ""
+    Write-Host "Exporting Cropout Unreal IR..."
+
+    & $EditorCmd `
+        $CropoutProject `
+        -run=UnrealIrExport `
+        -root="/Game;/Cropout;/IslandGenerator" `
+        -output="$ExportOutput" `
+        -source-root="$TargetSourceRoot" `
+        -module="Cappadocia" `
+        -include-data-only `
+        -unattended `
+        -nop4 `
+        -nosplash `
+        -nullrhi `
+        -log
+
+    if ($LASTEXITCODE -ne 0) {
+        throw "Unreal IR export failed with exit code $LASTEXITCODE."
+    }
+
+    Write-Host ""
+    Write-Host "Export completed."
+    Write-Host "IR JSON: $ExportOutput"
+    Write-Host "Headers: $TargetSourceRoot\Cappadocia\Generated\Public"
+    Write-Host "Implementations: $TargetSourceRoot\Cappadocia\Generated\Private"
 }
 
 function Invoke-CappadociaProjectFiles {
@@ -213,14 +291,9 @@ function bbg {
 
 function bbc {
     if (Test-Path $ProjectRoot) {
-        Remove-Item (Join-Path $ProjectRoot "Binaries") `
-            -Recurse -Force -ErrorAction SilentlyContinue
-
-        Remove-Item (Join-Path $ProjectRoot "Intermediate") `
-            -Recurse -Force -ErrorAction SilentlyContinue
-
-        Remove-Item (Join-Path $ProjectRoot ".vs") `
-            -Recurse -Force -ErrorAction SilentlyContinue
+        Remove-Item (Join-Path $ProjectRoot "Binaries") -Recurse -Force -ErrorAction SilentlyContinue
+        Remove-Item (Join-Path $ProjectRoot "Intermediate") -Recurse -Force -ErrorAction SilentlyContinue
+        Remove-Item (Join-Path $ProjectRoot ".vs") -Recurse -Force -ErrorAction SilentlyContinue
     }
 
     Invoke-CappadociaProjectFiles
@@ -230,11 +303,11 @@ function bbc {
 function capp {
     Assert-FileExists $ProjectFile
 
-    $EditorExe = Join-Path `
-        $EngineRoot `
-        "Engine\Binaries\Win64\UnrealEditor.exe"
+    $EditorExe = Join-Path $EngineRoot "Engine\Binaries\Win64\UnrealEditor.exe"
 
     Assert-FileExists $EditorExe
 
     & $EditorExe $ProjectFile
 }
+
+SetAliases

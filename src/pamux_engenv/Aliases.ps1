@@ -154,7 +154,12 @@ function Export-Cropout-BP {
     Write-Host "Implementations: $TargetSourceRoot\Cappadocia\Private"
 }
 
+
 function Export-Cropout {
+    param(
+        [string]$EngineRoot = "C:\Program Files\Epic Games\UE_5.8"
+    )
+
     $PluginSource = "C:\src\UnrealTools\UnrealIrExporter"
     $PluginPackage = "C:\src\UnrealTools\Build\UnrealIrExporter"
     $CropoutRoot = "C:\src\CropoutSampleProject 5.8"
@@ -162,77 +167,158 @@ function Export-Cropout {
     $CropoutProject = Join-Path $CropoutRoot "CropoutSampleProject.uproject"
     $ExportOutput = "C:\src\UnrealTools\UnrealIrExports"
     $TargetSourceRoot = "C:\src\Cappadocia\Source"
+    $LogPath = "C:\src\UnrealTools\log.txt"
 
-    $RunUat = Join-Path $EngineRoot "Engine\Build\BatchFiles\RunUAT.bat"
-    $EditorCmd = Join-Path $EngineRoot "Engine\Binaries\Win64\UnrealEditor-Cmd.exe"
-    $PluginFile = Join-Path $PluginSource "UnrealIrExporter.uplugin"
-    $CropoutPlugins = Join-Path $CropoutRoot "Plugins"
-    $OldDeployedPlugin = Join-Path $CropoutPlugins "BlueprintIrExporter"
-
-    foreach ($requiredFile in @($RunUat, $EditorCmd, $PluginFile, $CropoutProject)) {
-        Assert-FileExists $requiredFile
+    $State = [pscustomobject]@{
+        Succeeded      = $false
+        FailureMessage = $null
     }
 
-    New-Item $CropoutPlugins -ItemType Directory -Force | Out-Null
+    $LogDirectory = Split-Path $LogPath -Parent
+    New-Item $LogDirectory -ItemType Directory -Force | Out-Null
+    Set-Content -Path $LogPath -Value "" -Encoding UTF8
 
-    Remove-Item $PluginPackage -Recurse -Force -ErrorAction SilentlyContinue
+    & {
+        try {
+            Write-Output "Export-Cropout started: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
+            Write-Output "Log: $LogPath"
+            Write-Output ""
+
+            $RunUat = Join-Path $EngineRoot "Engine\Build\BatchFiles\RunUAT.bat"
+            $EditorCmd = Join-Path $EngineRoot "Engine\Binaries\Win64\UnrealEditor-Cmd.exe"
+            $PluginFile = Join-Path $PluginSource "UnrealIrExporter.uplugin"
+            $CropoutPlugins = Join-Path $CropoutRoot "Plugins"
+            $OldDeployedPlugin = Join-Path $CropoutPlugins "BlueprintIrExporter"
+
+            foreach ($RequiredFile in @(
+                $RunUat
+                $EditorCmd
+                $PluginFile
+                $CropoutProject
+            )) {
+                Assert-FileExists $RequiredFile
+            }
+
+            New-Item $CropoutPlugins -ItemType Directory -Force | Out-Null
+
+            Remove-Item `
+                $PluginPackage `
+                -Recurse `
+                -Force `
+                -ErrorAction SilentlyContinue
+
+            Write-Output ""
+            Write-Output "Building UnrealIrExporter..."
+
+            & $RunUat `
+                BuildPlugin `
+                -Plugin="$PluginFile" `
+                -Package="$PluginPackage" `
+                -TargetPlatforms=Win64 `
+                -NoUBA 2>&1
+
+            $BuildExitCode = $LASTEXITCODE
+
+            if ($BuildExitCode -ne 0) {
+                throw "UnrealIrExporter build failed with exit code $BuildExitCode."
+            }
+
+            Assert-FileExists (Join-Path $PluginPackage "UnrealIrExporter.uplugin")
+
+            Remove-Item `
+                $DeployedPlugin `
+                -Recurse `
+                -Force `
+                -ErrorAction SilentlyContinue
+
+            Remove-Item `
+                $OldDeployedPlugin `
+                -Recurse `
+                -Force `
+                -ErrorAction SilentlyContinue
+
+            Write-Output ""
+            Write-Output "Deploying UnrealIrExporter..."
+
+            Copy-Item `
+                $PluginPackage `
+                $DeployedPlugin `
+                -Recurse `
+                -Force `
+                -ErrorAction Stop
+
+            Assert-FileExists (Join-Path $DeployedPlugin "UnrealIrExporter.uplugin")
+
+            Remove-Item `
+                $ExportOutput `
+                -Recurse `
+                -Force `
+                -ErrorAction SilentlyContinue
+
+            New-Item `
+                $ExportOutput `
+                -ItemType Directory `
+                -Force `
+                -ErrorAction Stop |
+                Out-Null
+
+            Write-Output ""
+            Write-Output "Exporting Cropout Unreal IR..."
+
+            & $EditorCmd `
+                $CropoutProject `
+                -run=UnrealIrExport `
+                -root="/Game;/Cropout;/IslandGenerator" `
+                -output="$ExportOutput" `
+                -source-root="$TargetSourceRoot" `
+                -module="Cappadocia" `
+                -include-data-only `
+                -unattended `
+                -nop4 `
+                -nosplash `
+                -nullrhi `
+                -stdout `
+                -FullStdOutLogOutput `
+                -log 2>&1
+
+            $ExportExitCode = $LASTEXITCODE
+
+            if ($ExportExitCode -ne 0) {
+                throw "Unreal IR export failed with exit code $ExportExitCode."
+            }
+
+            Write-Output ""
+            Write-Output "Export completed."
+            Write-Output "IR JSON: $ExportOutput"
+            Write-Output "Headers: $TargetSourceRoot\Cappadocia\Generated\Public"
+            Write-Output "Implementations: $TargetSourceRoot\Cappadocia\Generated\Private"
+
+            $State.Succeeded = $true
+        }
+        catch {
+            $State.FailureMessage = $_.Exception.Message
+            Write-Output ""
+            Write-Output "ERROR: $($State.FailureMessage)"
+        }
+        finally {
+            Write-Output ""
+            Write-Output "Export-Cropout finished: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
+            Write-Output "Complete log: $LogPath"
+        }
+    } *>&1 | Tee-Object -FilePath $LogPath -Append
 
     Write-Host ""
-    Write-Host "Building UnrealIrExporter..."
+    Write-Host "Complete log: $LogPath"
 
-    & $RunUat `
-        BuildPlugin `
-        -Plugin="$PluginFile" `
-        -Package="$PluginPackage" `
-        -TargetPlatforms=Win64 `
-        -NoUBA
+    if (-not $State.Succeeded) {
+        if (-not [string]::IsNullOrWhiteSpace($State.FailureMessage)) {
+            throw $State.FailureMessage
+        }
 
-    if ($LASTEXITCODE -ne 0) {
-        throw "UnrealIrExporter build failed with exit code $LASTEXITCODE."
+        throw "Export-Cropout failed without a captured exception. See $LogPath."
     }
-
-    Remove-Item $DeployedPlugin -Recurse -Force -ErrorAction SilentlyContinue
-    Remove-Item $OldDeployedPlugin -Recurse -Force -ErrorAction SilentlyContinue
-
-    Write-Host ""
-    Write-Host "Deploying UnrealIrExporter..."
-
-    Copy-Item `
-        $PluginPackage `
-        $DeployedPlugin `
-        -Recurse `
-        -Force
-
-    Remove-Item $ExportOutput -Recurse -Force -ErrorAction SilentlyContinue
-    New-Item $ExportOutput -ItemType Directory -Force | Out-Null
-
-    Write-Host ""
-    Write-Host "Exporting Cropout Unreal IR..."
-
-    & $EditorCmd `
-        $CropoutProject `
-        -run=UnrealIrExport `
-        -root="/Game;/Cropout;/IslandGenerator" `
-        -output="$ExportOutput" `
-        -source-root="$TargetSourceRoot" `
-        -module="Cappadocia" `
-        -include-data-only `
-        -unattended `
-        -nop4 `
-        -nosplash `
-        -nullrhi `
-        -log
-
-    if ($LASTEXITCODE -ne 0) {
-        throw "Unreal IR export failed with exit code $LASTEXITCODE."
-    }
-
-    Write-Host ""
-    Write-Host "Export completed."
-    Write-Host "IR JSON: $ExportOutput"
-    Write-Host "Headers: $TargetSourceRoot\Cappadocia\Generated\Public"
-    Write-Host "Implementations: $TargetSourceRoot\Cappadocia\Generated\Private"
 }
+
 
 function Invoke-CappadociaProjectFiles {
     Assert-FileExists $ProjectFile

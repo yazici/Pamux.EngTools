@@ -446,14 +446,26 @@ function Remove-AllFiles {
 }
 
 
-Remove-AllFiles C:\src\Cappadocia\Source\Cappadocia\Private\Blueprint
-Remove-AllFiles C:\src\Cappadocia\Source\Cappadocia\Private\Characters
-Remove-AllFiles C:\src\Cappadocia\Source\Cappadocia\Private\IslandGenerator
-Remove-AllFiles C:\src\Cappadocia\Source\Cappadocia\Private\UI
+Get-ChildItem 'C:\src\UnrealTools\BPGraphToCpp' -Recurse -File |
+    Unblock-File
 
-Remove-AllFiles C:\src\Cappadocia\Source\Cappadocia\Public\Blueprint
-Remove-AllFiles C:\src\Cappadocia\Source\Cappadocia\Public\Characters
-Remove-AllFiles C:\src\Cappadocia\Source\Cappadocia\Public\IslandGenerator
-Remove-AllFiles C:\src\Cappadocia\Source\Cappadocia\Public\UI
+function ccrop {
+    & 'C:\src\UnrealTools\BPGraphToCpp\scripts\Convert-Cropout.ps1' @args
+}
+
+function bp2cpp() {
+    cd C:\src\UnrealTools\bp2cpp
+    python -m bp2cpp "C:\src\UnrealTools\UnrealIrExports\Game_Blueprint_Core_Player_BP_PC.json"
+}
+
+# Remove-AllFiles C:\src\Cappadocia\Source\Cappadocia\Private\Blueprint
+# Remove-AllFiles C:\src\Cappadocia\Source\Cappadocia\Private\Characters
+# Remove-AllFiles C:\src\Cappadocia\Source\Cappadocia\Private\IslandGenerator
+# Remove-AllFiles C:\src\Cappadocia\Source\Cappadocia\Private\UI
+
+# Remove-AllFiles C:\src\Cappadocia\Source\Cappadocia\Public\Blueprint
+# Remove-AllFiles C:\src\Cappadocia\Source\Cappadocia\Public\Characters
+# Remove-AllFiles C:\src\Cappadocia\Source\Cappadocia\Public\IslandGenerator
+# Remove-AllFiles C:\src\Cappadocia\Source\Cappadocia\Public\UI
  
 SetAliases
